@@ -173,11 +173,9 @@ php -S localhost:8080
 </ul>
 <aside class="special"><p><strong>ポイント</strong>: プロジェクトの文脈を一度設定すれば、以降の作業で一貫した理解に基づくアシストが可能になります。</p>
 </aside>
-<h2 is-upgraded>1.2 — カスタム指示を設定する</h2>
-<p><code>copilot-instructions.md</code> を以下の内容に書き換えてください：</p>
-<pre><code language="language-markdown" class="language-markdown"># Copilot Instructions
-
-## 言語設定
+<h2 is-upgraded>1.2 — カスタム指示を追加する</h2>
+<p><code>/init</code> で生成された <code>copilot-instructions.md</code> には、現在のレガシーコードに関する情報が含まれています。この内容は<strong>そのまま残して</strong>、ファイルの末尾に以下の移行ガイドラインを<strong>追記</strong>してください：</p>
+<pre><code language="language-markdown" class="language-markdown">## 言語設定
 すべての会話は日本語で行ってください。
 
 ## 移行先の技術スタック
@@ -191,16 +189,13 @@ php -S localhost:8080
 - レスポンシブデザイン（モバイルファースト）
 - ダークモード対応
 
-## セキュリティ要件
-- 入力バリデーション必須
-- SQLインジェクション対策
-- XSS対策
-
 ## コーディング規約
 - ESLint + Prettier に準拠
 - コンポーネントは関数コンポーネント + Hooks を使用
 - 型定義は厳格に（any 禁止）
 </code></pre>
+<aside class="special"><p><strong>ポイント</strong>: <code>/init</code> で生成されたレガシーコードの説明を残しておくことで、Copilot は「現在の状態」と「移行先の目標」の両方を理解した上でアシストしてくれます。</p>
+</aside>
 <h2 is-upgraded>1.3 — フロントエンド Skill を作成する</h2>
 <p>Copilot に以下のプロンプトを入力して、フロントエンド開発用の Skill を作成してもらいましょう：</p>
 <pre><code>please make a research to create a frontend skill that follow the branding of ヒカリ / Hikari (the company in hikari-legacy-php/). 
