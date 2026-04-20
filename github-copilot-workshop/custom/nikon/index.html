@@ -110,10 +110,26 @@
 <ol type="1">
 <li>プロジェクト URL をブラウザで開く</li>
 <li>右上の <strong>Use this template</strong> ボタンをクリックし、<strong>Create a new repository</strong> を選択</li>
-<li>リポジトリ名を入力し <strong>Create repository</strong> をクリック</li>
+<li>リポジトリ作成画面で以下を設定：</li>
 </ol>
-<aside class="warning"><p><strong>⚠️ 重要</strong>: リポジトリ作成時に <strong>Visibility は必ず「Public」</strong> を選択してください。Private リポジトリでは、一部の Copilot 機能や GitHub Actions が正しく動作しない場合があります。</p>
-</aside>
+<h3 is-upgraded>Owner（オーナー）の選択</h3>
+<p><strong>個人で参加の場合：</strong></p>
+<ul>
+<li>Owner は <strong>自分のアカウント</strong> を選択</li>
+<li>Visibility は <strong>Public</strong> を選択（Free プランの場合、Public でないと一部機能が制限されます）</li>
+</ul>
+<p><strong>企業の Organization で参加の場合：</strong></p>
+<ul>
+<li>Owner は <strong>Copilot / Actions / GHAS が有効化された Organization</strong> を選択</li>
+<li>Visibility は <strong>Private</strong> を選択</li>
+</ul>
+<h3 is-upgraded>Repository name（リポジトリ名）</h3>
+<ul>
+<li>任意の名前を入力してください（例: <code>handson-yourname</code>）</li>
+</ul>
+<ol type="1" start="4">
+<li><strong>Create repository</strong> をクリック</li>
+</ol>
 <h2 is-upgraded>ステップ2: Codespaces で開発環境を起動する</h2>
 <ol type="1">
 <li>作成したリポジトリのページで、緑色の <strong>Code</strong> ボタンをクリック</li>
