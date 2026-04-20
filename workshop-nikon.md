@@ -93,6 +93,9 @@ Duration: 15
 
 ![Codespaces Setup](github-copilot-workshop/img/github-codespaces.png)
 
+> aside positive
+> **⏳ 注意**: Codespace の起動には数分かかる場合があります。DevContainer のビルドが完了するまでお待ちください。
+
 DevContainer が自動的に Node.js 20 環境をセットアップし、以下が事前にインストールされます：
 - GitHub Copilot & Copilot Chat 拡張機能
 - Live Server 拡張機能（プレビュー用）
