@@ -77,11 +77,11 @@ Duration: 15
 - Visibility は **Public** を選択（Free プランの場合、Public でないと一部機能が制限されます）
 
 **企業の Organization で参加の場合：**
-- Owner は **Copilot / Actions / GHAS が有効化された Organization** を選択
+- Owner は **Copilot / Actions / GHAS / Codespaces などが有効化された Organization** を選択
 - Visibility は **Private** を選択
 
 #### Repository name（リポジトリ名）
-- 任意の名前を入力してください（例: `handson-yourname`）
+- 任意の名前を入力してください（例: `hands-on-yourname`）
 
 4. **Create repository** をクリック
 
