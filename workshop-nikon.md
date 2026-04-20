@@ -141,28 +141,16 @@ Copilot がレガシーコードの以下を理解していることを確認し
 
 ### 1.2 — カスタム指示を追加する
 
-`/init` で生成された `copilot-instructions.md` には、現在のレガシーコードに関する情報が含まれています。この内容は**そのまま残して**、ファイルの末尾に以下の移行ガイドラインを**追記**してください：
+`/init` で生成された `copilot-instructions.md` に、移行ガイドラインを追加しましょう。Copilot Chat で以下のプロンプトを入力してください：
 
-```markdown
+```
+copilot-instructions.md に以下の内容を追記してください。既存の内容は残してください。
 
-## 言語設定
-すべての会話は日本語で行ってください。
-
-## 移行先の技術スタック
-- フレームワーク: Next.js (App Router)
-- 言語: TypeScript
-- スタイリング: Tailwind CSS
+- 言語設定: すべての会話は日本語で行う
+- 移行先の技術スタック: Next.js (App Router) + TypeScript + Tailwind CSS
 - テスト: Vitest + Playwright
-
-## デザイン要件
-- モダンで洗練されたUI
-- レスポンシブデザイン（モバイルファースト）
-- ダークモード対応
-
-## コーディング規約
-- ESLint + Prettier に準拠
-- コンポーネントは関数コンポーネント + Hooks を使用
-- 型定義は厳格に（any 禁止）
+- デザイン要件: モダンで洗練されたUI、レスポンシブデザイン（モバイルファースト）、ダークモード対応
+- コーディング規約: ESLint + Prettier 準拠、関数コンポーネント + Hooks、型定義は厳格に（any 禁止）
 ```
 
 > aside positive

@@ -174,25 +174,14 @@ php -S localhost:8080
 <aside class="special"><p><strong>ポイント</strong>: プロジェクトの文脈を一度設定すれば、以降の作業で一貫した理解に基づくアシストが可能になります。</p>
 </aside>
 <h2 is-upgraded>1.2 — カスタム指示を追加する</h2>
-<p><code>/init</code> で生成された <code>copilot-instructions.md</code> には、現在のレガシーコードに関する情報が含まれています。この内容は<strong>そのまま残して</strong>、ファイルの末尾に以下の移行ガイドラインを<strong>追記</strong>してください：</p>
-<pre><code language="language-markdown" class="language-markdown">## 言語設定
-すべての会話は日本語で行ってください。
+<p><code>/init</code> で生成された <code>copilot-instructions.md</code> に、移行ガイドラインを追加しましょう。Copilot Chat で以下のプロンプトを入力してください：</p>
+<pre><code>copilot-instructions.md に以下の内容を追記してください。既存の内容は残してください。
 
-## 移行先の技術スタック
-- フレームワーク: Next.js (App Router)
-- 言語: TypeScript
-- スタイリング: Tailwind CSS
+- 言語設定: すべての会話は日本語で行う
+- 移行先の技術スタック: Next.js (App Router) + TypeScript + Tailwind CSS
 - テスト: Vitest + Playwright
-
-## デザイン要件
-- モダンで洗練されたUI
-- レスポンシブデザイン（モバイルファースト）
-- ダークモード対応
-
-## コーディング規約
-- ESLint + Prettier に準拠
-- コンポーネントは関数コンポーネント + Hooks を使用
-- 型定義は厳格に（any 禁止）
+- デザイン要件: モダンで洗練されたUI、レスポンシブデザイン（モバイルファースト）、ダークモード対応
+- コーディング規約: ESLint + Prettier 準拠、関数コンポーネント + Hooks、型定義は厳格に（any 禁止）
 </code></pre>
 <aside class="special"><p><strong>ポイント</strong>: <code>/init</code> で生成されたレガシーコードの説明を残しておくことで、Copilot は「現在の状態」と「移行先の目標」の両方を理解した上でアシストしてくれます。</p>
 </aside>
