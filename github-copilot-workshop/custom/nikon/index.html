@@ -1,0 +1,465 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Nikon GitHub Copilot ワークショップ</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="github-copilot-workshop"
+                  title="Nikon GitHub Copilot ワークショップ"
+                  environment="web"
+                  feedback-link="https://example.com/feedback">
+    
+      <google-codelab-step label="ワークショップについて" duration="5">
+        <p>GitHub Copilotワークショップへようこそ！</p>
+<p class="image-container"><img alt="GitHub Copilot Logo" src="../../img/dcd9c52ce37f5b19.png"></p>
+<p>このワークショップでは、<strong>GitHub Copilot CLI</strong> を中心に、最新の AI 駆動開発を体験していただきます。Copilot CLI はターミナル上で動作する対話型の AI アシスタントであり、コード生成・レビュー・リファクタリングなどの幅広いタスクを自律的に実行できます。</p>
+<h2 is-upgraded>本日のゴール</h2>
+<ul>
+<li>GitHub Copilot CLI の基本操作を理解する</li>
+<li>Copilot SDK を活用した Web アプリケーション開発を体験する</li>
+<li>複数の AI モデルを使ったコードレビューを実践する</li>
+<li>Agentic Workflow による開発プロセスの自動化を構築する</li>
+</ul>
+<h2 is-upgraded>本日のアジェンダ</h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p>ステップ</p>
+</td><td colspan="1" rowspan="1"><p>内容</p>
+</td><td colspan="1" rowspan="1"><p>概要</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>1</p>
+</td><td colspan="1" rowspan="1"><p>ワークショップについて</p>
+</td><td colspan="1" rowspan="1"><p>概要説明とゴールの確認</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>2</p>
+</td><td colspan="1" rowspan="1"><p>プロジェクトセットアップ</p>
+</td><td colspan="1" rowspan="1"><p>リポジトリの作成と開発環境の準備</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>3</p>
+</td><td colspan="1" rowspan="1"><p>Copilot SDK で AI チャットツールを作ろう</p>
+</td><td colspan="1" rowspan="1"><p>Copilot SDK を使って1プロンプトで Web アプリを構築</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>4</p>
+</td><td colspan="1" rowspan="1"><p>Copilot Code Review</p>
+</td><td colspan="1" rowspan="1"><p>複数モデルを使ったコードレビュー</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>5</p>
+</td><td colspan="1" rowspan="1"><p>Agentic Workflow</p>
+</td><td colspan="1" rowspan="1"><p>AI エージェントによる開発プロセスの自動化</p>
+</td></tr>
+</table>
+<h2 is-upgraded>前提条件</h2>
+<ul>
+<li>Visual Studio Code がインストールされていること</li>
+<li>GitHub Copilotのライセンスがあること（Business/Enterprise プラン推奨）</li>
+<li>GitHubアカウントを持っていること</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="プロジェクトのセットアップ" duration="15">
+        <p>このワークショップでは、以下のGitHubリポジトリを使用します：</p>
+<p><strong>プロジェクトURL</strong>: https://github.com/moulongzhang/2026-Github-Copilot-Workshop-Python</p>
+<h2 is-upgraded>ステップ1: テンプレートからリポジトリを作成する</h2>
+<p>まず、上記のプロジェクトURLをブラウザで開き、テンプレートから自分のリポジトリを作成します：</p>
+<ol type="1">
+<li>プロジェクトURL（https://github.com/moulongzhang/2026-Github-Copilot-Workshop-Python）をブラウザで開く</li>
+<li>右上の <strong>Use this template</strong> ボタンをクリックし、<strong>Create a new repository</strong> を選択</li>
+</ol>
+<p><img alt="Use this template ボタンをクリック" src="../../img/c09446109f5e979b.png"> テンプレートからの作成が完了すると、あなたのGitHubアカウントに新しいリポジトリが作成されます。</p>
+<h2 is-upgraded>ステップ2: 開発環境のセットアップ</h2>
+<p>作成したリポジトリを使って、GitHub Codespacesで開発環境を準備します：</p>
+<ol type="1">
+<li>作成したリポジトリのページで（<code>https://github.com/copilot-hands-on/[リポジトリ名]</code>）</li>
+<li>緑色の <strong>Code</strong> ボタンをクリック</li>
+<li><strong>Codespaces</strong> タブを選択</li>
+<li><strong>Create codespace on main</strong> をクリック</li>
+</ol>
+<p class="image-container"><img alt="Codespaces Setup" src="../../img/da697969a846a2d4.png"></p>
+<h2 is-upgraded>ステップ3: Copilot の設定確認</h2>
+<p>GitHubで利用可能なCopilot機能を有効化しましょう。</p>
+<ol type="1">
+<li>GitHubの右上のプロフィールアイコンをクリック</li>
+<li><strong>Copilot Settings</strong> を選択</li>
+</ol>
+<p class="image-container"><img alt="Copilot 設定" src="../../img/e0788a8fe3eff510.png"></p>
+<p>以下の機能を有効化してください：</p>
+<ul>
+<li><strong>Copilot CLI</strong> - ターミナルでのCopilot利用</li>
+<li><strong>Copilot code review</strong> - コードレビュー機能</li>
+</ul>
+<aside class="warning"><p><strong>プラン制限</strong>: Copilot Code Review、Copilot CLIなどの機能は、GitHub Copilot Business/Enterprise プランでのみ利用可能です。</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Copilot SDK で AI チャットツールを作ろう" duration="10">
+        <p>ここからは、<strong>Copilot SDK</strong> を使って、ブラウザ上で動作する生成 AI チャットツールを <strong>Copilot CLI から1つのプロンプトで</strong> 構築します。</p>
+<h2 is-upgraded>Copilot SDK とは？</h2>
+<p><strong>Copilot SDK</strong> は、GitHub Copilot CLI をプログラムから制御するための SDK です。JSON-RPC を介して Copilot CLI と通信し、AI セッションの作成・メッセージの送受信・ストリーミングレスポンスの取得などをアプリケーションに組み込むことができます。</p>
+<p><strong>SDK リポジトリ</strong>: <a href="https://github.com/github/copilot-sdk" target="_blank">https://github.com/github/copilot-sdk</a></p>
+<h2 is-upgraded>何を作るか</h2>
+<p>ブラウザから AI とリアルタイムにチャットできる Web アプリケーションを作ります：</p>
+<ul>
+<li><strong>フロントエンド</strong>: ブラウザ上のチャット UI（React + TypeScript）</li>
+<li><strong>バックエンド</strong>: Copilot SDK を使って AI セッションを管理する Node.js サーバー</li>
+<li><strong>リアルタイム通信</strong>: WebSocket でストリーミングレスポンスを配信</li>
+</ul>
+<h2 is-upgraded>Copilot SDK の主要 API</h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p>API</p>
+</td><td colspan="1" rowspan="1"><p>説明</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>CopilotClient</code></p>
+</td><td colspan="1" rowspan="1"><p>CLI サーバーとの接続を管理するクライアント</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>client.createSession()</code></p>
+</td><td colspan="1" rowspan="1"><p>新しい会話セッションを作成</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>session.send()</code></p>
+</td><td colspan="1" rowspan="1"><p>メッセージを送信</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>session.on("assistant.message_delta")</code></p>
+</td><td colspan="1" rowspan="1"><p>ストリーミングレスポンスのチャンクを受信</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>session.on("assistant.message")</code></p>
+</td><td colspan="1" rowspan="1"><p>最終レスポンスを受信</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>session.on("session.idle")</code></p>
+</td><td colspan="1" rowspan="1"><p>セッションの処理完了を検知</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>approveAll</code></p>
+</td><td colspan="1" rowspan="1"><p>すべてのツール実行パーミッションを自動許可</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>createChatTools()</code></p>
+</td><td colspan="1" rowspan="1"><p>チャット用の標準ツールセットを生成</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>hooks.onPreToolUse</code></p>
+</td><td colspan="1" rowspan="1"><p>ツール実行前のフック（入力の検証・変換などに使用）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>hooks.onPostToolUse</code></p>
+</td><td colspan="1" rowspan="1"><p>ツール実行後のフック（結果のログ・加工などに使用）</p>
+</td></tr>
+</table>
+<h2 is-upgraded>SDK の基本的な使い方</h2>
+<pre><code language="language-javascript" class="language-javascript">import { CopilotClient, approveAll, createChatTools } from &#34;@github/copilot-sdk&#34;;
+
+const client = new CopilotClient();
+await client.start();
+
+const session = await client.createSession({
+    model: &#34;gpt-5&#34;,
+    onPermissionRequest: approveAll,
+    tools: createChatTools(),
+    hooks: {
+        onPreToolUse: (input, invocation) =&gt; {
+            console.log(`ツール実行前: ${invocation.toolName}`, input);
+        },
+        onPostToolUse: (input, invocation) =&gt; {
+            console.log(`ツール実行後: ${invocation.toolName}`, input);
+        },
+    },
+});
+
+session.on(&#34;assistant.message_delta&#34;, (event) =&gt; {
+    process.stdout.write(event.data.deltaContent);
+});
+
+await session.send({ prompt: &#34;Hello!&#34; });
+</code></pre>
+<aside class="special"><p><strong>このセクションのポイント</strong>: 設計書や細かい仕様書を用意することなく、Copilot CLI に <strong>1つのプロンプト</strong> を投げるだけで、SDK を活用した Web アプリケーションを一気に構築します。AI 駆動開発の生産性を体感してください。</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Vibe Coding で実装しよう" duration="60">
+        <p>Copilot SDK の概要を理解したら、いよいよ <strong>Vibe Coding</strong> でブラウザ AI チャットツールを実装していきます。</p>
+<h2 is-upgraded>ステップ 1: Copilot CLI を起動する</h2>
+<p>VS Code のターミナルで Copilot CLI を起動します。</p>
+<pre><code language="language-bash" class="language-bash">copilot
+</code></pre>
+<h2 is-upgraded>ステップ 2: すべてのパーミッションを許可する</h2>
+<pre><code>/allow-all
+</code></pre>
+<p><code>/allow-all</code> は、Copilot CLI に対して<strong>ツールの実行・ファイルアクセス・外部URLへのアクセス</strong>のすべてのパーミッションを一括で許可するコマンドです。</p>
+<p>通常、Copilot CLI はセキュリティのために、ファイルの読み書きやコマンドの実行、外部通信を行う際にユーザーへ都度許可を求めます。<code>/allow-all</code> を実行することで、これらの確認プロンプトをスキップし、Copilot がファイルの作成・編集、パッケージのインストール、サーバーの起動などを自律的に実行できるようになります。</p>
+<aside class="warning"><p><strong>注意</strong>: <code>/allow-all</code> は現在のセッションに対してのみ有効です。セキュリティ上、信頼できるプロジェクトでのみ使用してください。個別に許可したい場合は、<code>/add-dir</code> でディレクトリ単位のアクセス許可を設定することもできます。</p>
+</aside>
+<h2 is-upgraded>ステップ 3: ハイエンドモデルを選択する</h2>
+<pre><code>/model
+</code></pre>
+<p>モデル一覧から最も高性能なモデル（例: Claude Opus 4.6）を選択してください。複数コンポーネントを持つ Web アプリケーションの構築には、推論能力の高いハイエンドモデルが効果的です。</p>
+<h2 is-upgraded>ステップ 4: Autopilot モードに切り替える</h2>
+<p><strong>Shift+Tab</strong> を押して、Copilot CLI を <strong>Autopilot モード</strong> に切り替えてください。Autopilot モードでは、Copilot がファイルの作成・編集やコマンドの実行を確認なしで自律的に進めるため、大規模な実装を一気に行う Vibe Coding に最適です。</p>
+<h2 is-upgraded>ステップ 5: 1プロンプトで一気に実装する</h2>
+<p>以下のプロンプトを Copilot CLI に投げてください。<code>/fleet</code> コマンドで複数のエージェントが並列に動作し、SDK を使ったブラウザ AI チャットツールを一気に構築します：</p>
+<pre><code>/fleet Copilot SDK を使って、ブラウザ上で動作する AI チャット Web アプリケーションを copilotWebRelay/ ディレクトリに構築してください。
+
+SDK リファレンス: https://github.com/github/copilot-sdk
+
+要件:
+- バックエンド: Node.js + Express + WebSocket サーバー
+  - Copilot SDK の CopilotClient でセッションを管理
+  - createSession() でモデル &#34;gpt-5&#34; を使用、onPermissionRequest には approveAll を使用
+  - session.on(&#34;assistant.message_delta&#34;) でストリーミングレスポンスを WebSocket 経由でクライアントに配信
+  - session.on(&#34;session.idle&#34;) で完了を通知
+- フロントエンド: React + TypeScript + Vite
+  - モダンなチャット UI（メッセージ入力欄、送信ボタン、チャット履歴表示）
+  - WebSocket でサーバーに接続し、ストリーミングレスポンスをリアルタイム表示
+  - Markdown レンダリング対応
+- 開発環境: npm scripts でバックエンドとフロントエンドを同時起動できること
+- 動作確認まで行ってください
+</code></pre>
+<aside class="special"><p><strong>1プロンプトのコツ</strong>: 要件を箇条書きで構造化し、使用する技術スタック・SDK の API・期待する動作を明確に伝えることで、Copilot が正確にアプリケーションを構築してくれます。</p>
+</aside>
+<h2 is-upgraded>つまずいた場合のヒント</h2>
+<p>実装でエラーが発生した場合は、以下を試してみましょう：</p>
+<ul>
+<li><strong>エラーメッセージをそのまま Copilot に共有</strong>: 「このエラーを修正してください」と伝えるだけで修正してくれます</li>
+<li><strong><code>/diff</code></strong><strong> で変更内容を確認</strong>: 意図しない変更がないかチェック</li>
+<li><strong><code>/model</code></strong><strong> でモデルを変更</strong>: 別のモデルに切り替えて再試行</li>
+</ul>
+<aside class="warning"><p><strong>よくあるつまずきポイント</strong>:</p>
+<ul>
+<li><strong>Copilot SDK のインストール</strong>: <code>npm install @github/copilot-sdk</code> が正しく実行されていることを確認</li>
+<li><strong>認証</strong>: Copilot CLI がログイン済みであること（<code>copilot</code> コマンドが動作すること）</li>
+<li><strong>Vite の WebSocket プロキシ</strong>: <code>target</code> に <code>ws://</code> ではなく <code>http://</code> を指定する必要があります</li>
+<li><strong>React StrictMode</strong>: <code>useEffect</code> が2回実行される問題で WebSocket 接続が不安定になることがあります</li>
+</ul>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Copilot Code Review — 複数モデルによるコードレビュー" duration="30">
+        <p>Copilot Web Relay の実装が完了したら、<strong>Copilot CLI のレビュー関連コマンド</strong> を使って、複数の AI モデルでコードレビューを行いましょう。異なるモデルの視点から品質・セキュリティ・パフォーマンスの問題を多角的に検出することがゴールです。</p>
+<h2 is-upgraded>レビューに使う主なコマンド</h2>
+<p>Copilot CLI にはコードレビューに活用できるコマンドが複数用意されています。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>コマンド</p>
+</td><td colspan="1" rowspan="1"><p>説明</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/review</code></p>
+</td><td colspan="1" rowspan="1"><p>コードレビューエージェントを実行して変更を分析する</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/model</code></p>
+</td><td colspan="1" rowspan="1"><p>使用する AI モデルを選択する（Claude、GPT、Gemini 等）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/undo</code></p>
+</td><td colspan="1" rowspan="1"><p>直前のターンを巻き戻し、ファイル変更を元に戻す</p>
+</td></tr>
+</table>
+<h2 is-upgraded>ステップ 1: コードをコミット &amp; Push する</h2>
+<p>Copilot CLI で以下のように指示して、実装をコミット &amp; Push します：</p>
+<pre><code>実装した Copilot Web Relay のコードをすべて git add して、適切なコミットメッセージでコミットし、feature/copilot-web-relay ブランチにプッシュして、main ブランチへの Pull Request を作成してください。
+</code></pre>
+<h2 is-upgraded>ステップ 2: 複数モデルでレビュー &amp; Pull Request にコメント</h2>
+<p>Copilot CLI で以下のプロンプトを入力して、複数モデルによるレビューから PR コメントまでを一気に実行します：</p>
+<pre><code>/review opus4.6, GPT5.4の各モデルでPull Requestをレビューいただき、結果をまとめていただき、結果をPull Requestにコメントとして残してください
+</code></pre>
+<p>このプロンプトだけで、以下が自動的に実行されます：</p>
+<ul>
+<li><strong>Claude Opus 4.6</strong> によるコードレビュー</li>
+<li><strong>GPT-5.4</strong> によるコードレビュー</li>
+<li>各モデルのレビュー結果の統合・比較</li>
+<li>Pull Request へのレビューコメントの投稿</li>
+</ul>
+<p>修正に問題があった場合は、<code>/undo</code> で直前のターンを巻き戻してファイル変更を元に戻すことができます。</p>
+<aside class="special"><p><strong>複数モデルレビューのメリット</strong>:</p>
+<ul>
+<li><strong>Claude</strong>: 論理的な整合性やエッジケースの検出に強い</li>
+<li><strong>GPT</strong>: 幅広いベストプラクティスの指摘が得意</li>
+</ul>
+<p>複数のモデルが共通して指摘する問題は、信頼度が高く優先的に修正すべき問題です。</p>
+</aside>
+<h2 is-upgraded>ステップ 3: GitHub 上での Code Review</h2>
+<p>GitHub 上でも Copilot Code Review 機能を併用しましょう：</p>
+<ol type="1">
+<li>GitHub 上で Pull Request を開く</li>
+<li><strong>Reviewers</strong> セクションで <strong>Copilot</strong> をレビュワーとしてアサイン</li>
+</ol>
+<p class="image-container"><img alt="Copilot自動アサインの設定" src="../../img/bc9c16ab7a83d165.png"></p>
+<aside class="special"><p><strong>CLI レビューと GitHub レビューの使い分け</strong>:</p>
+<ul>
+<li><strong><code>/review</code></strong><strong>（CLI）</strong>: ローカルの変更差分を対象に即座にレビューを実行。開発中の早い段階で問題を検出できる</li>
+<li><strong>GitHub Code Review</strong>: Pull Request の差分を対象に、フォーマルなレビューコメントを残す。チームでのレビューフローに最適</li>
+</ul>
+<p>両方を組み合わせることで、開発の早い段階から品質を担保できます。</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Agentic Workflow — AI エージェントによる開発プロセスの自動化" duration="20">
+        <p>最後のステップでは、<strong>GitHub Agentic Workflow</strong> を構築し、AI エージェントが開発プロセスを自律的に自動化する仕組みを体験しましょう。</p>
+<h2 is-upgraded>Agentic Workflow とは</h2>
+<p><strong>Agentic Workflow</strong> は、GitHub Actions 上で AI エージェントが作業を自律的に実行する仕組みです。2026年2月13日にテクニカルプレビューとして発表されました。</p>
+<p>従来の GitHub Actions はあらかじめ決められたステップを順番に実行するものでしたが、Agentic Workflow では <strong>AI が状況を判断し、必要なアクションを自律的に決定・実行</strong> します。</p>
+<h2 is-upgraded>何ができるか</h2>
+<p>Agentic Workflow を使うことで、以下のような開発タスクを AI エージェントに委任できます：</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>ユースケース</p>
+</td><td colspan="1" rowspan="1"><p>説明</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>Issue の自動トリアージ</strong></p>
+</td><td colspan="1" rowspan="1"><p>新しい Issue の内容を AI が分析し、ラベル付け・担当者アサイン・優先度設定を自動実行</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>PR レビューの自動化</strong></p>
+</td><td colspan="1" rowspan="1"><p>Pull Request の変更内容を AI がレビューし、コメントや改善提案を自動投稿</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>CI エラーの分析と修正</strong></p>
+</td><td colspan="1" rowspan="1"><p>CI/CD パイプラインのエラーを AI が分析し、原因特定と修正 PR の自動作成</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>ドキュメント管理</strong></p>
+</td><td colspan="1" rowspan="1"><p>コード変更に連動してドキュメントを自動更新し、コードとドキュメントの一貫性を維持</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>リリースノート生成</strong></p>
+</td><td colspan="1" rowspan="1"><p>マージされた PR やコミット履歴から、リリースノートを自動生成</p>
+</td></tr>
+</table>
+<h2 is-upgraded>主なメリット</h2>
+<ul>
+<li><strong>自然言語で記述</strong>: ワークフローの目的を自然言語（Markdown）で記述するだけで、AI が処理内容を判断して実行する</li>
+<li><strong>柔軟なトリガー</strong>: スケジュール実行、イベントトリガー（Push、PR作成）、Issue コメントコマンドなど、多様な起動条件に対応</li>
+<li><strong>自律的な判断</strong>: AI エージェントがコードの変更内容を理解し、何をすべきかを自ら判断する</li>
+</ul>
+<h2 is-upgraded>始め方</h2>
+<p>Agentic Workflow は <code>gh aw</code> CLI 拡張機能を使って作成します：</p>
+<ol type="1">
+<li><strong>Markdown ファイルを作成</strong> — ワークフローの目的と動作を自然言語で記述</li>
+<li><strong>コンパイル</strong> — <code>gh aw</code> が Markdown を GitHub Actions のワークフロー YAML に変換</li>
+<li><strong>コミット &amp; Push</strong> — ワークフローがリポジトリに追加され、トリガー条件に応じて自動実行</li>
+</ol>
+<aside class="special"><p><strong>参考</strong>: サンプルユースケースは「Peli&#39;s Agent Factory」（https://github.com/peli-pro-hq/agent-factory）で多数公開されています。</p>
+</aside>
+<h2 is-upgraded>ステップ 1: PAT（Personal Access Token）の作成</h2>
+<p>Agentic Workflow が GitHub Actions で Copilot を利用するために、Personal Access Token を作成します。</p>
+<h3 is-upgraded>Fine-grained PAT の作成</h3>
+<p>以下のURLにアクセスして、新しいFine-grained PATを作成します：</p>
+<p><a href="https://github.com/settings/personal-access-tokens/new" target="_blank">https://github.com/settings/personal-access-tokens/new</a></p>
+<p>設定内容：</p>
+<ul>
+<li><strong>Token name</strong>: 任意の名前を入力してください（例: <code>copilot-workshop</code>）</li>
+<li><strong>Resource owner</strong>: 自分のユーザーアカウントを選択</li>
+<li><strong>Repository access</strong>: <strong>Public repositories</strong> を選択</li>
+<li><strong>Permissions</strong>: <strong>Copilot Requests</strong> を有効化</li>
+</ul>
+<p class="image-container"><img alt="Fine-grained PAT の作成" src="../../img/14b892fb9208458f.png"></p>
+<p>作成が完了したら、表示されたPATを必ずコピーしてください。</p>
+<aside class="warning"><p><strong>⚠️ 注意</strong>: PATは作成直後の画面でのみ表示されます。画面遷移すると二度と確認できなくなるため、必ずこのタイミングでコピーしてください。</p>
+</aside>
+<h3 is-upgraded>Repository Secret に設定</h3>
+<p>作成したPATをリポジトリのシークレットとして設定します：</p>
+<ol type="1">
+<li>自分のリポジトリの <strong>Settings</strong> タブをクリック</li>
+<li>左サイドバーから <strong>Secrets and variables</strong> → <strong>Actions</strong> を選択</li>
+<li><strong>New repository secret</strong> をクリック</li>
+<li>以下の内容を入力： <ul>
+<li><strong>Name</strong>: <code>COPILOT_GITHUB_TOKEN</code></li>
+<li><strong>Value</strong>: 先ほど作成したPATを貼り付け</li>
+</ul>
+</li>
+<li><strong>Add secret</strong> をクリック</li>
+</ol>
+<h3 is-upgraded>Workflow permissions の確認</h3>
+<ol type="1">
+<li>自分のリポジトリの <strong>Settings</strong> タブをクリック</li>
+<li>左サイドバーから <strong>Actions</strong> → <strong>General</strong> を選択</li>
+<li><strong>Workflow permissions</strong> セクションで <strong>Allow GitHub Actions to create and approve pull requests</strong> にチェックが入っていることを確認</li>
+<li>チェックが入っていない場合は有効化して <strong>Save</strong> をクリック</li>
+</ol>
+<h2 is-upgraded>ステップ 2: ドキュメント自動更新ワークフローの作成</h2>
+<p>まずは、コード変更に連動してドキュメントを自動更新する Agentic Workflow を作成しましょう。Copilot CLI で以下のプロンプトを入力してください：</p>
+<pre><code>以下のURLを参照して GitHub Agentic Workflow を作成してください。
+https://github.com/github/gh-aw/blob/main/create.md
+
+ワークフローの目的は以下のとおりです：
+- copilotWebRelay 配下のコードが更新された時に実行されます
+- copilotWebRelay 配下のコードの内容に応じて copilotWebRelay/docs のドキュメンテーションを更新し、ソースコードとドキュメンテーションが常に一致するようにします
+</code></pre>
+<h2 is-upgraded>ステップ 3: ワークフローの動作確認</h2>
+<p>ワークフローが作成できたら、コードに変更を加えて動作を確認しましょう：</p>
+<ol type="1">
+<li>Copilot Web Relay のコードに小さな変更を加える（例: コメントの追加、関数の改善など）</li>
+<li>変更をコミットして Push する</li>
+<li>GitHub の <strong>Actions</strong> タブでワークフローが実行されていることを確認</li>
+<li>ワークフロー完了後、ドキュメントを更新する <strong>Pull Request</strong> が自動的に作成されることを確認</li>
+</ol>
+<aside class="special"><p><strong>ポイント</strong>: AI エージェントがコードの差分を読み取り、変更内容に応じて適切なドキュメント更新を自律的に判断・実行します。開発者がドキュメント更新を忘れても、常にコードとドキュメントの一貫性が保たれます。</p>
+</aside>
+<h2 is-upgraded>ステップ 4: Auto Healing DevOps の作成（オプション）</h2>
+<p>余裕がある方は、CI/CD のジョブが失敗した時にそれを検知して自動修正する Agentic Workflow も作成してみましょう。これは <strong>CI エラー分析</strong> のユースケースです。</p>
+<pre><code>以下のURLを参照して GitHub Agentic Workflow を作成してください。
+https://github.com/github/gh-aw/blob/main/create.md
+
+ワークフローの目的は以下のとおりです：
+リポジトリで失敗したワークフロー実行を検知し、原因を分析してIssueを自動作成する。
+作成したissueにはCopilotを自動アサインする。
+</code></pre>
+<p>ワークフローが作成できたら、意図的にビルドを失敗させて動作を確認します：</p>
+<pre><code>System.out.println(&#34;Hello World!&#34;); を System.out.println(&#34;Hell World!&#34;); にして push して
+</code></pre>
+<p>Push 後、GitHub Actions のワークフローが失敗を検知し、Copilot が自動的に Issue を作成してアサインされることを確認しましょう。</p>
+<aside class="special"><p><strong>Agentic Workflow の可能性</strong>: 今回体験したドキュメント自動更新と CI エラー分析は、Agentic Workflow のほんの一例です。Issue のトリアージ、PR レビュー、リリースノート生成、セキュリティスキャンの自動化など、開発プロセスのあらゆる場面で AI エージェントを活用できます。</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="おめでとうございます 🎉" duration="5">
+        <h2 is-upgraded>今日学んだこと</h2>
+<p>このワークショップでは以下のことを学びました：</p>
+<ol type="1">
+<li><strong>GitHub Copilot CLI の基本操作</strong> — ターミナル上でのAIアシスタントの活用</li>
+<li><strong>Copilot SDK を活用した Web アプリケーション開発</strong> — 1プロンプトで SDK ベースの AI チャットツールを構築</li>
+<li><strong>複数モデルによるコードレビュー</strong> — Claude、GPT、Gemini を使い分けた多角的なコード品質チェック</li>
+<li><strong>Agentic Workflow</strong> — GitHub Actions 上で AI エージェントが開発プロセスを自律的に自動化する仕組みの構築</li>
+</ol>
+<h2 is-upgraded>次のステップ</h2>
+<ul>
+<li>実際のプロジェクトで Copilot CLI を活用してみる</li>
+<li><code>/review</code> を日常のコードレビューワークフローに組み込む</li>
+<li>Agentic Workflow を自社のCI/CDパイプラインに導入する</li>
+<li>Copilotの新機能をキャッチアップする</li>
+</ul>
+<h2 is-upgraded>リソース</h2>
+<ul>
+<li><a href="https://docs.github.com/copilot" target="_blank">GitHub Copilot Documentation</a></li>
+<li><a href="https://docs.github.com/copilot/using-github-copilot/best-practices-for-using-github-copilot" target="_blank">GitHub Copilot ベストプラクティス</a></li>
+<li><a href="https://docs.github.com/copilot/github-copilot-in-the-cli" target="_blank">GitHub Copilot CLI</a></li>
+</ul>
+<p>お疲れさまでした！</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
