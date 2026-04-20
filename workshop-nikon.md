@@ -122,7 +122,7 @@ Duration: 20
 
 まず、Copilot にこのリポジトリの全体像を把握させましょう。
 
-Copilot Chat をエージェントモードに切り替え、以下を実行します：
+Copilot Chat で以下を実行します：
 
 ```
 /init
