@@ -30,7 +30,7 @@
       <google-codelab-step label="ワークショップについて" duration="5">
         <p>GitHub Copilotワークショップへようこそ！</p>
 <p class="image-container"><img alt="GitHub Copilot Logo" src="../../img/dcd9c52ce37f5b19.png"></p>
-<p>このワークショップでは、<strong>2008年時代のレガシーウェブサイト（Nikora Corporation）</strong> を題材に、GitHub Copilot の全機能を活用してモダンなウェブアプリケーションに変革する体験をしていただきます。</p>
+<p>このワークショップでは、<strong>2008年時代のレガシーPHPウェブサイト（ヒカリ電機 / Hikari Denki）</strong> を題材に、GitHub Copilot の全機能を活用してモダンなウェブアプリケーションに変革する体験をしていただきます。</p>
 <h2 is-upgraded>本日のゴール</h2>
 <ul>
 <li>GitHub Copilot のセットアップとカスタマイズ方法を理解する</li>
@@ -148,7 +148,7 @@
 </ul>
 <h2 is-upgraded>ステップ3: レガシーサイトを確認する</h2>
 <ol type="1">
-<li>VS Code のエクスプローラーで <code>1.nikora-website/index.html</code> を右クリック</li>
+<li>VS Code のエクスプローラーで <code>hikari-legacy-php/index.html</code> を右クリック</li>
 <li><strong>「Open with Live Server」</strong> を選択</li>
 <li>ブラウザでレガシーサイトが表示されることを確認</li>
 </ol>
@@ -203,7 +203,7 @@
 </code></pre>
 <h2 is-upgraded>1.3 — フロントエンド Skill を作成する</h2>
 <p>Copilot に以下のプロンプトを入力して、フロントエンド開発用の Skill を作成してもらいましょう：</p>
-<pre><code>please make a research to create a frontend skill that follow the branding of Nikora Corporation (the company in 1.nikora-website/). 
+<pre><code>please make a research to create a frontend skill that follow the branding of ヒカリ電機 / Hikari Denki (the company in hikari-legacy-php/). 
 The skill should define the brand colors, typography, design principles and component patterns. 
 Add the skill to this repo under .github/skills/
 </code></pre>
@@ -250,7 +250,7 @@ Add the skill to this repo under .github/skills/
 <li>Copilot Chat で <strong>Shift+Tab</strong> を押して Plan Mode に切り替え</li>
 <li>以下のプロンプトを入力：</li>
 </ol>
-<pre><code>このレガシー HTML サイト（1.nikora-website/）を Next.js + TypeScript + Tailwind CSS に移行してください。
+<pre><code>このレガシー HTML サイト（hikari-legacy-php/）を Next.js + TypeScript + Tailwind CSS に移行してください。
 
 現状のサイトの特徴：
 - HTML 4.01 テーブルレイアウト
@@ -276,7 +276,7 @@ Add the skill to this repo under .github/skills/
 <h2 is-upgraded>2.2 — 移行を実行する</h2>
 <p>計画が確定したら、実装を開始します。</p>
 <pre><code>計画に従って、レガシーサイトの Next.js への移行を実行してください。
-1.nikora-website/ の内容を分析し、新しい Next.js プロジェクトとして構築してください。
+hikari-legacy-php/ の内容を分析し、新しい Next.js プロジェクトとして構築してください。
 </code></pre>
 <p>Copilot エージェントが以下を自動的に実行します：</p>
 <ul>
