@@ -198,7 +198,9 @@ Copilot Chat で以下を入力して、GitHub との接続を確認します：
 
 1. Copilot Chat の入力欄にある **🔧 ツールボタン**（モデル選択の右側）をクリック
 2. **「Add MCP Server」** を選択
-3. Playwright MCP Server を検索してインストール
+3. **「Browse MCP Servers」** をクリック
+4. 初回の場合は **「Enable MCP Servers Marketplace」** をクリックして有効化
+5. Playwright MCP Server を検索してインストール
 
 インストール後、`.vscode/mcp.json` に Playwright が追加されていることを確認してください：
 
