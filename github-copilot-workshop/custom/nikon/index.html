@@ -205,7 +205,13 @@ Skill ファイルは .github/skills/ 配下に追加してください。
 <pre><code>このリポジトリの情報を教えてください（リポジトリ名、Issue 一覧、最新コミット）
 </code></pre>
 <h3 is-upgraded>Playwright MCP Server の追加</h3>
-<p>テスト用に Playwright MCP Server を追加します。<code>.vscode/mcp.json</code> を以下のように更新してください：</p>
+<p>テスト用に Playwright MCP Server を追加します。</p>
+<ol type="1">
+<li>Copilot Chat の入力欄にある <strong>🔧 ツールボタン</strong>（モデル選択の右側）をクリック</li>
+<li><strong>「Add MCP Server」</strong> を選択</li>
+<li>Playwright MCP Server を検索してインストール</li>
+</ol>
+<p>インストール後、<code>.vscode/mcp.json</code> に Playwright が追加されていることを確認してください：</p>
 <pre><code language="language-json" class="language-json">{
   &#34;servers&#34;: {
     &#34;github-mcp-server&#34;: {
@@ -219,6 +225,8 @@ Skill ファイルは .github/skills/ 配下に追加してください。
   }
 }
 </code></pre>
+<aside class="special"><p><strong>ヒント</strong>: 🔧 ツールボタンをクリックすると、現在 Copilot が利用可能な MCP Server とツールの一覧を確認できます。GitHub MCP Server と Playwright が表示されていれば正しく設定されています。</p>
+</aside>
 <p>Playwright MCP Server が正しく動作することを確認するために、以下のプロンプトを試してみましょう：</p>
 <pre><code>Playwright を使って https://www.nikon.com を開き、スクリーンショットを撮ってください
 </code></pre>
