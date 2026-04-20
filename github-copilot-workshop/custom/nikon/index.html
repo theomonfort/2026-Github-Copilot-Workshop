@@ -208,7 +208,7 @@ Skill ファイルは .github/skills/ 配下に追加してください。
 }
 </code></pre>
 <p>Copilot Chat で以下を入力して、GitHub との接続を確認します：</p>
-<pre><code>このリポジトリの情報を教えてください（リポジトリ名、ブランチ一覧、最新コミット）
+<pre><code>このリポジトリの情報を教えてください（リポジトリ名、Issue 一覧、最新コミット）
 </code></pre>
 <h3 is-upgraded>Playwright MCP Server の追加</h3>
 <p>テスト用に Playwright MCP Server を追加します。<code>.vscode/mcp.json</code> を以下のように更新してください：</p>
@@ -225,6 +225,11 @@ Skill ファイルは .github/skills/ 配下に追加してください。
   }
 }
 </code></pre>
+<p>Playwright MCP Server が正しく動作することを確認するために、以下のプロンプトを試してみましょう：</p>
+<pre><code>Playwright を使って https://www.nikon.com を開き、スクリーンショットを撮ってください
+</code></pre>
+<aside class="special"><p><strong>ポイント</strong>: Playwright MCP Server を使うと、Copilot がブラウザを操作してウェブページの確認やスクリーンショットの取得ができます。後のテスト工程で E2E テストにも活用します。</p>
+</aside>
 
 
       </google-codelab-step>

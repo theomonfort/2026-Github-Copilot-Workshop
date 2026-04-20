@@ -193,7 +193,7 @@ MCP（Model Context Protocol）Server が正しく接続されていることを
 Copilot Chat で以下を入力して、GitHub との接続を確認します：
 
 ```
-このリポジトリの情報を教えてください（リポジトリ名、ブランチ一覧、最新コミット）
+このリポジトリの情報を教えてください（リポジトリ名、Issue 一覧、最新コミット）
 ```
 
 #### Playwright MCP Server の追加
@@ -214,6 +214,15 @@ Copilot Chat で以下を入力して、GitHub との接続を確認します：
   }
 }
 ```
+
+Playwright MCP Server が正しく動作することを確認するために、以下のプロンプトを試してみましょう：
+
+```
+Playwright を使って https://www.nikon.com を開き、スクリーンショットを撮ってください
+```
+
+> aside positive
+> **ポイント**: Playwright MCP Server を使うと、Copilot がブラウザを操作してウェブページの確認やスクリーンショットの取得ができます。後のテスト工程で E2E テストにも活用します。
 
 ## 実装 — レガシーサイトの移行
 Duration: 45
