@@ -28,47 +28,17 @@
                   feedback-link="https://example.com/feedback">
     
       <google-codelab-step label="ワークショップについて" duration="5">
-        <p>GitHub Copilotワークショップへようこそ！</p>
+        <p>GitHub Copilotワークショップへようこそ！このワークショップでは、GitHub Copilot を使ってコードの解説や改善を行う方法を学びます。 GitHub Copilot Chat は Chat 体験を通じて AI との対話を行うことができます。 ぜひ、このワークショップを通じて GitHub Copilot の使い方を学んでみましょう。</p>
 <p class="image-container"><img alt="GitHub Copilot Logo" src="../../img/dcd9c52ce37f5b19.png"></p>
-<p>このワークショップでは、<strong>GitHub Copilot CLI</strong> を中心に、最新の AI 駆動開発を体験していただきます。Copilot CLI はターミナル上で動作する対話型の AI アシスタントであり、コード生成・レビュー・リファクタリングなどの幅広いタスクを自律的に実行できます。</p>
 <h2 is-upgraded>本日のゴール</h2>
 <ul>
-<li>GitHub Copilot CLI の基本操作を理解する</li>
-<li>Copilot SDK を活用した Web アプリケーション開発を体験する</li>
-<li>複数の AI モデルを使ったコードレビューを実践する</li>
-<li>Agentic Workflow による開発プロセスの自動化を構築する</li>
+<li>GitHub Copilotの各種機能を理解する</li>
+<li>エージェントモードを使って、新規にアプリケーションを開発する</li>
 </ul>
-<h2 is-upgraded>本日のアジェンダ</h2>
-<table>
-<tr><td colspan="1" rowspan="1"><p>ステップ</p>
-</td><td colspan="1" rowspan="1"><p>内容</p>
-</td><td colspan="1" rowspan="1"><p>概要</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p>1</p>
-</td><td colspan="1" rowspan="1"><p>ワークショップについて</p>
-</td><td colspan="1" rowspan="1"><p>概要説明とゴールの確認</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p>2</p>
-</td><td colspan="1" rowspan="1"><p>プロジェクトセットアップ</p>
-</td><td colspan="1" rowspan="1"><p>リポジトリの作成と開発環境の準備</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p>3</p>
-</td><td colspan="1" rowspan="1"><p>Copilot SDK で AI チャットツールを作ろう</p>
-</td><td colspan="1" rowspan="1"><p>Copilot SDK を使って1プロンプトで Web アプリを構築</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p>4</p>
-</td><td colspan="1" rowspan="1"><p>Copilot Code Review</p>
-</td><td colspan="1" rowspan="1"><p>複数モデルを使ったコードレビュー</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p>5</p>
-</td><td colspan="1" rowspan="1"><p>Agentic Workflow</p>
-</td><td colspan="1" rowspan="1"><p>AI エージェントによる開発プロセスの自動化</p>
-</td></tr>
-</table>
 <h2 is-upgraded>前提条件</h2>
 <ul>
 <li>Visual Studio Code がインストールされていること</li>
-<li>GitHub Copilotのライセンスがあること（Business/Enterprise プラン推奨）</li>
+<li>GitHub Copilotのライセンスがあること</li>
 <li>GitHubアカウントを持っていること</li>
 </ul>
 
@@ -84,36 +54,462 @@
 <li>プロジェクトURL（https://github.com/moulongzhang/2026-Github-Copilot-Workshop-Python）をブラウザで開く</li>
 <li>右上の <strong>Use this template</strong> ボタンをクリックし、<strong>Create a new repository</strong> を選択</li>
 </ol>
-<p><img alt="Use this template ボタンをクリック" src="../../img/c09446109f5e979b.png"> テンプレートからの作成が完了すると、あなたのGitHubアカウントに新しいリポジトリが作成されます。</p>
+<p class="image-container"><img alt="Use this template ボタンをクリック" src="../../img/f30b349b9da9c209.png"></p>
+<ol type="1" start="3">
+<li>リポジトリ作成画面で、リポジトリ名を入力し <strong>Create repository</strong> ボタンをクリック</li>
+</ol>
+<p class="image-container"><img alt="Create repository ボタンをクリック" src="../../img/9b42f25710076003.png"></p>
+<aside class="warning"><p><strong>⚠️ 重要</strong>: リポジトリ作成時に <strong>Visibility（公開設定）は必ず「Public」</strong> を選択してください。Private リポジトリでは、一部の Copilot 機能や GitHub Actions が正しく動作しない場合があります。</p>
+</aside>
+<p>テンプレートからの作成が完了すると、あなたのGitHubアカウントに新しいリポジトリが作成されます。</p>
 <h2 is-upgraded>ステップ2: 開発環境のセットアップ</h2>
 <p>作成したリポジトリを使って、GitHub Codespacesで開発環境を準備します：</p>
 <ol type="1">
-<li>作成したリポジトリのページで（<code>https://github.com/copilot-hands-on/[リポジトリ名]</code>）</li>
+<li>作成したリポジトリのページで（<code>https://github.com/[あなたのユーザー名]/2026-Github-Copilot-Workshop-Python</code>）</li>
 <li>緑色の <strong>Code</strong> ボタンをクリック</li>
 <li><strong>Codespaces</strong> タブを選択</li>
 <li><strong>Create codespace on main</strong> をクリック</li>
 </ol>
 <p class="image-container"><img alt="Codespaces Setup" src="../../img/da697969a846a2d4.png"></p>
-<h2 is-upgraded>ステップ3: Copilot の設定確認</h2>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ポモドーロタイマーを作ってみよう" duration="30">
+        <p>ここまでで、VS Code上で利用できるGitHub Copilotの基本的な使い方を学びました。次は、実際にアプリケーションを開発してみましょう。</p>
+<p>今回のハンズオンでは、ポモドーロタイマーアプリケーションを開発します。このアプリケーションは、作業時間と休憩時間を設定し、タイマーを管理する機能を持っています。</p>
+<p>以下のようなUIを持つアプリケーションを作成することを目指します。</p>
+<p class="image-container"><img alt="ポモドーロタイマーUI" src="../../img/8e24c2d7e6a91e1b.png"></p>
+<p>では、まずVS Code上で、新しいPythonファイルを作成しましょう。今回はWebアプリケーションとして作成したいので、Flaskを使用します。メインファイル名は「app.py」としましょう。</p>
+<h2 is-upgraded>プロジェクトの概要</h2>
+<p>ポモドーロテクニック用のWebタイマーアプリケーションを作成します。</p>
+<h2 is-upgraded>必要な機能</h2>
+<ul>
+<li>25分の作業タイマー</li>
+<li>5分の休憩タイマー</li>
+<li>タイマーの開始・停止・リセット</li>
+<li>進捗表示と統計機能</li>
+<li>ブラウザ通知とサウンド通知</li>
+<li>レスポンシブなWebUI</li>
+</ul>
+<aside class="special"><p><strong>ポモドーロタイマーとは？</strong>: ポモドーロ・テクニックは、1980年代にフランチェスコ・シリロによって考案された時間管理術です。「25分の作業 + 5分の休憩」を1セット（＝1ポモドーロ）とし、これを繰り返すことで集中力を維持しながら効率的に作業を進める手法です。詳しくは <a href="https://ja.wikipedia.org/wiki/%E3%83%9D%E3%83%A2%E3%83%89%E3%83%BC%E3%83%AD%E3%83%BB%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF" target="_blank">Wikipedia: ポモドーロ・テクニック</a> をご覧ください。</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ポモドーロタイマーの設計を考える" duration="10">
+        <p>まず、いきなり実装を始めるのではなく、どういった方針・設計で進めるかをCopilotに相談してみましょう。ここから先は、すべてエージェントモードで進めていきます。</p>
+<h2 is-upgraded>エージェントモードへの切り替え</h2>
+<p>Copilot Chatのモード選択から「エージェント」を選択します。エージェントは、ユーザーの意図を理解し、より自律的にタスクを実行することができます。</p>
+<p class="image-container"><img alt="エージェントモード選択2" src="../../img/bcc926772d6a58dd.png"></p>
+<p class="image-container"><img alt="エージェントモード選択" src="../../img/428f81215165ebb9.png"></p>
+<h2 is-upgraded>設計の相談</h2>
+<p>今回のようにUIを持ったWebアプリケーションを作成するにあたって役に立つのが、Copilot Chatに画像をアップロードする機能です。これを使うことで、アプリケーションのUIイメージをCopilotに理解させることができます。</p>
+<p>前ページのUIイメージをまずはプロジェクトのルートに <code>pomodoro.png</code> として保存してください。その後、チャット欄の <code>Add Context</code> をクリックし、「Image from Clipboard」または「Files &amp; Folders...」を選択します。そして、UIイメージの画像を選択します。</p>
+<p class="image-container"><img alt="VS Code Copilot Chat Context Menu" src="../../img/32ba4d287403b2f9.png"></p>
+<p class="image-container"><img alt="VS Code Copilot Chat Context Menu" src="../../img/aadb91ba110fa522.png"></p>
+<p>画像のアップロードができたら、Copilot Chatに画像が表示されます。</p>
+<p>その上で、次のプロンプトを入力してみましょう。</p>
+<pre><code>このプロジェクトでポモドーロタイマーのWebアプリを作成する予定です。添付の画像はそのアプリのUIモックです。FlaskとHTML/CSS/JavaScriptを使用してこのアプリを作成するにあたって、どのような設計で進めるべきか、アーキテクチャの提案をしてください。
+</code></pre>
+<p>すると、推奨のWebアプリケーションアーキテクチャを提案してくれます。</p>
+<p>このアーキテクチャに対して、もっとこうした方が良いという点や考慮不足の点があれば、それを指摘してみましょう。例えば次のような指摘です。</p>
+<pre><code>ユニットテストのしやすさという点を考慮して、今のアーキテクチャにもし改善や追加が必要な点があればそれも書き出してください。
+</code></pre>
+<p>このやり取りを経て、アーキテクチャの設計が固まったら、一度その内容をファイルに保存してもらいましょう。そうすることで、別のチャットセッションを開いても、同じアーキテクチャの内容を参照することができます。</p>
+<pre><code>ここまでの会話でアーキテクチャについては固まったので、これまでの会話の内容を踏まえて、プロジェクトのルートにarchitecture.mdというファイルに、Webアプリケーションアーキテクチャ案をまとめてください。
+</code></pre>
+<aside class="special"><p> Copilot Chatでのやりとりに一区切りがついたら、新しい会話を始めることで、よりCopilotに対して明確な指示を与えることができます。新しい会話を始めるには、チャットウィンドウの上部にある「新しい会話」ボタンをクリックします。その際、今回のアーキテクチャの内容のように、今後のチャットでも参照したい内容は、今回のようにファイルに書き出して保存しておくと便利です。</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="やることを洗い出そう" duration="10">
+        <p>ここまでで、UIモックとアーキテクチャの設計が固まりました。具体的にどのような機能を実装する必要があるかを検討していきましょう。これもCopilot Chatに相談してみます。その際、pomodoro.pngとarchitecture.mdを添付しましょう。</p>
+<pre><code>このポモドーロタイマーアプリケーションを作成するにあたって、実装する必要のある機能を洗い出してください。
+</code></pre>
+<p class="image-container"><img alt="機能一覧の検討" src="../../img/8e24c2d7e6a91e1b.png"></p>
+<p class="image-container"><img alt="機能洗い出しの例" src="../../img/20a6ec3e5b2f7c50.png"></p>
+<p>この内容もCopilotとのチャットを通して、改善していきましょう。内容が固まったら、アーキテクチャの時と同様にこの内容もfeatures.mdというファイルにまとめて保存しておきましょう。</p>
+<pre><code>ありがとうございます。その内容で良さそうなので、実装する必要のある機能一覧をfeatures.mdというファイルに書いてください。
+</code></pre>
+<p>では、ここから実装を始めるわけですが、Copilotを使いこなすコツとしては、一度に大きな機能を実装しようとするのではなく、まずは小さな機能から実装していくことです。これにより、Copilotが提案するコードの精度が上がり、よりスムーズに開発を進めることができます。</p>
+<p>今回のアプリケーション開発を、どのような粒度で細分化して実装していくかについても、Copilotに相談してみましょう。ここでは、pomodoro.png、architecture.md、features.mdを添付しましょう。</p>
+<pre><code>このポモドーロタイマーアプリケーションを段階的に実装していきたいと考えています。添付の画像とアーキテクチャ、機能一覧を踏まえて、どのような粒度で機能を実装していくべきか、段階的な実装計画を提案してください。
+</code></pre>
+<p>私が試したところ、6つのステップからなる計画を提案してくれました。この点についても、もっとこうしてほしいなどがあれば、Copilotに指摘してみましょう。そして、この内容も後で参照できるように、plan.mdというファイルにまとめて保存しておきましょう。その際、どういうプロンプトで指示するべきかは、みなさん自身で考えてみてください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="実装しよう" duration="30">
+        <p>ここまでの準備が整ったので、いよいよ実装に取り掛かりましょう。前のステップで提案された実装計画に従って、段階的に機能を実装していきます。</p>
+<h2 is-upgraded>1. ブランチの準備</h2>
+<p>実装を始める前に、作業用のブランチを作成しましょう。</p>
+<h3 is-upgraded>ステップ1: ステージングされた変更をリセット</h3>
+<p>現在ステージングエリアにある変更を全てワーキングディレクトリに戻します：</p>
+<pre><code language="language-bash" class="language-bash">git restore .
+</code></pre>
+<h3 is-upgraded>ステップ2: 新しいブランチを作成</h3>
+<p>feature/pomodoroブランチを作成して切り替えます：</p>
+<pre><code language="language-bash" class="language-bash">git checkout -b feature/pomodoro
+</code></pre>
+<h2 is-upgraded>2. プロジェクト構成の準備</h2>
+<p>まずは、今回のアーキテクチャに従ったプロジェクトのディレクトリ構成を作成しましょう。</p>
+<p>まずは、<code>architecture.md</code> のようなアーキテクチャを実現するにあたって、現在のプロジェクトのフォルダ構成を修正してください。必要に応じてファイルの移動や、設定ファイルの変更も行ってください。</p>
+<p>その後、<code>pomodoro.png</code>, <code>architecture.md</code>, <code>plan.md</code> を添付した上で、次のようにCopilotに指示を出してみましょう。</p>
+<pre><code>plan.mdのステップ１を実装してください。その際、すでにこのプロジェクトにあるファイルを別のディレクトリに移動する必要があれば、その作業も実行してください。もし追加で考慮が必要なことがあれば、私に質問してください。
+</code></pre>
+<p>すると、私のケースでは以下のように検討が必要な質問をしてきました。こういった場合には、必要な情報を提供しましょう。</p>
+<p class="image-container"><img alt="Copilotからの質問例" src="../../img/8254991301cd47cd.png"></p>
+<p>その後、Copilotは、ステップ1の実装を行います。実装が完了したら、Copilotは自らの判断でプロジェクトのビルドを行い、エラーがないかを確認します。エラーが発生した場合は、そのエラーを解決するために追加で修正を行います。このような自律的な動作が、エージェントモードの特徴です。</p>
+<p>実装が完了したら、以下の点を確認してみましょう：</p>
+<ol type="1">
+<li><strong>ディレクトリ構造</strong>：推奨されたアーキテクチャに沿った構成になっているか</li>
+<li><strong>基本ファイル</strong>：必要な基本ファイル（app.py、HTML テンプレート、CSS ファイルなど）が作成されているか</li>
+<li><strong>動作確認</strong>：簡単な動作テストを行って、エラーが発生していないか</li>
+</ol>
+<p>以下が、私の場合のステップ1の実装結果です。この段階でどのようなアプリケーションになっているかは人によって異なるでしょう。</p>
+<p class="image-container"><img alt="ステップ1実装結果例" src="../../img/99241f822533e37a.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="テストを書こう" duration="20">
+        <p>このまま実装を続ける前に、実装した機能に対してユニットテストを書いておきましょう。ユニットテストを書くことで、後のステップでの変更が既存の機能に影響を与えないことを確認できます。</p>
+<p>もし前ページの段階でユニットテストも実装されている場合は、このページは読み飛ばしてください。</p>
+<h2 is-upgraded>テストの実装</h2>
+<p>次のようなプロンプトを実行してみましょう。</p>
+<pre><code>現在の実装に対して、ユニットテストが全くないので、ユニットテストを実装してください。
+</code></pre>
+<p>すると、Copilotエージェントはユニットテスト用の依存関係をインストールするために、コマンドを使って良いかどうかを尋ねてきます。このように、エージェントが何かのコマンドを実行する前には、必ずユーザーに確認を求めます。ここでは、必要なコマンドを実行することを許可するために、「Continue」をクリックします。</p>
+<p class="image-container"><img alt="Copilotによるテスト実装確認" src="../../img/c724e1c653e2c6b3.png"></p>
+<p>すると、CopilotはVS Code内のターミナル内で、先ほどのコマンドを実行し、必要な依存関係をインストールします。それ以降も同様に、Copilotが何かのコマンドを実行する前には、必ずユーザーに確認を求めます。もし、そのコマンドを実行してエラーが発生した場合は、そのエラーを解決するために、エージェントは追加の修正を行います。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="次のタスクに向けた設定" duration="20">
+        <p>ここから先のステップでは、GitHub.com上でのCopilot機能やCloud Agentを使用します。そのために必要な設定を行いましょう。</p>
+<h2 is-upgraded>1. GitHub Advanced Security (GHAS) の設定</h2>
+<p>GitHub Advanced Security の Code Scanning 機能を有効にすることで、コードの脆弱性を自動的に検出できます。</p>
+<ol type="1">
+<li>自分のリポジトリの <strong>Settings</strong> タブをクリック</li>
+<li>左サイドバーから <strong>Security</strong> → <strong>Code security</strong> を選択</li>
+<li><strong>Code scanning</strong> セクションで <strong>Set up</strong> をクリック</li>
+</ol>
+<p class="image-container"><img alt="GHAS Code Scanning Setup" src="../../img/96a57e2d2f8719ce.png"></p>
+<ol type="1" start="4">
+<li><strong>Default</strong> を選択（推奨）</li>
+</ol>
+<p class="image-container"><img alt="GHAS Default Configuration" src="../../img/e4bb34522ad67510.png"></p>
+<ol type="1" start="5">
+<li><strong>Enable CodeQL</strong> をクリック</li>
+</ol>
+<p>これにより、プッシュ時やプルリクエスト作成時にコードの自動スキャンが実行されます。</p>
+<h2 is-upgraded>2. Copilot 機能の有効化</h2>
 <p>GitHubで利用可能なCopilot機能を有効化しましょう。</p>
 <ol type="1">
 <li>GitHubの右上のプロフィールアイコンをクリック</li>
-<li><strong>Copilot Settings</strong> を選択</li>
+<li><strong>Copilot settings</strong> を選択</li>
 </ol>
 <p class="image-container"><img alt="Copilot 設定" src="../../img/e0788a8fe3eff510.png"></p>
 <p>以下の機能を有効化してください：</p>
 <ul>
+<li><strong>Editor preview features</strong> - エディタのプレビュー機能</li>
 <li><strong>Copilot CLI</strong> - ターミナルでのCopilot利用</li>
 <li><strong>Copilot code review</strong> - コードレビュー機能</li>
+<li><strong>Copilot Cloud Agent</strong> - 自律的なコーディングエージェント</li>
 </ul>
-<aside class="warning"><p><strong>プラン制限</strong>: Copilot Code Review、Copilot CLIなどの機能は、GitHub Copilot Business/Enterprise プランでのみ利用可能です。</p>
+<aside class="warning"><p><strong>プラン制限</strong>: Copilot Code Review、Cloud Agent、Copilot CLIなどの高度な機能は、GitHub Copilot Business/Enterprise プランでのみ利用可能です。Freeプランをご利用の場合、これらの機能は利用できません。</p>
+</aside>
+<h2 is-upgraded>3. リポジトリの Issues と Actions を有効化</h2>
+<p><strong>⚠️ この手順は、Issues や Actions が無効になっているユーザーのみ対象です。</strong> すでに有効になっている場合はスキップしてください。</p>
+<p>テンプレートから作成したリポジトリでは、デフォルトで Issues と Actions が無効になっている場合があります。後のステップで使用するため、無効になっている方は有効化しておきましょう。</p>
+<h3 is-upgraded>Issues の有効化</h3>
+<ol type="1">
+<li>自分のリポジトリの <strong>Settings</strong> タブをクリック</li>
+<li><strong>General</strong> セクションの <strong>Features</strong> を確認</li>
+<li><strong>Issues</strong> にチェックを入れる</li>
+</ol>
+<h3 is-upgraded>Actions の有効化</h3>
+<ol type="1">
+<li>リポジトリの <strong>Actions</strong> タブをクリック</li>
+<li>「I understand my workflows, go ahead and enable them」をクリックして有効化</li>
+</ol>
+<h2 is-upgraded>4. Personal Access Token (PAT) の作成（オプション）</h2>
+<p>Cloud Agent が GitHub Actions で動作するために、Personal Access Token を作成します。</p>
+<h3 is-upgraded>ステップ1: Fine-grained PAT を作成</h3>
+<p>以下のURLにアクセスして、新しいFine-grained PATを作成します：</p>
+<p><a href="https://github.com/settings/personal-access-tokens/new" target="_blank">https://github.com/settings/personal-access-tokens/new</a></p>
+<p>設定内容：</p>
+<ul>
+<li><strong>Token name</strong>: 任意の名前を入力してください（例: <code>copilot-workshop</code>）</li>
+<li><strong>Resource owner</strong>: 自分のユーザーアカウントを選択してください（組織ではなく個人アカウント）</li>
+<li><strong>Repository access</strong>: <strong>Public repositories</strong> を選択してください（プライベートリポジトリに追加する場合でもPublic repositoriesを選択します）</li>
+<li><strong>Permissions</strong>: <strong>Copilot Requests</strong> を有効にしてください</li>
+</ul>
+<p class="image-container"><img alt="Fine-grained PAT の作成" src="../../img/14b892fb9208458f.png"></p>
+<p>作成が完了したら、表示されたPATを必ずコピーしてください。</p>
+<p><strong>⚠️ 注意</strong>: PATは作成直後の画面でのみ表示されます。画面遷移すると二度と確認できなくなるため、必ずこのタイミングでコピーしてください。</p>
+<h3 is-upgraded>ステップ2: GitHub Actions の Repository Secret に設定</h3>
+<p>作成したPATをリポジトリのシークレットとして設定します：</p>
+<ol type="1">
+<li>自分のリポジトリの <strong>Settings</strong> タブをクリック</li>
+<li>左サイドバーから <strong>Secrets and variables</strong> → <strong>Actions</strong> を選択</li>
+<li><strong>New repository secret</strong> をクリック</li>
+<li>以下の内容を入力： <ul>
+<li><strong>Name</strong>: <code>COPILOT_GITHUB_TOKEN</code></li>
+<li><strong>Value</strong>: 先ほど作成したPATを貼り付け</li>
+</ul>
+</li>
+<li><strong>Add secret</strong> をクリック</li>
+</ol>
+<h3 is-upgraded>ステップ3: Workflow permissions の確認</h3>
+<p>Cloud Agent が Pull Request を自動作成できるように、Actions のワークフロー権限を確認します：</p>
+<ol type="1">
+<li>自分のリポジトリの <strong>Settings</strong> タブをクリック</li>
+<li>左サイドバーから <strong>Actions</strong> → <strong>General</strong> を選択</li>
+<li><strong>Workflow permissions</strong> セクションで <strong>Allow GitHub Actions to create and approve pull requests</strong> にチェックが入っていることを確認</li>
+<li>チェックが入っていない場合は有効化して <strong>Save</strong> をクリック</li>
+</ol>
+<aside class="special"><p><strong>ヒント</strong>: この設定により、Copilot Cloud Agent が GitHub Actions のワークフロー内でCopilotの機能を利用できるようになります。</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="残りの機能を実装しよう（オプション）" duration="20">
+        <p>このセクションは <strong>オプション</strong> です。基本的なCopilot機能を学習済みの方で、より高度な実装に挑戦したい場合に実施してください。</p>
+<p>ここからは、自由課題として、残りの機能を段階的に実装していきましょう。</p>
+<p>いくつか役に立つであろうポイントをここでは紹介します。</p>
+<h2 is-upgraded>UIに対して指示をしたい場合</h2>
+<p>UI上の特定の要素に対して指示を出したい場合は、UIのスクリーンショットをCopilotにアップロードすることで、その要素を認識させることができます。その際、スクリーンショットの上に特に指摘したい箇所を丸で囲むなり、矢印を引くなりして、どの要素に対して指示を出したいのかを明確にすると良いでしょう。</p>
+<p>または、現状のスクリーンショットと、期待するスクリーンショットを2枚アップロードすることで、その差分を確認してもらい、期待するUIにできるだけ近づくように指示を出すこともできます。</p>
+<h2 is-upgraded>毎回同じような指示を出している場合</h2>
+<p>プロンプトを書いたり、文脈を指定する際に、頻繁に同じような指示を出している場合は、Copilotにその指示を覚えさせることができます。具体的には、プロジェクト内に <code>.github/copilot-instructions.md</code> というファイルを作成し、その中に指示を書いておきます。このファイルがあると、Copilotはその指示を自動的に読み込み、以降のチャットでその指示を参照することができます。</p>
+<p>以下にカスタム指示のサンプルを示します。</p>
+<pre><code language="language-markdown" class="language-markdown">このプロジェクトは、ポモドーロタイマーをFlaskで実装するものです。
+
+以下はプロジェクトの重要なファイルです。ユーザーの指示に対して、必要に応じてこれらのファイルを参照してください。
+ - `pomodoro.png`: アプリケーションのUIモックです。
+ - `architecture.md`: アプリケーションのアーキテクチャドキュメントです。
+ - `features.md`: 実装する機能の一覧です。
+ - `plan.md`: 段階的な実装計画です。
+</code></pre>
+<p>そのほかにも、プロジェクトをビルドするコマンドやテストを実行するコマンドなど、プロジェクトに特有のコマンドを記載しておくと、Copilotはそのコマンドを自動的に使用するようになります。</p>
+<h2 is-upgraded>なかなか実装が進まなかったり、バグを解決できない場合</h2>
+<p>このような場合には、以下のアプローチを試してみましょう。</p>
+<ul>
+<li>デバッグ情報を出力するように指示し、その出力をCopilotに分析させる。</li>
+<li>他のモデルを試してみる。</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="GitにコミットしてPushしよう" duration="10">
+        <p>作成したコードをGitリポジトリにコミットしてリモートブランチにPushしましょう。ここでは2つの方法を紹介します。</p>
+<h2 is-upgraded>方法A: ターミナルでコマンドを使用</h2>
+<p>従来の方法として、ターミナルでGitコマンドを直接実行する方法です：</p>
+<pre><code>git add .
+git commit -m &#34;ポモドーロタイマー機能を追加&#34;
+git push origin feature/pomodoro
+</code></pre>
+<h2 is-upgraded>方法B: 生成AIによるコミットの作成</h2>
+<p>エージェントモードでCopilotに直接指示してコミットとPushを行います。以下のプロンプトを実行してください：</p>
+<pre><code>機能の作成が完了したので、コードの差分をgitのステージングにあげてください。
+
+その後、適切なコミットメッセージでコミットいただき、リモートブランチに変更をPushしてください。
+</code></pre>
+<p class="image-container"><img alt="MCP による Git ワークフロー" src="../../img/26ebf645a750b3a6.png"></p>
+<h3 is-upgraded>【オプション】MCP サーバーによる GitHub Issues の自動起票</h3>
+<p>続いて、MCP サーバーを使用して実装計画をGitHub Issuesとして管理することもできます。</p>
+<aside class="warning"><p><strong>注意</strong>: GitHub MCP サーバーが有効化されていない場合は、<code>.vscode/mcp.json</code> ファイル内から MCP サーバーを起動してください：</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;servers&#34;: {
+    &#34;github-mcp-server&#34;: {
+      &#34;type&#34;: &#34;http&#34;,
+      &#34;url&#34;: &#34;https://api.githubcopilot.com/mcp/&#34;
+    }
+  }
+}
+</code></pre>
+</aside>
+<pre><code>plan.mdの各ステップをGitHub issuesとして起票してください
+</code></pre>
+<p>この指示により、Copilotは以下を実行します：</p>
+<ol type="1">
+<li><code>plan.md</code> の内容を読み取り</li>
+<li>各ステップを個別のIssueとして起票</li>
+<li>各Issueには以下が含まれます： <ul>
+<li>ステップのタイトルと詳細説明</li>
+<li>実装すべき機能の要件</li>
+<li>受け入れ条件</li>
+<li>適切なラベルと優先度</li>
+</ul>
+</li>
+</ol>
+<p>これにより、計画的なプロジェクト管理とアジャイル開発が可能になります。</p>
+<p class="image-container"><img alt="MCP Issues" src="../../img/b03e6ea597ff6ae3.png"></p>
+<aside class="special"><p><strong>MCP の利点</strong>: GitHub MCPサーバーを使用することで、Copilotがリポジトリの情報、Issues、Pull Requests、ブランチ情報などのGitHubメタデータに直接アクセスし、より詳細な分析や提案を行うことができます。</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="[GitHub.com] Copilot Code Review" duration="15">
+        <p>Pushした後の内容をGitHub.com上でPull Requestを立てて、Copilotのコードレビュー機能を活用しましょう。</p>
+<h2 is-upgraded>Pull Requestの作成とCopilot Summary</h2>
+<ol type="1">
+<li>GitHub上で自分のリポジトリにアクセス</li>
+<li><strong>Open a pull request</strong> をクリック</li>
+<li>Pull Request作成画面で、<strong>Copilotのアイコン</strong> » <strong>Summary</strong> をクリック</li>
+</ol>
+<p class="image-container"><img alt="Pull RequestでのCopilot Summary" src="../../img/f379c36d2daae6be.png"></p>
+<p>Copilotが自動的にPull Requestの概要を生成してくれます。</p>
+<h2 is-upgraded>Copilotをレビュワーとしてアサイン</h2>
+<p><strong>Reviewers</strong> セクションで <strong>Copilot</strong> をアサインすることで、Copilotをレビュワーとしてアサインし、コードのレビューを依頼できます。</p>
+<aside class="special"><p><strong>自動アサインの設定</strong>: Settings » Branches » Rulesets » Require a pull request before merging » Automatically request Copilot code reviewにチェックを入れることで、Pull Requestを開いた時、自動的にCopilotがアサインされるようになります。</p>
+</aside>
+<p class="image-container"><img alt="Copilot自動アサインの設定" src="../../img/bc9c16ab7a83d165.png"></p>
+<h2 is-upgraded>Copilot Code Reviewの結果確認</h2>
+<p>Pull Requestが開かれた後、Copilot Code Reviewの結果を閲覧できます：</p>
+<ul>
+<li><strong>Pull Requestのオーバービュー</strong>: コードの変更内容の要約</li>
+<li><strong>指摘事項</strong>: 潜在的な問題点の指摘</li>
+<li><strong>改善提案</strong>: コードの品質向上のための具体的な提案</li>
+</ul>
+<p class="image-container"><img alt="Copilot Code Reviewの概要" src="../../img/190eae2847f8b194.png"></p>
+<h2 is-upgraded>GitHub Advanced Securityによる静的脆弱性スキャン</h2>
+<p>Pull Requestには、GitHub Advanced Security（GHAS）による静的脆弱性スキャンの結果も表示されます：</p>
+<h3 is-upgraded>セキュリティアラートの確認</h3>
+<p class="image-container"><img alt="GHAS セキュリティアラート" src="../../img/a5a70f95b612809a.png"></p>
+<ul>
+<li><strong>高セキュリティ脆弱性</strong>: 重要度の高いセキュリティ問題</li>
+<li><strong>Copilot Autofix</strong>: AIによる自動修正提案</li>
+<li><strong>詳細な説明</strong>: 脆弱性の内容と修正方法</li>
+</ul>
+<h3 is-upgraded>チェック結果の詳細</h3>
+<p class="image-container"><img alt="GHAS チェック結果" src="../../img/b79fd737fef0ad88.png"></p>
+<aside class="special"><p><strong>Copilot Autofixの活用</strong>: GitHubは検出されたセキュリティ脆弱性に対して、Copilot Autofixによる自動修正提案を提供します。これにより、セキュリティ問題を迅速に解決できます。</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="[GitHub.com] Copilot Cloud Agent" duration="20">
+        <p>GitHub CopilotのWebサイト版を使用して、プロジェクトの改善提案をIssueとして自動生成し、Cloud Agentを活用してみましょう。</p>
+<h2 is-upgraded>GitHub Copilotでのissue自動起票</h2>
+<ol type="1">
+<li><strong>GitHub.com</strong> にアクセスし、右上の <strong>Copilot</strong> アイコンをクリック</li>
+<li>Chatのコンテキストに自身のリポジトリが追加されていることを確認</li>
+<li>以下のプロンプトを入力します：</li>
+</ol>
+<pre><code>ポモドーロタイマーのカスタマイズを行うために３つのissueを起票してください。
+
+パターンA: 視覚的フィードバックの強化
+
+円形プログレスバーのアニメーション: 残り時間に応じて滑らかに減少するアニメーション
+色の変化: 時間経過に応じて青→黄→赤にグラデーション変化
+背景エフェクト: 集中時間中は背景にパーティクルエフェクトや波紋アニメーション
+テスト目的: 視覚的な没入感がユーザーの集中力に与える影響を測定
+
+パターンB: カスタマイズ性の向上
+
+時間設定の柔軟化: 25分固定ではなく、15/25/35/45分から選択可能
+テーマ切り替え: ダーク/ライト/フォーカスモード（ミニマル）
+サウンド設定: 開始音/終了音/tick音のオン/オフ切り替え
+休憩時間カスタム: 5/10/15分から選択
+テスト目的: 個人の好みに合わせた設定がユーザー継続率に与える影響を測定
+
+パターンC: ゲーミフィケーション要素の追加
+
+経験値システム: 完了したポモドーロに応じてXPとレベルアップ
+達成バッジ: 「3日連続」「今週10回完了」などの実績システム
+週間/月間統計: より詳細なグラフ表示（完了率、平均集中時間など）
+ストリーク表示: 連続日数のカウント表示
+テスト目的: ゲーミフィケーション要素がモチベーション維持と継続利用に与える影響を測定
+</code></pre>
+<p class="image-container"><img alt="GitHub Copilotでのissue作成" src="../../img/a69389a1032d0aab.png"></p>
+<h2 is-upgraded>Issueの作成とCloud Agentのアサイン</h2>
+<ol type="1">
+<li><strong>Copilotが3つのIssueを自動生成</strong>します</li>
+<li>各Issueの内容を確認し、必要に応じて編集</li>
+<li><strong>Create</strong> ボタンをクリックして各Issueを作成</li>
+<li>Issue画面に遷移後、<strong>Assignees</strong> セクションで <strong>Copilot</strong> を選択してCloud Agentをアサイン</li>
+</ol>
+<p class="image-container"><img alt="Cloud AgentをIssueにアサイン" src="../../img/14fa8fd6031e20b8.png"></p>
+<h2 is-upgraded>期待されるPull Requestの結果</h2>
+<p>Cloud Agentがアサインされると、以下のような結果が期待できます：</p>
+<ul>
+<li><strong>自動的なコード実装</strong>: 各Issueの要件に基づいた機能実装</li>
+<li><strong>Pull Requestの作成</strong>: 実装完了後の自動PR作成</li>
+<li><strong>包括的なテスト</strong>: 単体テストとUIテストの両方を含む</li>
+</ul>
+<h3 is-upgraded>パターンA: 視覚的フィードバックの強化</h3>
+<p class="image-container"><img alt="視覚的フィードバック強化のPR結果" src="../../img/705e39500bad3885.png"></p>
+<h3 is-upgraded>パターンB: カスタマイズ性の向上</h3>
+<p class="image-container"><img alt="カスタマイズ性向上のPR結果" src="../../img/8184bbbafbf918ee.png"></p>
+<h3 is-upgraded>パターンC: ゲーミフィケーション要素の追加</h3>
+<p class="image-container"><img alt="ゲーミフィケーション要素のPR結果" src="../../img/3e0271a144640fba.png"></p>
+<aside class="special"><p><strong>MCP Serverの活用</strong>: GitHub MCP ServerとPlaywright MCP Serverが初期設定としてCloud Agentに含まれています。これにより、単体テストだけではなく、スクリーンショットによるUIの自動チェックも行うことができます。Cloud Agentは実装した機能が期待通りに動作するかを視覚的に検証し、より品質の高いコードを提供します。</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="[GitHub.com] Agentic Workflow" duration="15">
+        <p>GitHub Actions と Copilot を組み合わせることで、コードの変更を検知して自動的にドキュメントを更新する <strong>Agentic Workflow</strong> を体験しましょう。</p>
+<h2 is-upgraded>Agentic Workflow とは</h2>
+<p>Agentic Workflow は、GitHub Actions のワークフロー内で Copilot（AI）を活用し、コードの変更に応じた自律的なタスクを実行する仕組みです。今回のワークショップでは、ポモドーロタイマーのコードに変更が加わった際に、関連するドキュメントを自動更新するワークフローが事前に設定されています。</p>
+<h2 is-upgraded>1. Pull Request を main ブランチにマージする</h2>
+<p>前のステップで作成した Pull Request を main ブランチにマージしてください。</p>
+<ol type="1">
+<li>GitHub 上で自分のリポジトリにアクセス</li>
+<li><strong>Pull requests</strong> タブをクリック</li>
+<li>対象の Pull Request を開く</li>
+<li><strong>Merge pull request</strong> ボタンをクリックしてマージを実行</li>
+</ol>
+<p class="image-container"><img alt="Pull Request のマージ" src="../../img/18921e0b11f54ac5.png"></p>
+<h2 is-upgraded>2. ワークフローの実行を確認する</h2>
+<p>先ほどコードを Push したことで、Agentic Workflow が自動的にトリガーされています。</p>
+<ol type="1">
+<li>GitHub 上で自分のリポジトリにアクセス</li>
+<li><strong>Actions</strong> タブをクリック</li>
+<li><strong>Pomodoro Documentation Sync</strong> ワークフローが実行されていることを確認</li>
+</ol>
+<p class="image-container"><img alt="Agentic Workflow の実行" src="../../img/ef16e89e1e5c684b.png"></p>
+<p>このワークフローは、<code>pomodoro/</code> 配下のコードに差分が生じたときに、変更内容に応じて <code>pomodoro/docs/</code> 配下で管理しているドキュメンテーションを自動的に更新するものです。</p>
+<h2 is-upgraded>3. Pull Request を確認する</h2>
+<p>Actions の実行が完了すると、ドキュメンテーションを更新する <strong>Pull Request</strong> が自動的に作成されます。</p>
+<ol type="1">
+<li><strong>Pull requests</strong> タブをクリック</li>
+<li>Copilot が作成した PR を確認</li>
+<li>ドキュメントの変更内容をレビュー</li>
+</ol>
+<h2 is-upgraded>4. 自分で Agentic Workflow を作ってみよう</h2>
+<p>ここまでで Agentic Workflow の動作を確認できました。次は、自分自身で Agentic Workflow を作成してみましょう。</p>
+<p>エージェントモードで以下のプロンプトを実行してください：</p>
+<pre><code>以下のURLを参照して GitHub Agentic Workflow を作成してください。
+https://github.com/github/gh-aw/blob/main/create.md
+
+ワークフローの目的は以下のとおりです：
+- copilotWebRelay 配下のコードが更新された時に実行されます
+- copilotWebRelay 配下のコードの内容に応じて copilotWebRelay/docs のドキュメンテーションを更新し、ソースコードとドキュメンテーションが常に一致するようにします
+
+作成したワークフローファイルをコミットし、Pull Requestを作成してください。
+</code></pre>
+<aside class="special"><p><strong>Agentic Workflow の可能性</strong>: ドキュメント更新以外にも、テストの自動生成、コードレビューの自動化、リリースノートの作成など、様々なタスクを Agentic Workflow として構築できます。</p>
 </aside>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Copilot SDK で AI チャットツールを作ろう" duration="10">
-        <p>ここからは、<strong>Copilot SDK</strong> を使って、ブラウザ上で動作する生成 AI チャットツールを <strong>Copilot CLI から1つのプロンプトで</strong> 構築します。</p>
+        <p>ここからは、<strong>Copilot SDK</strong> を使って、ブラウザ上で動作する生成 AI チャットツール「<strong>Copilot Web Relay</strong>」を <strong>Copilot CLI から1つのプロンプトで</strong> 構築します。</p>
 <h2 is-upgraded>Copilot SDK とは？</h2>
 <p><strong>Copilot SDK</strong> は、GitHub Copilot CLI をプログラムから制御するための SDK です。JSON-RPC を介して Copilot CLI と通信し、AI セッションの作成・メッセージの送受信・ストリーミングレスポンスの取得などをアプリケーションに組み込むことができます。</p>
 <p><strong>SDK リポジトリ</strong>: <a href="https://github.com/github/copilot-sdk" target="_blank">https://github.com/github/copilot-sdk</a></p>
@@ -292,17 +688,10 @@ SDK リファレンス: https://github.com/github/copilot-sdk
 </ul>
 <p>複数のモデルが共通して指摘する問題は、信頼度が高く優先的に修正すべき問題です。</p>
 </aside>
-<h2 is-upgraded>ステップ 3: GitHub 上での Code Review</h2>
-<p>GitHub 上でも Copilot Code Review 機能を併用しましょう：</p>
-<ol type="1">
-<li>GitHub 上で Pull Request を開く</li>
-<li><strong>Reviewers</strong> セクションで <strong>Copilot</strong> をレビュワーとしてアサイン</li>
-</ol>
-<p class="image-container"><img alt="Copilot自動アサインの設定" src="../../img/bc9c16ab7a83d165.png"></p>
-<aside class="special"><p><strong>CLI レビューと GitHub レビューの使い分け</strong>:</p>
+<aside class="special"><p><strong>CLIレビューとGitHub.comのCode Reviewの使い分け</strong>:</p>
 <ul>
 <li><strong><code>/review</code></strong><strong>（CLI）</strong>: ローカルの変更差分を対象に即座にレビューを実行。開発中の早い段階で問題を検出できる</li>
-<li><strong>GitHub Code Review</strong>: Pull Request の差分を対象に、フォーマルなレビューコメントを残す。チームでのレビューフローに最適</li>
+<li><strong>Copilot Code Review</strong>: Pull Request の差分を対象に、フォーマルなレビューコメントを残す。チームでのレビューフローに最適</li>
 </ul>
 <p>両方を組み合わせることで、開発の早い段階から品質を担保できます。</p>
 </aside>
@@ -310,117 +699,34 @@ SDK リファレンス: https://github.com/github/copilot-sdk
 
       </google-codelab-step>
     
-      <google-codelab-step label="Agentic Workflow — AI エージェントによる開発プロセスの自動化" duration="20">
-        <p>最後のステップでは、<strong>GitHub Agentic Workflow</strong> を構築し、AI エージェントが開発プロセスを自律的に自動化する仕組みを体験しましょう。</p>
-<h2 is-upgraded>Agentic Workflow とは</h2>
-<p><strong>Agentic Workflow</strong> は、GitHub Actions 上で AI エージェントが作業を自律的に実行する仕組みです。2026年2月13日にテクニカルプレビューとして発表されました。</p>
-<p>従来の GitHub Actions はあらかじめ決められたステップを順番に実行するものでしたが、Agentic Workflow では <strong>AI が状況を判断し、必要なアクションを自律的に決定・実行</strong> します。</p>
-<h2 is-upgraded>何ができるか</h2>
-<p>Agentic Workflow を使うことで、以下のような開発タスクを AI エージェントに委任できます：</p>
-<table>
-<tr><td colspan="1" rowspan="1"><p>ユースケース</p>
-</td><td colspan="1" rowspan="1"><p>説明</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p><strong>Issue の自動トリアージ</strong></p>
-</td><td colspan="1" rowspan="1"><p>新しい Issue の内容を AI が分析し、ラベル付け・担当者アサイン・優先度設定を自動実行</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p><strong>PR レビューの自動化</strong></p>
-</td><td colspan="1" rowspan="1"><p>Pull Request の変更内容を AI がレビューし、コメントや改善提案を自動投稿</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p><strong>CI エラーの分析と修正</strong></p>
-</td><td colspan="1" rowspan="1"><p>CI/CD パイプラインのエラーを AI が分析し、原因特定と修正 PR の自動作成</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p><strong>ドキュメント管理</strong></p>
-</td><td colspan="1" rowspan="1"><p>コード変更に連動してドキュメントを自動更新し、コードとドキュメントの一貫性を維持</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p><strong>リリースノート生成</strong></p>
-</td><td colspan="1" rowspan="1"><p>マージされた PR やコミット履歴から、リリースノートを自動生成</p>
-</td></tr>
-</table>
-<h2 is-upgraded>主なメリット</h2>
-<ul>
-<li><strong>自然言語で記述</strong>: ワークフローの目的を自然言語（Markdown）で記述するだけで、AI が処理内容を判断して実行する</li>
-<li><strong>柔軟なトリガー</strong>: スケジュール実行、イベントトリガー（Push、PR作成）、Issue コメントコマンドなど、多様な起動条件に対応</li>
-<li><strong>自律的な判断</strong>: AI エージェントがコードの変更内容を理解し、何をすべきかを自ら判断する</li>
-</ul>
-<h2 is-upgraded>始め方</h2>
-<p>Agentic Workflow は <code>gh aw</code> CLI 拡張機能を使って作成します：</p>
-<ol type="1">
-<li><strong>Markdown ファイルを作成</strong> — ワークフローの目的と動作を自然言語で記述</li>
-<li><strong>コンパイル</strong> — <code>gh aw</code> が Markdown を GitHub Actions のワークフロー YAML に変換</li>
-<li><strong>コミット &amp; Push</strong> — ワークフローがリポジトリに追加され、トリガー条件に応じて自動実行</li>
-</ol>
-<aside class="special"><p><strong>参考</strong>: サンプルユースケースは「Peli&#39;s Agent Factory」（https://github.com/peli-pro-hq/agent-factory）で多数公開されています。</p>
-</aside>
-<h2 is-upgraded>ステップ 1: PAT（Personal Access Token）の作成</h2>
-<p>Agentic Workflow が GitHub Actions で Copilot を利用するために、Personal Access Token を作成します。</p>
-<h3 is-upgraded>Fine-grained PAT の作成</h3>
-<p>以下のURLにアクセスして、新しいFine-grained PATを作成します：</p>
-<p><a href="https://github.com/settings/personal-access-tokens/new" target="_blank">https://github.com/settings/personal-access-tokens/new</a></p>
-<p>設定内容：</p>
-<ul>
-<li><strong>Token name</strong>: 任意の名前を入力してください（例: <code>copilot-workshop</code>）</li>
-<li><strong>Resource owner</strong>: 自分のユーザーアカウントを選択</li>
-<li><strong>Repository access</strong>: <strong>Public repositories</strong> を選択</li>
-<li><strong>Permissions</strong>: <strong>Copilot Requests</strong> を有効化</li>
-</ul>
-<p class="image-container"><img alt="Fine-grained PAT の作成" src="../../img/14b892fb9208458f.png"></p>
-<p>作成が完了したら、表示されたPATを必ずコピーしてください。</p>
-<aside class="warning"><p><strong>⚠️ 注意</strong>: PATは作成直後の画面でのみ表示されます。画面遷移すると二度と確認できなくなるため、必ずこのタイミングでコピーしてください。</p>
-</aside>
-<h3 is-upgraded>Repository Secret に設定</h3>
-<p>作成したPATをリポジトリのシークレットとして設定します：</p>
-<ol type="1">
-<li>自分のリポジトリの <strong>Settings</strong> タブをクリック</li>
-<li>左サイドバーから <strong>Secrets and variables</strong> → <strong>Actions</strong> を選択</li>
-<li><strong>New repository secret</strong> をクリック</li>
-<li>以下の内容を入力： <ul>
-<li><strong>Name</strong>: <code>COPILOT_GITHUB_TOKEN</code></li>
-<li><strong>Value</strong>: 先ほど作成したPATを貼り付け</li>
-</ul>
-</li>
-<li><strong>Add secret</strong> をクリック</li>
-</ol>
-<h3 is-upgraded>Workflow permissions の確認</h3>
-<ol type="1">
-<li>自分のリポジトリの <strong>Settings</strong> タブをクリック</li>
-<li>左サイドバーから <strong>Actions</strong> → <strong>General</strong> を選択</li>
-<li><strong>Workflow permissions</strong> セクションで <strong>Allow GitHub Actions to create and approve pull requests</strong> にチェックが入っていることを確認</li>
-<li>チェックが入っていない場合は有効化して <strong>Save</strong> をクリック</li>
-</ol>
-<h2 is-upgraded>ステップ 2: ドキュメント自動更新ワークフローの作成</h2>
-<p>まずは、コード変更に連動してドキュメントを自動更新する Agentic Workflow を作成しましょう。Copilot CLI で以下のプロンプトを入力してください：</p>
-<pre><code>以下のURLを参照して GitHub Agentic Workflow を作成してください。
-https://github.com/github/gh-aw/blob/main/create.md
-
-ワークフローの目的は以下のとおりです：
-- copilotWebRelay 配下のコードが更新された時に実行されます
-- copilotWebRelay 配下のコードの内容に応じて copilotWebRelay/docs のドキュメンテーションを更新し、ソースコードとドキュメンテーションが常に一致するようにします
+      <google-codelab-step label="コードを理解＆改善しよう" duration="20">
+        <p>Vibe Coding で実装した Copilot SDK チャットツールのコードを、Copilot に解説してもらい理解を深めましょう。その後、問題点を見つけて改善まで行います。</p>
+<h2 is-upgraded>1. コード全体の解説を依頼</h2>
+<p>まずは、実装されたコードの全体像を把握しましょう。エージェントモードで以下のプロンプトを入力してください：</p>
+<pre><code>copilotWebRelay/ 配下の AI チャットアプリケーションのコード全体を確認して、アーキテクチャ、各ファイルの役割、主要な処理の流れを解説してください。特に Copilot SDK の使い方（CopilotClient、createSession、ストリーミングレスポンス）がどのように実装されているかを重点的に説明してください。
 </code></pre>
-<h2 is-upgraded>ステップ 3: ワークフローの動作確認</h2>
-<p>ワークフローが作成できたら、コードに変更を加えて動作を確認しましょう：</p>
-<ol type="1">
-<li>Copilot Web Relay のコードに小さな変更を加える（例: コメントの追加、関数の改善など）</li>
-<li>変更をコミットして Push する</li>
-<li>GitHub の <strong>Actions</strong> タブでワークフローが実行されていることを確認</li>
-<li>ワークフロー完了後、ドキュメントを更新する <strong>Pull Request</strong> が自動的に作成されることを確認</li>
-</ol>
-<aside class="special"><p><strong>ポイント</strong>: AI エージェントがコードの差分を読み取り、変更内容に応じて適切なドキュメント更新を自律的に判断・実行します。開発者がドキュメント更新を忘れても、常にコードとドキュメントの一貫性が保たれます。</p>
+<p>Copilot エージェントはプロジェクト内のファイルを自動的にスキャンし、コードの構造や処理の流れを解説してくれます。</p>
+<aside class="special"><p><strong>ヒント</strong>: エージェントモードでは、Copilot が自動的にプロジェクト内のファイルを参照して回答してくれるため、手動でファイルをコンテキストに追加する必要がありません。</p>
 </aside>
-<h2 is-upgraded>ステップ 4: Auto Healing DevOps の作成（オプション）</h2>
-<p>余裕がある方は、CI/CD のジョブが失敗した時にそれを検知して自動修正する Agentic Workflow も作成してみましょう。これは <strong>CI エラー分析</strong> のユースケースです。</p>
-<pre><code>以下のURLを参照して GitHub Agentic Workflow を作成してください。
-https://github.com/github/gh-aw/blob/main/create.md
-
-ワークフローの目的は以下のとおりです：
-リポジトリで失敗したワークフロー実行を検知し、原因を分析してIssueを自動作成する。
-作成したissueにはCopilotを自動アサインする。
+<h2 is-upgraded>2. 問題点を見つける</h2>
+<p>次に、コードの品質やセキュリティの観点から問題点を洗い出してもらいましょう：</p>
+<pre><code>copilotWebRelay/ 配下のアプリケーション全体を見て、どのような問題点や改善点がありますか？設計パターン、コードの品質、保守性、セキュリティの観点から教えてください。
 </code></pre>
-<p>ワークフローが作成できたら、意図的にビルドを失敗させて動作を確認します：</p>
-<pre><code>System.out.println(&#34;Hello World!&#34;); を System.out.println(&#34;Hell World!&#34;); にして push して
+<p>さらに、特定のコンポーネントに絞って深掘りすることもできます：</p>
+<pre><code>バックエンドの WebSocket サーバーと Copilot SDK セッション管理に問題はありますか？エラーハンドリングやリソース管理の改善案を提案してください。
 </code></pre>
-<p>Push 後、GitHub Actions のワークフローが失敗を検知し、Copilot が自動的に Issue を作成してアサインされることを確認しましょう。</p>
-<aside class="special"><p><strong>Agentic Workflow の可能性</strong>: 今回体験したドキュメント自動更新と CI エラー分析は、Agentic Workflow のほんの一例です。Issue のトリアージ、PR レビュー、リリースノート生成、セキュリティスキャンの自動化など、開発プロセスのあらゆる場面で AI エージェントを活用できます。</p>
+<pre><code>フロントエンドの WebSocket 接続管理やストリーミングレスポンスの表示に問題はありますか？React のベストプラクティスに従っているか確認してください。
+</code></pre>
+<h2 is-upgraded>3. 改善案を実装する</h2>
+<p>見つかった問題点を実際に修正してもらいましょう：</p>
+<pre><code>提示してくれたすべての改善案を実装してください。
+</code></pre>
+<p>Copilot はコードに対して直接変更を提案します。変更内容を確認し、チャット欄の「保持」もしくは「元に戻す」ボタンで受け入れるかどうかを決定しましょう。</p>
+<h2 is-upgraded>4. 動作確認</h2>
+<p>改善を実装した後は、アプリケーションが引き続き正常に動作することを確認しましょう：</p>
+<pre><code>改善を実装した結果、アプリケーションが正常に動作することを確認してください。バックエンドの起動、フロントエンドのビルド、ブラウザでの動作確認を行ってください。
+</code></pre>
+<aside class="special"><p><strong>重要</strong>: エージェントモードでは、Copilot がより自律的に動作するため、提案される変更内容をよく確認してから受け入れるようにしましょう。エージェントはコード変更後にエラーが発生した場合、自動的に検出して修正を試みることもあります。</p>
 </aside>
 
 
@@ -430,23 +736,23 @@ https://github.com/github/gh-aw/blob/main/create.md
         <h2 is-upgraded>今日学んだこと</h2>
 <p>このワークショップでは以下のことを学びました：</p>
 <ol type="1">
-<li><strong>GitHub Copilot CLI の基本操作</strong> — ターミナル上でのAIアシスタントの活用</li>
-<li><strong>Copilot SDK を活用した Web アプリケーション開発</strong> — 1プロンプトで SDK ベースの AI チャットツールを構築</li>
-<li><strong>複数モデルによるコードレビュー</strong> — Claude、GPT、Gemini を使い分けた多角的なコード品質チェック</li>
-<li><strong>Agentic Workflow</strong> — GitHub Actions 上で AI エージェントが開発プロセスを自律的に自動化する仕組みの構築</li>
+<li><strong>GitHub Copilot の基本的な使い方</strong></li>
+<li><strong>エージェントモードでのコードの解説・改善</strong></li>
+<li><strong>AI をコントロールしながら実装するスペック駆動開発</strong></li>
+<li><strong>強力なモデルとツールを用いた AI 駆動開発</strong></li>
+<li><strong>Copilot SDK を活用した AI を内包したアプリケーション開発</strong></li>
 </ol>
 <h2 is-upgraded>次のステップ</h2>
 <ul>
-<li>実際のプロジェクトで Copilot CLI を活用してみる</li>
-<li><code>/review</code> を日常のコードレビューワークフローに組み込む</li>
-<li>Agentic Workflow を自社のCI/CDパイプラインに導入する</li>
+<li>実際のプロジェクトでCopilotを活用してみる</li>
+<li>より複雑なアプリケーション開発に挑戦する</li>
 <li>Copilotの新機能をキャッチアップする</li>
+<li>Copilot Web Relay を自身の環境にデプロイしてみる</li>
 </ul>
 <h2 is-upgraded>リソース</h2>
 <ul>
 <li><a href="https://docs.github.com/copilot" target="_blank">GitHub Copilot Documentation</a></li>
 <li><a href="https://docs.github.com/copilot/using-github-copilot/best-practices-for-using-github-copilot" target="_blank">GitHub Copilot ベストプラクティス</a></li>
-<li><a href="https://docs.github.com/copilot/github-copilot-in-the-cli" target="_blank">GitHub Copilot CLI</a></li>
 </ul>
 <p>お疲れさまでした！</p>
 
