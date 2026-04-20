@@ -147,12 +147,12 @@
 <li>GitHub MCP Server（自動検出有効化済み）</li>
 </ul>
 <h2 is-upgraded>ステップ3: レガシーサイトを確認する</h2>
-<ol type="1">
-<li>VS Code のエクスプローラーで <code>hikari-legacy-php/index.html</code> を右クリック</li>
-<li><strong>「Open with Live Server」</strong> を選択</li>
-<li>ブラウザでレガシーサイトが表示されることを確認</li>
-</ol>
-<p><strong>これが今日のリファクタリング対象です。</strong> 2008年時代のテーブルレイアウト、<code><font></code> タグ、画像ベースのナビゲーション — 典型的なレガシーコードです。</p>
+<p>VS Code のターミナルを開き、以下のコマンドを実行してレガシーサイトを起動します：</p>
+<pre><code language="language-bash" class="language-bash">cd hikari-legacy-php
+php -S localhost:8080
+</code></pre>
+<p>Codespace がポート <strong>8080</strong> を自動検出し、<strong>「Open in Browser」</strong> のポップアップが表示されます。クリックしてブラウザでサイトを確認してください。</p>
+<p><strong>これが今日のリファクタリング対象です。</strong> テーブルレイアウト、<code><font></code> タグ、SQLインジェクション — 典型的なレガシーPHPコードです。</p>
 
 
       </google-codelab-step>
