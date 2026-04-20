@@ -15,7 +15,7 @@ GitHub Copilotワークショップへようこそ！
 
 ![GitHub Copilot Logo](github-copilot-workshop/img/octocat_copilot.png)
 
-このワークショップでは、**2008年時代のレガシーPHPウェブサイト（ヒカリ電機 / Hikari Denki）** を題材に、GitHub Copilot の全機能を活用してモダンなウェブアプリケーションに変革する体験をしていただきます。
+このワークショップでは、**2008年時代のレガシーPHPウェブサイト（ヒカリ / Hikari）** を題材に、GitHub Copilot の全機能を活用してモダンなウェブアプリケーションに変革する体験をしていただきます。
 
 ### 本日のゴール
 - GitHub Copilot のセットアップとカスタマイズ方法を理解する
@@ -171,7 +171,7 @@ Copilot がレガシーコードの以下を理解していることを確認し
 Copilot に以下のプロンプトを入力して、フロントエンド開発用の Skill を作成してもらいましょう：
 
 ```
-please make a research to create a frontend skill that follow the branding of ヒカリ電機 / Hikari Denki (the company in hikari-legacy-php/). 
+please make a research to create a frontend skill that follow the branding of ヒカリ / Hikari (the company in hikari-legacy-php/). 
 The skill should define the brand colors, typography, design principles and component patterns. 
 Add the skill to this repo under .github/skills/
 ```
