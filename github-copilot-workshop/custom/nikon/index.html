@@ -186,12 +186,12 @@ php -S localhost:8080
 <aside class="special"><p><strong>ポイント</strong>: <code>/init</code> で生成されたレガシーコードの説明を残しておくことで、Copilot は「現在の状態」と「移行先の目標」の両方を理解した上でアシストしてくれます。</p>
 </aside>
 <h2 is-upgraded>1.3 — フロントエンド Skill を作成する</h2>
-<p>Copilot に以下のプロンプトを入力して、フロントエンド開発用の Skill を作成してもらいましょう。<code>[name of your company]</code> の部分を<strong>自社の会社名に置き換えて</strong>ください：</p>
-<pre><code>please make a research to create a frontend skill that follow the branding of [name of your company]. 
-The skill should define the brand colors, typography, design principles and component patterns. 
-Add the skill to this repo under .github/skills/
+<p>Copilot に以下のプロンプトを入力して、フロントエンド開発用の Skill を作成してもらいましょう。<code>[自社の会社名]</code> の部分を<strong>実際の会社名に置き換えて</strong>ください：</p>
+<pre><code>[自社の会社名] のブランディングに基づいたフロントエンド Skill を作成してください。
+ウェブ上でリサーチを行い、ブランドカラー、タイポグラフィ、デザイン原則、コンポーネントパターンを定義してください。
+Skill ファイルは .github/skills/ 配下に追加してください。
 </code></pre>
-<aside class="warning"><p><strong>⚠️ 重要</strong>: <code>[name of your company]</code> をそのまま入力しないでください。必ず自社の会社名（例: <code>Nikon</code>、<code>Sony</code>、<code>Toyota</code> など）に置き換えてください。</p>
+<aside class="warning"><p><strong>⚠️ 重要</strong>: <code>[自社の会社名]</code> をそのまま入力しないでください。必ず実際の会社名（例: <code>Nikon</code>、<code>Sony</code>、<code>Toyota</code> など）に置き換えてください。</p>
 </aside>
 <p>Copilot がウェブ上で会社のブランド情報をリサーチし、ブランドガイドラインに基づいた Skill ファイルを自動生成します。</p>
 <h2 is-upgraded>1.4 — MCP Server を確認する</h2>
