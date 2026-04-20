@@ -39,9 +39,20 @@ GitHub Copilotワークショップへようこそ！
 | 7 | CLI | AI 利用状況ダッシュボードの構築 |
 
 ### 前提条件
+
+以下の**いずれか**の環境をご用意ください：
+
+**オプション A: 個人環境**
 - Visual Studio Code がインストールされていること
 - GitHub Copilot のライセンスがあること（Business/Enterprise プラン推奨）
 - GitHub アカウントを持っていること
+
+**オプション B: 企業環境（お客様向け）**
+- 以下の機能が有効化されたプライベート Organization を持っていること：
+  - GitHub Actions
+  - GitHub Copilot（Business/Enterprise）
+  - GitHub Advanced Security (GHAS)
+- Organization 内でリポジトリを作成できる権限があること
 
 ## プロジェクトのセットアップ
 Duration: 15
