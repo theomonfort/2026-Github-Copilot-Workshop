@@ -264,11 +264,9 @@ Duration: 45
 
 ### 2.2 — 移行を実行する
 
-計画が確定したら、実装を開始します。
+計画が確定したら、**「Start with Autopilot」** ボタンをクリックして実装を開始します。
 
-```
-計画に従って、レガシーサイトの Next.js への移行を実行してください。
-```
+![Start with Autopilot](github-copilot-workshop/img/start-with-autopilot.png)
 
 ⏱ 約5〜10分
 
