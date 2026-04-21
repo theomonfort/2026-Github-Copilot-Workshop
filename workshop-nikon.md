@@ -439,6 +439,11 @@ Copilot のレビュー提案を修正する方法は2つあります：
 1. **Commit suggestion** — 個別の提案を1つずつコミット
 2. **Fix batch with Copilot** — すべての提案を一括で修正（おすすめ）
 
+**Fix batch with Copilot** をクリックすると、修正内容を含む **新しい PR** が自動的に作成されます。
+
+1. まず **修正用の新しい PR** をマージ
+2. 次に **元の PR（feature/modernize）** をマージ
+
 > aside positive
 > **ポイント**:
 > - Copilot Code Review のセッションは **Actions** タブで確認でき、レビュープロセスは完全に透明です。
