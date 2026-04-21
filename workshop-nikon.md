@@ -268,7 +268,7 @@ Duration: 45
 
 ![Start with Autopilot](github-copilot-workshop/img/start-with-autopilot.png)
 
-⏱ 約5〜10分
+⏱ 約15分
 
 Copilot エージェントが以下を自動的に実行します：
 - Next.js プロジェクトの初期化
