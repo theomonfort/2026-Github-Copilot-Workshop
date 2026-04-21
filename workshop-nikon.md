@@ -247,7 +247,7 @@ Duration: 45
 
 いきなり実装に入るのではなく、まず **Plan Mode** で詳細な移行計画を立てましょう。
 
-1. Copilot Chat で **Shift+Tab** を押して Plan Mode に切り替え
+1. Copilot Chat のモデル選択の横にあるモード切り替えから **「Plan」** を選択
 2. 以下のプロンプトを入力：
 
 ```
