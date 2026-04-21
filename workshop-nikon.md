@@ -251,25 +251,10 @@ Duration: 45
 2. 以下のプロンプトを入力：
 
 ```
-このレガシー HTML サイト（hikari-legacy-php/）を Next.js + TypeScript + Tailwind CSS に移行してください。
-
-現状のサイトの特徴：
-- HTML 4.01 テーブルレイアウト
-- <font> タグによるスタイリング
-- 画像ベースのナビゲーション
-- 固定幅 760px
-- 4つの製品カテゴリ（Imaging Devices, Field Optics, Precision Systems, Laboratory Instruments）
-
-移行後の要件：
-- Next.js App Router を使用
-- TypeScript で型安全に
-- Tailwind CSS でレスポンシブデザイン
-- セマンティック HTML（アクセシビリティ対応）
-- コンポーネント分割（Header, Navigation, ProductCard, Footer）
-- ダークモード対応の基盤
+このレガシー PHP サイトを移行する計画を立ててください。
 ```
 
-3. Copilot が詳細な移行計画を作成します（`plan.md` に保存）
+3. Copilot が `copilot-instructions.md` の内容を踏まえて、詳細な移行計画を作成します
 4. 計画の内容を確認・調整
 
 > aside positive
