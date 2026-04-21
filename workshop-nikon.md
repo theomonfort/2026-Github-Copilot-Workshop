@@ -427,7 +427,7 @@ PR の説明に「Closes #1」を含めてください。
 
 ### 4.5 — PR の結果を確認する
 
-作成した PR を確認しましょう。Copilot Code Review が自動的に実行され、以下が表示されます：
+作成した PR を確認しましょう。Copilot Code Review が自動的に実行され、以下が表示されます（⏱ 約5分）：
 
 - ✅ **Pull Request Overview** — PR 全体のサマリーコメント
 - ✅ **コード提案** — 各ファイルに対する具体的な改善提案
@@ -439,10 +439,13 @@ Copilot のレビュー提案を修正する方法は2つあります：
 1. **Commit suggestion** — 個別の提案を1つずつコミット
 2. **Fix batch with Copilot** — すべての提案を一括で修正（おすすめ）
 
-**Fix batch with Copilot** をクリックすると、修正内容を含む **新しい PR** が自動的に作成されます。
+**Fix batch with Copilot** をクリックすると、修正内容を含む **新しい PR** が自動的に作成されます（⏱ 約15分）。
 
 1. まず **修正用の新しい PR** をマージ
 2. 次に **元の PR（feature/modernize）** をマージ
+
+> aside negative
+> **注意**: 場合によっては新しい PR が作成されず、修正が直接元の PR にコミットされることもあります。その場合はそのまま元の PR をマージしてください。
 
 > aside positive
 > **ポイント**:

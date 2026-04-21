@@ -392,7 +392,7 @@ PR の説明に「Closes #1」を含めてください。
 <aside class="special"><p><strong>ポイント</strong>: PR に <code>Closes #1</code> を含めることで、PR がマージされた時に Issue #1（レガシーサイトの移行）が自動的にクローズされます。</p>
 </aside>
 <h2 is-upgraded>4.5 — PR の結果を確認する</h2>
-<p>作成した PR を確認しましょう。Copilot Code Review が自動的に実行され、以下が表示されます：</p>
+<p>作成した PR を確認しましょう。Copilot Code Review が自動的に実行され、以下が表示されます（⏱ 約5分）：</p>
 <ul>
 <li>✅ <strong>Pull Request Overview</strong> — PR 全体のサマリーコメント</li>
 <li>✅ <strong>コード提案</strong> — 各ファイルに対する具体的な改善提案</li>
@@ -403,11 +403,13 @@ PR の説明に「Closes #1」を含めてください。
 <li><strong>Commit suggestion</strong> — 個別の提案を1つずつコミット</li>
 <li><strong>Fix batch with Copilot</strong> — すべての提案を一括で修正（おすすめ）</li>
 </ol>
-<p><strong>Fix batch with Copilot</strong> をクリックすると、修正内容を含む <strong>新しい PR</strong> が自動的に作成されます。</p>
+<p><strong>Fix batch with Copilot</strong> をクリックすると、修正内容を含む <strong>新しい PR</strong> が自動的に作成されます（⏱ 約15分）。</p>
 <ol type="1">
 <li>まず <strong>修正用の新しい PR</strong> をマージ</li>
 <li>次に <strong>元の PR（feature/modernize）</strong> をマージ</li>
 </ol>
+<aside class="warning"><p><strong>注意</strong>: 場合によっては新しい PR が作成されず、修正が直接元の PR にコミットされることもあります。その場合はそのまま元の PR をマージしてください。</p>
+</aside>
 <aside class="special"><p><strong>ポイント</strong>:</p>
 <ul>
 <li>Copilot Code Review のセッションは <strong>Actions</strong> タブで確認でき、レビュープロセスは完全に透明です。</li>
