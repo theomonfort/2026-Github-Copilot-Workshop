@@ -546,19 +546,39 @@ Agentic Workflow で Copilot を活用するために PAT を作成します。
 
 今日の活動を自動レポートするワークフローを追加しましょう。
 
-エージェントモードで以下を実行：
+#### gh aw のインストール
 
-```
-以下の手順を実行してください：
+ターミナルで以下を実行します：
 
-1. gh aw 拡張機能をインストール: gh extension install github/gh-aw
-2. Daily Repo Status ワークフローを追加: gh aw add-wizard githubnext/agentics/daily-repo-status
-3. 変更をコミットして PR を作成
-
-参考: https://github.com/githubnext/agentics/blob/main/docs/daily-repo-status.md
+```bash
+gh extension install github/gh-aw
 ```
 
-PR がマージされたら、ターミナルで手動実行して今日の活動レポートを確認します：
+#### ワークフローの追加
+
+```bash
+gh aw add-wizard githubnext/agentics/daily-repo-status
+```
+
+ウィザードで以下を選択・入力してください：
+
+1. **Which coding agent?** → **GitHub Copilot CLI** を選択
+2. **Schedule** → **daily** を選択
+3. **PAT の入力** → Step 6.1 で作成した PAT を貼り付け
+4. その他の質問はデフォルトのまま Enter
+
+> aside positive
+> **なぜ PAT を2回使うの？**: Secret（`COPILOT_GITHUB_TOKEN`）はワークフローが GitHub 上で実行される時に使用されます。ウィザードでの入力は、セットアップ時の確認用です。
+
+#### PR を作成してマージ
+
+ワークフローファイルが作成されたら、Copilot Chat で PR を作成します：
+
+```
+変更をコミットして PR を作成してください。
+```
+
+GitHub で PR をマージした後、ターミナルで手動実行して今日の活動レポートを確認します（⏱ 約4分30秒）：
 
 ```bash
 gh aw run daily-repo-status
