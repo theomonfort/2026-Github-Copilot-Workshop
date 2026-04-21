@@ -492,9 +492,16 @@ Agentic Workflow で Copilot を活用するために PAT を作成します。
 1. [https://github.com/settings/personal-access-tokens/new](https://github.com/settings/personal-access-tokens/new) にアクセス
 2. 設定内容：
    - **Token name**: `copilot-workshop-agent`
-   - **Resource owner**: 自分のアカウント
-   - **Repository access**: Public repositories
-   - **Permissions**: Copilot Requests を有効化
+   - **Resource owner**: リポジトリを作成した Organization（または個人アカウント）
+   - **Repository access**: Only select repositories → 作成したリポジトリを選択
+   - **Permissions**:
+     - **Actions**: Read and write
+     - **Contents**: Read-only
+     - **Issues**: Read and write
+     - **Metadata**: Read-only（自動付与）
+     - **Pull requests**: Read-only
+
+![PAT Permissions](github-copilot-workshop/img/pat-permissions.png)
 3. 作成した PAT をコピー
 
 #### リポジトリシークレットに設定
