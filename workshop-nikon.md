@@ -132,15 +132,18 @@ Copilot Chat で以下を実行します：
 
 生成された内容を確認し、レガシー PHP サイトの構造が正しく認識されていることを確認してください。
 
+> aside negative
+> **気づきましたか？** Copilot の応答が**英語**で返ってきます。`copilot-instructions.md` に言語設定がないため、Copilot はデフォルトの英語で応答しています。次のステップでこれを修正しましょう。
+
 > aside positive
 > **ポイント**: プロジェクトの文脈を一度設定すれば、以降の作業で一貫した理解に基づくアシストが可能になります。
 
 ### 1.2 — カスタム指示を追加する
 
-`/init` で生成された `copilot-instructions.md` に、移行ガイドラインを追加しましょう。Copilot Chat で以下のプロンプトを入力してください：
+`/init` で生成された `copilot-instructions.md` を日本語化し、移行ガイドラインを追加しましょう。Copilot Chat で以下のプロンプトを入力してください：
 
 ```
-copilot-instructions.md に以下の内容を追記してください。既存の内容は残してください。
+copilot-instructions.md を日本語にして、以下の内容を追記してください。既存の内容は残してください。
 
 - 言語設定: すべての会話は日本語で行う
 - 移行先の技術スタック: Next.js (App Router) + TypeScript + Tailwind CSS

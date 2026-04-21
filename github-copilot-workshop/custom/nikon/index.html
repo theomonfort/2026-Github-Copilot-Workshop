@@ -165,11 +165,13 @@ php -S localhost:8080
 </code></pre>
 <p><code>/init</code> コマンドにより、Copilot がリポジトリをスキャンし、<code>copilot-instructions.md</code> を自動生成します。</p>
 <p>生成された内容を確認し、レガシー PHP サイトの構造が正しく認識されていることを確認してください。</p>
+<aside class="warning"><p><strong>気づきましたか？</strong> Copilot の応答が<strong>英語</strong>で返ってきます。<code>copilot-instructions.md</code> に言語設定がないため、Copilot はデフォルトの英語で応答しています。次のステップでこれを修正しましょう。</p>
+</aside>
 <aside class="special"><p><strong>ポイント</strong>: プロジェクトの文脈を一度設定すれば、以降の作業で一貫した理解に基づくアシストが可能になります。</p>
 </aside>
 <h2 is-upgraded>1.2 — カスタム指示を追加する</h2>
-<p><code>/init</code> で生成された <code>copilot-instructions.md</code> に、移行ガイドラインを追加しましょう。Copilot Chat で以下のプロンプトを入力してください：</p>
-<pre><code>copilot-instructions.md に以下の内容を追記してください。既存の内容は残してください。
+<p><code>/init</code> で生成された <code>copilot-instructions.md</code> を日本語化し、移行ガイドラインを追加しましょう。Copilot Chat で以下のプロンプトを入力してください：</p>
+<pre><code>copilot-instructions.md を日本語にして、以下の内容を追記してください。既存の内容は残してください。
 
 - 言語設定: すべての会話は日本語で行う
 - 移行先の技術スタック: Next.js (App Router) + TypeScript + Tailwind CSS
