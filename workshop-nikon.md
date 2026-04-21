@@ -499,7 +499,7 @@ Agentic Workflow で Copilot を活用するために PAT を作成します。
      - **Contents**: Read-only
      - **Issues**: Read and write
      - **Metadata**: Read-only（自動付与）
-     - **Pull requests**: Read-only
+     - **Pull requests**: Read and write
 
 ![PAT Permissions](github-copilot-workshop/img/pat-permissions.png)
 3. 作成した PAT をコピー
