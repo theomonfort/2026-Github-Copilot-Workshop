@@ -419,11 +419,11 @@ Copilot がコードの問題点や改善提案をコメントしてくれます
 
 ```
 すべての変更をコミットして feature/modernize ブランチにプッシュし、main ブランチへの Pull Request を作成してください。
-PR の説明に「Closes #1」を含めてください。
+PR の説明に「Closes #（移行Issueの番号）」を含めてください。
 ```
 
 > aside positive
-> **ポイント**: PR に `Closes #1` を含めることで、PR がマージされた時に Issue #1（レガシーサイトの移行）が自動的にクローズされます。
+> **ポイント**: PR に `Closes #N` を含めることで、PR がマージされた時に対応する Issue が自動的にクローズされます。Issue 番号は Step 1.4 で作成した移行 Issue の番号を確認してください。
 
 ### 4.5 — PR の結果を確認する
 
@@ -463,59 +463,24 @@ Cloud Agent を使用するために、以下の設定を確認します：
 1. GitHubの右上のプロフィールアイコン → **Copilot settings**
 2. **Copilot Cloud Agent** が有効になっていることを確認
 
-### 5.2 — Issue を作成して Cloud Agent をアサインする
+### 5.2 — 既存の Issue に Cloud Agent をアサインする
 
-2つの Issue を作成し、Copilot Cloud Agent に自律的に実装させます。
+Step 1.4 で作成した Issue の中から、Cloud Agent に実装させたい Issue を開きます。
 
-#### Issue 1: ダークモード / ライトモード切り替え
+1. Issue を開く
+2. 右サイドバーの **Assignees** をクリック
+3. **Copilot**（GitHub）、**Claude**（Anthropic）、**Codex**（OpenAI）から選択してアサイン
 
-以下の内容で Issue を作成してください：
+![Cloud Agent アサイン画面](github-copilot-workshop/img/cloud-agent-assignees.png)
 
-**タイトル**: Support dark/light mode toggle
+アサイン時に以下をカスタマイズできます：
 
-```
-## 概要
-ウェブサイトにダークモード / ライトモードの切り替え機能を追加する。
+- **追加プロンプト** — Issue の説明に補足指示を追加
+- **モデル選択** — Copilot / Claude / Codex から選択
+- **ベースブランチ** — 作業の起点となるブランチを指定
 
-## 要件
-- ヘッダーにトグルボタンを配置
-- ユーザーの選択を localStorage に保存
-- システムのカラースキーム設定を初期値として使用
-- Tailwind CSS の dark: プレフィックスを活用
-- スムーズなトランジションアニメーション
-
-## 受け入れ条件
-- [ ] トグルボタンが表示される
-- [ ] クリックでテーマが切り替わる
-- [ ] リロード後もテーマが保持される
-- [ ] 全ページでダークモードが正しく表示される
-```
-
-#### Issue 2: 英語対応
-
-**タイトル**: Support English language on the website
-
-```
-## 概要
-ウェブサイトを多言語対応（日本語・英語）にする。
-
-## 要件
-- next-intl または同等のi18nライブラリを使用
-- 言語切り替えボタンをヘッダーに追加
-- すべてのテキストコンテンツを翻訳ファイルで管理
-- URL パスによる言語切り替え（/en, /ja）
-
-## 受け入れ条件
-- [ ] 日本語と英語の切り替えができる
-- [ ] すべてのページが両言語で表示される
-- [ ] 言語選択がURLに反映される
-```
-
-各 Issue の **Assignees** で **Copilot** を選択してアサインしてください。
-
-Cloud Agent が自律的にコードを実装し、PR を作成します。
-
-![Cloud AgentをIssueにアサイン](github-copilot-workshop/img/coding-agent-assignment.png)
+> aside positive
+> **ポイント**: Cloud Agent が自律的にコードを実装し、PR を作成します。Step 4.1 で設定した Validation Tools（CodeQL、Code Review、Secret Scanning）が有効な場合、Agent は自分の実装を検証してから PR を提出します。
 
 ## Agentic Workflow
 Duration: 15
