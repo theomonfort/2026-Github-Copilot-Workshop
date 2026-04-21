@@ -122,6 +122,9 @@ Duration: 20
 
 まず、Copilot にこのリポジトリの全体像を把握させましょう。
 
+> aside positive
+> **💡 ヒント**: Codespaces で作業している場合、Copilot Chat の左下にある承認モードを **「Bypass Approvals」** に変更すると、ツール実行の承認をスキップでき、ワークショップをスムーズに進められます。
+
 Copilot Chat で以下を実行します：
 
 ```
