@@ -482,6 +482,33 @@ Step 1.4 で作成した Issue の中から、Cloud Agent に実装させたい 
 > aside positive
 > **ポイント**: Cloud Agent が自律的にコードを実装し、PR を作成します（⏱ 各 Issue につき約15分）。Step 4.1 で設定した Validation Tools（CodeQL、Code Review、Secret Scanning）が有効な場合、Agent は自分の実装を検証してから PR を提出します。複数の Issue を同時にアサインすると並行して処理されます。
 
+### 5.3 — PR を確認してマージする
+
+Cloud Agent が作成した PR は **Draft（下書き）** 状態で作成されます。
+
+1. PR を開き、内容を確認
+2. **Ready for review** をクリックして Draft を解除
+3. Copilot Code Review が自動的に開始されます
+4. レビュー完了後、PR をマージ
+
+> aside negative
+> **コンフリクトが発生した場合**: 複数の Cloud Agent が並行して作業すると、同じファイルを変更してコンフリクトが発生することがあります。**Resolve conflicts** → **Fix with Copilot** をクリックすると、Copilot が自動的にコンフリクトを解決してくれます。
+
+![Fix with Copilot でコンフリクト解決](github-copilot-workshop/img/fix-conflicts-copilot.png)
+
+### 5.4 — 最新コードを取得して確認する
+
+Cloud Agent の PR がマージされたら、Codespace で最新のコードを取得してサイトを確認しましょう。
+
+```bash
+git checkout main
+git pull
+npm install
+npm run dev
+```
+
+ポートフォワーディングの通知が表示されたら **「ブラウザで開く」** をクリックして、Cloud Agent が実装した新機能を確認してください。
+
 ## Agentic Workflow
 Duration: 15
 
