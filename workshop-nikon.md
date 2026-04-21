@@ -480,7 +480,7 @@ Step 1.4 で作成した Issue の中から、Cloud Agent に実装させたい 
 - **ベースブランチ** — 作業の起点となるブランチを指定
 
 > aside positive
-> **ポイント**: Cloud Agent が自律的にコードを実装し、PR を作成します。Step 4.1 で設定した Validation Tools（CodeQL、Code Review、Secret Scanning）が有効な場合、Agent は自分の実装を検証してから PR を提出します。
+> **ポイント**: Cloud Agent が自律的にコードを実装し、PR を作成します（⏱ 各 Issue につき約15分）。Step 4.1 で設定した Validation Tools（CodeQL、Code Review、Secret Scanning）が有効な場合、Agent は自分の実装を検証してから PR を提出します。複数の Issue を同時にアサインすると並行して処理されます。
 
 ## Agentic Workflow
 Duration: 15
@@ -504,6 +504,9 @@ Agentic Workflow で Copilot を活用するために PAT を作成します。
 ![PAT Permissions](github-copilot-workshop/img/pat-permissions.png)
 3. 作成した PAT をコピー
 
+> aside negative
+> **注意**: PAT は作成時に一度だけ表示されます。必ずコピーして安全な場所に保存してください。再表示はできません。
+
 #### リポジトリシークレットに設定
 
 1. リポジトリの **Settings** → **Secrets and variables** → **Actions**
@@ -515,9 +518,33 @@ Agentic Workflow で Copilot を活用するために PAT を作成します。
 1. **Settings** → **Actions** → **General**
 2. **Allow GitHub Actions to create and approve pull requests** にチェック
 
-### 6.2 — テストカバレッジ自動更新ワークフローを作成する
+### 6.2 — Daily Repo Status ワークフローを追加する
 
-新しい機能がマージされた時に、テストカバレッジレポートを自動更新するワークフローを作成しましょう。
+今日の活動を自動レポートするワークフローを追加しましょう。
+
+ターミナルで以下のコマンドを実行します：
+
+```bash
+# gh aw 拡張機能をインストール
+gh extension install github/gh-aw
+
+# Daily Repo Status ワークフローを追加
+gh aw add-wizard githubnext/agentics/daily-repo-status
+```
+
+ウィザードの指示に従って設定を完了してください。
+
+追加が完了したら、手動で実行して今日の活動レポートを確認します：
+
+```bash
+gh aw run daily-repo-status
+```
+
+リポジトリの **Issues** タブに `[repo-status]` というプレフィックスの Issue が自動作成され、今日の PR、Issue、コード変更の活動サマリーが表示されます。
+
+### 6.3 —（ボーナス）テストカバレッジ自動更新ワークフローを作成する
+
+余裕がある方は、テストカバレッジレポートを自動更新するワークフローも作成してみましょう。
 
 エージェントモードで以下を実行：
 
