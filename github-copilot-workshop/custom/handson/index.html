@@ -1,0 +1,713 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>GitHub Copilot ハンズオン勉強会</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="github-copilot-workshop"
+                  title="GitHub Copilot ハンズオン勉強会"
+                  environment="web"
+                  feedback-link="https://example.com/feedback">
+    
+      <google-codelab-step label="ワークショップについて" duration="5">
+        <p>GitHub Copilotワークショップへようこそ！</p>
+<p class="image-container"><img alt="GitHub Copilot Logo" src="../../img/dcd9c52ce37f5b19.png"></p>
+<p>このワークショップでは、<strong>レガシーPHPで作られた「AI駆動開発ガイド」ページ</strong> を題材に、GitHub Copilot の全機能を活用してモダンなウェブアプリケーションに変革する体験をしていただきます。</p>
+<h2 is-upgraded>本日のゴール</h2>
+<ul>
+<li>GitHub Copilot のセットアップとカスタマイズ方法を理解する</li>
+<li>Copilot Agent Mode でレガシーサイトを Next.js + TypeScript + Tailwind CSS に移行する</li>
+<li>自動テスト、コード品質チェック、セキュリティスキャンを設定する</li>
+<li>Cloud Agent による自律的な機能実装を体験する</li>
+<li>Agentic Workflow で CI/CD パイプラインに AI を組み込む</li>
+<li>Copilot CLI で新規アプリケーションを構築する</li>
+</ul>
+<h2 is-upgraded>本日のアジェンダ</h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p>パート</p>
+</td><td colspan="1" rowspan="1"><p>内容</p>
+</td><td colspan="1" rowspan="1"><p>概要</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Setup</p>
+</td><td colspan="1" rowspan="1"><p>プロジェクトセットアップ</p>
+</td><td colspan="1" rowspan="1"><p>テンプレートリポジトリから Codespaces を起動</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>1</p>
+</td><td colspan="1" rowspan="1"><p>セットアップ＆カスタマイズ</p>
+</td><td colspan="1" rowspan="1"><p>/init、カスタム指示、Skill 作成、MCP 設定</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>2</p>
+</td><td colspan="1" rowspan="1"><p>実装：レガシーサイトの移行</p>
+</td><td colspan="1" rowspan="1"><p>Plan Mode → Next.js + TypeScript + Tailwind への移行</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>3</p>
+</td><td colspan="1" rowspan="1"><p>自動テストと Actions</p>
+</td><td colspan="1" rowspan="1"><p>Vitest + Playwright テスト、CI ワークフロー</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>4</p>
+</td><td colspan="1" rowspan="1"><p>コード品質</p>
+</td><td colspan="1" rowspan="1"><p>Copilot Code Review、GHAS 設定</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>5</p>
+</td><td colspan="1" rowspan="1"><p>Cloud Agent</p>
+</td><td colspan="1" rowspan="1"><p>Issue からの自律的な機能実装</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>6</p>
+</td><td colspan="1" rowspan="1"><p>Agentic Workflow</p>
+</td><td colspan="1" rowspan="1"><p>PAT 作成、テストカバレッジ自動更新</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>7</p>
+</td><td colspan="1" rowspan="1"><p>CLI</p>
+</td><td colspan="1" rowspan="1"><p>AI 利用状況ダッシュボードの構築</p>
+</td></tr>
+</table>
+<h2 is-upgraded>前提条件</h2>
+<p>以下の<strong>いずれか</strong>の環境をご用意ください：</p>
+<p><strong>オプション A: 個人環境</strong></p>
+<ul>
+<li>Visual Studio Code がインストールされていること</li>
+<li>GitHub CLI（<code>gh</code>）がインストールされていること</li>
+<li>GitHub Copilot のライセンスがあること（<strong>Pro / Pro+ / Business / Enterprise</strong> プラン推奨）</li>
+<li>GitHub アカウントを持っていること</li>
+</ul>
+<aside class="warning"><p><strong>⚠️ プランについて</strong>: Free プランでも Agent Mode（Part 1〜2）は利用可能ですが、Cloud Agent（Part 5）、Agentic Workflow（Part 6）、自動 Code Review（Part 4）は <strong>Pro プラン以上</strong> が必要です。ワークショップの全パートを体験するには <strong>Pro / Pro+ / Business / Enterprise</strong> プランをご利用ください。</p>
+</aside>
+<p><strong>オプション B: 企業環境（お客様向け）</strong></p>
+<ul>
+<li>以下の機能が有効化されたプライベート Organization を持っていること： <ul>
+<li>GitHub Actions</li>
+<li>GitHub Copilot（Pro+ / Business / Enterprise）</li>
+<li>GitHub Advanced Security (GHAS)</li>
+</ul>
+</li>
+<li>Organization 内でリポジトリを作成できる権限があること</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="プロジェクトのセットアップ" duration="15">
+        <p>このワークショップでは、以下の GitHub リポジトリを使用します：</p>
+<p><strong>プロジェクトURL</strong>: https://github.com/theomonfort/2026-Github-Copilot-Workshop-Nodejs</p>
+<h2 is-upgraded>ステップ1: テンプレートからリポジトリを作成する</h2>
+<ol type="1">
+<li>プロジェクト URL をブラウザで開く</li>
+<li>右上の <strong>Use this template</strong> ボタンをクリックし、<strong>Create a new repository</strong> を選択</li>
+<li>リポジトリ作成画面で以下を設定：</li>
+</ol>
+<h3 is-upgraded>Owner（オーナー）の選択</h3>
+<p><strong>個人で参加の場合：</strong></p>
+<ul>
+<li>Owner は <strong>自分のアカウント</strong> を選択</li>
+<li>Visibility は <strong>Public</strong> を選択（Free プランの場合、Public でないと一部機能が制限されます）</li>
+</ul>
+<p><strong>企業の Organization で参加の場合：</strong></p>
+<ul>
+<li>Owner は <strong>Copilot / Actions / GHAS / Codespaces などが有効化された Organization</strong> を選択</li>
+<li>Visibility は <strong>Private</strong> を選択</li>
+</ul>
+<h3 is-upgraded>Repository name（リポジトリ名）</h3>
+<ul>
+<li>任意の名前を入力してください（例: <code>hands-on-yourname</code>）</li>
+</ul>
+<ol type="1" start="4">
+<li><strong>Create repository</strong> をクリック</li>
+</ol>
+<h2 is-upgraded>ステップ2: Codespaces で開発環境を起動する</h2>
+<ol type="1">
+<li>作成したリポジトリのページで、緑色の <strong>Code</strong> ボタンをクリック</li>
+<li><strong>Codespaces</strong> タブを選択</li>
+<li><strong>Create codespace on main</strong> をクリック</li>
+</ol>
+<p class="image-container"><img alt="Codespaces Setup" src="../../img/da697969a846a2d4.png"></p>
+<aside class="special"><p><strong>⏳ 注意</strong>: Codespace の起動には数分かかる場合があります。DevContainer のビルドが完了するまでお待ちください。</p>
+</aside>
+<p>DevContainer が自動的に Node.js 20 環境をセットアップし、以下が事前にインストールされます：</p>
+<ul>
+<li>GitHub Copilot &amp; Copilot Chat 拡張機能</li>
+<li>Live Server 拡張機能（プレビュー用）</li>
+<li>GitHub CLI</li>
+<li>GitHub MCP Server（自動検出有効化済み）</li>
+</ul>
+<h2 is-upgraded>ステップ3: レガシーサイトを確認する</h2>
+<p>VS Code のターミナルを開き、以下のコマンドを実行してレガシーサイトを起動します：</p>
+<pre><code language="language-bash" class="language-bash">cd github-legacy
+php -S localhost:8080
+</code></pre>
+<p>Codespace がポート <strong>8080</strong> を自動検出し、<strong>「Open in Browser」</strong> のポップアップが表示されます。クリックしてブラウザでサイトを確認してください。</p>
+<p><strong>これが今日のリファクタリング対象です。</strong></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="セットアップ＆カスタマイズ" duration="20">
+        <h2 is-upgraded>1.1 — Copilot でリポジトリを理解する</h2>
+<p>まず、Copilot にこのリポジトリの全体像を把握させましょう。</p>
+<aside class="special"><p><strong>💡 ヒント</strong>: Codespaces で作業している場合、Copilot Chat の左下にある承認モードを <strong>「Bypass Approvals」</strong> に変更すると、ツール実行の承認をスキップでき、ワークショップをスムーズに進められます。</p>
+</aside>
+<p>Copilot Chat で以下を実行します：</p>
+<pre><code>/init
+</code></pre>
+<p><code>/init</code> コマンドにより、Copilot がリポジトリをスキャンし、<code>copilot-instructions.md</code> を自動生成します。（⏱ 約2分30秒）</p>
+<p>生成された内容を確認し、レガシー PHP サイトの構造が正しく認識されていることを確認してください。</p>
+<aside class="warning"><p><strong>気づきましたか？</strong> Copilot の応答が<strong>英語</strong>で返ってきます。<code>copilot-instructions.md</code> に言語設定がないため、Copilot はデフォルトの英語で応答しています。次のステップでこれを修正しましょう。</p>
+</aside>
+<aside class="special"><p><strong>ポイント</strong>: プロジェクトの文脈を一度設定すれば、以降の作業で一貫した理解に基づくアシストが可能になります。</p>
+</aside>
+<h2 is-upgraded>1.2 — カスタム指示を追加する</h2>
+<p><code>/init</code> で生成された <code>copilot-instructions.md</code> を日本語化し、移行ガイドラインを追加しましょう。Copilot Chat で以下のプロンプトを入力してください：</p>
+<pre><code>copilot-instructions.md を日本語にして、以下の内容を追記してください。既存の内容は残してください。
+
+- 言語設定: すべての会話は日本語で行う
+- 移行先の技術スタック: Next.js (App Router) + TypeScript + Tailwind CSS
+- テスト: Vitest + Playwright
+- デザイン要件: モダンで洗練されたUI、レスポンシブデザイン（モバイルファースト）
+- コーディング規約: ESLint + Prettier 準拠、関数コンポーネント + Hooks、型定義は厳格に（any 禁止）
+</code></pre>
+<p>⏱ 約1分</p>
+<aside class="special"><p><strong>ポイント</strong>: <code>/init</code> で生成されたレガシーコードの説明を残しておくことで、Copilot は「現在の状態」と「移行先の目標」の両方を理解した上でアシストしてくれます。</p>
+</aside>
+<h2 is-upgraded>1.3 — フロントエンド Skill を作成する</h2>
+<p>Copilot に以下のプロンプトを入力して、フロントエンド開発用の Skill を作成してもらいましょう。<code>[自社の会社名]</code> の部分を<strong>実際の会社名に置き換えて</strong>ください：</p>
+<pre><code>[自社の会社名] のブランディングに基づいたフロントエンド Skill を作成してください。
+ウェブ上でリサーチを行い、ブランドカラー、タイポグラフィ、デザイン原則、コンポーネントパターンを定義してください。
+Skill ファイルは .github/skills/ 配下に追加してください。
+</code></pre>
+<aside class="warning"><p><strong>⚠️ 重要</strong>: <code>[自社の会社名]</code> をそのまま入力しないでください。必ず実際の会社名に置き換えてください。</p>
+</aside>
+<p>Copilot がウェブ上で会社のブランド情報をリサーチし、ブランドガイドラインに基づいた Skill ファイルを自動生成します。（⏱ 約2分30秒）</p>
+<h2 is-upgraded>1.4 — MCP Server を確認する</h2>
+<p>MCP（Model Context Protocol）Server が正しく接続されていることを確認しましょう。</p>
+<h3 is-upgraded>GitHub MCP Server の確認</h3>
+<p><code>.vscode/mcp.json</code> に GitHub MCP Server が設定されていることを確認します：</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;servers&#34;: {
+    &#34;github-mcp-server&#34;: {
+      &#34;type&#34;: &#34;http&#34;,
+      &#34;url&#34;: &#34;https://api.githubcopilot.com/mcp/&#34;
+    }
+  }
+}
+</code></pre>
+<p>Copilot Chat で以下を入力して、GitHub MCP Server の接続確認と Issue の作成を行います：</p>
+<pre><code>GitHub MCP Server を使って、このリポジトリに以下の Issue を作成してください：
+
+1. このレガシー PHP サイトをモダンなフレームワークに移行する
+2. 適切なテストを追加する
+3. ダークモードをサポートする
+4. 英語対応を追加する
+</code></pre>
+<p>⏱ 約30秒</p>
+<aside class="special"><p><strong>ポイント</strong>: GitHub MCP Server が正しく接続されていれば、Copilot がリポジトリに直接 Issue を作成します。作成された Issue は後のステップで活用します。</p>
+</aside>
+<h3 is-upgraded>Playwright MCP Server の追加</h3>
+<p>テスト用に Playwright MCP Server を追加します。</p>
+<ol type="1">
+<li>Copilot Chat の入力欄にある <strong>🔧 ツールボタン</strong>（モデル選択の右側）をクリック</li>
+<li><strong>「Add MCP Server」</strong> を選択</li>
+<li><strong>「Browse MCP Servers」</strong> をクリック</li>
+<li>初回の場合は <strong>「Enable MCP Servers Marketplace」</strong> をクリックして有効化</li>
+<li><strong>「Playwright」</strong> で検索し、<strong>Microsoft</strong> の Playwright MCP Server を選択</li>
+<li><strong>「Install in Workspace」</strong> をクリックしてインストール</li>
+</ol>
+<p>インストール後、<code>.vscode/mcp.json</code> に Playwright が追加されていることを確認してください：</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;servers&#34;: {
+    &#34;github-mcp-server&#34;: {
+      &#34;type&#34;: &#34;http&#34;,
+      &#34;url&#34;: &#34;https://api.githubcopilot.com/mcp/&#34;
+    },
+    &#34;playwright&#34;: {
+      &#34;command&#34;: &#34;npx&#34;,
+      &#34;args&#34;: [&#34;@anthropic-ai/mcp-server-playwright&#34;]
+    }
+  }
+}
+</code></pre>
+<aside class="special"><p><strong>ヒント</strong>: 🔧 ツールボタンをクリックすると、現在 Copilot が利用可能な MCP Server とツールの一覧を確認できます。GitHub MCP Server と Playwright が表示されていれば正しく設定されています。</p>
+</aside>
+<p>Playwright MCP Server が正しく動作することを確認するために、以下のプロンプトを試してみましょう：</p>
+<pre><code>Playwright を使って https://www.nikon.com を開き、スクリーンショットを撮ってください
+</code></pre>
+<p>スクリーンショットはプロジェクトのルートフォルダに保存されます。エクスプローラーで確認してみましょう。</p>
+<aside class="special"><p><strong>ポイント</strong>: Playwright MCP Server を使うと、Copilot がブラウザを操作してウェブページの確認やスクリーンショットの取得ができます。後のテスト工程で E2E テストにも活用します。</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="実装 — レガシーサイトの移行" duration="45">
+        <h2 is-upgraded>2.1 — Plan Mode で移行計画を立てる</h2>
+<p>いきなり実装に入るのではなく、まず <strong>Plan Mode</strong> で詳細な移行計画を立てましょう。</p>
+<ol type="1">
+<li>Copilot Chat のモデル選択の横にあるモード切り替えから <strong>「Plan」</strong> を選択</li>
+<li>以下のプロンプトを入力：</li>
+</ol>
+<pre><code>このレガシー PHP サイトを Next.js + Tailwind CSS に移行する計画を立ててください。
+テストはまだ作成しないでください。
+
+デザインの参考：
+- 機能紹介 → モダンなタイルカード（グリッドレイアウト）
+- 統計データ → テーブルではなくスタットカード形式
+- FAQ → https://www.designjoy.co/ のようなクリーンなアコーディオン
+- おすすめリソース → https://awesome-copilot.github.com/instructions/ のようなカード＋インストールボタン形式
+</code></pre>
+<ol type="1" start="3">
+<li>Copilot が計画を立てる前に、いくつか質問をしてくることがあります。適切に回答してください。</li>
+</ol>
+<p class="image-container"><img alt="Plan Mode での質問例" src="../../img/e1891485966ebcee.png"></p>
+<ol type="1" start="4">
+<li>Copilot が <code>copilot-instructions.md</code> の内容を踏まえて、詳細な移行計画を作成します（⏱ 約2分30秒）</li>
+<li>計画の内容を確認・調整</li>
+</ol>
+<aside class="special"><p><strong>ポイント</strong>: 実装前に計画を立て、レビューしてから着手できます。Plan Mode は大規模なリファクタリングやマイグレーションに最適です。</p>
+</aside>
+<h2 is-upgraded>2.2 — 移行を実行する</h2>
+<p>計画が確定したら、<strong>「Start with Autopilot」</strong> ボタンをクリックして実装を開始します。</p>
+<p class="image-container"><img alt="Start with Autopilot" src="../../img/93aa5f09e9db647d.png"></p>
+<p>⏱ 約15分</p>
+<p>Copilot エージェントが以下を自動的に実行します：</p>
+<ul>
+<li>Next.js プロジェクトの初期化</li>
+<li>TypeScript 設定</li>
+<li>Tailwind CSS の設定</li>
+<li>レガシー HTML からのコンテンツ移行</li>
+<li>コンポーネントの分割・作成</li>
+<li>レスポンシブレイアウトの実装</li>
+</ul>
+<h2 is-upgraded>2.3 — 結果を確認する</h2>
+<p>移行が完了したら、サーバーを起動してブラウザでモダナイズされたサイトを確認しましょう。</p>
+<p>ターミナルで以下のコマンドを実行します：</p>
+<pre><code language="language-bash" class="language-bash">npm run dev
+</code></pre>
+<p>ポートフォワーディングの通知が表示されたら <strong>「ブラウザで開く」</strong> をクリックしてサイトを確認してください。</p>
+<p><strong>Before → After</strong> の違いを確認してみてください！</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="自動テストと Actions" duration="25">
+        <h2 is-upgraded>3.1 — 自動テストを作成する</h2>
+<p>移行したサイトに対して、自動テストを作成しましょう。</p>
+<pre><code>移行した Next.js サイトに対して、以下のテストを作成してください：
+
+1. Vitest によるユニットテスト：
+   - 各コンポーネントのレンダリングテスト
+   - ProductCard コンポーネントの props テスト
+   - Navigation コンポーネントのリンクテスト
+
+2. Playwright による E2E テスト：
+   - トップページの表示確認
+   - ナビゲーションの動作確認
+   - レスポンシブデザインの確認（モバイル・タブレット・デスクトップ）
+   - 各製品カテゴリセクションへのスクロール
+
+テストは tests/ ディレクトリに配置してください。
+</code></pre>
+<p>⏱ 約3〜5分</p>
+<h2 is-upgraded>3.2 — GitHub Actions ワークフローを作成する</h2>
+<p>テストを PR 作成時に自動実行する GitHub Actions ワークフローを設定します。</p>
+<pre><code>以下の GitHub Actions ワークフローを作成してください：
+
+1. PR 作成・更新時にトリガー
+2. Node.js 20 環境でテストを実行
+3. Vitest ユニットテストを実行
+4. Playwright E2E テストを実行
+5. テスト結果を PR にコメントとして投稿
+
+ワークフローファイルは .github/workflows/test.yml に配置してください。
+</code></pre>
+<p>⏱ 約2分</p>
+<h2 is-upgraded>3.3 — Dependency Review を追加する（ボーナス）</h2>
+<p>依存関係の脆弱性を PR 時に自動チェックする Dependency Review を追加します。</p>
+<pre><code>GitHub Actions に Dependency Review のワークフローを追加してください。
+PR 作成時に依存関係の脆弱性を自動チェックし、問題があればコメントで通知するようにしてください。
+</code></pre>
+<p>⏱ 約1分</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="コード品質" duration="15">
+        <h2 is-upgraded>4.1 — Copilot Code Review の設定を有効化する</h2>
+<p>まず、Copilot Code Review の設定を確認します。</p>
+<ol type="1">
+<li>リポジトリの <strong>Settings</strong> → <strong>Copilot</strong> → <strong>Code review</strong></li>
+<li>以下を有効化： <ul>
+<li><strong>Use custom instructions when reviewing pull requests</strong> → On</li>
+<li><strong>Allow Copilot to use MCP tools when reviewing pull requests</strong> → On</li>
+</ul>
+</li>
+</ol>
+<p class="image-container"><img alt="Copilot Code Review 設定" src="../../img/9efafe5d9ff23597.png"></p>
+<aside class="special"><p><strong>ポイント</strong>: Custom instructions を有効にすると、<code>copilot-instructions.md</code> の内容がコードレビューにも反映されます。MCP tools を有効にすると、レビュー時に外部ツールも活用できます。</p>
+</aside>
+<h2 is-upgraded>4.2 — Ruleset で自動レビューを設定する</h2>
+<p>PR 作成時に Copilot が自動的にコードレビューを行う設定をします。</p>
+<ol type="1">
+<li>リポジトリの <strong>Settings</strong> → <strong>Rules</strong> → <strong>Rulesets</strong> → <strong>New ruleset</strong> → <strong>New branch ruleset</strong></li>
+<li>Ruleset 名を入力（例: <code>Require PR and CCR</code>）</li>
+<li><strong>Enforcement status</strong> を <strong>Active</strong> に変更</li>
+<li><strong>Bypass list</strong> → <strong>Add bypass</strong> → <strong>Repository admin</strong> を追加</li>
+<li><strong>Target branches</strong> → <strong>Add target</strong> → <strong>Include default branch</strong> を選択</li>
+<li><strong>Require a pull request before merging</strong> を有効化 <ul>
+<li><strong>Required approvals</strong> を <strong>1</strong> に設定</li>
+</ul>
+</li>
+<li><strong>Automatically request Copilot code review</strong> にチェック</li>
+<li><strong>Create</strong> をクリック</li>
+</ol>
+<p class="image-container"><img alt="Bypass list に Repository admin を追加" src="../../img/b0e0262dba22efd1.png"></p>
+<aside class="special"><p><strong>ポイント</strong>: Bypass list に Repository admin を追加しておくと、急いでいる時にチェックを待たずにマージできます。</p>
+</aside>
+<p class="image-container"><img alt="Ruleset ターゲットブランチの設定" src="../../img/6f5ce2c9a2731194.png"></p>
+<aside class="warning"><p><strong>注意</strong>: Enforcement status が「Disabled」のままだとルールが適用されません。必ず <strong>Active</strong> に変更してください。</p>
+</aside>
+<h2 is-upgraded>4.3 — GitHub Advanced Security (GHAS) を設定する</h2>
+<ol type="1">
+<li>リポジトリの <strong>Settings</strong> → <strong>Security</strong> → <strong>Advanced Security</strong></li>
+<li><strong>Dependabot</strong> セクション： <ul>
+<li><strong>Dependabot security updates</strong> を有効化</li>
+<li><strong>Dependabot version updates</strong> を有効化</li>
+</ul>
+</li>
+<li>（オプション）<strong>Tools</strong> → <strong>CodeQL analysis</strong> → <strong>Set up</strong> → <strong>Default</strong> → <strong>Enable CodeQL</strong></li>
+</ol>
+<aside class="warning"><p><strong>注意</strong>: CodeQL はデフォルトブランチに存在する言語のみスキャンします。移行前のレガシー PHP しかない状態では JavaScript/TypeScript が検出されません。PR をマージした後に CodeQL を有効化すると、以降の Push/PR で自動スキャンが実行されます。</p>
+</aside>
+<p class="image-container"><img alt="GHAS Code Scanning Setup" src="../../img/96a57e2d2f8719ce.png"></p>
+<h2 is-upgraded>4.4 — VS Code でコードレビューを実行する</h2>
+<p>PR を作成する前に、VS Code 上でコードレビューを実行できます。</p>
+<ol type="1">
+<li><strong>Source Control</strong> タブを開く</li>
+<li><strong>CHANGES</strong> の横にある <strong>Review uncommitted changes</strong>（🔍アイコン）をクリック</li>
+</ol>
+<p class="image-container"><img alt="VS Code Review Uncommitted Changes" src="../../img/aced8406e1db60aa.png"></p>
+<p>Copilot がコードの問題点や改善提案をコメントしてくれます。</p>
+<h2 is-upgraded>4.5 — コミット・Push・PR 作成</h2>
+<p>コード品質の設定が完了したら、コードをコミットして Pull Request を作成しましょう。</p>
+<pre><code>すべての変更をコミットして feature/modernize ブランチにプッシュし、main ブランチへの Pull Request を作成してください。
+PR の説明に「Closes #（移行Issueの番号）」を含めてください。
+</code></pre>
+<aside class="special"><p><strong>ポイント</strong>: PR に <code>Closes #N</code> を含めることで、PR がマージされた時に対応する Issue が自動的にクローズされます。Issue 番号は Step 1.4 で作成した移行 Issue の番号を確認してください。</p>
+</aside>
+<h2 is-upgraded>4.6 — PR の結果を確認する</h2>
+<p>作成した PR を確認しましょう。Copilot Code Review が自動的に実行され、以下が表示されます（⏱ 約5分）：</p>
+<ul>
+<li>✅ <strong>Pull Request Overview</strong> — PR 全体のサマリーコメント</li>
+<li>✅ <strong>コード提案</strong> — 各ファイルに対する具体的な改善提案</li>
+<li>✅ <strong>CodeQL スキャン</strong> — セキュリティ脆弱性のスキャン（⏱ 追加で約3分）</li>
+</ul>
+<h2 is-upgraded>4.7 — レビュー提案を修正する</h2>
+<p>Copilot のレビュー提案を修正する方法は2つあります：</p>
+<ol type="1">
+<li><strong>Commit suggestion</strong> — 個別の提案を1つずつコミット</li>
+<li><strong>Fix batch with Copilot</strong> — すべての提案を一括で修正（おすすめ）</li>
+</ol>
+<p><strong>Fix batch with Copilot</strong> をクリックすると、修正内容を含む <strong>新しい PR</strong> が自動的に作成されます（⏱ 約15分）。</p>
+<ol type="1">
+<li>まず <strong>修正用の新しい PR</strong> をマージ</li>
+<li>次に <strong>元の PR（feature/modernize）</strong> をマージ</li>
+</ol>
+<aside class="warning"><p><strong>注意</strong>: 場合によっては新しい PR が作成されず、修正が直接元の PR にコミットされることもあります。その場合はそのまま元の PR をマージしてください。</p>
+</aside>
+<aside class="special"><p><strong>ポイント</strong>:</p>
+<ul>
+<li>Copilot Code Review のセッションは <strong>Actions</strong> タブで確認でき、レビュープロセスは完全に透明です。</li>
+<li>レビューコメントが日本語で表示されているのは、<code>copilot-instructions.md</code> で設定した言語指定が反映されているためです！</li>
+<li><code>copilot-instructions.md</code> にレビュー観点（例: セキュリティ重視、パフォーマンス重視）を追記することで、レビュー内容をカスタマイズできます。</li>
+</ul>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Cloud Agent" duration="20">
+        <h2 is-upgraded>5.1 — Copilot の設定を確認する</h2>
+<p>Cloud Agent を使用するために、以下の設定を確認します：</p>
+<ol type="1">
+<li>GitHubの右上のプロフィールアイコン → <strong>Copilot settings</strong></li>
+<li><strong>Copilot Cloud Agent</strong> が有効になっていることを確認</li>
+</ol>
+<h2 is-upgraded>5.2 — 既存の Issue に Cloud Agent をアサインする</h2>
+<p>Step 1.4 で作成した Issue の中から、Cloud Agent に実装させたい Issue を開きます。</p>
+<ol type="1">
+<li>Issue を開く</li>
+<li>右サイドバーの <strong>Assignees</strong> をクリック</li>
+<li><strong>Copilot</strong>（GitHub）、<strong>Claude</strong>（Anthropic）、<strong>Codex</strong>（OpenAI）から選択してアサイン</li>
+</ol>
+<p class="image-container"><img alt="Cloud Agent アサイン画面" src="../../img/f36e70ae8a7a515c.png"></p>
+<p>アサイン時に以下をカスタマイズできます：</p>
+<ul>
+<li><strong>追加プロンプト</strong> — Issue の説明に補足指示を追加</li>
+<li><strong>モデル選択</strong> — Copilot / Claude / Codex から選択</li>
+<li><strong>ベースブランチ</strong> — 作業の起点となるブランチを指定</li>
+</ul>
+<aside class="special"><p><strong>ポイント</strong>: Cloud Agent が自律的にコードを実装し、PR を作成します（⏱ 各 Issue につき約15分）。Step 4.1 で設定した Validation Tools（CodeQL、Code Review、Secret Scanning）が有効な場合、Agent は自分の実装を検証してから PR を提出します。複数の Issue を同時にアサインすると並行して処理されます。</p>
+</aside>
+<h2 is-upgraded>5.3 — PR を確認してマージする</h2>
+<p>Cloud Agent が作成した PR は <strong>Draft（下書き）</strong> 状態で作成されます。</p>
+<ol type="1">
+<li>PR を開き、内容を確認</li>
+<li><strong>Ready for review</strong> をクリックして Draft を解除</li>
+<li>Copilot Code Review が自動的に開始されます</li>
+<li>レビュー完了後、PR をマージ</li>
+</ol>
+<aside class="warning"><p><strong>コンフリクトが発生した場合</strong>: 複数の Cloud Agent が並行して作業すると、同じファイルを変更してコンフリクトが発生することがあります。<strong>Resolve conflicts</strong> → <strong>Fix with Copilot</strong> をクリックすると、Copilot が自動的にコンフリクトを解決してくれます。</p>
+</aside>
+<p class="image-container"><img alt="Fix with Copilot でコンフリクト解決" src="../../img/12a6ddcf1897bbd6.png"></p>
+<h2 is-upgraded>5.4 — 最新コードを取得して確認する</h2>
+<p>Cloud Agent の PR がマージされたら、Codespace で最新のコードを取得してサイトを確認しましょう。</p>
+<pre><code language="language-bash" class="language-bash">git checkout main &amp;&amp; git pull &amp;&amp; npm install &amp;&amp; npm run dev
+</code></pre>
+<p>ポートフォワーディングの通知が表示されたら <strong>「ブラウザで開く」</strong> をクリックして、Cloud Agent が実装した新機能を確認してください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Agentic Workflow" duration="15">
+        <p>GitHub Actions と Copilot（AI）を組み合わせることで、コードの変更を検知して自律的なタスクを自動実行する <strong>Agentic Workflow</strong> を体験しましょう。</p>
+<p><strong>Agentic Workflow とは</strong>: GitHub Actions のワークフロー内で Copilot を活用し、リポジトリの変更に応じた自律的なタスク（レポート生成、ドキュメント更新、コード修正など）を実行する仕組みです。</p>
+<h3 is-upgraded>gh aw のインストール</h3>
+<p>まず、Agentic Workflow の CLI ツールをインストールします。</p>
+<p>ローカル環境の場合：</p>
+<pre><code language="language-bash" class="language-bash">gh extension install github/gh-aw
+</code></pre>
+<p>Codespaces やネットワーク制限がある環境の場合（GA 前のため）：</p>
+<pre><code language="language-bash" class="language-bash">curl -sL https://raw.githubusercontent.com/github/gh-aw/main/install-gh-aw.sh | bash
+</code></pre>
+<h2 is-upgraded>6.1 — Personal Access Token (PAT) を作成する</h2>
+<p>Agentic Workflow で Copilot を活用するために PAT を作成します。</p>
+<ol type="1">
+<li><a href="https://github.com/settings/personal-access-tokens/new" target="_blank">https://github.com/settings/personal-access-tokens/new</a> にアクセス</li>
+<li>設定内容： <ul>
+<li><strong>Token name</strong>: <code>copilot-workshop-agent</code></li>
+<li><strong>Resource owner</strong>: リポジトリを作成した Organization（または個人アカウント）</li>
+<li><strong>Repository access</strong>: Only select repositories → 作成したリポジトリを選択</li>
+<li><strong>Permissions</strong>: <ul>
+<li><strong>Actions</strong>: Read and write</li>
+<li><strong>Contents</strong>: Read-only</li>
+<li><strong>Issues</strong>: Read and write</li>
+<li><strong>Metadata</strong>: Read-only（自動付与）</li>
+<li><strong>Pull requests</strong>: Read and write</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p><img alt="PAT Permissions" src="../../img/92804211fbb87c15.png"> 3. 作成した PAT をコピー</p>
+<aside class="warning"><p><strong>注意</strong>: PAT は作成時に一度だけ表示されます。必ずコピーして安全な場所に保存してください。再表示はできません。</p>
+</aside>
+<h3 is-upgraded>リポジトリシークレットに設定</h3>
+<ol type="1">
+<li>リポジトリの <strong>Settings</strong> → <strong>Secrets and variables</strong> → <strong>Actions</strong></li>
+<li><strong>New repository secret</strong> をクリック</li>
+<li>Name: <code>COPILOT_GITHUB_TOKEN</code>、Value: 作成した PAT</li>
+</ol>
+<h3 is-upgraded>Workflow permissions の確認</h3>
+<ol type="1">
+<li><strong>Settings</strong> → <strong>Actions</strong> → <strong>General</strong></li>
+<li><strong>Allow GitHub Actions to create and approve pull requests</strong> にチェック</li>
+</ol>
+<h2 is-upgraded>6.2 — Daily Repo Status ワークフローを作成する</h2>
+<p>今日のリポジトリ活動を自動レポートする Agentic Workflow を作成しましょう。</p>
+<p>エージェントモードで以下を実行：</p>
+<pre><code>以下の Agentic Workflow を作成してください。
+
+ファイル: .github/workflows/daily-repo-status.md
+
+目的: リポジトリの活動（Issue、PR、コード変更）を分析し、
+日次ステータスレポートを Issue として自動作成する。
+
+フォーマット:
+- YAML front matter で設定を定義（on, permissions, tools, safe-outputs）
+- Markdown 本文でワークフローの指示を記述
+
+設定:
+- トリガー: schedule: daily と workflow_dispatch
+- permissions: contents: read, issues: read, pull-requests: read
+- tools: github（lockdown: false, min-integrity: none）
+- safe-outputs: create-issue で title-prefix &#34;[repo-status] &#34;、
+  labels: [report, daily-status]、close-older-issues: true
+
+ワークフローの指示:
+1. リポジトリの最近の活動（Issue、PR、コード変更）を収集
+2. 進捗やハイライトを分析
+3. 結果を GitHub Issue として作成
+
+参考: https://github.com/githubnext/agentics/blob/main/workflows/daily-repo-status.md
+
+完了したら `gh aw compile` コマンドを実行してワークフローをコンパイルし、
+変更をコミットして PR を作成してください。
+</code></pre>
+<aside class="special"><p><strong>ポイント</strong>: <code>gh aw compile</code> は <code>.md</code> ファイルから GitHub Actions が実行できる <code>.lock.yml</code> ファイルを生成します。コンパイルしないとワークフローは動作しません。</p>
+</aside>
+<p>PR をマージした後、<strong>Actions</strong> タブからワークフローを手動実行します：</p>
+<ol type="1">
+<li>リポジトリの <strong>Actions</strong> タブを開く</li>
+<li>左メニューから <strong>Daily Repo Status</strong> を選択</li>
+<li><strong>Run workflow</strong> → <strong>Run workflow</strong> をクリック</li>
+</ol>
+<p class="image-container"><img alt="Actions から手動実行" src="../../img/d570d6f7f0957371.png"></p>
+<p>実行完了後（⏱ 約2分）、リポジトリの <strong>Issues</strong> タブに <code>[repo-status]</code> というプレフィックスの Issue が自動作成され、今日の PR、Issue、コード変更の活動サマリーが表示されます。</p>
+<aside class="special"><p><strong>ポイント</strong>: Agentic Workflow は通常の GitHub Actions とは異なり、<code>gh aw run</code> コマンドで実行します。スケジュール実行（毎日自動）も設定可能です。</p>
+</aside>
+<h2 is-upgraded>6.3 —（ボーナス）テストカバレッジ自動更新ワークフローを作成する</h2>
+<p>余裕がある方は、テストカバレッジレポートを自動更新するワークフローも作成してみましょう。</p>
+<p>エージェントモードで以下を実行：</p>
+<pre><code>以下の Agentic Workflow を作成してください。
+参照: https://github.com/github/gh-aw/blob/main/create.md
+
+ワークフローの目的：
+- main ブランチへの push 時にトリガー
+- テストを実行してカバレッジレポートを生成
+- カバレッジ結果を README.md のバッジとして自動更新
+- 変更がある場合は PR を自動作成
+
+ワークフローファイルは .github/workflows/coverage-update.md に配置してください。
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Copilot CLI" duration="45">
+        <p><strong>Copilot CLI</strong> は、ターミナル上で動作する対話型 AI アシスタントです。VS Code を開かずに、コード生成・レビュー・リファクタリングなどを自律的に実行できます。</p>
+<h2 is-upgraded>主なコマンド</h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p>コマンド</p>
+</td><td colspan="1" rowspan="1"><p>説明</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/model</code></p>
+</td><td colspan="1" rowspan="1"><p>AIモデルの選択（Claude、GPT 等）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/mode</code></p>
+</td><td colspan="1" rowspan="1"><p>モード切り替え（plan、agent 等）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/init</code></p>
+</td><td colspan="1" rowspan="1"><p>リポジトリをスキャンし copilot-instructions.md を生成</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/review</code></p>
+</td><td colspan="1" rowspan="1"><p>コードレビューを実行</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/fleet</code></p>
+</td><td colspan="1" rowspan="1"><p>複数エージェントの並列実行</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/chronicle</code></p>
+</td><td colspan="1" rowspan="1"><p>セッション履歴の確認</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/skill</code></p>
+</td><td colspan="1" rowspan="1"><p>スキルの管理・実行</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/resume</code></p>
+</td><td colspan="1" rowspan="1"><p>前回のセッションを再開</p>
+</td></tr>
+</table>
+<h2 is-upgraded>7.1 — Copilot CLI を起動する</h2>
+<p>VS Code のターミナルで Copilot CLI を起動します：</p>
+<pre><code language="language-bash" class="language-bash">copilot
+</code></pre>
+<aside class="warning"><p><strong>Codespaces の場合</strong>: 初回実行時に「Install GitHub Copilot CLI?」と表示されたら <code>y</code> を入力してインストールしてください。</p>
+</aside>
+<h2 is-upgraded>7.2 — AI 利用状況ダッシュボードを構築する</h2>
+<p>Copilot CLI を使って、組織内の AI 利用状況を可視化するウェブサイトを構築します。</p>
+<h3 is-upgraded>準備</h3>
+<pre><code>/allow-all
+</code></pre>
+<pre><code>/model
+</code></pre>
+<p>最も高性能なモデル（例: Claude Opus 4.6）を選択してください。</p>
+<h3 is-upgraded>実装</h3>
+<p><strong>Shift+Tab</strong> で Autopilot モードに切り替えた後、以下のプロンプトを実行：</p>
+<pre><code>/fleet 組織内の GitHub Copilot 利用状況を可視化するダッシュボード Web アプリケーションを ai-usage-dashboard/ ディレクトリに構築してください。
+
+要件:
+- フレームワーク: Next.js + TypeScript + Tailwind CSS
+- GitHub Copilot Metrics API を使用してデータを取得
+  - エンドポイント: GET /orgs/{org}/copilot/metrics
+  - 認証: Bearer Token（環境変数 GITHUB_TOKEN から取得）
+- ダッシュボード機能:
+  - アクティブユーザー数の推移グラフ
+  - 言語別のコード提案受入率
+  - 日別・週別の利用統計
+  - チャット vs コード補完の利用比率
+- チャート: Recharts を使用
+- レスポンシブデザイン
+- ダークモード対応
+- 動作確認まで行ってください
+</code></pre>
+<h2 is-upgraded>7.3 — 複数モデルでコードレビュー</h2>
+<p>作成したダッシュボードのコードを複数モデルでレビューします：</p>
+<pre><code>/review Claude Opus 4.6 と GPT-5.4 の各モデルで ai-usage-dashboard/ のコードをレビューし、結果を比較して表示してください
+</code></pre>
+<h2 is-upgraded>7.4 — Chronicle で利用状況を分析する</h2>
+<p>最後に、Copilot CLI の experimental モードを使って、自分の AI 利用状況を分析してみましょう。</p>
+<pre><code>/experimental
+</code></pre>
+<p>Chronicle コマンドを使用して、ワークショップ中の Copilot 利用状況のアドバイスを取得します：</p>
+<pre><code>chronicle
+</code></pre>
+<aside class="special"><p><strong>Chronicle のポイント</strong>: Chronicle は Copilot の利用パターンを分析し、より効果的な使い方のアドバイスを提供します。個人の利用傾向に合わせた改善提案を受けることができます。</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="おめでとうございます 🎉" duration="5">
+        <h2 is-upgraded>今日学んだこと</h2>
+<p>このワークショップでは、GitHub Copilot の全機能を横断的に体験しました：</p>
+<ol type="1">
+<li><strong>セットアップ＆カスタマイズ</strong> — <code>/init</code>、カスタム指示、Skill 作成、MCP 設定</li>
+<li><strong>Plan Mode による設計</strong> — レガシーサイトの移行計画策定</li>
+<li><strong>Agent Mode による実装</strong> — Next.js + TypeScript + Tailwind CSS への移行</li>
+<li><strong>自動テスト</strong> — Vitest + Playwright + GitHub Actions</li>
+<li><strong>コード品質</strong> — Copilot Code Review + GHAS</li>
+<li><strong>Cloud Agent</strong> — Issue からの自律的な機能実装</li>
+<li><strong>Agentic Workflow</strong> — CI/CD パイプラインへの AI 統合</li>
+<li><strong>Copilot CLI</strong> — <code>/fleet</code> による並列実装、<code>/review</code> による複数モデルレビュー</li>
+</ol>
+<h2 is-upgraded>次のステップ</h2>
+<ul>
+<li>実際のプロジェクトで Copilot を活用してみる</li>
+<li>Copilot Extensions や MCP Server を活用して開発ワークフローを拡張する</li>
+<li>Cloud Agent で日常的なタスクを自動化する</li>
+<li>Copilot CLI を日常の開発に組み込む</li>
+</ul>
+<h2 is-upgraded>リソース</h2>
+<ul>
+<li><a href="https://docs.github.com/copilot" target="_blank">GitHub Copilot Documentation</a></li>
+<li><a href="https://docs.github.com/copilot/using-github-copilot/best-practices-for-using-github-copilot" target="_blank">GitHub Copilot ベストプラクティス</a></li>
+<li><a href="https://github.com/github/copilot-sdk" target="_blank">Copilot SDK</a></li>
+<li><a href="https://githubnext.com/projects/copilot-cli" target="_blank">Copilot CLI</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
