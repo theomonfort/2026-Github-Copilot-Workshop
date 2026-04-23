@@ -614,21 +614,14 @@ Agentic Workflow で Copilot を活用するために PAT を作成します。
 
 参考: https://github.com/githubnext/agentics/blob/main/workflows/daily-repo-status.md
 
-完了したら変更をコミットして PR を作成してください。
-```
-
-Copilot が `.md` ファイルを作成したら、ターミナルで以下を実行してワークフローをコンパイルします：
-
-```bash
-gh aw compile
+完了したら `gh aw compile` コマンドを実行してワークフローをコンパイルし、
+変更をコミットして PR を作成してください。
 ```
 
 > aside positive
 > **ポイント**: `gh aw compile` は `.md` ファイルから GitHub Actions が実行できる `.lock.yml` ファイルを生成します。コンパイルしないとワークフローは動作しません。
 
-コンパイル後、変更をコミットして PR を作成し、マージしてください。
-
-GitHub で PR をマージした後、**Actions** タブからワークフローを手動実行します：
+PR をマージした後、**Actions** タブからワークフローを手動実行します：
 
 1. リポジトリの **Actions** タブを開く
 2. 左メニューから **Daily Repo Status** を選択
