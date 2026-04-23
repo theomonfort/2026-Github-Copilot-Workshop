@@ -593,19 +593,15 @@ Agentic Workflow で Copilot を活用するために PAT を作成します。
 完了したら変更をコミットして PR を作成してください。
 ```
 
-GitHub で PR をマージした後、ターミナルで `gh-aw` をインストールして手動実行します：
+GitHub で PR をマージした後、**Actions** タブからワークフローを手動実行します：
 
-```bash
-gh extension install github/gh-aw
-```
+1. リポジトリの **Actions** タブを開く
+2. 左メニューから **Daily Repo Status** を選択
+3. **Run workflow** → **Run workflow** をクリック
 
-今日の活動レポートを確認します（⏱ 約2分）：
+![Actions から手動実行](github-copilot-workshop/img/actions-run-workflow.png)
 
-```bash
-gh aw run daily-repo-status
-```
-
-リポジトリの **Issues** タブに `[repo-status]` というプレフィックスの Issue が自動作成され、今日の PR、Issue、コード変更の活動サマリーが表示されます。
+実行完了後（⏱ 約2分）、リポジトリの **Issues** タブに `[repo-status]` というプレフィックスの Issue が自動作成され、今日の PR、Issue、コード変更の活動サマリーが表示されます。
 
 > aside positive
 > **ポイント**: Agentic Workflow は通常の GitHub Actions とは異なり、`gh aw run` コマンドで実行します。スケジュール実行（毎日自動）も設定可能です。
