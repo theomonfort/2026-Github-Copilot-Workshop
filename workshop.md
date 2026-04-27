@@ -43,7 +43,7 @@ Duration: 15
 
 3. リポジトリ作成画面で、リポジトリ名を入力し **Create repository** ボタンをクリック
 
-![Create repository ボタンをクリック](github-copilot-workshop/img/9b42f25710076003.png)
+![Create repository ボタンをクリック](github-copilot-workshop/img/create-repository-form.png)
 
 > aside negative
 > **⚠️ 重要**: リポジトリ作成時に **Visibility（公開設定）は必ず「Public」** を選択してください。Private リポジトリでは、一部の Copilot 機能や GitHub Actions が正しく動作しない場合があります。
