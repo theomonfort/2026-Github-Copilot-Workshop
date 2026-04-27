@@ -39,7 +39,7 @@ Duration: 15
 1. プロジェクトURL（https://github.com/theomonfort/2026-Github-Copilot-Workshop-Nodejs）をブラウザで開く
 2. 右上の **Use this template** ボタンをクリックし、**Create a new repository** を選択
 
-![Use this template ボタンをクリック](github-copilot-workshop/img/f30b349b9da9c209.png)
+![Use this template → Create a new repository](github-copilot-workshop/img/use-this-template-dropdown.png)
 
 3. リポジトリ作成画面で、リポジトリ名を入力し **Create repository** ボタンをクリック
 
