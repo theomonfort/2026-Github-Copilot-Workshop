@@ -30,13 +30,13 @@ Duration: 15
 
 このワークショップでは、以下のGitHubリポジトリを使用します：
 
-**プロジェクトURL**: https://github.com/moulongzhang/2026-Github-Copilot-Workshop-Python
+**プロジェクトURL**: https://github.com/theomonfort/2026-Github-Copilot-Workshop-Nodejs
 
 ### ステップ1: テンプレートからリポジトリを作成する
 
 まず、上記のプロジェクトURLをブラウザで開き、テンプレートから自分のリポジトリを作成します：
 
-1. プロジェクトURL（https://github.com/moulongzhang/2026-Github-Copilot-Workshop-Python）をブラウザで開く
+1. プロジェクトURL（https://github.com/theomonfort/2026-Github-Copilot-Workshop-Nodejs）をブラウザで開く
 2. 右上の **Use this template** ボタンをクリックし、**Create a new repository** を選択
 
 ![Use this template ボタンをクリック](github-copilot-workshop/img/f30b349b9da9c209.png)
@@ -54,7 +54,7 @@ Duration: 15
 
 作成したリポジトリを使って、GitHub Codespacesで開発環境を準備します：
 
-1. 作成したリポジトリのページで（`https://github.com/[あなたのユーザー名]/2026-Github-Copilot-Workshop-Python`）
+1. 作成したリポジトリのページで（`https://github.com/[あなたのユーザー名]/2026-Github-Copilot-Workshop-Nodejs`）
 2. 緑色の **Code** ボタンをクリック
 3. **Codespaces** タブを選択
 4. **Create codespace on main** をクリック
