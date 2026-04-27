@@ -45,11 +45,11 @@ GitHub Copilotワークショップへようこそ！
 **オプション A: 個人環境**
 - Visual Studio Code がインストールされていること
 - GitHub CLI（`gh`）がインストールされていること
-- GitHub Copilot のライセンスがあること（**Pro / Pro+ / Business / Enterprise** プラン推奨）
+- GitHub Copilot のライセンスがあること（**Business / Enterprise** プラン推奨）
 - GitHub アカウントを持っていること
 
 > aside negative
-> **⚠️ プランについて**: Free プランでも Agent Mode（Part 1〜2）は利用可能ですが、Cloud Agent（Part 5）、Agentic Workflow（Part 6）、自動 Code Review（Part 4）は **Pro プラン以上** が必要です。ワークショップの全パートを体験するには **Pro / Pro+ / Business / Enterprise** プランをご利用ください。
+> **⚠️ プランについて**: Free プランでも Agent Mode（Part 1〜2）は利用可能ですが、Cloud Agent（Part 5）、Agentic Workflow（Part 6）、自動 Code Review（Part 4）は **Pro プラン以上** が必要です。ワークショップの全パートを体験するには **Business / Enterprise** プランをご利用ください。
 
 **オプション B: 企業環境（お客様向け）**
 - 以下の機能が有効化されたプライベート Organization を持っていること：
