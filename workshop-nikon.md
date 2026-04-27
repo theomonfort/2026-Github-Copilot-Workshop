@@ -69,6 +69,9 @@ Duration: 15
 
 1. プロジェクト URL をブラウザで開く
 2. 右上の **Use this template** ボタンをクリックし、**Create a new repository** を選択
+
+![Use this template → Create a new repository](github-copilot-workshop/img/use-this-template-dropdown.png)
+
 3. リポジトリ作成画面で以下を設定：
 
 #### Owner（オーナー）の選択
@@ -85,6 +88,8 @@ Duration: 15
 - 任意の名前を入力してください（例: `hands-on-yourname`）
 
 4. **Create repository** をクリック
+
+![Create repository ボタンをクリック](github-copilot-workshop/img/create-repository-form.png)
 
 ### ステップ2: Codespaces で開発環境を起動する
 
