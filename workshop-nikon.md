@@ -8,7 +8,7 @@ feedback link: https://example.com/feedback
 
 # GitHub Copilot ハンズオン勉強会
 
-## ワークショップについて
+## INTRO：勉強会について
 Duration: 5
 
 GitHub Copilotワークショップへようこそ！
@@ -58,7 +58,7 @@ GitHub Copilotワークショップへようこそ！
   - GitHub Advanced Security (GHAS)
 - Organization 内でリポジトリを作成できる権限があること
 
-## プロジェクトのセットアップ
+## INTRO：セットアップ
 Duration: 15
 
 このワークショップでは、以下の GitHub リポジトリを使用します：
