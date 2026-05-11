@@ -815,7 +815,9 @@ updates:
 <p>Presentation モードの <strong>キーボードナビゲーション</strong> が壊れないように、Playwright で E2E テストを書き、PR ごとに自動実行する Actions ワークフローを作ります。</p>
 <h2 is-upgraded>10.1 — Presentation モードのテストを作成する</h2>
 <p>Copilot Chat（Agent モード）で以下を入力してください：</p>
-<pre><code>Presentation モードのキーボードナビゲーションを検証する Playwright E2E テストを作成してください。
+<pre><code>新しいブランチ `test-creation` を作成して、そのブランチで作業してください。
+
+Presentation モードのキーボードナビゲーションを検証する Playwright E2E テストを作成してください。
 
 前提：
 - src/content/playbook/ に少なくとも 2 件のエントリーがあるとする。
@@ -837,7 +839,9 @@ updates:
 <p>⏱ 約5分</p>
 <h2 is-upgraded>10.2 — PR で自動実行する Actions ワークフローを作成する</h2>
 <p>続けて Copilot Chat に以下を入力してください：</p>
-<pre><code>.github/workflows/test.yml を作成してください。
+<pre><code>同じ `test-creation` ブランチで作業してください。
+
+.github/workflows/test.yml を作成してください。
 PR の作成・更新時にトリガーし、以下を実行してください：
 
 1. Node.js 22 をセットアップ
