@@ -367,7 +367,7 @@
     
       <google-codelab-step label="INTRO：セットアップ" duration="15">
         <p>このワークショップでは、以下の GitHub リポジトリを使用します：</p>
-<p><strong>プロジェクトURL</strong>: https://github.com/theomonfort/2026-Github-Copilot-Workshop-Nodejs</p>
+<p><strong>プロジェクトURL</strong>: https://github.com/theomonfort/Github-copilot-workshop</p>
 <h2 is-upgraded>ステップ1: テンプレートからリポジトリを作成する</h2>
 <ol type="1">
 <li>プロジェクト URL をブラウザで開く</li>
@@ -398,20 +398,19 @@
 <p class="image-container"><img alt="Codespaces Setup" src="../../img/da697969a846a2d4.png"></p>
 <aside class="special"><p><strong>⏳ 注意</strong>: Codespace の起動には数分かかる場合があります。DevContainer のビルドが完了するまでお待ちください。</p>
 </aside>
-<p>DevContainer が自動的に Node.js 20 環境をセットアップし、以下が事前にインストールされます：</p>
+<p>DevContainer が自動的に Node.js 22 環境をセットアップし、以下が事前にインストールされます：</p>
 <ul>
 <li>GitHub Copilot &amp; Copilot Chat 拡張機能</li>
-<li>Live Server 拡張機能（プレビュー用）</li>
-<li>GitHub CLI</li>
-<li>GitHub MCP Server（自動検出有効化済み）</li>
+<li>GitHub CLI（<code>gh</code>）</li>
+<li>GitHub MCP Server（<code>.vscode/mcp.json</code>、自動検出有効化済み）</li>
+<li>Copilot CLI（<code>@github/copilot</code>）</li>
+<li>pnpm（パッケージマネージャ）</li>
+<li>gh-aw（Agentic Workflow CLI）</li>
+<li>Playwright（Chromium ブラウザ済み）</li>
 </ul>
-<h2 is-upgraded>ステップ3: レガシーサイトを確認する</h2>
-<p>VS Code のターミナルを開き、以下のコマンドを実行してレガシーサイトを起動します：</p>
-<pre><code language="language-bash" class="language-bash">cd github-legacy
-php -S localhost:8080
-</code></pre>
-<p>Codespace がポート <strong>8080</strong> を自動検出し、<strong>「Open in Browser」</strong> のポップアップが表示されます。クリックしてブラウザでサイトを確認してください。</p>
-<p><strong>これが今日のリファクタリング対象です。</strong></p>
+<h2 is-upgraded>ステップ3: 題材コンテンツを確認する</h2>
+<p><code>src/content/playbook/</code> に Markdown ファイルが配置されています。これらが今日のサイトの題材です。</p>
+<p>VS Code のエクスプローラで <code>src/content/playbook/</code> を開き、いくつかファイルを覗いてみてください。後ほど Copilot にこれらを「グリッド + 詳細 + プレゼンテーションモード」で閲覧できるサイトに仕立ててもらいます。</p>
 
 
       </google-codelab-step>
@@ -786,7 +785,7 @@ github-issues skill のテンプレートに従い、ユーザーストーリー
 <pre><code>.github/workflows/test.yml を作成してください。
 PR の作成・更新時にトリガーし、以下を実行してください：
 
-1. Node.js 20 をセットアップ
+1. Node.js 22 をセットアップ
 2. pnpm をセットアップ
 3. 依存関係をインストール
 4. Playwright のブラウザをインストール（npx playwright install --with-deps chromium）

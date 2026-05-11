@@ -44,7 +44,7 @@ Duration: 15
 
 このワークショップでは、以下の GitHub リポジトリを使用します：
 
-**プロジェクトURL**: https://github.com/theomonfort/2026-Github-Copilot-Workshop-Nodejs
+**プロジェクトURL**: https://github.com/theomonfort/Github-copilot-workshop
 
 ### ステップ1: テンプレートからリポジトリを作成する
 
@@ -76,24 +76,20 @@ Duration: 15
 > aside positive
 > **⏳ 注意**: Codespace の起動には数分かかる場合があります。DevContainer のビルドが完了するまでお待ちください。
 
-DevContainer が自動的に Node.js 20 環境をセットアップし、以下が事前にインストールされます：
+DevContainer が自動的に Node.js 22 環境をセットアップし、以下が事前にインストールされます：
 - GitHub Copilot & Copilot Chat 拡張機能
-- Live Server 拡張機能（プレビュー用）
-- GitHub CLI
-- GitHub MCP Server（自動検出有効化済み）
+- GitHub CLI（`gh`）
+- GitHub MCP Server（`.vscode/mcp.json`、自動検出有効化済み）
+- Copilot CLI（`@github/copilot`）
+- pnpm（パッケージマネージャ）
+- gh-aw（Agentic Workflow CLI）
+- Playwright（Chromium ブラウザ済み）
 
-### ステップ3: レガシーサイトを確認する
+### ステップ3: 題材コンテンツを確認する
 
-VS Code のターミナルを開き、以下のコマンドを実行してレガシーサイトを起動します：
+`src/content/playbook/` に Markdown ファイルが配置されています。これらが今日のサイトの題材です。
 
-```bash
-cd github-legacy
-php -S localhost:8080
-```
-
-Codespace がポート **8080** を自動検出し、**「Open in Browser」** のポップアップが表示されます。クリックしてブラウザでサイトを確認してください。
-
-**これが今日のリファクタリング対象です。**
+VS Code のエクスプローラで `src/content/playbook/` を開き、いくつかファイルを覗いてみてください。後ほど Copilot にこれらを「グリッド + 詳細 + プレゼンテーションモード」で閲覧できるサイトに仕立ててもらいます。
 
 ## PLAN: MCP サーバー
 Duration: 10
@@ -553,7 +549,7 @@ Presentation モードのキーボードナビゲーションを検証する Pla
 .github/workflows/test.yml を作成してください。
 PR の作成・更新時にトリガーし、以下を実行してください：
 
-1. Node.js 20 をセットアップ
+1. Node.js 22 をセットアップ
 2. pnpm をセットアップ
 3. 依存関係をインストール
 4. Playwright のブラウザをインストール（npx playwright install --with-deps chromium）
