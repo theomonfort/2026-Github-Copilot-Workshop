@@ -952,7 +952,7 @@ git pull
 <p>最も高性能なモデル（例: Claude Opus 4.6）を選択してください。</p>
 <p>そして <strong>Shift+Tab</strong> で <strong>Agent (Autopilot) モード</strong> に切り替えます。</p>
 <h2 is-upgraded>12.3 — <code>/fleet</code> で Issue を並列に実装する</h2>
-<p>Part 6 で作成した 3〜5 件の Issue を、CLI に並列で実装させます。</p>
+<p>Part 6 で作成した 3〜5 件の Issue を、CLI に並列で実装させます。プロンプトの最後に、別モデル（Codex 系）でラバーダックレビューさせる指示も含めます。</p>
 <details class="prompt-collapse"><summary>📋 プロンプトを表示 / コピー</summary>
 <pre><code>/fleet このリポジトリの open Issue のうち、label が bug または enhancement のものをすべて、
 1 Issue につき 1 つの fleet エージェントを割り当てて並列で実装してください。
@@ -963,32 +963,19 @@ git pull
 3. pnpm dev で動作確認できる状態にする
 4. コミットして PR を出す（`Closes #&lt;number&gt;` を本文に入れる）
 
-すべての Issue を処理し終えたら、作成された PR のリストを表示してください。
+すべての PR が作成されたら、最後に **GPT-5 Codex** モデルに切り替えて
+（実装させた Claude とは別モデルで盲点を避けるため）、
+作成された全 PR の差分を読みラバーダック視点でレビューしてください。
+観点：設計上の盲点・ロジックバグ、Issue 要件の漏れ、既存コードとの整合性、
+テスト・エラーハンドリングの不足。スタイルや軽微な指摘は無視し、
+本当に重要な問題だけ PR 単位で簡潔に列挙してください。
 </code></pre>
 </details>
 <p>⏱ 約10〜15分</p>
-<p>CLI が複数の fleet エージェントを spawn し、それぞれ別ブランチで実装 → PR 作成まで自律的に進めます。進捗はターミナルにストリーム表示されます。</p>
-<h2 is-upgraded>12.4 — Codex モデルでラバーダックレビューする</h2>
-<p>実装が一通り終わったら、<strong>別モデル（Codex 系）の視点</strong> で fleet が生成した変更全体をラバーダックレビューします。同じモデルでレビューすると同じ盲点を見逃すので、モデルを切り替えるのがポイントです。</p>
-<pre><code>/model
-</code></pre>
-<p>モデル選択画面で <strong>GPT-5 Codex</strong> を選択してください。</p>
-<p>そして以下のプロンプトを実行：</p>
-<details class="prompt-collapse"><summary>📋 プロンプトを表示 / コピー</summary>
-<pre><code>fleet エージェントが作った open PR をすべて列挙して、それぞれの差分を読み、
-ラバーダック視点でレビューしてください。観点は以下：
-
-1. 設計上の盲点・ロジックバグ
-2. Issue の要件を満たしているか（仕様の漏れ）
-3. 既存コードとの整合性（命名・スタイル・パターン）
-4. テストやエラーハンドリングの不足
-
-スタイルや軽微な指摘は無視して、本当に重要な問題だけ簡潔に PR 単位で列挙してください。
-</code></pre>
-</details>
-<aside class="special"><p><strong>ポイント</strong>: 実装させたモデル（Claude）と異なるモデル（Codex）でレビューすることで、同質性バイアスを避けて盲点を炙り出せます。これが「ラバーダックを別のモデルにやらせる」発想です。</p>
+<p>CLI が複数の fleet エージェントを spawn し、それぞれ別ブランチで実装 → PR 作成まで自律的に進めます。進捗はターミナルにストリーム表示され、最後に別モデルでのラバーダックレビューが出力されます。</p>
+<aside class="special"><p><strong>ポイント</strong>: 実装させたモデル（Claude）と異なるモデル（Codex）でレビューさせることで、同質性バイアスを避けて盲点を炙り出せます。</p>
 </aside>
-<h2 is-upgraded>12.5 — Chronicle で利用状況を分析する</h2>
+<h2 is-upgraded>12.4 — Chronicle で利用状況を分析する</h2>
 <p>最後に、ワークショップ中の Copilot CLI 利用状況を Chronicle で振り返ります：</p>
 <pre><code>/experimental
 </code></pre>
