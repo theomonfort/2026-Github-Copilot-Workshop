@@ -461,12 +461,9 @@ Duration: 15
 1. リポジトリの **Settings** → **Copilot** → **Code review**
 2. 以下を有効化：
    - **Use custom instructions when reviewing pull requests** → On
-   - **Allow Copilot to use MCP tools when reviewing pull requests** → On
-
-![Copilot Code Review 設定](github-copilot-workshop/img/copilot-code-review-settings.png)
 
 > aside positive
-> **ポイント**: Custom instructions を有効にすると、`copilot-instructions.md` の内容がコードレビューにも反映されます。MCP tools を有効にすると、レビュー時に Context7 などの外部ツールも活用できます。
+> **ポイント**: Custom instructions を有効にすると、`copilot-instructions.md` の内容がコードレビューにも反映されます。
 
 ### 7.2 — Ruleset で自動レビューを設定する
 

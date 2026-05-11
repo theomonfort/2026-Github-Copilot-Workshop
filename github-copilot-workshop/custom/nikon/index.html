@@ -328,14 +328,11 @@
       border-top: 1px solid rgba(255,176,0,0.3) !important;
     }
 
-    details.prompt-collapse { margin: 0.75em 0 1em; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 0.4em 0.9em; }
-    details.prompt-collapse[open] { padding-bottom: 0.9em; }
-    details.prompt-collapse > summary { cursor: pointer; font-family: "DotGothic16","IBM Plex Mono",monospace; font-size: 0.95em; color: #e6edf3; padding: 0.3em 0; user-select: none; list-style: none; }
+    details.prompt-collapse { margin: 1em 0; }
+    details.prompt-collapse > summary { cursor: pointer; padding: 0.5em 1em; background: #161b22; border: 1px solid #30363d; border-radius: 6px; color: #e6edf3; font-weight: 600; list-style: none; }
     details.prompt-collapse > summary::-webkit-details-marker { display: none; }
-    details.prompt-collapse > summary::before { content: "▶"; display: inline-block; margin-right: 0.5em; transition: transform 0.15s; color: var(--neon-cyan); }
-    details.prompt-collapse[open] > summary::before { transform: rotate(90deg); }
-    details.prompt-collapse > summary:hover { color: var(--neon-cyan); }
-    details.prompt-collapse > pre { margin-top: 0.5em; }
+    details.prompt-collapse[open] > summary { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+    details.prompt-collapse > pre { margin-top: 0 !important; border-top: 0 !important; border-top-left-radius: 0 !important; border-top-right-radius: 0 !important; }
   </style>
 </head>
 <body>
@@ -348,7 +345,7 @@
     
       <google-codelab-step label="INTRO：勉強会について" duration="5">
         <p>GitHub Copilotワークショップへようこそ！</p>
-<p class="image-container" style="text-align:center;"><img alt="GitHub Copilot Logo" style="width:160px;height:auto;" src="../../img/6877afb1f5b2b914.png"></p>
+<p class="image-container"><img alt="GitHub Copilot Logo" src="../../img/6877afb1f5b2b914.png"></p>
 <p>この勉強会では、<a href="https://theomonfort.github.io/theomonfort/playbook/github/?present=1" target="_blank"><strong>Copilot Playbook</strong></a> で紹介されているシンプルな概念を実際に手を動かして体験します。</p>
 <p><strong>PLAN → CODE → REVIEW → TEST &amp; SECURE → OPERATE</strong> のフェーズに沿って GitHub Copilot を使い、最終的には Playbook の簡易版（Markdown を綺麗に閲覧できるサイト）を Copilot と一緒に作り上げます。</p>
 <h2 is-upgraded>本日のゴール</h2>
@@ -426,7 +423,7 @@
       </google-codelab-step>
     
       <google-codelab-step label="PLAN: MCP サーバー" duration="10">
-        <p class="image-container" style="float:right;width:72px;margin:-8px 0 0.5em 1em;"><img alt="PLAN フェーズの Octocat" style="width:72px;height:auto;" src="../../img/571b167bb39ee720.png"></p>
+        <p class="image-container"><img alt="PLAN フェーズの Octocat" src="../../img/571b167bb39ee720.png"></p>
 <aside class="special"><p><strong>📖 参考</strong>: <a href="https://theomonfort.github.io/theomonfort/playbook/mcp/" target="_blank">プレイブック / MCP Server</a> で MCP の仕組み・接続方式 (stdio / HTTP)・VS Code での設定方法を確認できます。</p>
 </aside>
 <p>このステップでは、Copilot に外部ツールへのアクセスを与える <strong>MCP（Model Context Protocol）Server</strong> を確認・追加します。MCP を整えると、Copilot が Issue 作成・最新ドキュメント参照などを直接実行できるようになります。</p>
@@ -477,7 +474,7 @@
       </google-codelab-step>
     
       <google-codelab-step label="PLAN: Instruction" duration="15">
-        <p class="image-container" style="float:right;width:72px;margin:-8px 0 0.5em 1em;"><img alt="PLAN フェーズの Octocat" style="width:72px;height:auto;" src="../../img/571b167bb39ee720.png"></p>
+        <p class="image-container"><img alt="PLAN フェーズの Octocat" src="../../img/571b167bb39ee720.png"></p>
 <aside class="special"><p><strong>📖 参考</strong>: <a href="https://theomonfort.github.io/theomonfort/playbook/instructions" target="_blank">プレイブック / Instructions</a> で Instruction ファイルの役割・スコープ・使い分けを確認できます。</p>
 </aside>
 <p>Instruction ファイルは、リポジトリやファイル単位で Copilot に <strong>常駐ルール</strong> を与える「指示書」です。チーム全員の Copilot が同じ規約に従うようになります。</p>
@@ -582,7 +579,7 @@ Tailwind ユーティリティ: `font-pixel` (DotGothic16)、`font-body` (Noto S
       </google-codelab-step>
     
       <google-codelab-step label="PLAN: Skills" duration="10">
-        <p class="image-container" style="float:right;width:72px;margin:-8px 0 0.5em 1em;"><img alt="PLAN フェーズの Octocat" style="width:72px;height:auto;" src="../../img/571b167bb39ee720.png"></p>
+        <p class="image-container"><img alt="PLAN フェーズの Octocat" src="../../img/571b167bb39ee720.png"></p>
 <aside class="special"><p><strong>📖 参考</strong>: <a href="https://theomonfort.github.io/theomonfort/playbook/agent-skills" target="_blank">プレイブック / Agent Skills</a> で Skill の仕組み・召喚され方を確認できます。</p>
 </aside>
 <p><strong>Agent Skill</strong> は、Copilot に「特定のタスクのこなし方」を仕込む再利用可能な指示セットです。プロンプトに合致したときに自動で召喚され、毎回テンプレを説明し直す必要がなくなります。</p>
@@ -708,12 +705,10 @@ Tailwind ユーティリティ: `font-pixel` (DotGothic16)、`font-body` (Noto S
 <li>リポジトリの <strong>Settings</strong> → <strong>Copilot</strong> → <strong>Code review</strong></li>
 <li>以下を有効化： <ul>
 <li><strong>Use custom instructions when reviewing pull requests</strong> → On</li>
-<li><strong>Allow Copilot to use MCP tools when reviewing pull requests</strong> → On</li>
 </ul>
 </li>
 </ol>
-<p class="image-container"><img alt="Copilot Code Review 設定" src="../../img/9efafe5d9ff23597.png"></p>
-<aside class="special"><p><strong>ポイント</strong>: Custom instructions を有効にすると、<code>copilot-instructions.md</code> の内容がコードレビューにも反映されます。MCP tools を有効にすると、レビュー時に Context7 などの外部ツールも活用できます。</p>
+<aside class="special"><p><strong>ポイント</strong>: Custom instructions を有効にすると、<code>copilot-instructions.md</code> の内容がコードレビューにも反映されます。</p>
 </aside>
 <h2 is-upgraded>7.2 — Ruleset で自動レビューを設定する</h2>
 <p>PR 作成時に Copilot が自動的にコードレビューを行う設定をします。</p>
