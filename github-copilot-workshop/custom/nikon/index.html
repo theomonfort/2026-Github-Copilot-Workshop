@@ -244,20 +244,21 @@
       border-color: var(--neon-magenta) !important;
       box-shadow: 0 0 10px rgba(255,46,136,0.4), 0 2px 8px rgba(0,0,0,0.4) !important;
     }
-    /* Specifically style the floating FAB Next button */
-    .fab-container paper-fab {
-      background: linear-gradient(180deg, var(--neon-magenta) 0%, #c01c66 100%) !important;
-      color: var(--bg-deep) !important;
-      border: 1px solid rgba(255,46,136,0.6) !important;
+    /* Specifically style the floating FAB Next button — same family as other buttons */
+    .fab-container paper-fab, paper-fab {
+      background: linear-gradient(180deg, #1a2050 0%, #0d1230 100%) !important;
+      color: var(--neon-cyan) !important;
+      border: 1px solid rgba(0,240,255,0.5) !important;
       border-radius: 50% !important;
-      box-shadow: 0 0 16px rgba(255,46,136,0.45), 0 4px 12px rgba(0,0,0,0.5) !important;
-      font-size: 12px !important;
+      box-shadow: 0 0 14px rgba(0,240,255,0.35), 0 4px 12px rgba(0,0,0,0.5) !important;
     }
-    .fab-container paper-fab:hover {
-      background: linear-gradient(180deg, #ff4d9e 0%, var(--neon-magenta) 100%) !important;
-      color: var(--bg-deep) !important;
-      box-shadow: 0 0 22px rgba(255,46,136,0.7), 0 4px 12px rgba(0,0,0,0.5) !important;
+    .fab-container paper-fab:hover, paper-fab:hover {
+      background: linear-gradient(180deg, #232b6a 0%, #131a44 100%) !important;
+      color: var(--neon-cyan) !important;
+      border-color: var(--neon-cyan) !important;
+      box-shadow: 0 0 22px rgba(0,240,255,0.6), 0 4px 12px rgba(0,0,0,0.5) !important;
     }
+    paper-fab svg, paper-fab iron-icon { fill: var(--neon-cyan) !important; color: var(--neon-cyan) !important; }
 
     /* Progress / done indicators */
     google-codelab[hide-tabs] #app-bar .more, .arrow-back { color: var(--neon-cyan) !important; }
@@ -334,7 +335,7 @@
 
     /* Cap large hero/intro images */
     google-codelab-step img[src*="copilot-pixel"] {
-      max-width: 200px !important;
+      max-width: 100px !important;
       display: block;
       margin: 1em auto !important;
     }
