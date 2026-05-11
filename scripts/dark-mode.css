@@ -122,17 +122,17 @@
     a, a:visited { color: var(--neon-cyan) !important; text-decoration: underline; text-decoration-color: rgba(0,240,255,0.4); }
     a:hover { color: var(--neon-magenta) !important; text-shadow: 0 0 6px rgba(255,46,136,0.6); }
 
-    /* Code */
+    /* Code — sober dark mode */
     pre, code, .gcb-codelab-code {
-      background: var(--bg-panel) !important;
-      color: var(--gb-green) !important;
-      border: 2px solid var(--neon-cyan) !important;
-      border-radius: 0 !important;
-      font-family: "IBM Plex Mono","JetBrains Mono",monospace !important;
-      box-shadow: 0 0 8px rgba(0,240,255,0.15);
+      background: #0d1117 !important;
+      color: #e6edf3 !important;
+      border: 1px solid #30363d !important;
+      border-radius: 6px !important;
+      font-family: "IBM Plex Mono","JetBrains Mono","SFMono-Regular",Consolas,monospace !important;
+      box-shadow: none !important;
     }
-    code { padding: 1px 6px; }
-    pre code { border: none !important; padding: 0 !important; box-shadow: none !important; }
+    code { padding: 2px 6px; }
+    pre code { border: none !important; padding: 0 !important; box-shadow: none !important; background: transparent !important; }
 
     /* Tables */
     table {
@@ -228,18 +228,20 @@
     }
     google-codelab-step .instructions code,
     google-codelab-step code {
-      background: var(--bg-panel) !important;
-      color: var(--neon-cyan) !important;
-      border: 1px solid rgba(0,240,255,0.3) !important;
+      background: #0d1117 !important;
+      color: #e6edf3 !important;
+      border: 1px solid #30363d !important;
+      border-radius: 6px !important;
     }
     google-codelab-step pre,
     google-codelab-step .instructions pre {
-      background: var(--bg-panel) !important;
-      color: var(--gb-green) !important;
-      border: 2px solid var(--neon-cyan) !important;
-      box-shadow: 0 0 8px rgba(0,240,255,0.15) !important;
+      background: #0d1117 !important;
+      color: #e6edf3 !important;
+      border: 1px solid #30363d !important;
+      border-radius: 6px !important;
+      box-shadow: none !important;
     }
-    google-codelab-step pre > code { background: transparent !important; border: none !important; color: var(--gb-green) !important; }
+    google-codelab-step pre > code { background: transparent !important; border: none !important; color: #e6edf3 !important; }
 
     /* Brighten body text (was too dim) */
     google-codelab-step p,
