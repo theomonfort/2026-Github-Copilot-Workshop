@@ -69,6 +69,19 @@ sed -i '' 's|src="img/|src="../../img/|g' "github-copilot-workshop/custom/${CUST
 # PLAN フェーズの Octocat を控えめに（右寄せ・小サイズ）
 sed -i '' 's|<p class="image-container"><img alt="PLAN フェーズの Octocat"|<p class="image-container" style="float:right;width:72px;margin:-8px 0 0.5em 1em;"><img alt="PLAN フェーズの Octocat" style="width:72px;height:auto;"|g' "github-copilot-workshop/custom/${CUSTOM_NAME}/index.html"
 
+# ダークモード CSS を <head> 末尾に注入（既存の dark block があれば置換）
+python3 - "github-copilot-workshop/custom/${CUSTOM_NAME}/index.html" <<'PY'
+import re, sys
+from pathlib import Path
+target = Path(sys.argv[1])
+dark = Path("scripts/dark-mode.css").read_text()
+txt = target.read_text()
+txt = re.sub(r"  <style>\n    /\* ---- Dark mode ---- \*/.*?  </style>\n", "", txt, count=1, flags=re.S)
+marker = "      color: red;\n    }\n  </style>"
+new_block = f"      color: red;\n    }}\n  </style>\n  <style>\n{dark}  </style>"
+target.write_text(txt.replace(marker, new_block, 1))
+PY
+
 # 新しい画像があれば更新
 cp -r temp-export/github-copilot-workshop/img/* github-copilot-workshop/img/ 2>/dev/null || true
 
