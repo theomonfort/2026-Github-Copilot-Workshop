@@ -46,57 +46,74 @@
 
     /* App bar */
     #app-bar, header#app-bar, .codelab-title-bar, google-codelab #app-bar {
-      background: var(--bg-mid) !important;
-      color: var(--neon-magenta) !important;
-      border-bottom: 2px solid var(--neon-magenta) !important;
-      box-shadow: 0 0 12px rgba(255,46,136,0.35) !important;
+      background: linear-gradient(180deg, #11163a 0%, #0a0e27 100%) !important;
+      color: var(--phosphor) !important;
+      border-bottom: 1px solid rgba(0,240,255,0.25) !important;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.5) !important;
+      height: 56px !important;
     }
     #app-bar .codelab-title, #app-bar h1, #app-bar a, #app-bar .feedback {
-      color: var(--neon-magenta) !important;
+      color: var(--phosphor) !important;
       font-family: "DotGothic16", "Noto Sans JP", monospace !important;
-      text-shadow: 0 0 6px rgba(255,46,136,0.6);
+      text-shadow: none !important;
+      letter-spacing: 0.04em;
+      font-size: 16px !important;
+    }
+    #app-bar .codelab-title::before {
+      content: "▸ ";
+      color: var(--neon-cyan);
+      text-shadow: 0 0 6px rgba(0,240,255,0.5);
     }
     #app-bar [icon] svg, #app-bar svg, #app-bar paper-icon-button {
-      fill: var(--neon-cyan) !important;
-      color: var(--neon-cyan) !important;
+      fill: var(--phosphor-dim) !important;
+      color: var(--phosphor-dim) !important;
+      transition: color 0.2s ease, fill 0.2s ease;
     }
-    #countdown { color: var(--crt-amber) !important; text-shadow: 0 0 6px rgba(255,176,0,0.6); }
+    #app-bar paper-icon-button:hover svg { fill: var(--neon-cyan) !important; }
+    #countdown {
+      color: var(--crt-amber) !important;
+      text-shadow: none !important;
+      font-family: "IBM Plex Mono", monospace !important;
+      font-size: 13px !important;
+      letter-spacing: 0.05em;
+    }
 
     /* Drawer / TOC sidebar */
     #drawer, google-codelab #drawer {
       background: var(--bg-mid) !important;
-      border-right: 2px solid var(--neon-cyan) !important;
-      box-shadow: inset -1px 0 8px rgba(0,240,255,0.15) !important;
+      border-right: 1px solid rgba(0,240,255,0.15) !important;
+      box-shadow: inset -1px 0 8px rgba(0,0,0,0.4) !important;
     }
     #drawer a {
       background: transparent !important;
       color: var(--phosphor-dim) !important;
       border-left: 3px solid transparent !important;
-      font-family: "DotGothic16","Noto Sans JP",monospace !important;
-      letter-spacing: 0.03em;
+      font-family: "Noto Sans JP", system-ui, sans-serif !important;
+      letter-spacing: 0.01em;
     }
     #drawer a::before {
       background: var(--bg-panel) !important;
-      color: var(--neon-cyan) !important;
-      border: 1px solid var(--neon-cyan) !important;
-      border-radius: 0 !important;
-      box-shadow: 0 0 6px rgba(0,240,255,0.5);
+      color: var(--phosphor-dim) !important;
+      border: 1px solid rgba(122,138,168,0.4) !important;
+      border-radius: 4px !important;
+      box-shadow: none !important;
     }
     #drawer a.completed::before {
       background: var(--gb-green) !important;
       color: var(--bg-deep) !important;
       border-color: var(--gb-green) !important;
-      box-shadow: 0 0 6px rgba(155,188,15,0.6);
+      box-shadow: 0 0 6px rgba(155,188,15,0.5);
     }
     #drawer a:hover {
-      color: var(--neon-cyan) !important;
-      background: rgba(0,240,255,0.06) !important;
+      color: var(--phosphor) !important;
+      background: rgba(0,240,255,0.05) !important;
     }
     #drawer a.current, #drawer a[selected] {
-      color: var(--neon-magenta) !important;
-      background: rgba(255,46,136,0.08) !important;
-      border-left-color: var(--neon-magenta) !important;
-      text-shadow: 0 0 4px rgba(255,46,136,0.6);
+      color: var(--phosphor) !important;
+      background: linear-gradient(90deg, rgba(0,240,255,0.10) 0%, rgba(0,240,255,0.02) 100%) !important;
+      border-left-color: var(--neon-cyan) !important;
+      text-shadow: none !important;
+      font-weight: 700 !important;
     }
 
     /* Step content */
@@ -105,22 +122,28 @@
     }
     .step-title, google-codelab-step h2.step-title, h1.step-title {
       color: var(--neon-magenta) !important;
-      font-family: "Press Start 2P","DotGothic16",monospace !important;
-      text-shadow: 0 0 8px rgba(255,46,136,0.6);
-      border-bottom: 2px solid var(--neon-magenta) !important;
-      padding-bottom: 0.4em;
+      font-family: "DotGothic16","Noto Sans JP",monospace !important;
+      font-size: 28px !important;
+      text-shadow: 0 0 12px rgba(255,46,136,0.4);
+      border-bottom: 1px solid rgba(255,46,136,0.4) !important;
+      padding-bottom: 0.5em;
+      margin-bottom: 1.2em !important;
+      letter-spacing: 0.02em;
     }
     h1, h2, h3, h4, [is-upgraded] {
       color: var(--neon-cyan) !important;
       font-family: "DotGothic16","Noto Sans JP",monospace !important;
-      text-shadow: 0 0 6px rgba(0,240,255,0.45);
+      text-shadow: 0 0 6px rgba(0,240,255,0.3);
+      letter-spacing: 0.01em;
     }
+    h3 { font-size: 20px !important; margin-top: 1.6em !important; }
     p, li, td, th, span, label, dt, dd {
       color: var(--phosphor) !important;
+      line-height: 1.7 !important;
     }
     strong, b { color: var(--crt-amber) !important; }
     a, a:visited { color: var(--neon-cyan) !important; text-decoration: underline; text-decoration-color: rgba(0,240,255,0.4); }
-    a:hover { color: var(--neon-magenta) !important; text-shadow: 0 0 6px rgba(255,46,136,0.6); }
+    a:hover { color: var(--neon-magenta) !important; text-shadow: 0 0 6px rgba(255,46,136,0.5); }
 
     /* Code — sober dark mode */
     pre, code, .gcb-codelab-code {
@@ -137,17 +160,19 @@
     /* Tables */
     table {
       background: var(--bg-panel) !important;
-      border: 2px solid var(--neon-cyan) !important;
+      border: 1px solid rgba(0,240,255,0.3) !important;
       border-collapse: collapse !important;
+      border-radius: 4px !important;
+      overflow: hidden;
     }
     table td, table th {
       background: var(--bg-panel) !important;
-      border: 1px solid rgba(0,240,255,0.3) !important;
+      border: 1px solid rgba(0,240,255,0.15) !important;
       color: var(--phosphor) !important;
-      padding: 8px 12px !important;
+      padding: 10px 14px !important;
     }
     table tr:nth-child(even) td { background: var(--bg-mid) !important; }
-    table th { color: var(--crt-amber) !important; font-family: "DotGothic16",monospace !important; text-transform: uppercase; }
+    table th { color: var(--crt-amber) !important; font-family: "DotGothic16",monospace !important; text-transform: uppercase; letter-spacing: 0.05em; background: rgba(255,176,0,0.05) !important; }
 
     /* Asides */
     aside, aside.special, aside.warning, aside.positive, aside.negative {
@@ -167,19 +192,42 @@
     }
     aside p, aside li, aside strong { color: var(--phosphor) !important; }
 
-    /* Buttons / FAB / next-step */
+    /* Buttons / FAB / next-step — refined retro */
     paper-fab, .fab-container paper-fab,
     paper-button, button {
-      background: var(--neon-magenta) !important;
-      color: var(--bg-deep) !important;
-      border: 2px solid var(--neon-magenta) !important;
-      border-radius: 0 !important;
-      font-family: "Press Start 2P",monospace !important;
-      font-size: 11px !important;
-      box-shadow: 0 0 10px rgba(255,46,136,0.6) !important;
+      background: linear-gradient(180deg, #1a2050 0%, #0d1230 100%) !important;
+      color: var(--neon-cyan) !important;
+      border: 1px solid rgba(0,240,255,0.4) !important;
+      border-radius: 4px !important;
+      font-family: "DotGothic16", "Noto Sans JP", monospace !important;
+      font-size: 13px !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.08em !important;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.04) !important;
       text-transform: uppercase;
+      padding: 8px 18px !important;
+      transition: all 0.2s ease;
     }
-    paper-button:hover, button:hover { background: var(--neon-cyan) !important; border-color: var(--neon-cyan) !important; box-shadow: 0 0 12px rgba(0,240,255,0.7) !important; }
+    paper-button:hover, button:hover, paper-fab:hover {
+      background: linear-gradient(180deg, #232b6a 0%, #131a44 100%) !important;
+      color: var(--neon-magenta) !important;
+      border-color: var(--neon-magenta) !important;
+      box-shadow: 0 0 10px rgba(255,46,136,0.4), 0 2px 8px rgba(0,0,0,0.4) !important;
+    }
+    /* Specifically style the floating FAB Next button */
+    .fab-container paper-fab {
+      background: linear-gradient(180deg, var(--neon-magenta) 0%, #c01c66 100%) !important;
+      color: var(--bg-deep) !important;
+      border: 1px solid rgba(255,46,136,0.6) !important;
+      border-radius: 50% !important;
+      box-shadow: 0 0 16px rgba(255,46,136,0.45), 0 4px 12px rgba(0,0,0,0.5) !important;
+      font-size: 12px !important;
+    }
+    .fab-container paper-fab:hover {
+      background: linear-gradient(180deg, #ff4d9e 0%, var(--neon-magenta) 100%) !important;
+      color: var(--bg-deep) !important;
+      box-shadow: 0 0 22px rgba(255,46,136,0.7), 0 4px 12px rgba(0,0,0,0.5) !important;
+    }
 
     /* Progress / done indicators */
     google-codelab[hide-tabs] #app-bar .more, .arrow-back { color: var(--neon-cyan) !important; }
@@ -256,7 +304,7 @@
 
     /* ---- Drawer: no border around step tiles ---- */
     #drawer { background: var(--bg-mid) !important; }
-    #drawer ol { background: var(--bg-mid) !important; }
+    #drawer ol { background: var(--bg-mid) !important; padding: 8px 0 !important; }
     #drawer ol li a {
       background: transparent !important;
       border: none !important;
@@ -264,38 +312,49 @@
       box-shadow: none !important;
       color: var(--phosphor-dim) !important;
       border-left: 3px solid transparent !important;
-      margin: 2px 0 !important;
+      margin: 1px 0 !important;
+      padding: 10px 14px !important;
+      transition: all 0.18s ease !important;
+      font-size: 13px !important;
     }
     #drawer ol li a:hover {
-      background: rgba(0,240,255,0.06) !important;
-      color: var(--neon-cyan) !important;
-      border-left-color: var(--neon-cyan) !important;
+      background: rgba(0,240,255,0.05) !important;
+      color: var(--phosphor) !important;
+      border-left-color: rgba(0,240,255,0.4) !important;
     }
     #drawer ol li[selected] a,
     #drawer ol li a:focus {
-      background: rgba(255,46,136,0.10) !important;
-      color: var(--neon-magenta) !important;
+      background: linear-gradient(90deg, rgba(0,240,255,0.10) 0%, rgba(0,240,255,0.02) 100%) !important;
+      color: var(--phosphor) !important;
       border: none !important;
-      border-left: 3px solid var(--neon-magenta) !important;
-      box-shadow: none !important;
-      text-shadow: 0 0 4px rgba(255,46,136,0.6);
+      border-left: 3px solid var(--neon-cyan) !important;
+      box-shadow: inset 0 0 0 1px rgba(0,240,255,0.12) !important;
+      text-shadow: none !important;
+      font-weight: 700 !important;
     }
     /* Step number bullet in drawer */
     #drawer ol li .step:before,
     #drawer ol li a .step::before {
       background: var(--bg-panel) !important;
+      color: var(--phosphor-dim) !important;
+      border: 1px solid rgba(122,138,168,0.4) !important;
+      box-shadow: none !important;
+      border-radius: 4px !important;
+      font-family: "IBM Plex Mono", monospace !important;
+      font-weight: 700 !important;
+      transition: all 0.18s ease;
+    }
+    #drawer ol li a:hover .step::before {
       color: var(--neon-cyan) !important;
-      border: 1px solid var(--neon-cyan) !important;
-      box-shadow: 0 0 4px rgba(0,240,255,0.4);
-      border-radius: 0 !important;
+      border-color: rgba(0,240,255,0.5) !important;
     }
     #drawer ol li[selected] .step:before {
-      background: var(--neon-magenta) !important;
+      background: var(--neon-cyan) !important;
       color: var(--bg-deep) !important;
-      border-color: var(--neon-magenta) !important;
-      box-shadow: 0 0 6px rgba(255,46,136,0.6);
+      border-color: var(--neon-cyan) !important;
+      box-shadow: 0 0 8px rgba(0,240,255,0.45) !important;
     }
-    .step:before { background: var(--bg-panel) !important; color: var(--neon-cyan) !important; border-radius: 0 !important; }
+    .step:before { background: var(--bg-panel) !important; color: var(--phosphor-dim) !important; border-radius: 4px !important; }
 
     /* ---- Hide scrollbars (keep scroll functional) ---- */
     * { scrollbar-width: none !important; -ms-overflow-style: none !important; }
