@@ -723,12 +723,20 @@ Tailwind ユーティリティ: `font-pixel` (DotGothic16)、`font-body` (Noto S
 <li><strong>Bypass list</strong> に <strong>Repository admin</strong> を追加 — ワークショップ中にレビュー待ちでブロックされないように</li>
 </ul>
 </aside>
-<h2 is-upgraded>7.3 — PR の結果を確認する</h2>
-<p>実装をコミット・push して PR を作成すると、Copilot Code Review が自動的に実行され、以下が表示されます（⏱ 約5分）：</p>
-<ul>
+<h2 is-upgraded>7.3 — PR を作成して結果を確認する</h2>
+<p>セクション 6 で Copilot Chat が作ったサイトはまだローカル（Codespace 上のブランチ）にあるだけです。これをリモートに上げて PR を作ると、7.2 で設定した Ruleset によって Copilot Code Review が自動的に走ります。</p>
+<ol type="1">
+<li><strong>VS Code のソース管理タブ</strong> で変更をステージ → コミットメッセージを入力 → <strong>Commit</strong></li>
+<li><strong>Sync Changes</strong> （または <strong>Publish Branch</strong>）でリモートに push</li>
+<li>GitHub.com のリポジトリで <strong>Compare &amp; pull request</strong> をクリックして PR を作成</li>
+<li>PR を開くと、Copilot Code Review が自動的に実行され、以下が表示されます（⏱ 約5分）： <ul>
 <li>✅ <strong>Pull Request Overview</strong> — PR 全体のサマリーコメント</li>
 <li>✅ <strong>コード提案</strong> — 各ファイルに対する具体的な改善提案</li>
 </ul>
+</li>
+</ol>
+<aside class="special"><p><strong>ポイント</strong>: ブランチ名は何でも OK ですが、<code>feature/<内容></code> のような形式が一般的です。Copilot Chat の Agent モードが自動でブランチを切っている場合はそのまま使えます。</p>
+</aside>
 <h2 is-upgraded>7.4 — レビュー提案を修正する</h2>
 <p>Copilot のレビュー提案を修正する方法は2つあります：</p>
 <ol type="1">
