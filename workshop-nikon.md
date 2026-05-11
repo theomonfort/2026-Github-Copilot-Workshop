@@ -465,19 +465,22 @@ Duration: 15
 > aside positive
 > **ポイント**: Custom instructions を有効にすると、`copilot-instructions.md` の内容がコードレビューにも反映されます。
 
-### 7.2 — Ruleset で自動レビューを設定する
+### 7.2 — 自動レビューの Ruleset を作成する
 
-PR 作成時に Copilot が自動的にコードレビューを行う設定をします。
+PR 作成時に Copilot が自動的にコードレビューを行うように設定します。**Code review 設定ページから直接** Ruleset を作成すると速いです。
 
-1. リポジトリの **Settings** → **Rules** → **Rulesets** → **New ruleset** → **New branch ruleset**
-2. Ruleset 名を入力（例: `Require PR and CCR`）
-3. **Enforcement status** を **Active** に変更
-4. **Bypass list** → **Add bypass** → **Repository admin** を追加
-5. **Target branches** → **Add target** → **Include default branch** を選択
-6. **Require a pull request before merging** を有効化
+1. **Settings** → **Copilot** → **Code review** のページで、**Automatic code review** セクションを探す
+2. **Add a ruleset** （または **Create ruleset**）をクリック → Ruleset 作成画面が **Automatically request Copilot code review** が有効化された状態で開きます
+3. Ruleset 名を入力（例: `Require PR and CCR`）
+4. **Enforcement status** を **Active** に変更
+5. **Bypass list** → **Add bypass** → **Repository admin** を追加
+6. **Target branches** → **Add target** → **Include default branch** を選択
+7. **Require a pull request before merging** を有効化
    - **Required approvals** を **1** に設定
-7. **Automatically request Copilot code review** にチェック
 8. **Create** をクリック
+
+> aside positive
+> **ポイント**: Code review 設定ページからこの導線を使うと、`Automatically request Copilot code review` が最初からチェック済みで開きます。Settings → Rules から作る場合は手動でこのチェックを入れる必要があります。
 
 > aside positive
 > **ポイント**: Bypass list に Repository admin を追加しておくと、急いでいる時にチェックを待たずにマージできます。

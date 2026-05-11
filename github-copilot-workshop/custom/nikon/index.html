@@ -710,10 +710,11 @@ Tailwind ユーティリティ: `font-pixel` (DotGothic16)、`font-body` (Noto S
 </ol>
 <aside class="special"><p><strong>ポイント</strong>: Custom instructions を有効にすると、<code>copilot-instructions.md</code> の内容がコードレビューにも反映されます。</p>
 </aside>
-<h2 is-upgraded>7.2 — Ruleset で自動レビューを設定する</h2>
-<p>PR 作成時に Copilot が自動的にコードレビューを行う設定をします。</p>
+<h2 is-upgraded>7.2 — 自動レビューの Ruleset を作成する</h2>
+<p>PR 作成時に Copilot が自動的にコードレビューを行うように設定します。<strong>Code review 設定ページから直接</strong> Ruleset を作成すると速いです。</p>
 <ol type="1">
-<li>リポジトリの <strong>Settings</strong> → <strong>Rules</strong> → <strong>Rulesets</strong> → <strong>New ruleset</strong> → <strong>New branch ruleset</strong></li>
+<li><strong>Settings</strong> → <strong>Copilot</strong> → <strong>Code review</strong> のページで、<strong>Automatic code review</strong> セクションを探す</li>
+<li><strong>Add a ruleset</strong> （または <strong>Create ruleset</strong>）をクリック → Ruleset 作成画面が <strong>Automatically request Copilot code review</strong> が有効化された状態で開きます</li>
 <li>Ruleset 名を入力（例: <code>Require PR and CCR</code>）</li>
 <li><strong>Enforcement status</strong> を <strong>Active</strong> に変更</li>
 <li><strong>Bypass list</strong> → <strong>Add bypass</strong> → <strong>Repository admin</strong> を追加</li>
@@ -722,9 +723,10 @@ Tailwind ユーティリティ: `font-pixel` (DotGothic16)、`font-body` (Noto S
 <li><strong>Required approvals</strong> を <strong>1</strong> に設定</li>
 </ul>
 </li>
-<li><strong>Automatically request Copilot code review</strong> にチェック</li>
 <li><strong>Create</strong> をクリック</li>
 </ol>
+<aside class="special"><p><strong>ポイント</strong>: Code review 設定ページからこの導線を使うと、<code>Automatically request Copilot code review</code> が最初からチェック済みで開きます。Settings → Rules から作る場合は手動でこのチェックを入れる必要があります。</p>
+</aside>
 <aside class="special"><p><strong>ポイント</strong>: Bypass list に Repository admin を追加しておくと、急いでいる時にチェックを待たずにマージできます。</p>
 </aside>
 <aside class="warning"><p><strong>注意</strong>: Enforcement status が「Disabled」のままだとルールが適用されません。必ず <strong>Active</strong> に変更してください。</p>
