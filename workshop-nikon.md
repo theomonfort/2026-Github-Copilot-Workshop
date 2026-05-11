@@ -314,7 +314,7 @@ gh skill install theomonfort/skills github-issues
 > aside positive
 > **💡 ヒント**: スキルの公開方法は標準化されており、**公開リポジトリ + `skills/<skill-name>/SKILL.md`** の構成にするだけで `gh skill install <owner>/<repo> <skill-name>` で誰でもインストールできます（仕様: [agentskills.io](https://agentskills.io/specification)）。`github/awesome-copilot` はコミュニティ版のコレクションですが、SAML SSO で守られた組織からインストールしようとすると認可ステップが必要になるため、本ワークショップではフォーク先の `theomonfort/skills` を使います。
 
-インストールが完了すると `.github/skills/github-issues/SKILL.md` が追加されます。中身を開いて Copilot がどんなときにこの Skill を呼ぶのか、どんなテンプレを持っているのかを確認してみてください。
+インストールが完了すると `.agents/skills/github-issues/SKILL.md` が追加されます。中身を開いて Copilot がどんなときにこの Skill を呼ぶのか、どんなテンプレを持っているのかを確認してみてください。
 
 ⏱ 約1分
 
