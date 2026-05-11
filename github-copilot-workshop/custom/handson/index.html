@@ -162,46 +162,13 @@ php -S localhost:8080
 
       </google-codelab-step>
     
-      <google-codelab-step label="セットアップ＆カスタマイズ" duration="20">
-        <h2 is-upgraded>1.1 — Copilot でリポジトリを理解する</h2>
-<p>まず、Copilot にこのリポジトリの全体像を把握させましょう。</p>
-<aside class="special"><p><strong>💡 ヒント</strong>: Codespaces で作業している場合、Copilot Chat の左下にある承認モードを <strong>「Bypass Approvals」</strong> に変更すると、ツール実行の承認をスキップでき、ワークショップをスムーズに進められます。</p>
+      <google-codelab-step label="PLAN: MCP サーバー" duration="10">
+        <aside class="special"><p><strong>📖 参考</strong>: <a href="https://theomonfort.github.io/theomonfort/playbook/mcp/" target="_blank">プレイブック / MCP Server</a> で MCP の仕組み・接続方式 (stdio / HTTP)・VS Code での設定方法を確認できます。</p>
 </aside>
-<p>Copilot Chat で以下を実行します：</p>
-<pre><code>/init
-</code></pre>
-<p><code>/init</code> コマンドにより、Copilot がリポジトリをスキャンし、<code>copilot-instructions.md</code> を自動生成します。（⏱ 約2分30秒）</p>
-<p>生成された内容を確認し、レガシー PHP サイトの構造が正しく認識されていることを確認してください。</p>
-<aside class="warning"><p><strong>気づきましたか？</strong> Copilot の応答が<strong>英語</strong>で返ってきます。<code>copilot-instructions.md</code> に言語設定がないため、Copilot はデフォルトの英語で応答しています。次のステップでこれを修正しましょう。</p>
-</aside>
-<aside class="special"><p><strong>ポイント</strong>: プロジェクトの文脈を一度設定すれば、以降の作業で一貫した理解に基づくアシストが可能になります。</p>
-</aside>
-<h2 is-upgraded>1.2 — カスタム指示を追加する</h2>
-<p><code>/init</code> で生成された <code>copilot-instructions.md</code> を日本語化し、移行ガイドラインを追加しましょう。Copilot Chat で以下のプロンプトを入力してください：</p>
-<pre><code>copilot-instructions.md を日本語にして、以下の内容を追記してください。既存の内容は残してください。
-
-- 言語設定: すべての会話は日本語で行う
-- 移行先の技術スタック: Next.js (App Router) + TypeScript + Tailwind CSS
-- テスト: Vitest + Playwright
-- デザイン要件: モダンで洗練されたUI、レスポンシブデザイン（モバイルファースト）
-- コーディング規約: ESLint + Prettier 準拠、関数コンポーネント + Hooks、型定義は厳格に（any 禁止）
-</code></pre>
-<p>⏱ 約1分</p>
-<aside class="special"><p><strong>ポイント</strong>: <code>/init</code> で生成されたレガシーコードの説明を残しておくことで、Copilot は「現在の状態」と「移行先の目標」の両方を理解した上でアシストしてくれます。</p>
-</aside>
-<h2 is-upgraded>1.3 — フロントエンド Skill を作成する</h2>
-<p>Copilot に以下のプロンプトを入力して、フロントエンド開発用の Skill を作成してもらいましょう。<code>[自社の会社名]</code> の部分を<strong>実際の会社名に置き換えて</strong>ください：</p>
-<pre><code>[自社の会社名] のブランディングに基づいたフロントエンド Skill を作成してください。
-ウェブ上でリサーチを行い、ブランドカラー、タイポグラフィ、デザイン原則、コンポーネントパターンを定義してください。
-Skill ファイルは .github/skills/ 配下に追加してください。
-</code></pre>
-<aside class="warning"><p><strong>⚠️ 重要</strong>: <code>[自社の会社名]</code> をそのまま入力しないでください。必ず実際の会社名に置き換えてください。</p>
-</aside>
-<p>Copilot がウェブ上で会社のブランド情報をリサーチし、ブランドガイドラインに基づいた Skill ファイルを自動生成します。（⏱ 約2分30秒）</p>
-<h2 is-upgraded>1.4 — MCP Server を確認する</h2>
-<p>MCP（Model Context Protocol）Server が正しく接続されていることを確認しましょう。</p>
-<h3 is-upgraded>GitHub MCP Server の確認</h3>
-<p><code>.vscode/mcp.json</code> に GitHub MCP Server が設定されていることを確認します：</p>
+<p>このステップでは、Copilot に外部ツールへのアクセスを与える <strong>MCP（Model Context Protocol）Server</strong> を確認・追加します。MCP を整えると、Copilot が Issue 作成・最新ドキュメント参照などを直接実行できるようになります。</p>
+<h2 is-upgraded>3.1 — GitHub MCP Server を確認する</h2>
+<p>このリポジトリには既に GitHub MCP Server が <code>.vscode/mcp.json</code> に設定されています。Codespace 起動時に VS Code が自動的に接続を確認します。</p>
+<p><code>.vscode/mcp.json</code> を開いて、以下の設定があることを確認してください：</p>
 <pre><code language="language-json" class="language-json">{
   &#34;servers&#34;: {
     &#34;github-mcp-server&#34;: {
@@ -211,141 +178,190 @@ Skill ファイルは .github/skills/ 配下に追加してください。
   }
 }
 </code></pre>
-<p>Copilot Chat で以下を入力して、GitHub MCP Server の接続確認と Issue の作成を行います：</p>
-<pre><code>GitHub MCP Server を使って、このリポジトリに以下の Issue を作成してください：
-
-1. このレガシー PHP サイトをモダンなフレームワークに移行する
-2. 適切なテストを追加する
-3. ダークモードをサポートする
-4. 英語対応を追加する
-</code></pre>
-<p>⏱ 約30秒</p>
-<aside class="special"><p><strong>ポイント</strong>: GitHub MCP Server が正しく接続されていれば、Copilot がリポジトリに直接 Issue を作成します。作成された Issue は後のステップで活用します。</p>
+<p>Copilot Chat の入力欄にある <strong>🔧 ツールボタン</strong>（モデル選択の右側）をクリックして、<code>github-mcp-server</code> のツール（Issues / PRs / code search など）が一覧に表示されていることを確認しましょう。</p>
+<p>⏱ 約1分</p>
+<aside class="special"><p><strong>ポイント</strong>: GitHub MCP Server は GitHub 公式提供。<code>gh</code> コマンドを叩く感覚で、Copilot が Issues / PRs / Actions / Code search を直接操作できます。</p>
 </aside>
-<h3 is-upgraded>Playwright MCP Server の追加</h3>
-<p>テスト用に Playwright MCP Server を追加します。</p>
+<h2 is-upgraded>3.2 — Context7 MCP Server を追加する</h2>
+<p><strong>Context7</strong> は、ライブラリやフレームワークの <strong>最新の公式ドキュメント</strong> を Copilot に取り込める MCP Server です。Astro / Tailwind / TypeScript など、進化の速いフレームワークを使う本ワークショップでは欠かせません。</p>
 <ol type="1">
-<li>Copilot Chat の入力欄にある <strong>🔧 ツールボタン</strong>（モデル選択の右側）をクリック</li>
+<li>Copilot Chat の <strong>🔧 ツールボタン</strong> をクリック</li>
 <li><strong>「Add MCP Server」</strong> を選択</li>
 <li><strong>「Browse MCP Servers」</strong> をクリック</li>
-<li>初回の場合は <strong>「Enable MCP Servers Marketplace」</strong> をクリックして有効化</li>
-<li><strong>「Playwright」</strong> で検索し、<strong>Microsoft</strong> の Playwright MCP Server を選択</li>
-<li><strong>「Install in Workspace」</strong> をクリックしてインストール</li>
+<li>初回の場合は <strong>「Enable MCP Servers Marketplace」</strong> を有効化</li>
+<li><strong>「Context7」</strong> で検索し、<strong>Upstash</strong> の Context7 を選択</li>
+<li><strong>「Install in Workspace」</strong> をクリック</li>
 </ol>
-<p>インストール後、<code>.vscode/mcp.json</code> に Playwright が追加されていることを確認してください：</p>
+<p>インストール後、<code>.vscode/mcp.json</code> に <code>context7</code> が追加されていることを確認してください：</p>
 <pre><code language="language-json" class="language-json">{
   &#34;servers&#34;: {
-    &#34;github-mcp-server&#34;: {
+    &#34;github-mcp-server&#34;: { &#34;type&#34;: &#34;http&#34;, &#34;url&#34;: &#34;https://api.githubcopilot.com/mcp/&#34; },
+    &#34;context7&#34;: {
       &#34;type&#34;: &#34;http&#34;,
-      &#34;url&#34;: &#34;https://api.githubcopilot.com/mcp/&#34;
-    },
-    &#34;playwright&#34;: {
-      &#34;command&#34;: &#34;npx&#34;,
-      &#34;args&#34;: [&#34;@anthropic-ai/mcp-server-playwright&#34;]
+      &#34;url&#34;: &#34;https://mcp.context7.com/mcp&#34;
     }
   }
 }
 </code></pre>
-<aside class="special"><p><strong>ヒント</strong>: 🔧 ツールボタンをクリックすると、現在 Copilot が利用可能な MCP Server とツールの一覧を確認できます。GitHub MCP Server と Playwright が表示されていれば正しく設定されています。</p>
-</aside>
-<p>Playwright MCP Server が正しく動作することを確認するために、以下のプロンプトを試してみましょう：</p>
-<pre><code>Playwright を使って https://www.nikon.com を開き、スクリーンショットを撮ってください
-</code></pre>
-<p>スクリーンショットはプロジェクトのルートフォルダに保存されます。エクスプローラーで確認してみましょう。</p>
-<aside class="special"><p><strong>ポイント</strong>: Playwright MCP Server を使うと、Copilot がブラウザを操作してウェブページの確認やスクリーンショットの取得ができます。後のテスト工程で E2E テストにも活用します。</p>
-</aside>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="実装 — レガシーサイトの移行" duration="45">
-        <h2 is-upgraded>2.1 — Plan Mode で移行計画を立てる</h2>
-<p>いきなり実装に入るのではなく、まず <strong>Plan Mode</strong> で詳細な移行計画を立てましょう。</p>
-<ol type="1">
-<li>Copilot Chat のモデル選択の横にあるモード切り替えから <strong>「Plan」</strong> を選択</li>
-<li>以下のプロンプトを入力：</li>
-</ol>
-<pre><code>このレガシー PHP サイトを Next.js + Tailwind CSS に移行する計画を立ててください。
-テストはまだ作成しないでください。
-
-デザインの参考：
-- 機能紹介 → モダンなタイルカード（グリッドレイアウト）
-- 統計データ → テーブルではなくスタットカード形式
-- FAQ → https://www.designjoy.co/ のようなクリーンなアコーディオン
-- おすすめリソース → https://awesome-copilot.github.com/instructions/ のようなカード＋インストールボタン形式
-</code></pre>
-<ol type="1" start="3">
-<li>Copilot が計画を立てる前に、いくつか質問をしてくることがあります。適切に回答してください。</li>
-</ol>
-<p class="image-container"><img alt="Plan Mode での質問例" src="../../img/e1891485966ebcee.png"></p>
-<ol type="1" start="4">
-<li>Copilot が <code>copilot-instructions.md</code> の内容を踏まえて、詳細な移行計画を作成します（⏱ 約2分30秒）</li>
-<li>計画の内容を確認・調整</li>
-</ol>
-<aside class="special"><p><strong>ポイント</strong>: 実装前に計画を立て、レビューしてから着手できます。Plan Mode は大規模なリファクタリングやマイグレーションに最適です。</p>
-</aside>
-<h2 is-upgraded>2.2 — 移行を実行する</h2>
-<p>計画が確定したら、<strong>「Start with Autopilot」</strong> ボタンをクリックして実装を開始します。</p>
-<p class="image-container"><img alt="Start with Autopilot" src="../../img/93aa5f09e9db647d.png"></p>
-<p>⏱ 約15分</p>
-<p>Copilot エージェントが以下を自動的に実行します：</p>
-<ul>
-<li>Next.js プロジェクトの初期化</li>
-<li>TypeScript 設定</li>
-<li>Tailwind CSS の設定</li>
-<li>レガシー HTML からのコンテンツ移行</li>
-<li>コンポーネントの分割・作成</li>
-<li>レスポンシブレイアウトの実装</li>
-</ul>
-<h2 is-upgraded>2.3 — 結果を確認する</h2>
-<p>移行が完了したら、サーバーを起動してブラウザでモダナイズされたサイトを確認しましょう。</p>
-<p>ターミナルで以下のコマンドを実行します：</p>
-<pre><code language="language-bash" class="language-bash">npm run dev
-</code></pre>
-<p>ポートフォワーディングの通知が表示されたら <strong>「ブラウザで開く」</strong> をクリックしてサイトを確認してください。</p>
-<p><strong>Before → After</strong> の違いを確認してみてください！</p>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="自動テストと Actions" duration="25">
-        <h2 is-upgraded>3.1 — 自動テストを作成する</h2>
-<p>移行したサイトに対して、自動テストを作成しましょう。</p>
-<pre><code>移行した Next.js サイトに対して、以下のテストを作成してください：
-
-1. Vitest によるユニットテスト：
-   - 各コンポーネントのレンダリングテスト
-   - ProductCard コンポーネントの props テスト
-   - Navigation コンポーネントのリンクテスト
-
-2. Playwright による E2E テスト：
-   - トップページの表示確認
-   - ナビゲーションの動作確認
-   - レスポンシブデザインの確認（モバイル・タブレット・デスクトップ）
-   - 各製品カテゴリセクションへのスクロール
-
-テストは tests/ ディレクトリに配置してください。
-</code></pre>
-<p>⏱ 約3〜5分</p>
-<h2 is-upgraded>3.2 — GitHub Actions ワークフローを作成する</h2>
-<p>テストを PR 作成時に自動実行する GitHub Actions ワークフローを設定します。</p>
-<pre><code>以下の GitHub Actions ワークフローを作成してください：
-
-1. PR 作成・更新時にトリガー
-2. Node.js 20 環境でテストを実行
-3. Vitest ユニットテストを実行
-4. Playwright E2E テストを実行
-5. テスト結果を PR にコメントとして投稿
-
-ワークフローファイルは .github/workflows/test.yml に配置してください。
+<p>動作確認として、Copilot Chat で以下を試してみましょう：</p>
+<pre><code>Context7 を使って Astro の content collections の最新ドキュメントを要約してください。
 </code></pre>
 <p>⏱ 約2分</p>
-<h2 is-upgraded>3.3 — Dependency Review を追加する（ボーナス）</h2>
-<p>依存関係の脆弱性を PR 時に自動チェックする Dependency Review を追加します。</p>
-<pre><code>GitHub Actions に Dependency Review のワークフローを追加してください。
-PR 作成時に依存関係の脆弱性を自動チェックし、問題があればコメントで通知するようにしてください。
+<aside class="special"><p><strong>ポイント</strong>: 以後「Astro の最新の API は？」「Tailwind v4 の新しい記法は？」と聞くだけで、Copilot が Context7 経由で公式ドキュメントを引っ張ってきます。学習データのカットオフを気にする必要がなくなります。</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="PLAN: Instruction" duration="15">
+        <aside class="special"><p><strong>📖 参考</strong>: <a href="https://theomonfort.github.io/theomonfort/playbook/instructions" target="_blank">プレイブック / Instructions</a> で Instruction ファイルの役割・スコープ・使い分けを確認できます。</p>
+</aside>
+<p>Instruction ファイルは、リポジトリやファイル単位で Copilot に <strong>常駐ルール</strong> を与える「指示書」です。チーム全員の Copilot が同じ規約に従うようになります。</p>
+<p>このステップでは、2 種類の Instruction ファイルを作成します：</p>
+<ul>
+<li><strong><code>.github/copilot-instructions.md</code></strong> — リポジトリ全体に常時適用 (言語・Stack・規約)</li>
+<li><strong><code>.github/instructions/frontend.instructions.md</code></strong> — フロントエンド系ファイルにのみ適用される <strong>Path Instruction</strong>（デザイントークン）</li>
+</ul>
+<h2 is-upgraded>4.1 — リポジトリ共通の Instruction を作成する</h2>
+<p>Copilot Chat で以下を入力してください：</p>
+<pre><code>.github/copilot-instructions.md を作成してください。本文はすべて日本語で書いてください。
+内容は以下のとおりにしてください：
+
+# Copilot Instructions
+
+## 言語
+
+- すべての応答・コメント・コミットメッセージ・PR 説明は **日本語** で書く。
+
+## Stack
+
+- **Astro** のみ。Next.js・React Router・SvelteKit は使わない。
+- ページ・レイアウトは Astro コンポーネント (.astro) を使う。
+- マークダウンコンテンツは Astro の **content collections** (src/content/) を使う。
+- スタイルは Tailwind CSS。必要に応じてスコープ付き &lt;style&gt; ブロック。
+- TypeScript をすべての場所で使う (.ts, .astro frontmatter)。
+
+## 規約
+
+- ページは src/pages/。
+- 再利用 UI は src/components/。
+- マークダウンは src/content/&lt;collection&gt;/*.md。スキーマは src/content.config.ts。
+- パッケージマネージャは **pnpm**。
+
+## コードレビュー / 変更ルール
+
+- 変更は最小限・外科的に。関係のないコードは触らない。
+- 公開 API・型定義の変更には必ず理由を PR description に記載する。
+- 新しい依存を追加する場合は理由とリスクを明記する。
+- アクセシビリティ (a11y) を意識する: 適切な見出し階層、alt 属性、キーボード操作。
+- 既存テストを壊さない。変更箇所に既存テストがあれば実行して確認する。
 </code></pre>
+<p>⏱ 約2分</p>
+<aside class="special"><p><strong>ポイント</strong>: 以後 Copilot の応答が日本語に切り替わります。Stack 制約も自動で守られるようになります。</p>
+</aside>
+<h2 is-upgraded>4.2 — フロントエンド専用の Path Instruction を作成する</h2>
+<p>特定のファイルパターンにだけ適用される <strong>Path Instruction</strong> を作成します。VS Code は <code>applyTo</code> の glob にマッチするファイルを触るときだけ、このルールを Copilot に渡します。</p>
+<p>Copilot Chat で以下を入力してください：</p>
+<pre><code>.github/instructions/frontend.instructions.md を作成してください。
+本文はすべて日本語で書いてください。先頭の YAML frontmatter は以下のとおりにしてください：
+
+---
+applyTo: &#34;**/*.{astro,css,tsx,jsx,ts,js,html}&#34;
+description: &#34;フロントエンドのデザイントークン（レトロ JRPG テーマ）&#34;
+---
+
+本文は以下を日本語で含めてください：
+
+# フロントエンド設計ルール
+
+スタイル・コンポーネント・レイアウトを触るときは、以下のトークンを必ず適用する。
+
+## テーマ
+
+レトロ JRPG / サイバーパンクのアーケード。暗い背景にネオンのアクセント、ピクセル系タイポグラフィ。
+
+## カラー
+
+| 役割              | Hex        | 用途                              |
+| ----------------- | ---------- | --------------------------------- |
+| 背景 (ベース)     | `#05060f`  | body / page                       |
+| 背景 (パネル)     | `#0a0e27`  | カード・サイドバー                |
+| ネオンマゼンタ    | `#ff2e88`  | プライマリアクセント・アクティブ  |
+| ネオンシアン      | `#00f0ff`  | セカンダリ・ホバー・リンク        |
+| アンバー          | `#ffb000`  | 警告・ハイライト                  |
+| フォスファ緑      | `#9bbc0f`  | 成功・CRT 風テキスト              |
+| テキスト (通常)   | `#e6f1ff`  | 暗い背景上の本文                  |
+| テキスト (薄)     | `#7a8aa8`  | 補助テキスト                      |
+
+## フォント
+
+- 見出し / UI: **`&#39;DotGothic16&#39;`** (ピクセル)、fallback `monospace`。
+- 本文 (日本語 + ラテン): **`&#39;Noto Sans JP&#39;`**、fallback `system-ui, sans-serif`。
+- コード: `&#39;JetBrains Mono&#39;, &#39;Menlo&#39;, monospace`。
+
+Tailwind ユーティリティ: `font-pixel` (DotGothic16)、`font-body` (Noto Sans JP)。
+
+## エフェクト
+
+- 画面オーバーレイに控えめな CRT スキャンライン。
+- ネオングロー: `text-shadow: 0 0 8px &lt;color&gt;` / `box-shadow: 0 0 12px &lt;color&gt;`。
+- ボーダー: `1px dashed` または `2px solid` のネオンカラー。
+- コントラストは高めに。淡いパステルグラデは禁止。
+
+## してはいけないこと
+
+- 明るい / 白の背景。
+- 完全な丸 (pill) 形状。角丸は最大 4px まで。
+- 灰色のソフトドロップシャドウ。グロー (neon glow) のみ使う。
+</code></pre>
+<p>⏱ 約2分</p>
+<aside class="special"><p><strong>ポイント</strong>: <code>.astro</code> や <code>.css</code> を編集するときだけこの design token が自動的に Copilot に渡されます。<code>/init</code> や docs 編集など関係ないタスクでは混ざらないので、ノイズが減ります。</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Skill — Issue を綺麗に書く" duration="10">
+        <aside class="special"><p><strong>📖 参考</strong>: <a href="https://theomonfort.github.io/theomonfort/playbook/agent-skills" target="_blank">プレイブック / Agent Skills</a> で Skill の仕組み・召喚され方を確認できます。</p>
+</aside>
+<p><strong>Agent Skill</strong> は、Copilot に「特定のタスクのこなし方」を仕込む再利用可能な指示セットです。プロンプトに合致したときに自動で召喚され、毎回テンプレを説明し直す必要がなくなります。</p>
+<p>このステップでは、Issue を整った形で書ける Skill を入れて、実際に Issue を 1 件作ってみます。</p>
+<h2 is-upgraded>5.1 — github-issues Skill をインストール</h2>
+<p><a href="https://github.com/github/awesome-copilot" target="_blank"><code>github/awesome-copilot</code></a> から <strong><code>github-issues</code></strong> Skill を入れます。このスキルは bug report / feature request / task など複数のテンプレを持ち、ラベル・優先度・依存関係まで含めた構造化された Issue を書けるようになります。</p>
+<p>VS Code のターミナルで以下を実行してください：</p>
+<pre><code language="language-bash" class="language-bash">gh skill install github-issues
+</code></pre>
+<aside class="special"><p><strong>💡 ヒント</strong>: <code>gh skill</code> コマンドが未インストールの場合は、最初に <code>gh extension install theomonfort/gh-skill</code> を実行してください（Codespaces には事前インストール済みです）。</p>
+</aside>
+<p>インストールが完了すると <code>.github/skills/github-issues/SKILL.md</code> が追加されます。中身を開いて Copilot がどんなときにこの Skill を呼ぶのか、どんなテンプレを持っているのかを確認してみてください。</p>
 <p>⏱ 約1分</p>
+<h2 is-upgraded>5.2 — MCP + Skill で Issue を作成する</h2>
+<p>GitHub MCP Server + <code>github-issues</code> Skill を組み合わせて、構造化された Issue を 1 件作成します。Copilot Chat で以下のプロンプトを入力してください：</p>
+<pre><code>GitHub MCP Server を使って、このリポジトリに以下の Issue を作成してください。
+github-issues skill のテンプレートに従い、ユーザーストーリー・受け入れ基準・実装ノートを含む構造化された feature request にしてください。
+
+タイトル: Add English support on the website
+
+背景:
+- 現在サイトはすべて日本語で書かれている。海外のエンジニアにも届けたい。
+
+要件:
+- Astro の i18n ルーティング (`/en/...`) で英語版を追加する。フォールバックは日本語。
+- ナビゲーション・ボタン等の UI 文字列は src/i18n/ja.ts / en.ts に切り出す。
+- src/content/ のマークダウンは ja / en の両言語を併設できる構造にする。
+- 言語切替トグルをサイトのヘッダーに追加する。
+
+受け入れ基準:
+- /en/ ルートでサイト全体が英語で閲覧できる。
+- 翻訳が無いページはフォールバックで日本語を表示し、上部に warning banner を出す。
+- 既存の SEO (sitemap, OG tags) が両言語で正しく出力される。
+
+ラベル: feature, i18n, frontend
+</code></pre>
+<p>⏱ 約2分</p>
+<aside class="special"><p><strong>ポイント</strong>: <strong>MCP</strong> が「ツールへの接続」を、<strong>Skill</strong> が「そのツールでの作法」を持ち込みます。両方そろうと、Copilot は「英語対応の Issue を書いて」と頼むだけで、テンプレに沿った Issue を GitHub に直接立ててくれます。</p>
+<p>このあと作成された Issue は、Cloud Agent や Agentic Workflow のステップで実装担当として割り当てます（次の章で）。</p>
+</aside>
 
 
       </google-codelab-step>
