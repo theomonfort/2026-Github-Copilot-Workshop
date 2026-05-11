@@ -247,14 +247,6 @@ php -S localhost:8080
 - 再利用 UI は src/components/。
 - マークダウンは src/content/&lt;collection&gt;/*.md。スキーマは src/content.config.ts。
 - パッケージマネージャは **pnpm**。
-
-## コードレビュー / 変更ルール
-
-- 変更は最小限・外科的に。関係のないコードは触らない。
-- 公開 API・型定義の変更には必ず理由を PR description に記載する。
-- 新しい依存を追加する場合は理由とリスクを明記する。
-- アクセシビリティ (a11y) を意識する: 適切な見出し階層、alt 属性、キーボード操作。
-- 既存テストを壊さない。変更箇所に既存テストがあれば実行して確認する。
 </code></pre>
 <p>⏱ 約2分</p>
 <aside class="special"><p><strong>ポイント</strong>: 以後 Copilot の応答が日本語に切り替わります。Stack 制約も自動で守られるようになります。</p>
