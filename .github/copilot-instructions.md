@@ -72,6 +72,20 @@ sed -i '' 's|<p class="image-container"><img alt="PLAN フェーズの Octocat"|
 # INTRO の Copilot Pixel を控えめに（中央・小サイズ）
 sed -i '' 's|<p class="image-container"><img alt="GitHub Copilot Logo"|<p class="image-container" style="text-align:center;"><img alt="GitHub Copilot Logo" style="width:160px;height:auto;"|g' "github-copilot-workshop/custom/${CUSTOM_NAME}/index.html"
 
+# 長いプロンプトを <details> で折りたたみ（PLAN: Instruction の 4.1 / 4.2 など）
+python3 - "github-copilot-workshop/custom/${CUSTOM_NAME}/index.html" <<'PY'
+import re, sys
+from pathlib import Path
+target = Path(sys.argv[1])
+txt = target.read_text()
+pattern = re.compile(r'<p>📋 プロンプトを表示 / コピー</p>\s*(<pre[\s\S]*?</pre>)')
+txt = pattern.sub(
+    lambda m: f'<details class="prompt-collapse"><summary>📋 プロンプトを表示 / コピー</summary>\n{m.group(1)}\n</details>',
+    txt,
+)
+target.write_text(txt)
+PY
+
 # ダークモード CSS を <head> 末尾に注入（既存の dark block があれば置換）
 python3 - "github-copilot-workshop/custom/${CUSTOM_NAME}/index.html" <<'PY'
 import re, sys
