@@ -310,7 +310,7 @@ Tailwind ユーティリティ: `font-pixel` (DotGothic16)、`font-body` (Noto S
 > aside positive
 > **ポイント**: `.astro` や `.css` を編集するときだけこの design token が自動的に Copilot に渡されます。`/init` や docs 編集など関係ないタスクでは混ざらないので、ノイズが減ります。
 
-## Skill — Issue を綺麗に書く
+## PLAN: Skills
 Duration: 10
 
 > aside positive
