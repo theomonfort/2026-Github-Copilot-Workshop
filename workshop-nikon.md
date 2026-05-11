@@ -71,8 +71,6 @@ Duration: 15
 2. **Codespaces** タブを選択
 3. **Create codespace on main** をクリック
 
-![Codespaces Setup](github-copilot-workshop/img/github-codespaces.png)
-
 > aside positive
 > **⏳ 注意**: Codespace の起動には数分かかる場合があります。DevContainer のビルドが完了するまでお待ちください。
 
