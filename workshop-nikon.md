@@ -13,7 +13,7 @@ Duration: 5
 
 GitHub Copilotワークショップへようこそ！
 
-![GitHub Copilot Logo](github-copilot-workshop/img/octocat_copilot.png)
+![GitHub Copilot Logo](github-copilot-workshop/img/copilot-pixel.png)
 
 このワークショップでは、**Copilot Playbook の Markdown コンテンツを題材に**、PLAN → CODE → REVIEW → SECURE → TEST → OPERATE のフェーズに沿って GitHub Copilot を体験します。最終的には、Markdown を「グリッド + 詳細 + プレゼンテーションモード」で閲覧できる **Astro サイト** を、Copilot と一緒にゼロから作り上げます。
 
