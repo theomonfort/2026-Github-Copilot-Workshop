@@ -440,12 +440,11 @@
 <h2 is-upgraded>3.2 — Context7 MCP Server を追加する</h2>
 <p><strong>Context7</strong> は、ライブラリやフレームワークの <strong>最新の公式ドキュメント</strong> を Copilot に取り込める MCP Server です。Astro / Tailwind / TypeScript など、進化の速いフレームワークを使う本ワークショップでは欠かせません。</p>
 <ol type="1">
-<li>Copilot Chat の <strong>🔧 ツールボタン</strong> をクリック</li>
-<li><strong>「Add MCP Server」</strong> を選択</li>
-<li><strong>「Browse MCP Servers」</strong> をクリック</li>
-<li>初回の場合は <strong>「Enable MCP Servers Marketplace」</strong> を有効化</li>
-<li><strong>「Context7」</strong> で検索し、<strong>Upstash</strong> の Context7 を選択</li>
-<li><strong>「Install in Workspace」</strong> をクリック</li>
+<li><strong>Cmd+Shift+P</strong> (Windows/Linux は <strong>Ctrl+Shift+P</strong>) でコマンドパレットを開く</li>
+<li><strong>「MCP: Add Server...」</strong> を入力して選択</li>
+<li>トランスポートに <strong>「HTTP」</strong> を選択</li>
+<li>URL に <code>https://mcp.context7.com/mcp</code> を貼り付け</li>
+<li>保存先に <strong>「Workspace」</strong> を選択</li>
 </ol>
 <p>インストール後、<code>.vscode/mcp.json</code> に <code>context7</code> が追加されていることを確認してください：</p>
 <pre><code language="language-json" class="language-json">{
@@ -462,7 +461,7 @@
 <pre><code>Context7 を使って Astro の content collections の最新ドキュメントを要約してください。
 </code></pre>
 <p>⏱ 約2分</p>
-<aside class="special"><p><strong>ポイント</strong>: 以後「Astro の最新の API は？」「Tailwind v4 の新しい記法は？」と聞くだけで、Copilot が Context7 経由で公式ドキュメントを引っ張ってきます。学習データのカットオフを気にする必要がなくなります。</p>
+<aside class="special"><p><strong>ポイント</strong>: HTTP 版を直接追加する方法を使うと、<code>npx</code> でパッケージをダウンロードする必要がないため、起動が一瞬で完了します。Marketplace の <strong>「Browse MCP Servers」</strong> から入る場合は stdio (npx 経由) 版の <code>io.github.upstash/context7</code> が選ばれ、初回起動時にパッケージのダウンロードで時間がかかる、または途中で止まることがあります。HTTP 版ならこの待ち時間が発生しません。 以後「Astro の最新の API は？」「Tailwind v4 の新しい記法は？」と聞くだけで、Copilot が Context7 経由で公式ドキュメントを引っ張ってきます。学習データのカットオフを気にする必要がなくなります。</p>
 </aside>
 
 
