@@ -305,6 +305,13 @@
       opacity: 1 !important;
     }
 
+    /* Cap large hero/intro images */
+    google-codelab-step img[src*="copilot-pixel"] {
+      max-width: 200px !important;
+      display: block;
+      margin: 1em auto !important;
+    }
+
     /* ---- Drawer: no border around step tiles ---- */
     #drawer { background: var(--bg-mid) !important; }
     #drawer ol { background: var(--bg-mid) !important; padding: 8px 0 !important; }

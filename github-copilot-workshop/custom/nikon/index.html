@@ -326,6 +326,13 @@
       opacity: 1 !important;
     }
 
+    /* Cap large hero/intro images */
+    google-codelab-step img[src*="copilot-pixel"] {
+      max-width: 200px !important;
+      display: block;
+      margin: 1em auto !important;
+    }
+
     /* ---- Drawer: no border around step tiles ---- */
     #drawer { background: var(--bg-mid) !important; }
     #drawer ol { background: var(--bg-mid) !important; padding: 8px 0 !important; }
@@ -390,7 +397,6 @@
       border-top: 1px solid rgba(255,176,0,0.3) !important;
     }
 
-    /* Collapsible prompt blocks */
     details.prompt-collapse { margin: 1em 0; border: 1px solid rgba(0,240,255,0.25); border-radius: 6px; background: var(--bg-panel); }
     details.prompt-collapse summary { cursor: pointer; padding: 10px 14px; color: var(--crt-amber); font-family: "DotGothic16",monospace; letter-spacing: 0.05em; user-select: none; }
     details.prompt-collapse summary:hover { background: rgba(255,176,0,0.05); }
