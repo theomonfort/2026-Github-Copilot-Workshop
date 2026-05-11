@@ -19,6 +19,14 @@ GitHub Copilotワークショップへようこそ！
 
 **PLAN → CODE → REVIEW → SECURE → TEST → OPERATE** のフェーズに沿って GitHub Copilot を使い、最終的には Playbook の簡易版（Markdown を綺麗に閲覧できる **Astro サイト**）を Copilot と一緒に作り上げます。
 
+### 本日のゴール
+- **PLAN**: MCP・Instruction・Skill で Copilot に「文脈」「ルール」「型」を仕込む
+- **CODE**: Copilot Chat（Plan / Agent）で Astro サイトを設計・実装する
+- **REVIEW**: Copilot Code Review で PR を自動レビューする
+- **SECURE**: Dependabot & CodeQL（GHAS）で脆弱性を検出する
+- **TEST**: GitHub Actions で Playwright テストを自動化する
+- **OPERATE**: Cloud Agent・Copilot CLI・Agentic Workflow で日常運用に AI を組み込む
+
 > aside positive
 > **📖 リファレンス**: 各ステップに対応する [Copilot Playbook](https://theomonfort.github.io/theomonfort/playbook/) のページを併記しています。社内展開時の参考資料としても活用してください。
 
