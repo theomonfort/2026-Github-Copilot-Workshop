@@ -602,10 +602,9 @@ Tailwind ユーティリティ: `font-pixel` (DotGothic16)、`font-body` (Noto S
 <p>インストールが完了すると <code>.agents/skills/github-issues/SKILL.md</code> が追加されます。中身を開いて Copilot がどんなときにこの Skill を呼ぶのか、どんなテンプレを持っているのかを確認してみてください。</p>
 <p>⏱ 約1分</p>
 <h2 is-upgraded>5.2 — MCP + Skill で Issue を作成する</h2>
-<p>GitHub MCP Server + <code>github-issues</code> Skill を組み合わせて、構造化された Issue を 1 件作成します。<strong>Skill の名前は明示しません</strong> — Copilot Chat は SKILL.md の説明文を読み、プロンプトの内容にマッチすると自動で召喚します。</p>
-<p>Copilot Chat で以下のプロンプトを入力してください：</p>
+<p>GitHub MCP Server + <code>github-issues</code> Skill を組み合わせて、構造化された Issue を 1 件作成します。Copilot Chat で以下のプロンプトを入力してください：</p>
 <details class="prompt-collapse"><summary>📋 プロンプトを表示 / コピー</summary>
-<pre><code>このリポジトリに以下の Issue を作成してください。
+<pre><code>github-issues skill を使って、このリポジトリに以下の Issue を作成してください。
 ユーザーストーリー・受け入れ基準・実装ノートを含む構造化された feature request にしてください。
 
 タイトル: Add English support on the website
@@ -628,7 +627,7 @@ Tailwind ユーティリティ: `font-pixel` (DotGothic16)、`font-body` (Noto S
 </code></pre>
 </details>
 <p>⏱ 約2分</p>
-<aside class="special"><p><strong>ポイント</strong>: <strong>MCP</strong> が「ツールへの接続」を、<strong>Skill</strong> が「そのツールでの作法」を持ち込みます。Skill を明示しなくても、Copilot は SKILL.md の説明から「これは Issue を作るタスクだ」と判断して <code>github-issues</code> を自動的に召喚します。テンプレに沿った Issue が GitHub に直接立てられるのを確認してください。</p>
+<aside class="special"><p><strong>ポイント</strong>: <strong>MCP</strong> が「ツールへの接続」を、<strong>Skill</strong> が「そのツールでの作法」を持ち込みます。本来 Copilot は SKILL.md の説明から自動でスキルを召喚しますが、確実に発動させるために今回はプロンプトで明示的に指定しています。テンプレに沿った Issue が GitHub に直接立てられるのを確認してください。</p>
 <p>このあと作成された Issue は、Cloud Agent や Agentic Workflow のステップで実装担当として割り当てます（次の章で）。</p>
 </aside>
 
