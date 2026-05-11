@@ -298,16 +298,16 @@ Duration: 10
 
 ### 5.1 — github-issues Skill をインストール
 
-[`theomonfort/copilot-skills`](https://github.com/theomonfort/copilot-skills) から **`github-issues`** Skill を入れます。このスキルは bug report / feature request / task など複数のテンプレを持ち、ラベル・優先度・依存関係まで含めた構造化された Issue を書けるようになります。
+[`theomonfort/skills`](https://github.com/theomonfort/skills) から **`github-issues`** Skill を入れます。このスキルは bug report / feature request / task など複数のテンプレを持ち、ラベル・優先度・依存関係まで含めた構造化された Issue を書けるようになります。
 
 VS Code のターミナルで以下を実行してください：
 
 ```bash
-gh skill install theomonfort/copilot-skills github-issues
+gh skill install theomonfort/skills github-issues
 ```
 
 > aside positive
-> **💡 ヒント**: スキルの公開方法は標準化されており、**公開リポジトリ + `skills/<skill-name>/SKILL.md`** の構成にするだけで `gh skill install <owner>/<repo> <skill-name>` で誰でもインストールできます（仕様: [agentskills.io](https://agentskills.io/specification)）。`github/awesome-copilot` はコミュニティ版のコレクションですが、SAML SSO で守られた組織からインストールしようとすると認可ステップが必要になるため、本ワークショップではフォーク先の `theomonfort/copilot-skills` を使います。
+> **💡 ヒント**: スキルの公開方法は標準化されており、**公開リポジトリ + `skills/<skill-name>/SKILL.md`** の構成にするだけで `gh skill install <owner>/<repo> <skill-name>` で誰でもインストールできます（仕様: [agentskills.io](https://agentskills.io/specification)）。`github/awesome-copilot` はコミュニティ版のコレクションですが、SAML SSO で守られた組織からインストールしようとすると認可ステップが必要になるため、本ワークショップではフォーク先の `theomonfort/skills` を使います。
 
 インストールが完了すると `.github/skills/github-issues/SKILL.md` が追加されます。中身を開いて Copilot がどんなときにこの Skill を呼ぶのか、どんなテンプレを持っているのかを確認してみてください。
 
