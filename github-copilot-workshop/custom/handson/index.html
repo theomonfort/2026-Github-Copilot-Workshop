@@ -151,11 +151,11 @@
       background: var(--bg-deep) !important;
     }
     .step-title, google-codelab-step h2.step-title, h1.step-title {
-      color: var(--neon-magenta) !important;
+      color: var(--neon-cyan) !important;
       font-family: "DotGothic16","Noto Sans JP",monospace !important;
       font-size: 28px !important;
-      text-shadow: 0 0 12px rgba(255,46,136,0.4);
-      border-bottom: 1px solid rgba(255,46,136,0.4) !important;
+      text-shadow: 0 0 12px rgba(0,240,255,0.35);
+      border-bottom: 1px solid rgba(0,240,255,0.4) !important;
       padding-bottom: 0.5em;
       margin-bottom: 1.2em !important;
       letter-spacing: 0.02em;
@@ -221,8 +221,8 @@
       box-shadow: 0 0 10px rgba(255,176,0,0.2);
     }
     aside.special, aside.positive {
-      border-left-color: var(--gb-green) !important;
-      box-shadow: 0 0 10px rgba(155,188,15,0.2);
+      border-left-color: var(--neon-cyan) !important;
+      box-shadow: 0 0 10px rgba(0,240,255,0.15);
     }
     aside p, aside li, aside strong { color: var(--phosphor) !important; }
 
@@ -313,7 +313,8 @@
     google-codelab-step .instructions aside.tip,
     google-codelab-step .instructions aside.special,
     google-codelab-step .instructions aside.positive {
-      border-color: var(--gb-green) !important;
+      border-color: var(--neon-cyan) !important;
+      border-left-color: var(--neon-cyan) !important;
     }
     google-codelab-step .instructions aside.callout {
       border-left-color: var(--neon-cyan) !important;
@@ -462,8 +463,8 @@
     }
     google-codelab-step:has(img[alt*="TEST"]) strong,
     google-codelab-step:has(img[alt*="TEST"]) b { color: #7dd3e0 !important; }
-    google-codelab-step:has(img[alt*="TEST"]) aside.special,
-    google-codelab-step:has(img[alt*="TEST"]) aside.positive {
+    google-codelab-step:has(img[alt*="TEST"]) aside.special, google-codelab-step:has(img[alt*="TEST"]) .instructions aside.special,
+    google-codelab-step:has(img[alt*="TEST"]) aside.positive, google-codelab-step:has(img[alt*="TEST"]) .instructions aside.positive, google-codelab-step:has(img[alt*="TEST"]) .instructions aside.tip {
       border-left-color: #4dd0ff !important;
       box-shadow: 0 0 10px rgba(77,208,255,0.15) !important;
     }
@@ -485,8 +486,8 @@
     }
     google-codelab-step:has(img[alt*="PLAN"]) strong,
     google-codelab-step:has(img[alt*="PLAN"]) b { color: #c5e895 !important; }
-    google-codelab-step:has(img[alt*="PLAN"]) aside.special,
-    google-codelab-step:has(img[alt*="PLAN"]) aside.positive {
+    google-codelab-step:has(img[alt*="PLAN"]) aside.special, google-codelab-step:has(img[alt*="PLAN"]) .instructions aside.special,
+    google-codelab-step:has(img[alt*="PLAN"]) aside.positive, google-codelab-step:has(img[alt*="PLAN"]) .instructions aside.positive, google-codelab-step:has(img[alt*="PLAN"]) .instructions aside.tip {
       border-left-color: #9bbc0f !important;
       box-shadow: 0 0 10px rgba(155,188,15,0.18) !important;
     }
@@ -508,8 +509,8 @@
     }
     google-codelab-step:has(img[alt*="CODE"]) strong,
     google-codelab-step:has(img[alt*="CODE"]) b { color: #ffb3c0 !important; }
-    google-codelab-step:has(img[alt*="CODE"]) aside.special,
-    google-codelab-step:has(img[alt*="CODE"]) aside.positive {
+    google-codelab-step:has(img[alt*="CODE"]) aside.special, google-codelab-step:has(img[alt*="CODE"]) .instructions aside.special,
+    google-codelab-step:has(img[alt*="CODE"]) aside.positive, google-codelab-step:has(img[alt*="CODE"]) .instructions aside.positive, google-codelab-step:has(img[alt*="CODE"]) .instructions aside.tip {
       border-left-color: #ff6b88 !important;
       box-shadow: 0 0 10px rgba(255,107,136,0.18) !important;
     }
@@ -531,8 +532,8 @@
     }
     google-codelab-step:has(img[alt*="REVIEW"]) strong,
     google-codelab-step:has(img[alt*="REVIEW"]) b { color: #ffe199 !important; }
-    google-codelab-step:has(img[alt*="REVIEW"]) aside.special,
-    google-codelab-step:has(img[alt*="REVIEW"]) aside.positive {
+    google-codelab-step:has(img[alt*="REVIEW"]) aside.special, google-codelab-step:has(img[alt*="REVIEW"]) .instructions aside.special,
+    google-codelab-step:has(img[alt*="REVIEW"]) aside.positive, google-codelab-step:has(img[alt*="REVIEW"]) .instructions aside.positive, google-codelab-step:has(img[alt*="REVIEW"]) .instructions aside.tip {
       border-left-color: #ffc94d !important;
       box-shadow: 0 0 10px rgba(255,201,77,0.2) !important;
     }
