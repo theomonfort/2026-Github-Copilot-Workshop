@@ -27,20 +27,7 @@ GitHub Copilotワークショップへようこそ！
 
 ### 本日のアジェンダ
 
-| パート | フェーズ | 内容 |
-|---|---|---|
-| 1 | INTRO | 勉強会について |
-| 2 | INTRO | セットアップ（Codespaces 起動） |
-| 3 | PLAN | MCP サーバー（GitHub MCP / Context7） |
-| 4 | PLAN | Instruction（`copilot-instructions.md` + Path Instruction） |
-| 5 | PLAN | Skills（awesome-copilot で Issue 作成） |
-| 6 | CODE | Copilot Chat（Plan モード → Agent モードで Astro 実装） |
-| 7 | REVIEW | Copilot Code Review |
-| 8 | SECURE | Dependabot & CodeQL（任意） |
-| 9 | TEST | GitHub Actions（任意） |
-| 10 | CODE | Cloud Agent |
-| 11 | CODE | Copilot CLI |
-| 12 | OPERATE | Agentic Workflow |
+サイドバーに沿って **PLAN → CODE → REVIEW → SECURE → TEST → OPERATE** の順に進みます。
 
 > aside positive
 > **📖 リファレンス**: 本ワークショップは [Copilot Playbook](https://theomonfort.github.io/theomonfort/playbook/) を題材コンテンツとして使います。各ステップにプレイブックのリンクを併記しているので、社内展開時の参考資料としても活用してください。
