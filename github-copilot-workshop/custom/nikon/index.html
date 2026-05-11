@@ -770,7 +770,7 @@ Tailwind ユーティリティ: `font-pixel` (DotGothic16)、`font-body` (Noto S
 <p>依存関係の脆弱性チェックとコードスキャンを <strong>GHAS</strong> で有効化します。設定は数クリックで完了します。</p>
 <h2 is-upgraded>8.1 — Dependabot と CodeQL を有効化する</h2>
 <ol type="1">
-<li>リポジトリの <strong>Settings</strong> → <strong>Security</strong> → <strong>Advanced Security</strong></li>
+<li>リポジトリの <strong>Settings</strong> → <strong>Security and quality</strong> → <strong>Advanced Security</strong></li>
 <li><strong>Dependabot</strong> セクション： <ul>
 <li><strong>Dependabot security updates</strong> を有効化</li>
 <li><strong>Dependabot version updates</strong> を有効化</li>
@@ -778,7 +778,6 @@ Tailwind ユーティリティ: `font-pixel` (DotGothic16)、`font-body` (Noto S
 </li>
 <li>（オプション）<strong>Tools</strong> → <strong>CodeQL analysis</strong> → <strong>Set up</strong> → <strong>Default</strong> → <strong>Enable CodeQL</strong></li>
 </ol>
-<p class="image-container"><img alt="GHAS Code Scanning Setup" src="../../img/96a57e2d2f8719ce.png"></p>
 <aside class="warning"><p><strong>注意</strong>: CodeQL はデフォルトブランチに存在する言語のみスキャンします。最初の Astro PR をマージしてから CodeQL を有効化すると、以降の Push / PR で TypeScript / JavaScript の自動スキャンが実行されます。</p>
 </aside>
 <aside class="special"><p><strong>ポイント</strong>: Dependabot は週次で依存関係をチェックし、脆弱性が見つかれば自動的に PR を作成してくれます。CodeQL は静的解析でセキュリティ上の問題（XSS / SQL Injection 等）を検出します。</p>

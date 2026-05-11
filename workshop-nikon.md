@@ -532,13 +532,11 @@ Duration: 5
 
 ### 8.1 — Dependabot と CodeQL を有効化する
 
-1. リポジトリの **Settings** → **Security** → **Advanced Security**
+1. リポジトリの **Settings** → **Security and quality** → **Advanced Security**
 2. **Dependabot** セクション：
    - **Dependabot security updates** を有効化
    - **Dependabot version updates** を有効化
 3. （オプション）**Tools** → **CodeQL analysis** → **Set up** → **Default** → **Enable CodeQL**
-
-![GHAS Code Scanning Setup](github-copilot-workshop/img/code-scanning-setup.png)
 
 > aside negative
 > **注意**: CodeQL はデフォルトブランチに存在する言語のみスキャンします。最初の Astro PR をマージしてから CodeQL を有効化すると、以降の Push / PR で TypeScript / JavaScript の自動スキャンが実行されます。
