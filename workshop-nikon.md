@@ -874,27 +874,31 @@ Duration: 5
 
 ### 今日学んだこと
 
-このワークショップでは、GitHub Copilot の全機能を横断的に体験しました：
+このワークショップでは、GitHub Copilot を **PLAN → CODE → REVIEW → SECURE → TEST → OPERATE** のフェーズに沿って横断的に体験しました：
 
-1. **セットアップ＆カスタマイズ** — `/init`、カスタム指示、Skill 作成、MCP 設定
-2. **Plan Mode による設計** — レガシーサイトの移行計画策定
-3. **Agent Mode による実装** — Next.js + TypeScript + Tailwind CSS への移行
-4. **自動テスト** — Vitest + Playwright + GitHub Actions
-5. **コード品質** — Copilot Code Review + GHAS
-6. **Cloud Agent** — Issue からの自律的な機能実装
-7. **Agentic Workflow** — CI/CD パイプラインへの AI 統合
-8. **Copilot CLI** — `/fleet` による並列実装、`/review` による複数モデルレビュー
+- **PLAN：MCP サーバー** — GitHub MCP・Context7 で Copilot に最新コンテキストを与える
+- **PLAN：Instruction** — `copilot-instructions.md` と Path Instruction で Copilot の前提・スタイル・言語を固定する
+- **PLAN：Skills** — awesome-copilot の Skill を導入し、Issue 作成を自動化する
+- **CODE：Copilot Chat** — Plan モードで設計し、Agent モードで Astro サイトを実装する
+- **REVIEW：Copilot Code Review** — PR の自動レビューで品質を担保する
+- **SECURE：Dependabot & CodeQL** — 依存関係とコードの脆弱性を継続的に検出する
+- **TEST：Actions** — GitHub Actions で Playwright テストを自動化する
+- **CODE：Cloud Agent** — Issue を Copilot にアサインしてバックグラウンドで実装させる
+- **CODE：CLI** — ターミナルから Copilot CLI で Plan ↔ Agent を行き来する
+- **OPERATE：Agentic Workflow** — `gh-aw` で AI を組み込んだ自律的な CI/CD を構築する
 
 ### 次のステップ
 
-- 実際のプロジェクトで Copilot を活用してみる
-- Copilot Extensions や MCP Server を活用して開発ワークフローを拡張する
-- Cloud Agent で日常的なタスクを自動化する
-- Copilot CLI を日常の開発に組み込む
+- [プレイブック](https://theomonfort.github.io/theomonfort/playbook/) を社内資料として参照・展開する
+- 実際のプロジェクトで Copilot を `/init` → Plan → Agent の順で活用してみる
+- Cloud Agent と Agentic Workflow で日常的なタスクを自動化する
+- Copilot CLI を日々のターミナル作業に組み込む
 
 ### リソース
 
+- [Theo's Copilot Playbook](https://theomonfort.github.io/theomonfort/playbook/)
 - [GitHub Copilot Documentation](https://docs.github.com/copilot)
 - [GitHub Copilot ベストプラクティス](https://docs.github.com/copilot/using-github-copilot/best-practices-for-using-github-copilot)
-- [Copilot SDK](https://github.com/github/copilot-sdk)
-- [Copilot CLI](https://githubnext.com/projects/copilot-cli)
+- [awesome-copilot](https://github.com/github/awesome-copilot)
+- [gh-aw (Agentic Workflows)](https://github.com/githubnext/gh-aw)
+- [Copilot CLI](https://github.com/github/copilot-cli)
