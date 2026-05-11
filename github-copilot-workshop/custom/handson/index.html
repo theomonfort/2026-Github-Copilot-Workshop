@@ -19,17 +19,200 @@
     }
   </style>
   <style>
-    /* ---- Dark mode (filter-invert approach) ---- */
-    html {
-      background: #0d1117;
-      filter: invert(1) hue-rotate(180deg);
+    /* ---- Retro JRPG neon theme (matches playbook) ---- */
+    @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DotGothic16&family=Noto+Sans+JP:wght@400;700&family=IBM+Plex+Mono:wght@400;700&display=swap");
+
+    :root {
+      --bg-deep: #05060f;
+      --bg-mid:  #0a0e27;
+      --bg-panel:#0e1330;
+      --neon-magenta:#ff2e88;
+      --neon-cyan:#00f0ff;
+      --crt-amber:#ffb000;
+      --gb-green:#9bbc0f;
+      --phosphor:#e6f1ff;
+      --phosphor-dim:#7a8aa8;
     }
-    /* Re-invert media so images/videos look normal */
-    img, video, iframe, svg, canvas, [style*="background-image"] {
-      filter: invert(1) hue-rotate(180deg);
+
+    /* Page + scanlines + grid */
+    html, body {
+      background: var(--bg-deep) !important;
+      color: var(--phosphor) !important;
+      font-family: "Noto Sans JP", system-ui, sans-serif !important;
     }
-    /* Avoid double-inverting nested media */
-    img img, video img { filter: none; }
+    body::before {
+      content:""; position:fixed; inset:0; z-index:9998; pointer-events:none;
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          rgba(255,255,255,0.04) 0,
+          rgba(255,255,255,0.04) 1px,
+          transparent 1px,
+          transparent 3px
+        );
+      mix-blend-mode: overlay;
+    }
+    body::after {
+      content:""; position:fixed; inset:0; z-index:9997; pointer-events:none;
+      background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.55) 100%);
+    }
+
+    /* Outer codelab container */
+    google-codelab,
+    google-codelab[hide-tabs],
+    google-codelab-step {
+      background: var(--bg-deep) !important;
+      color: var(--phosphor) !important;
+    }
+
+    /* App bar */
+    #app-bar, header#app-bar, .codelab-title-bar, google-codelab #app-bar {
+      background: var(--bg-mid) !important;
+      color: var(--neon-magenta) !important;
+      border-bottom: 2px solid var(--neon-magenta) !important;
+      box-shadow: 0 0 12px rgba(255,46,136,0.35) !important;
+    }
+    #app-bar .codelab-title, #app-bar h1, #app-bar a, #app-bar .feedback {
+      color: var(--neon-magenta) !important;
+      font-family: "DotGothic16", "Noto Sans JP", monospace !important;
+      text-shadow: 0 0 6px rgba(255,46,136,0.6);
+    }
+    #app-bar [icon] svg, #app-bar svg, #app-bar paper-icon-button {
+      fill: var(--neon-cyan) !important;
+      color: var(--neon-cyan) !important;
+    }
+    #countdown { color: var(--crt-amber) !important; text-shadow: 0 0 6px rgba(255,176,0,0.6); }
+
+    /* Drawer / TOC sidebar */
+    #drawer, google-codelab #drawer {
+      background: var(--bg-mid) !important;
+      border-right: 2px solid var(--neon-cyan) !important;
+      box-shadow: inset -1px 0 8px rgba(0,240,255,0.15) !important;
+    }
+    #drawer a {
+      background: transparent !important;
+      color: var(--phosphor-dim) !important;
+      border-left: 3px solid transparent !important;
+      font-family: "DotGothic16","Noto Sans JP",monospace !important;
+      letter-spacing: 0.03em;
+    }
+    #drawer a::before {
+      background: var(--bg-panel) !important;
+      color: var(--neon-cyan) !important;
+      border: 1px solid var(--neon-cyan) !important;
+      border-radius: 0 !important;
+      box-shadow: 0 0 6px rgba(0,240,255,0.5);
+    }
+    #drawer a.completed::before {
+      background: var(--gb-green) !important;
+      color: var(--bg-deep) !important;
+      border-color: var(--gb-green) !important;
+      box-shadow: 0 0 6px rgba(155,188,15,0.6);
+    }
+    #drawer a:hover {
+      color: var(--neon-cyan) !important;
+      background: rgba(0,240,255,0.06) !important;
+    }
+    #drawer a.current, #drawer a[selected] {
+      color: var(--neon-magenta) !important;
+      background: rgba(255,46,136,0.08) !important;
+      border-left-color: var(--neon-magenta) !important;
+      text-shadow: 0 0 4px rgba(255,46,136,0.6);
+    }
+
+    /* Step content */
+    google-codelab-step {
+      background: var(--bg-deep) !important;
+    }
+    .step-title, google-codelab-step h2.step-title, h1.step-title {
+      color: var(--neon-magenta) !important;
+      font-family: "Press Start 2P","DotGothic16",monospace !important;
+      text-shadow: 0 0 8px rgba(255,46,136,0.6);
+      border-bottom: 2px solid var(--neon-magenta) !important;
+      padding-bottom: 0.4em;
+    }
+    h1, h2, h3, h4, [is-upgraded] {
+      color: var(--neon-cyan) !important;
+      font-family: "DotGothic16","Noto Sans JP",monospace !important;
+      text-shadow: 0 0 6px rgba(0,240,255,0.45);
+    }
+    p, li, td, th, span, label, dt, dd {
+      color: var(--phosphor) !important;
+    }
+    strong, b { color: var(--crt-amber) !important; }
+    a, a:visited { color: var(--neon-cyan) !important; text-decoration: underline; text-decoration-color: rgba(0,240,255,0.4); }
+    a:hover { color: var(--neon-magenta) !important; text-shadow: 0 0 6px rgba(255,46,136,0.6); }
+
+    /* Code */
+    pre, code, .gcb-codelab-code {
+      background: var(--bg-panel) !important;
+      color: var(--gb-green) !important;
+      border: 2px solid var(--neon-cyan) !important;
+      border-radius: 0 !important;
+      font-family: "IBM Plex Mono","JetBrains Mono",monospace !important;
+      box-shadow: 0 0 8px rgba(0,240,255,0.15);
+    }
+    code { padding: 1px 6px; }
+    pre code { border: none !important; padding: 0 !important; box-shadow: none !important; }
+
+    /* Tables */
+    table {
+      background: var(--bg-panel) !important;
+      border: 2px solid var(--neon-cyan) !important;
+      border-collapse: collapse !important;
+    }
+    table td, table th {
+      background: var(--bg-panel) !important;
+      border: 1px solid rgba(0,240,255,0.3) !important;
+      color: var(--phosphor) !important;
+      padding: 8px 12px !important;
+    }
+    table tr:nth-child(even) td { background: var(--bg-mid) !important; }
+    table th { color: var(--crt-amber) !important; font-family: "DotGothic16",monospace !important; text-transform: uppercase; }
+
+    /* Asides */
+    aside, aside.special, aside.warning, aside.positive, aside.negative {
+      background: var(--bg-panel) !important;
+      color: var(--phosphor) !important;
+      border-left: 4px solid var(--neon-cyan) !important;
+      border-radius: 0 !important;
+      box-shadow: 0 0 10px rgba(0,240,255,0.15);
+    }
+    aside.warning, aside.negative {
+      border-left-color: var(--crt-amber) !important;
+      box-shadow: 0 0 10px rgba(255,176,0,0.2);
+    }
+    aside.special, aside.positive {
+      border-left-color: var(--gb-green) !important;
+      box-shadow: 0 0 10px rgba(155,188,15,0.2);
+    }
+    aside p, aside li, aside strong { color: var(--phosphor) !important; }
+
+    /* Buttons / FAB / next-step */
+    paper-fab, .fab-container paper-fab,
+    paper-button, button {
+      background: var(--neon-magenta) !important;
+      color: var(--bg-deep) !important;
+      border: 2px solid var(--neon-magenta) !important;
+      border-radius: 0 !important;
+      font-family: "Press Start 2P",monospace !important;
+      font-size: 11px !important;
+      box-shadow: 0 0 10px rgba(255,46,136,0.6) !important;
+      text-transform: uppercase;
+    }
+    paper-button:hover, button:hover { background: var(--neon-cyan) !important; border-color: var(--neon-cyan) !important; box-shadow: 0 0 12px rgba(0,240,255,0.7) !important; }
+
+    /* Progress / done indicators */
+    google-codelab[hide-tabs] #app-bar .more, .arrow-back { color: var(--neon-cyan) !important; }
+
+    /* Scrollbars */
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: var(--bg-deep); }
+    ::-webkit-scrollbar-thumb { background: var(--neon-cyan); border-radius: 0; box-shadow: 0 0 6px rgba(0,240,255,0.5); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--neon-magenta); }
+
+    /* Selection */
+    ::selection { background: var(--neon-magenta); color: var(--bg-deep); }
   </style>
 </head>
 <body>
