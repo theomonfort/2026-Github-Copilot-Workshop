@@ -66,13 +66,14 @@
     }
 
     /* App bar */
-    #app-bar, header#app-bar, .codelab-title-bar, google-codelab #app-bar {
+    #app-bar, header#app-bar, .codelab-title-bar, google-codelab #app-bar,
+    #codelab-title, google-codelab #codelab-title {
       background: linear-gradient(180deg, #11163a 0%, #0a0e27 100%) !important;
       color: var(--phosphor) !important;
       border-bottom: 1px solid rgba(0,240,255,0.25) !important;
       box-shadow: 0 2px 16px rgba(0,0,0,0.5) !important;
-      height: 56px !important;
     }
+    #codelab-title h1, #codelab-title .codelab-title, #codelab-title a,
     #app-bar .codelab-title, #app-bar h1, #app-bar a, #app-bar .feedback {
       color: var(--phosphor) !important;
       font-family: "DotGothic16", "Noto Sans JP", monospace !important;
@@ -80,16 +81,18 @@
       letter-spacing: 0.04em;
       font-size: 16px !important;
     }
-    #app-bar .codelab-title::before {
+    #codelab-title h1::before, #app-bar .codelab-title::before {
       content: "▸ ";
       color: var(--neon-cyan);
       text-shadow: 0 0 6px rgba(0,240,255,0.5);
     }
+    #codelab-title [icon] svg, #codelab-title svg, #codelab-title paper-icon-button,
     #app-bar [icon] svg, #app-bar svg, #app-bar paper-icon-button {
       fill: var(--phosphor-dim) !important;
       color: var(--phosphor-dim) !important;
       transition: color 0.2s ease, fill 0.2s ease;
     }
+    #codelab-title paper-icon-button:hover svg,
     #app-bar paper-icon-button:hover svg { fill: var(--neon-cyan) !important; }
     #countdown {
       color: var(--crt-amber) !important;
