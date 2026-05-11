@@ -715,21 +715,13 @@ Tailwind ユーティリティ: `font-pixel` (DotGothic16)、`font-body` (Noto S
 <ol type="1">
 <li><strong>Settings</strong> → <strong>Copilot</strong> → <strong>Code review</strong> のページで、<strong>Automatic code review</strong> セクションを探す</li>
 <li><strong>Add a ruleset</strong> （または <strong>Create ruleset</strong>）をクリック → Ruleset 作成画面が <strong>Automatically request Copilot code review</strong> が有効化された状態で開きます</li>
-<li>Ruleset 名を入力（例: <code>Require PR and CCR</code>）</li>
-<li><strong>Enforcement status</strong> を <strong>Active</strong> に変更</li>
-<li><strong>Bypass list</strong> → <strong>Add bypass</strong> → <strong>Repository admin</strong> を追加</li>
-<li><strong>Target branches</strong> → <strong>Add target</strong> → <strong>Include default branch</strong> を選択</li>
-<li><strong>Require a pull request before merging</strong> を有効化 <ul>
-<li><strong>Required approvals</strong> を <strong>1</strong> に設定</li>
-</ul>
-</li>
-<li><strong>Create</strong> をクリック</li>
 </ol>
-<aside class="special"><p><strong>ポイント</strong>: Code review 設定ページからこの導線を使うと、<code>Automatically request Copilot code review</code> が最初からチェック済みで開きます。Settings → Rules から作る場合は手動でこのチェックを入れる必要があります。</p>
-</aside>
-<aside class="special"><p><strong>ポイント</strong>: Bypass list に Repository admin を追加しておくと、急いでいる時にチェックを待たずにマージできます。</p>
-</aside>
-<aside class="warning"><p><strong>注意</strong>: Enforcement status が「Disabled」のままだとルールが適用されません。必ず <strong>Active</strong> に変更してください。</p>
+<aside class="special"><p><strong>ポイント</strong>: 開いた Ruleset 画面では、以下のオプションも有効化しておくのがおすすめです：</p>
+<ul>
+<li><strong>Review new pushes</strong> — push のたびに自動で再レビュー</li>
+<li><strong>Require a pull request before merging</strong> — 直接 push を禁止</li>
+<li><strong>Bypass list</strong> に <strong>Repository admin</strong> を追加 — ワークショップ中にレビュー待ちでブロックされないように</li>
+</ul>
 </aside>
 <h2 is-upgraded>7.3 — PR の結果を確認する</h2>
 <p>実装をコミット・push して PR を作成すると、Copilot Code Review が自動的に実行され、以下が表示されます（⏱ 約5分）：</p>
