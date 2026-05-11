@@ -17,11 +17,11 @@ GitHub Copilotワークショップへようこそ！
 
 この勉強会では、[**Copilot Playbook**](https://theomonfort.github.io/theomonfort/playbook/github/?present=1) で紹介されているシンプルな概念を実際に手を動かして体験します。
 
-**PLAN → CODE → REVIEW → TEST & SECURE → OPERATE** のフェーズに沿って GitHub Copilot を使い、最終的には Playbook の簡易版（Markdown を綺麗に閲覧できる **Astro サイト**）を Copilot と一緒に作り上げます。
+**PLAN → CODE → REVIEW → TEST & SECURE → OPERATE** のフェーズに沿って GitHub Copilot を使い、最終的には Playbook の簡易版（Markdown を綺麗に閲覧できるサイト）を Copilot と一緒に作り上げます。
 
 ### 本日のゴール
 - **PLAN**: MCP・Instruction・Skill で Copilot に「文脈」「ルール」「型」を仕込む
-- **CODE**: Copilot Chat（Plan / Agent）で Astro サイトを設計・実装する
+- **CODE**: Copilot Chat（Plan / Agent）でサイトを設計・実装する
 - **REVIEW**: Copilot Code Review で PR を自動レビューする
 - **TEST & SECURE**: Dependabot・CodeQL（GHAS）と GitHub Actions（Playwright）で品質と安全性を担保する
 - **OPERATE**: Cloud Agent・Copilot CLI・Agentic Workflow で日常運用に AI を組み込む
@@ -866,7 +866,7 @@ Duration: 5
 - **PLAN：MCP サーバー** — GitHub MCP・Context7 で Copilot に最新コンテキストを与える
 - **PLAN：Instruction** — `copilot-instructions.md` と Path Instruction で Copilot の前提・スタイル・言語を固定する
 - **PLAN：Skills** — awesome-copilot の Skill を導入し、Issue 作成を自動化する
-- **CODE：Copilot Chat** — Plan モードで設計し、Agent モードで Astro サイトを実装する
+- **CODE：Copilot Chat** — Plan モードで設計し、Agent モードでサイトを実装する
 - **REVIEW：Copilot Code Review** — PR の自動レビューで品質を担保する
 - **TEST & SECURE：Dependabot & CodeQL** — 依存関係とコードの脆弱性を継続的に検出する
 - **TEST & SECURE：Actions** — GitHub Actions で Playwright テストを自動化する
