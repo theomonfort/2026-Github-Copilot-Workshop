@@ -327,6 +327,36 @@
       color: var(--crt-amber) !important;
       border-top: 1px solid rgba(255,176,0,0.3) !important;
     }
+
+    /* Collapsible prompt blocks */
+    details.prompt-collapse {
+      margin: 0.75em 0 1em;
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      padding: 0.4em 0.9em;
+    }
+    details.prompt-collapse[open] { padding-bottom: 0.9em; }
+    details.prompt-collapse > summary {
+      cursor: pointer;
+      font-family: "DotGothic16","IBM Plex Mono",monospace;
+      font-size: 0.95em;
+      color: #e6edf3;
+      padding: 0.3em 0;
+      user-select: none;
+      list-style: none;
+    }
+    details.prompt-collapse > summary::-webkit-details-marker { display: none; }
+    details.prompt-collapse > summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 0.5em;
+      transition: transform 0.15s;
+      color: var(--neon-cyan);
+    }
+    details.prompt-collapse[open] > summary::before { transform: rotate(90deg); }
+    details.prompt-collapse > summary:hover { color: var(--neon-cyan); }
+    details.prompt-collapse > pre { margin-top: 0.5em; }
   </style>
 </head>
 <body>
@@ -478,7 +508,8 @@
 <li><strong><code>.github/instructions/frontend.instructions.md</code></strong> — フロントエンド系ファイルにのみ適用される <strong>Path Instruction</strong>（デザイントークン）</li>
 </ul>
 <h2 is-upgraded>4.1 — リポジトリ共通の Instruction を作成する</h2>
-<p>Copilot Chat で以下を入力してください：</p>
+<p>Copilot Chat で以下のプロンプトを貼り付けてください：</p>
+<details class="prompt-collapse"><summary>📋 プロンプトを表示 / コピー</summary>
 <pre><code>.github/copilot-instructions.md を作成してください。本文はすべて日本語で書いてください。
 内容は以下のとおりにしてください：
 
@@ -503,12 +534,14 @@
 - マークダウンは src/content/&lt;collection&gt;/*.md。スキーマは src/content.config.ts。
 - パッケージマネージャは **pnpm**。
 </code></pre>
+</details>
 <p>⏱ 約2分</p>
 <aside class="special"><p><strong>ポイント</strong>: 以後 Copilot の応答が日本語に切り替わります。Stack 制約も自動で守られるようになります。</p>
 </aside>
 <h2 is-upgraded>4.2 — フロントエンド専用の Path Instruction を作成する</h2>
 <p>特定のファイルパターンにだけ適用される <strong>Path Instruction</strong> を作成します。VS Code は <code>applyTo</code> の glob にマッチするファイルを触るときだけ、このルールを Copilot に渡します。</p>
-<p>Copilot Chat で以下を入力してください：</p>
+<p>Copilot Chat で以下のプロンプトを貼り付けてください：</p>
+<details class="prompt-collapse"><summary>📋 プロンプトを表示 / コピー</summary>
 <pre><code>.github/instructions/frontend.instructions.md を作成してください。
 本文はすべて日本語で書いてください。先頭の YAML frontmatter は以下のとおりにしてください：
 
@@ -561,6 +594,7 @@ Tailwind ユーティリティ: `font-pixel` (DotGothic16)、`font-body` (Noto S
 - 完全な丸 (pill) 形状。角丸は最大 4px まで。
 - 灰色のソフトドロップシャドウ。グロー (neon glow) のみ使う。
 </code></pre>
+</details>
 <p>⏱ 約2分</p>
 <aside class="special"><p><strong>ポイント</strong>: <code>.astro</code> や <code>.css</code> を編集するときだけこの design token が自動的に Copilot に渡されます。<code>/init</code> や docs 編集など関係ないタスクでは混ざらないので、ノイズが減ります。</p>
 </aside>
