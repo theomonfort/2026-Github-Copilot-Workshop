@@ -514,7 +514,7 @@ Copilot のレビュー提案を修正する方法は2つあります：
 > - レビューコメントが日本語で表示されているのは、`copilot-instructions.md` で設定した言語指定が反映されているためです！
 > - `copilot-instructions.md` にレビュー観点（例: セキュリティ重視、パフォーマンス重視）を追記することで、レビュー内容をカスタマイズできます。
 
-## Test & Secure: Dependabot & CodeQL（任意）
+## SECURE: Dependabot & CodeQL（任意）
 Duration: 5
 
 > aside positive
@@ -538,7 +538,7 @@ Duration: 5
 > aside positive
 > **ポイント**: Dependabot は週次で依存関係をチェックし、脆弱性が見つかれば自動的に PR を作成してくれます。CodeQL は静的解析でセキュリティ上の問題（XSS / SQL Injection 等）を検出します。
 
-## Test & Secure: Actions（任意）
+## TEST: Actions（任意）
 Duration: 15
 
 > aside positive
