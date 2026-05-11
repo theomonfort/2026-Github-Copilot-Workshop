@@ -245,8 +245,8 @@
       border-color: var(--neon-magenta) !important;
       box-shadow: 0 0 16px rgba(255,46,136,0.4), 0 2px 8px rgba(0,0,0,0.5) !important;
     }
-    #next-step { background: linear-gradient(180deg, #00f0ff 0%, #00b8c8 100%) !important; color: var(--bg-deep) !important; border-color: var(--neon-cyan) !important; }
-    #next-step:hover { background: linear-gradient(180deg, #6df6ff 0%, #00f0ff 100%) !important; color: var(--bg-deep) !important; border-color: var(--neon-cyan) !important; }
+    #next-step { background: linear-gradient(180deg, #1a2050 0%, #0d1230 100%) !important; color: var(--neon-cyan) !important; border-color: rgba(0,240,255,0.5) !important; }
+    #next-step:hover { background: linear-gradient(180deg, #232b6a 0%, #131a44 100%) !important; color: var(--neon-magenta) !important; border-color: var(--neon-magenta) !important; }
     #done { background: linear-gradient(180deg, var(--gb-green) 0%, #6a8a0a 100%) !important; color: var(--bg-deep) !important; border-color: var(--gb-green) !important; }
 
     /* Progress / done indicators */
