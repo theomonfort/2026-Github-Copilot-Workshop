@@ -635,11 +635,15 @@ Tailwind ユーティリティ: `font-pixel` (DotGothic16)、`font-body` (Noto S
         <aside class="special"><p><strong>📖 参考</strong>: <a href="https://theomonfort.github.io/theomonfort/playbook/copilot-chat/" target="_blank">プレイブック / Copilot Chat</a> で Plan / Agent モードの違いと使い分けを確認できます。</p>
 </aside>
 <p>ここまでで PLAN 側 (MCP・Instruction・Skill) のハーネスが整いました。いよいよ <strong>Copilot Chat の Plan モード</strong> で実装計画を立て、Agent モードで一気に実装します。</p>
-<h2 is-upgraded>6.1 — Plan モードに切り替える</h2>
+<h2 is-upgraded>6.1 — モデルを Claude Opus 4.6 に切り替える</h2>
+<p>Copilot Chat 画面下部のモデルセレクターをクリックし、<strong>Claude Opus 4.6</strong> を選択します。</p>
+<aside class="special"><p><strong>💡 ヒント</strong>: 複雑な設計タスクや長文のコンテキストを扱う際は Opus 系モデルが強いです。日常の編集・補完は他のモデルで十分ですが、本セクションの「サイト全体を一気に組み立てる」ような作業では Opus 4.6 を使うと品質が安定します。</p>
+</aside>
+<h2 is-upgraded>6.2 — Plan モードに切り替える</h2>
 <p>Copilot Chat のモード切替えから <strong>「Plan」</strong> を選択してください。</p>
 <aside class="special"><p><strong>💡 ヒント</strong>: Plan モードでは Copilot は <strong>設計と質問</strong> に徹し、すぐにファイルを書き換えません。要件が曖昧な部分は逆質問してきます。納得できる計画になるまで対話を重ねましょう。</p>
 </aside>
-<h2 is-upgraded>6.2 — 実装計画を依頼する</h2>
+<h2 is-upgraded>6.3 — 実装計画を依頼する</h2>
 <p>以下のプロンプトをそのままコピーして Copilot Chat に貼り付けてください：</p>
 <pre><code>小さな Astro サイトを作ってください（日本語のみ。i18n / 英語対応は不要）。新しいブランチ（例: feature/playbook-site）で作業してください。
 
@@ -656,7 +660,7 @@ Tailwind ユーティリティ: `font-pixel` (DotGothic16)、`font-body` (Noto S
 <p>⏱ 約3分</p>
 <aside class="special"><p><strong>ポイント</strong>: 4.1 で書いた Stack ルールと、4.2 のフロントエンド design token がここで効きます。Plan が Astro + Tailwind + 指定カラーで提案されるはずです。</p>
 </aside>
-<h2 is-upgraded>6.3 — Autopilot で実装する</h2>
+<h2 is-upgraded>6.4 — Autopilot で実装する</h2>
 <p>Plan に納得したら <strong>「Start with Autopilot」</strong> をクリックして実装を開始します。</p>
 <p class="image-container"><img alt="Start with Autopilot" src="../../img/768c1c91ea2ffc00.png"></p>
 <p>⏱ 約15〜20分</p>
