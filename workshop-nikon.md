@@ -320,11 +320,16 @@ gh skill install theomonfort/skills github-issues
 
 ### 5.2 — MCP + Skill で Issue を作成する
 
-GitHub MCP Server + `github-issues` Skill を組み合わせて、構造化された Issue を 1 件作成します。Copilot Chat で以下のプロンプトを入力してください：
+GitHub MCP Server + `github-issues` Skill を組み合わせて、構造化された Issue を 1 件作成します。**Skill の名前は明示しません** — Copilot Chat は SKILL.md の説明文を読み、プロンプトの内容にマッチすると自動で召喚します。
+
+Copilot Chat で以下のプロンプトを入力してください：
+
+<details>
+<summary>📋 プロンプトを表示 / コピー</summary>
 
 ```
-GitHub MCP Server を使って、このリポジトリに以下の Issue を作成してください。
-github-issues skill のテンプレートに従い、ユーザーストーリー・受け入れ基準・実装ノートを含む構造化された feature request にしてください。
+このリポジトリに以下の Issue を作成してください。
+ユーザーストーリー・受け入れ基準・実装ノートを含む構造化された feature request にしてください。
 
 タイトル: Add English support on the website
 
@@ -345,10 +350,12 @@ github-issues skill のテンプレートに従い、ユーザーストーリー
 ラベル: feature, i18n, frontend
 ```
 
+</details>
+
 ⏱ 約2分
 
 > aside positive
-> **ポイント**: **MCP** が「ツールへの接続」を、**Skill** が「そのツールでの作法」を持ち込みます。両方そろうと、Copilot は「英語対応の Issue を書いて」と頼むだけで、テンプレに沿った Issue を GitHub に直接立ててくれます。
+> **ポイント**: **MCP** が「ツールへの接続」を、**Skill** が「そのツールでの作法」を持ち込みます。Skill を明示しなくても、Copilot は SKILL.md の説明から「これは Issue を作るタスクだ」と判断して `github-issues` を自動的に召喚します。テンプレに沿った Issue が GitHub に直接立てられるのを確認してください。
 >
 > このあと作成された Issue は、Cloud Agent や Agentic Workflow のステップで実装担当として割り当てます（次の章で）。
 
