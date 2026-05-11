@@ -303,7 +303,7 @@ Duration: 10
 VS Code のターミナルで以下を実行してください：
 
 ```bash
-gh skill install github-issues
+gh skill install github/awesome-copilot github-issues
 ```
 
 > aside positive
