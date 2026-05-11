@@ -332,17 +332,20 @@
       margin: 1em auto !important;
     }
 
-    /* Floating Octocat in PLAN sections */
+    /* Floating Octocat — sits at top-right of section, slightly above the first paragraph */
     google-codelab-step .image-container:has(img[alt*="Octocat"]) {
       float: right !important;
-      margin: 0 0 1em 1.5em !important;
+      margin: -3.5em 0 0.5em 1.5em !important;
       width: 120px !important;
       text-align: right !important;
+      position: relative;
+      z-index: 1;
     }
     google-codelab-step img[alt*="Octocat"] {
       width: 120px !important;
       max-width: 120px !important;
       height: auto;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
     }
 
     /* ---- Drawer: no border around step tiles ---- */
