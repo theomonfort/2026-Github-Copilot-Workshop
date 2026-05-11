@@ -535,7 +535,7 @@ Duration: 3
 
 
 > aside positive
-> **📖 参考**: [プレイブック / GitHub Advanced Security](https://theomonfort.github.io/theomonfort/playbook/github-advanced-security/?present=1) で GHAS が提供する保護（Dependabot / CodeQL / Secret Scanning）の全体像を確認できます。
+> **📖 参考**: [プレイブック / Dependabot](http://127.0.0.1:4321/theomonfort/playbook/dependabot) で Dependabot の仕組みと設定方法を確認できます。
 
 依存関係の脆弱性チェックを Dependabot で有効化します。設定は数クリックで完了します。
 
