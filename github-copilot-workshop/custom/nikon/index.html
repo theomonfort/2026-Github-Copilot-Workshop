@@ -139,6 +139,12 @@
       text-shadow: none !important;
       font-weight: 700 !important;
     }
+    /* Kill the dark label backgrounds behind step text in drawer */
+    #drawer a span, #drawer a .label, #drawer ol li a span, #drawer ol li a .label,
+    #drawer a > *:not(.step), #drawer ol li a > *:not(.step) {
+      background: transparent !important;
+      background-color: transparent !important;
+    }
 
     /* Step content */
     google-codelab-step {
