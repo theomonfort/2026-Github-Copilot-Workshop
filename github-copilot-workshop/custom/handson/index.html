@@ -646,7 +646,7 @@ Tailwind ユーティリティ: `font-pixel` (DotGothic16)、`font-body` (Noto S
 <p>以下のプロンプトをそのままコピーして Copilot Chat に貼り付けてください：</p>
 <pre><code>小さな Astro サイトを作ってください。
 
-- グリッドのインデックスページ：src/content/glossary/*.md の各マークダウンエントリーを 1 タイル表示する（アイコン + タイトル + 短いサマリーを載せたクリック可能なカード）。
+- グリッドのインデックスページ：src/content/playbook/*.md の各マークダウンエントリーを 1 タイル表示する（アイコン + タイトル + 短いサマリーを載せたクリック可能なカード）。
 - タイルをクリック → そのエントリーの詳細ページが開き、マークダウン全文をスクロール可能に表示する。
 - 詳細ページで「P」キーを押す → Presentation モードのトグル：
     * 各 ## 見出しが 1 スライドになる。
@@ -666,7 +666,7 @@ Tailwind ユーティリティ: `font-pixel` (DotGothic16)、`font-body` (Noto S
 <p>Copilot が以下を自動で実行します：</p>
 <ul>
 <li>Astro プロジェクトの初期化（pnpm）</li>
-<li><code>src/content.config.ts</code> で glossary collection を定義</li>
+<li><code>src/content.config.ts</code> で playbook collection を定義</li>
 <li>グリッドのインデックスページ</li>
 <li>詳細ページ（dynamic route + content rendering）</li>
 <li>Presentation モードのキーボード操作（P / ← → / ↑ ↓ / Esc）</li>
@@ -783,8 +783,8 @@ Tailwind ユーティリティ: `font-pixel` (DotGothic16)、`font-body` (Noto S
 <pre><code>Presentation モードのキーボードナビゲーションを検証する Playwright E2E テストを作成してください。
 
 前提：
-- src/content/glossary/ に少なくとも 2 件のエントリーがあるとする。
-- 詳細ページの URL パターンは `/glossary/[slug]`。
+- src/content/playbook/ に少なくとも 2 件のエントリーがあるとする。
+- 詳細ページの URL パターンは `/playbook/[slug]`。
 
 テストケース：
 1. 詳細ページで `P` を押すと Presentation モードに入る（DOM の状態クラスやサイドバー表示で確認）。
