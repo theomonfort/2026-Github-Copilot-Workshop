@@ -30,55 +30,73 @@
       <google-codelab-step label="INTRO：勉強会について" duration="5">
         <p>GitHub Copilotワークショップへようこそ！</p>
 <p class="image-container"><img alt="GitHub Copilot Logo" src="../../img/dcd9c52ce37f5b19.png"></p>
-<p>このワークショップでは、<strong>レガシーPHPで作られた「AI駆動開発ガイド」ページ</strong> を題材に、GitHub Copilot の全機能を活用してモダンなウェブアプリケーションに変革する体験をしていただきます。</p>
+<p>このワークショップでは、<strong>Copilot Playbook の Markdown コンテンツを題材に</strong>、PLAN → CODE → REVIEW → SECURE → TEST → OPERATE のフェーズに沿って GitHub Copilot を体験します。最終的には、Markdown を「グリッド + 詳細 + プレゼンテーションモード」で閲覧できる <strong>Astro サイト</strong> を、Copilot と一緒にゼロから作り上げます。</p>
 <h2 is-upgraded>本日のゴール</h2>
 <ul>
-<li>GitHub Copilot のセットアップとカスタマイズ方法を理解する</li>
-<li>Copilot Agent Mode でレガシーサイトを Next.js + TypeScript + Tailwind CSS に移行する</li>
-<li>自動テスト、コード品質チェック、セキュリティスキャンを設定する</li>
-<li>Cloud Agent による自律的な機能実装を体験する</li>
-<li>Agentic Workflow で CI/CD パイプラインに AI を組み込む</li>
-<li>Copilot CLI で新規アプリケーションを構築する</li>
+<li><strong>PLAN</strong>: MCP・Instruction・Skill で Copilot に「文脈」「ルール」「型」を仕込む</li>
+<li><strong>CODE</strong>: Copilot Chat（Plan / Agent）で Astro サイトを設計・実装する</li>
+<li><strong>REVIEW</strong>: Copilot Code Review で PR を自動レビューする</li>
+<li><strong>SECURE</strong>: Dependabot &amp; CodeQL（GHAS）で脆弱性を検出する</li>
+<li><strong>TEST</strong>: GitHub Actions で Playwright テストを自動化する</li>
+<li><strong>OPERATE</strong>: Cloud Agent・Copilot CLI・Agentic Workflow で日常運用に AI を組み込む</li>
 </ul>
 <h2 is-upgraded>本日のアジェンダ</h2>
 <table>
 <tr><td colspan="1" rowspan="1"><p>パート</p>
+</td><td colspan="1" rowspan="1"><p>フェーズ</p>
 </td><td colspan="1" rowspan="1"><p>内容</p>
-</td><td colspan="1" rowspan="1"><p>概要</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p>Setup</p>
-</td><td colspan="1" rowspan="1"><p>プロジェクトセットアップ</p>
-</td><td colspan="1" rowspan="1"><p>テンプレートリポジトリから Codespaces を起動</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>1</p>
-</td><td colspan="1" rowspan="1"><p>セットアップ＆カスタマイズ</p>
-</td><td colspan="1" rowspan="1"><p>/init、カスタム指示、Skill 作成、MCP 設定</p>
+</td><td colspan="1" rowspan="1"><p>INTRO</p>
+</td><td colspan="1" rowspan="1"><p>勉強会について</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>2</p>
-</td><td colspan="1" rowspan="1"><p>実装：レガシーサイトの移行</p>
-</td><td colspan="1" rowspan="1"><p>Plan Mode → Next.js + TypeScript + Tailwind への移行</p>
+</td><td colspan="1" rowspan="1"><p>INTRO</p>
+</td><td colspan="1" rowspan="1"><p>セットアップ（Codespaces 起動）</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>3</p>
-</td><td colspan="1" rowspan="1"><p>自動テストと Actions</p>
-</td><td colspan="1" rowspan="1"><p>Vitest + Playwright テスト、CI ワークフロー</p>
+</td><td colspan="1" rowspan="1"><p>PLAN</p>
+</td><td colspan="1" rowspan="1"><p>MCP サーバー（GitHub MCP / Context7）</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>4</p>
-</td><td colspan="1" rowspan="1"><p>コード品質</p>
-</td><td colspan="1" rowspan="1"><p>Copilot Code Review、GHAS 設定</p>
+</td><td colspan="1" rowspan="1"><p>PLAN</p>
+</td><td colspan="1" rowspan="1"><p>Instruction（<code>copilot-instructions.md</code> + Path Instruction）</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>5</p>
-</td><td colspan="1" rowspan="1"><p>Cloud Agent</p>
-</td><td colspan="1" rowspan="1"><p>Issue からの自律的な機能実装</p>
+</td><td colspan="1" rowspan="1"><p>PLAN</p>
+</td><td colspan="1" rowspan="1"><p>Skills（awesome-copilot で Issue 作成）</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>6</p>
-</td><td colspan="1" rowspan="1"><p>Agentic Workflow</p>
-</td><td colspan="1" rowspan="1"><p>PAT 作成、テストカバレッジ自動更新</p>
+</td><td colspan="1" rowspan="1"><p>CODE</p>
+</td><td colspan="1" rowspan="1"><p>Copilot Chat（Plan モード → Agent モードで Astro 実装）</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>7</p>
-</td><td colspan="1" rowspan="1"><p>CLI</p>
-</td><td colspan="1" rowspan="1"><p>AI 利用状況ダッシュボードの構築</p>
+</td><td colspan="1" rowspan="1"><p>REVIEW</p>
+</td><td colspan="1" rowspan="1"><p>Copilot Code Review</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>8</p>
+</td><td colspan="1" rowspan="1"><p>SECURE</p>
+</td><td colspan="1" rowspan="1"><p>Dependabot &amp; CodeQL（任意）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>9</p>
+</td><td colspan="1" rowspan="1"><p>TEST</p>
+</td><td colspan="1" rowspan="1"><p>GitHub Actions（任意）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>10</p>
+</td><td colspan="1" rowspan="1"><p>CODE</p>
+</td><td colspan="1" rowspan="1"><p>Cloud Agent</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>11</p>
+</td><td colspan="1" rowspan="1"><p>CODE</p>
+</td><td colspan="1" rowspan="1"><p>Copilot CLI</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>12</p>
+</td><td colspan="1" rowspan="1"><p>OPERATE</p>
+</td><td colspan="1" rowspan="1"><p>Agentic Workflow</p>
 </td></tr>
 </table>
+<aside class="special"><p><strong>📖 リファレンス</strong>: 本ワークショップは <a href="https://theomonfort.github.io/theomonfort/playbook/" target="_blank">Copilot Playbook</a> を題材コンテンツとして使います。各ステップにプレイブックのリンクを併記しているので、社内展開時の参考資料としても活用してください。</p>
+</aside>
 <h2 is-upgraded>前提条件</h2>
 <p>以下の環境をご用意ください：</p>
 <ul>

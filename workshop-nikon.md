@@ -15,28 +15,35 @@ GitHub Copilotワークショップへようこそ！
 
 ![GitHub Copilot Logo](github-copilot-workshop/img/octocat_copilot.png)
 
-このワークショップでは、**レガシーPHPで作られた「AI駆動開発ガイド」ページ** を題材に、GitHub Copilot の全機能を活用してモダンなウェブアプリケーションに変革する体験をしていただきます。
+このワークショップでは、**Copilot Playbook の Markdown コンテンツを題材に**、PLAN → CODE → REVIEW → SECURE → TEST → OPERATE のフェーズに沿って GitHub Copilot を体験します。最終的には、Markdown を「グリッド + 詳細 + プレゼンテーションモード」で閲覧できる **Astro サイト** を、Copilot と一緒にゼロから作り上げます。
 
 ### 本日のゴール
-- GitHub Copilot のセットアップとカスタマイズ方法を理解する
-- Copilot Agent Mode でレガシーサイトを Next.js + TypeScript + Tailwind CSS に移行する
-- 自動テスト、コード品質チェック、セキュリティスキャンを設定する
-- Cloud Agent による自律的な機能実装を体験する
-- Agentic Workflow で CI/CD パイプラインに AI を組み込む
-- Copilot CLI で新規アプリケーションを構築する
+- **PLAN**: MCP・Instruction・Skill で Copilot に「文脈」「ルール」「型」を仕込む
+- **CODE**: Copilot Chat（Plan / Agent）で Astro サイトを設計・実装する
+- **REVIEW**: Copilot Code Review で PR を自動レビューする
+- **SECURE**: Dependabot & CodeQL（GHAS）で脆弱性を検出する
+- **TEST**: GitHub Actions で Playwright テストを自動化する
+- **OPERATE**: Cloud Agent・Copilot CLI・Agentic Workflow で日常運用に AI を組み込む
 
 ### 本日のアジェンダ
 
-| パート | 内容 | 概要 |
+| パート | フェーズ | 内容 |
 |---|---|---|
-| Setup | プロジェクトセットアップ | テンプレートリポジトリから Codespaces を起動 |
-| 1 | セットアップ＆カスタマイズ | /init、カスタム指示、Skill 作成、MCP 設定 |
-| 2 | 実装：レガシーサイトの移行 | Plan Mode → Next.js + TypeScript + Tailwind への移行 |
-| 3 | 自動テストと Actions | Vitest + Playwright テスト、CI ワークフロー |
-| 4 | コード品質 | Copilot Code Review、GHAS 設定 |
-| 5 | Cloud Agent | Issue からの自律的な機能実装 |
-| 6 | Agentic Workflow | PAT 作成、テストカバレッジ自動更新 |
-| 7 | CLI | AI 利用状況ダッシュボードの構築 |
+| 1 | INTRO | 勉強会について |
+| 2 | INTRO | セットアップ（Codespaces 起動） |
+| 3 | PLAN | MCP サーバー（GitHub MCP / Context7） |
+| 4 | PLAN | Instruction（`copilot-instructions.md` + Path Instruction） |
+| 5 | PLAN | Skills（awesome-copilot で Issue 作成） |
+| 6 | CODE | Copilot Chat（Plan モード → Agent モードで Astro 実装） |
+| 7 | REVIEW | Copilot Code Review |
+| 8 | SECURE | Dependabot & CodeQL（任意） |
+| 9 | TEST | GitHub Actions（任意） |
+| 10 | CODE | Cloud Agent |
+| 11 | CODE | Copilot CLI |
+| 12 | OPERATE | Agentic Workflow |
+
+> aside positive
+> **📖 リファレンス**: 本ワークショップは [Copilot Playbook](https://theomonfort.github.io/theomonfort/playbook/) を題材コンテンツとして使います。各ステップにプレイブックのリンクを併記しているので、社内展開時の参考資料としても活用してください。
 
 ### 前提条件
 
