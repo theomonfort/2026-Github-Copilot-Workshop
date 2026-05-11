@@ -592,6 +592,11 @@ Tailwind ユーティリティ: `font-pixel` (DotGothic16)、`font-body` (Noto S
 <p>VS Code のターミナルで以下を実行してください：</p>
 <pre><code language="language-bash" class="language-bash">gh skill install theomonfort/skills github-issues
 </code></pre>
+<p>実行すると CLI から <strong>対象エージェント</strong> と <strong>インストール先（scope）</strong> を選ぶよう聞かれます：</p>
+<ul>
+<li><strong>Agent</strong>: <code>copilot</code> を選択（VS Code の GitHub Copilot Chat 用）</li>
+<li><strong>Scope</strong>: <code>project</code>（プロジェクト = このリポジトリ専用にインストール）</li>
+</ul>
 <aside class="special"><p><strong>💡 ヒント</strong>: スキルの公開方法は標準化されており、<strong>公開リポジトリ + </strong><strong><code>skills/<skill-name>/SKILL.md</code></strong> の構成にするだけで <code>gh skill install <owner>/<repo> <skill-name></code> で誰でもインストールできます（仕様: <a href="https://agentskills.io/specification" target="_blank">agentskills.io</a>）。<code>github/awesome-copilot</code> はコミュニティ版のコレクションですが、SAML SSO で守られた組織からインストールしようとすると認可ステップが必要になるため、本ワークショップではフォーク先の <code>theomonfort/skills</code> を使います。</p>
 </aside>
 <p>インストールが完了すると <code>.github/skills/github-issues/SKILL.md</code> が追加されます。中身を開いて Copilot がどんなときにこの Skill を呼ぶのか、どんなテンプレを持っているのかを確認してみてください。</p>

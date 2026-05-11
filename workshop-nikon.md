@@ -306,6 +306,11 @@ VS Code のターミナルで以下を実行してください：
 gh skill install theomonfort/skills github-issues
 ```
 
+実行すると CLI から **対象エージェント** と **インストール先（scope）** を選ぶよう聞かれます：
+
+- **Agent**: `copilot` を選択（VS Code の GitHub Copilot Chat 用）
+- **Scope**: `project`（プロジェクト = このリポジトリ専用にインストール）
+
 > aside positive
 > **💡 ヒント**: スキルの公開方法は標準化されており、**公開リポジトリ + `skills/<skill-name>/SKILL.md`** の構成にするだけで `gh skill install <owner>/<repo> <skill-name>` で誰でもインストールできます（仕様: [agentskills.io](https://agentskills.io/specification)）。`github/awesome-copilot` はコミュニティ版のコレクションですが、SAML SSO で守られた組織からインストールしようとすると認可ステップが必要になるため、本ワークショップではフォーク先の `theomonfort/skills` を使います。
 
