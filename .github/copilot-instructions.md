@@ -69,6 +69,9 @@ sed -i '' 's|src="img/|src="../../img/|g' "github-copilot-workshop/custom/${CUST
 # PLAN フェーズの Octocat を控えめに（右寄せ・小サイズ）
 sed -i '' 's|<p class="image-container"><img alt="PLAN フェーズの Octocat"|<p class="image-container" style="float:right;width:72px;margin:-8px 0 0.5em 1em;"><img alt="PLAN フェーズの Octocat" style="width:72px;height:auto;"|g' "github-copilot-workshop/custom/${CUSTOM_NAME}/index.html"
 
+# INTRO の Copilot Pixel を控えめに（中央・小サイズ）
+sed -i '' 's|<p class="image-container"><img alt="GitHub Copilot Logo"|<p class="image-container" style="text-align:center;"><img alt="GitHub Copilot Logo" style="width:160px;height:auto;"|g' "github-copilot-workshop/custom/${CUSTOM_NAME}/index.html"
+
 # ダークモード CSS を <head> 末尾に注入（既存の dark block があれば置換）
 python3 - "github-copilot-workshop/custom/${CUSTOM_NAME}/index.html" <<'PY'
 import re, sys
