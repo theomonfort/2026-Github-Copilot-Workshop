@@ -55,13 +55,6 @@ Duration: 15
 
 3. リポジトリ作成画面で以下を設定：
 
-#### Owner（オーナー）の選択
-
-**個人で参加の場合：**
-- Owner は **自分のアカウント** を選択
-- Visibility は **Public** を選択（Free プランの場合、Public でないと一部機能が制限されます）
-
-**企業の Organization で参加の場合：**
 - Owner は **Copilot / Actions / GHAS / Codespaces などが有効化された Organization** を選択
 - Visibility は **Private** を選択
 
