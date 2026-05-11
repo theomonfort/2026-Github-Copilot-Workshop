@@ -150,7 +150,11 @@
       color: var(--phosphor) !important;
       line-height: 1.7 !important;
     }
-    strong, b { color: var(--crt-amber) !important; }
+    strong, b {
+      color: var(--phosphor) !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.01em;
+    }
     a, a:visited { color: var(--neon-cyan) !important; text-decoration: underline; text-decoration-color: rgba(0,240,255,0.4); }
     a:hover { color: var(--neon-magenta) !important; text-shadow: 0 0 6px rgba(255,46,136,0.5); }
 
