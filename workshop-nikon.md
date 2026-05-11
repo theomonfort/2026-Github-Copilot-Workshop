@@ -56,7 +56,7 @@ Duration: 15
 3. リポジトリ作成画面で以下を設定：
 
 - Owner は **Copilot / Actions / GHAS / Codespaces などが有効化された Organization** を選択
-- Visibility は **Private** を選択
+- Visibility は **Public** を選択
 
 #### Repository name（リポジトリ名）
 - 任意の名前を入力してください（例: `hands-on-yourname`）
