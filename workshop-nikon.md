@@ -535,8 +535,21 @@ Duration: 5
 1. リポジトリの **Settings** → **Security and quality** → **Advanced Security**
 2. **Dependabot** セクション：
    - **Dependabot security updates** を有効化
-   - **Dependabot version updates** を有効化
-3. （オプション）**Tools** → **CodeQL analysis** → **Set up** → **Default** → **Enable CodeQL**
+   - **Dependabot version updates** を有効化 → エディタが開き `.github/dependabot.yml` のテンプレートが表示されます
+3. テンプレートの `package-ecosystem: ""` を **`"npm"`** に変更（本リポジトリは pnpm / npm エコシステム）：
+   ```yaml
+   version: 2
+   updates:
+     - package-ecosystem: "npm"
+       directory: "/"
+       schedule:
+         interval: "weekly"
+   ```
+4. **Commit changes…** → **「Create a new branch and start a pull request」** を選択 → PR を作成してマージ
+5. （オプション）**Tools** → **CodeQL analysis** → **Set up** → **Default** → **Enable CodeQL**
+
+> aside negative
+> **注意**: `package-ecosystem` が空のままだと **Commit changes** ボタンがグレーアウトします。`"npm"` などの有効な値を入れてから commit してください。また、セクション 7.2 で設定した Ruleset によって `main` への直接 commit はブロックされるので、PR 経由でマージします。
 
 > aside negative
 > **注意**: CodeQL はデフォルトブランチに存在する言語のみスキャンします。最初の Astro PR をマージしてから CodeQL を有効化すると、以降の Push / PR で TypeScript / JavaScript の自動スキャンが実行されます。

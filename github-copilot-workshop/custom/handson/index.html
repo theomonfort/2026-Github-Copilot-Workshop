@@ -773,11 +773,22 @@ Tailwind ユーティリティ: `font-pixel` (DotGothic16)、`font-body` (Noto S
 <li>リポジトリの <strong>Settings</strong> → <strong>Security and quality</strong> → <strong>Advanced Security</strong></li>
 <li><strong>Dependabot</strong> セクション： <ul>
 <li><strong>Dependabot security updates</strong> を有効化</li>
-<li><strong>Dependabot version updates</strong> を有効化</li>
+<li><strong>Dependabot version updates</strong> を有効化 → エディタが開き <code>.github/dependabot.yml</code> のテンプレートが表示されます</li>
 </ul>
 </li>
+<li>テンプレートの <code>package-ecosystem: ""</code> を <strong><code>"npm"</code></strong> に変更（本リポジトリは pnpm / npm エコシステム）： <pre><code language="language-yaml" class="language-yaml">version: 2
+updates:
+  - package-ecosystem: &#34;npm&#34;
+    directory: &#34;/&#34;
+    schedule:
+      interval: &#34;weekly&#34;
+</code></pre>
+</li>
+<li><strong>Commit changes...</strong> → <strong>「Create a new branch and start a pull request」</strong> を選択 → PR を作成してマージ</li>
 <li>（オプション）<strong>Tools</strong> → <strong>CodeQL analysis</strong> → <strong>Set up</strong> → <strong>Default</strong> → <strong>Enable CodeQL</strong></li>
 </ol>
+<aside class="warning"><p><strong>注意</strong>: <code>package-ecosystem</code> が空のままだと <strong>Commit changes</strong> ボタンがグレーアウトします。<code>"npm"</code> などの有効な値を入れてから commit してください。また、セクション 7.2 で設定した Ruleset によって <code>main</code> への直接 commit はブロックされるので、PR 経由でマージします。</p>
+</aside>
 <aside class="warning"><p><strong>注意</strong>: CodeQL はデフォルトブランチに存在する言語のみスキャンします。最初の Astro PR をマージしてから CodeQL を有効化すると、以降の Push / PR で TypeScript / JavaScript の自動スキャンが実行されます。</p>
 </aside>
 <aside class="special"><p><strong>ポイント</strong>: Dependabot は週次で依存関係をチェックし、脆弱性が見つかれば自動的に PR を作成してくれます。CodeQL は静的解析でセキュリティ上の問題（XSS / SQL Injection 等）を検出します。</p>
