@@ -437,6 +437,108 @@
       border-top: 1px solid rgba(255,176,0,0.3) !important;
     }
 
+    /* ====================================================================
+       Per-phase "world" theming — each section gets its own color identity
+       Detection via the colored octocat present in the step:
+       - PLAN フェーズ    → green (PLAN sections 3,4,5)
+       - CODE フェーズ    → red   (CODE sections 6,11,12)
+       - REVIEW フェーズ  → yellow (REVIEW section 7)
+       - TEST & SECURE   → blue  (TEST & SECURE sections 8,9,10)
+       Other sections keep the default (cyan/magenta) palette.
+       ==================================================================== */
+
+    /* --- BLUE world: TEST & SECURE --- */
+    google-codelab-step:has(img[alt*="TEST"]) .step-title,
+    google-codelab-step:has(img[alt*="TEST"]) h1.step-title {
+      color: #4dd0ff !important;
+      text-shadow: 0 0 12px rgba(77,208,255,0.35) !important;
+      border-bottom-color: rgba(77,208,255,0.4) !important;
+    }
+    google-codelab-step:has(img[alt*="TEST"]) h2,
+    google-codelab-step:has(img[alt*="TEST"]) h3,
+    google-codelab-step:has(img[alt*="TEST"]) h4 {
+      color: #4dd0ff !important;
+      text-shadow: 0 0 6px rgba(77,208,255,0.3) !important;
+    }
+    google-codelab-step:has(img[alt*="TEST"]) strong,
+    google-codelab-step:has(img[alt*="TEST"]) b { color: #7dd3e0 !important; }
+    google-codelab-step:has(img[alt*="TEST"]) aside.special,
+    google-codelab-step:has(img[alt*="TEST"]) aside.positive {
+      border-left-color: #4dd0ff !important;
+      box-shadow: 0 0 10px rgba(77,208,255,0.15) !important;
+    }
+    google-codelab-step:has(img[alt*="TEST"]) a,
+    google-codelab-step:has(img[alt*="TEST"]) a:visited { color: #7dd3e0 !important; }
+
+    /* --- GREEN world: PLAN --- */
+    google-codelab-step:has(img[alt*="PLAN"]) .step-title,
+    google-codelab-step:has(img[alt*="PLAN"]) h1.step-title {
+      color: #b8e054 !important;
+      text-shadow: 0 0 12px rgba(155,188,15,0.4) !important;
+      border-bottom-color: rgba(155,188,15,0.45) !important;
+    }
+    google-codelab-step:has(img[alt*="PLAN"]) h2,
+    google-codelab-step:has(img[alt*="PLAN"]) h3,
+    google-codelab-step:has(img[alt*="PLAN"]) h4 {
+      color: #b8e054 !important;
+      text-shadow: 0 0 6px rgba(155,188,15,0.3) !important;
+    }
+    google-codelab-step:has(img[alt*="PLAN"]) strong,
+    google-codelab-step:has(img[alt*="PLAN"]) b { color: #c5e895 !important; }
+    google-codelab-step:has(img[alt*="PLAN"]) aside.special,
+    google-codelab-step:has(img[alt*="PLAN"]) aside.positive {
+      border-left-color: #9bbc0f !important;
+      box-shadow: 0 0 10px rgba(155,188,15,0.18) !important;
+    }
+    google-codelab-step:has(img[alt*="PLAN"]) a,
+    google-codelab-step:has(img[alt*="PLAN"]) a:visited { color: #c5e895 !important; }
+
+    /* --- RED world: CODE --- */
+    google-codelab-step:has(img[alt*="CODE"]) .step-title,
+    google-codelab-step:has(img[alt*="CODE"]) h1.step-title {
+      color: #ff6b88 !important;
+      text-shadow: 0 0 12px rgba(255,107,136,0.4) !important;
+      border-bottom-color: rgba(255,107,136,0.45) !important;
+    }
+    google-codelab-step:has(img[alt*="CODE"]) h2,
+    google-codelab-step:has(img[alt*="CODE"]) h3,
+    google-codelab-step:has(img[alt*="CODE"]) h4 {
+      color: #ff6b88 !important;
+      text-shadow: 0 0 6px rgba(255,107,136,0.3) !important;
+    }
+    google-codelab-step:has(img[alt*="CODE"]) strong,
+    google-codelab-step:has(img[alt*="CODE"]) b { color: #ffb3c0 !important; }
+    google-codelab-step:has(img[alt*="CODE"]) aside.special,
+    google-codelab-step:has(img[alt*="CODE"]) aside.positive {
+      border-left-color: #ff6b88 !important;
+      box-shadow: 0 0 10px rgba(255,107,136,0.18) !important;
+    }
+    google-codelab-step:has(img[alt*="CODE"]) a,
+    google-codelab-step:has(img[alt*="CODE"]) a:visited { color: #ffb3c0 !important; }
+
+    /* --- YELLOW world: REVIEW --- */
+    google-codelab-step:has(img[alt*="REVIEW"]) .step-title,
+    google-codelab-step:has(img[alt*="REVIEW"]) h1.step-title {
+      color: #ffc94d !important;
+      text-shadow: 0 0 12px rgba(255,201,77,0.4) !important;
+      border-bottom-color: rgba(255,201,77,0.45) !important;
+    }
+    google-codelab-step:has(img[alt*="REVIEW"]) h2,
+    google-codelab-step:has(img[alt*="REVIEW"]) h3,
+    google-codelab-step:has(img[alt*="REVIEW"]) h4 {
+      color: #ffc94d !important;
+      text-shadow: 0 0 6px rgba(255,201,77,0.3) !important;
+    }
+    google-codelab-step:has(img[alt*="REVIEW"]) strong,
+    google-codelab-step:has(img[alt*="REVIEW"]) b { color: #ffe199 !important; }
+    google-codelab-step:has(img[alt*="REVIEW"]) aside.special,
+    google-codelab-step:has(img[alt*="REVIEW"]) aside.positive {
+      border-left-color: #ffc94d !important;
+      box-shadow: 0 0 10px rgba(255,201,77,0.2) !important;
+    }
+    google-codelab-step:has(img[alt*="REVIEW"]) a,
+    google-codelab-step:has(img[alt*="REVIEW"]) a:visited { color: #ffe199 !important; }
+
     details.prompt-collapse { margin: 1em 0; border: 1px solid rgba(0,240,255,0.25); border-radius: 6px; background: var(--bg-panel); }
     details.prompt-collapse summary { cursor: pointer; padding: 10px 14px; color: var(--crt-amber); font-family: "DotGothic16",monospace; letter-spacing: 0.05em; user-select: none; }
     details.prompt-collapse summary:hover { background: rgba(255,176,0,0.05); }
