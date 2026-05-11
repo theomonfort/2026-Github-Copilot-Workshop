@@ -339,6 +339,19 @@
       margin: 1em auto !important;
     }
 
+    /* Floating Octocat in PLAN sections */
+    google-codelab-step .image-container:has(img[alt*="Octocat"]) {
+      float: right !important;
+      margin: 0 0 1em 1.5em !important;
+      width: 120px !important;
+      text-align: right !important;
+    }
+    google-codelab-step img[alt*="Octocat"] {
+      width: 120px !important;
+      max-width: 120px !important;
+      height: auto;
+    }
+
     /* ---- Drawer: no border around step tiles ---- */
     #drawer { background: var(--bg-mid) !important; }
     #drawer ol { background: var(--bg-mid) !important; padding: 8px 0 !important; }
