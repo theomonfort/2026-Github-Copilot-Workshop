@@ -809,6 +809,8 @@ Tailwind ユーティリティ: `font-pixel` (DotGothic16)、`font-body` (Noto S
 <aside class="special"><p><strong>💡 ヒント</strong>: スキルの公開方法は標準化されており、<strong>公開リポジトリ + </strong><strong><code>skills/<skill-name>/SKILL.md</code></strong> の構成にするだけで <code>gh skill install <owner>/<repo> <skill-name></code> で誰でもインストールできます（仕様: <a href="https://agentskills.io/specification" target="_blank">agentskills.io</a>）。<code>github/awesome-copilot</code> はコミュニティ版のコレクションですが、SAML SSO で守られた組織からインストールしようとすると認可ステップが必要になるため、本ワークショップではフォーク先の <code>theomonfort/skills</code> を使います。</p>
 </aside>
 <p>インストールが完了すると <code>.agents/skills/github-issues/SKILL.md</code> が追加されます。中身を開いて Copilot がどんなときにこの Skill を呼ぶのか、どんなテンプレを持っているのかを確認してみてください。</p>
+<aside class="warning"><p><strong>⚠️ 重要</strong>: Skill をインストールした後は <strong>Copilot Chat の新しいセッションを開いてください</strong>（<code>+ New Chat</code>）。既存セッションには Skill が読み込まれないため、次のステップでうまく召喚されません。</p>
+</aside>
 <p>⏱ 約1分</p>
 <h2 is-upgraded>5.2 — MCP + Skill で Issue を作成する</h2>
 <p>GitHub MCP Server + <code>github-issues</code> Skill を組み合わせて、構造化された Issue を 1 件作成します。Copilot Chat で以下のプロンプトを入力してください：</p>

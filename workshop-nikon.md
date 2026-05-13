@@ -316,6 +316,9 @@ gh skill install theomonfort/skills github-issues
 
 インストールが完了すると `.agents/skills/github-issues/SKILL.md` が追加されます。中身を開いて Copilot がどんなときにこの Skill を呼ぶのか、どんなテンプレを持っているのかを確認してみてください。
 
+> aside negative
+> **⚠️ 重要**: Skill をインストールした後は **Copilot Chat の新しいセッションを開いてください**（`+ New Chat`）。既存セッションには Skill が読み込まれないため、次のステップでうまく召喚されません。
+
 ⏱ 約1分
 
 ### 5.2 — MCP + Skill で Issue を作成する
