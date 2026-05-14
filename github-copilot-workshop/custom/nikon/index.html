@@ -722,11 +722,20 @@
 - マークダウンは src/content/&lt;collection&gt;/*.md。スキーマは src/content.config.ts。
 - パッケージマネージャは **pnpm**。
 
-## ドキュメント参照
+## ドキュメント参照（必ず守る）
 
-- ライブラリ・フレームワーク・言語の使い方を扱うときは **必ず `#context7` MCP Server で最新ドキュメントを参照する**。
-- 知っているつもりでも調べる。学習データは過去のもので古くなっている可能性が高いため、馴染みのある技術であっても確認する。
-- 例: Astro の content collections 仕様、Tailwind のクラス、pnpm のコマンドなど。
+外部ライブラリ・フレームワーク・言語のコードを書く前に、**必ず Context7 MCP の以下のツールを呼び出してから実装する**：
+
+1. `resolve-library-id` でライブラリ ID を解決する。
+2. `get-library-docs` で最新ドキュメントを取得する。
+3. 取得したドキュメントに基づいて実装する。
+
+対象例: Astro（content collections, integrations, routing）、Tailwind CSS、Mermaid、Playwright、pnpm など。
+
+**禁止事項**：
+- 学習時点の記憶だけでコードを書かない。
+- 「知っているはず」と判断して Context7 をスキップしない。馴染みのある技術であっても毎回ドキュメントを確認する。
+- ライブラリの API・設定ファイル形式・CLI フラグは古くなっている可能性が高い。憶測ではなく Context7 で裏を取る。
 </code></pre>
 </details>
 <p>⏱ 約2分</p>
