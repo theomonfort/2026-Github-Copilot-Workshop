@@ -662,6 +662,7 @@
 <li><strong>「MCP: Add Server...」</strong> を入力して選択</li>
 <li>トランスポートに <strong>「HTTP」</strong> を選択</li>
 <li>URL に <code>https://mcp.context7.com/mcp</code> を貼り付け</li>
+<li><strong>Server ID</strong> を聞かれたら、デフォルトの <code>my-mcp-server-xxxxxxxx</code> ではなく <strong><code>context7</code></strong> に変更する（重要：Copilot Chat の <code>#</code> 補完やツール一覧で識別しやすくするため）</li>
 <li>保存先に <strong>「Workspace」</strong> を選択</li>
 </ol>
 <p>インストール後、<code>.vscode/mcp.json</code> に <code>context7</code> が追加されていることを確認してください：</p>
@@ -675,6 +676,7 @@
   }
 }
 </code></pre>
+<p><code>.vscode/mcp.json</code> を開くと、各サーバーの上に <strong><code>Running | N tools</code></strong> のような小さなステータス表示が出ます。<code>context7</code> の横に <strong><code>2 tools</code></strong>（<code>resolve-library-id</code> と <code>get-library-docs</code>）が表示されていれば接続成功です。表示されない場合は <strong>Start</strong> をクリックしてください。</p>
 <p>動作確認として、Copilot Chat で以下を試してみましょう：</p>
 <pre><code>Context7 を使って Astro の content collections の最新ドキュメントを要約してください。
 </code></pre>

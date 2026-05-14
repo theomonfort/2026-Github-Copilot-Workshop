@@ -131,7 +131,8 @@ Copilot Chat の入力欄にある **🔧 ツールボタン**（モデル選択
 2. **「MCP: Add Server…」** を入力して選択
 3. トランスポートに **「HTTP」** を選択
 4. URL に `https://mcp.context7.com/mcp` を貼り付け
-5. 保存先に **「Workspace」** を選択
+5. **Server ID** を聞かれたら、デフォルトの `my-mcp-server-xxxxxxxx` ではなく **`context7`** に変更する（重要：Copilot Chat の `#` 補完やツール一覧で識別しやすくするため）
+6. 保存先に **「Workspace」** を選択
 
 インストール後、`.vscode/mcp.json` に `context7` が追加されていることを確認してください：
 
@@ -146,6 +147,8 @@ Copilot Chat の入力欄にある **🔧 ツールボタン**（モデル選択
   }
 }
 ```
+
+`.vscode/mcp.json` を開くと、各サーバーの上に **`Running | N tools`** のような小さなステータス表示が出ます。`context7` の横に **`2 tools`**（`resolve-library-id` と `get-library-docs`）が表示されていれば接続成功です。表示されない場合は **Start** をクリックしてください。
 
 動作確認として、Copilot Chat で以下を試してみましょう：
 
