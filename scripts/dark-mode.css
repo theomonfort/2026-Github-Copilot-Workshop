@@ -316,6 +316,40 @@
     }
     google-codelab-step pre > code { background: transparent !important; border: none !important; color: #e6edf3 !important; }
 
+    /* ─── Prism syntax highlighting (one-dark inspired, calm) ─── */
+    pre[class*="language-"], code[class*="language-"] {
+      color: #e6edf3 !important;
+      background: #161b22 !important;
+      text-shadow: none !important;
+      font-family: "JetBrains Mono","SFMono-Regular","IBM Plex Mono",Consolas,monospace !important;
+      font-size: 0.9em !important;
+      line-height: 1.55 !important;
+      tab-size: 2 !important;
+    }
+    pre[class*="language-"] {
+      padding: 14px 16px !important;
+      border: 1px solid #30363d !important;
+      border-radius: 8px !important;
+      overflow: auto !important;
+    }
+    :not(pre) > code[class*="language-"] {
+      padding: 2px 6px !important;
+      border-radius: 4px !important;
+    }
+    .token.comment, .token.prolog, .token.doctype, .token.cdata { color: #7f848e !important; font-style: italic; }
+    .token.punctuation { color: #abb2bf !important; }
+    .token.property, .token.tag, .token.boolean, .token.number,
+    .token.constant, .token.symbol, .token.deleted { color: #d19a66 !important; }
+    .token.selector, .token.attr-name, .token.string, .token.char,
+    .token.builtin, .token.inserted { color: #98c379 !important; }
+    .token.operator, .token.entity, .token.url,
+    .language-css .token.string, .style .token.string { color: #56b6c2 !important; background: transparent !important; }
+    .token.atrule, .token.attr-value, .token.keyword { color: #c678dd !important; }
+    .token.function, .token.class-name { color: #61afef !important; }
+    .token.regex, .token.important, .token.variable { color: #e06c75 !important; }
+    .token.important, .token.bold { font-weight: bold; }
+    .token.italic { font-style: italic; }
+
     /* Brighten body text (was too dim) */
     google-codelab-step p,
     google-codelab-step li,
