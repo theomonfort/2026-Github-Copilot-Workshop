@@ -735,7 +735,7 @@ Duration: 10
 
 <img src="github-copilot-workshop/img/octocat-plan.png" alt="PLAN フェーズの Octocat" style="float: right; width: 100px; margin: 0 0 1em 1em;">
 
-次の章では **Copilot CLI で複数のエージェントを並列に走らせます**。自律的なエージェントが `.github/` の設定ファイルや `.env`、`pnpm-lock.yaml` のような **触ってほしくないファイル** を勝手に書き換えないよう、**Hooks** でガードレールを張りましょう。
+Copilot（Chat / CLI / Cloud Agent など）が `.github/` の設定ファイルや `.env`、`pnpm-lock.yaml` のような **触ってほしくないファイル** を勝手に書き換えないよう、**Hooks** でガードレールを張りましょう。特に次の章では CLI で複数のエージェントを並列に走らせるので、その前に安全網を用意しておくのが理想的です。
 
 **Hooks** は、エージェントがツールを呼び出す前後（`PreToolUse` / `PostToolUse`）に任意のスクリプトを差し込める仕組みです。`PreToolUse` で `permissionDecision: deny` を返せば、エージェントの動作を **物理的に止める** ことができます。
 
