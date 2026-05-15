@@ -1,0 +1,1576 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>GitHub Copilot Hands-on Workshop</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+  <style>
+    /* ---- Retro JRPG neon theme (matches playbook) ---- */
+    @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DotGothic16&family=Noto+Sans+JP:wght@400;700&family=IBM+Plex+Mono:wght@400;700&display=swap");
+
+    :root {
+      --bg-deep: #05060f;
+      --bg-mid:  #0a0e27;
+      --bg-panel:#0e1330;
+      --neon-magenta:#ff2e88;
+      --neon-cyan:#00f0ff;
+      --crt-amber:#ffb000;
+      --gb-green:#9bbc0f;
+      --phosphor:#e6f1ff;
+      --phosphor-dim:#7a8aa8;
+    }
+
+    /* Page + scanlines + grid */
+    html, body {
+      background: var(--bg-deep) !important;
+      color: var(--phosphor) !important;
+      font-family: "Noto Sans JP", system-ui, sans-serif !important;
+    }
+    body::before {
+      content:""; position:fixed; inset:0; z-index:9998; pointer-events:none;
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          rgba(255,255,255,0.04) 0,
+          rgba(255,255,255,0.04) 1px,
+          transparent 1px,
+          transparent 3px
+        );
+      mix-blend-mode: overlay;
+    }
+    body::after {
+      content:""; position:fixed; inset:0; z-index:9997; pointer-events:none;
+      background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.55) 100%);
+    }
+
+    /* Outer codelab container */
+    google-codelab,
+    google-codelab[hide-tabs],
+    google-codelab-step {
+      background: var(--bg-deep) !important;
+      color: var(--phosphor) !important;
+    }
+
+    /* App bar */
+    #app-bar, header#app-bar, .codelab-title-bar, google-codelab #app-bar,
+    #codelab-title, google-codelab #codelab-title {
+      background: linear-gradient(180deg, #11163a 0%, #0a0e27 100%) !important;
+      color: var(--phosphor) !important;
+      border-bottom: 1px solid rgba(0,240,255,0.25) !important;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.5) !important;
+    }
+    #codelab-title h1, #codelab-title .codelab-title, #codelab-title a,
+    #app-bar .codelab-title, #app-bar h1, #app-bar a, #app-bar .feedback {
+      color: var(--phosphor) !important;
+      font-family: "DotGothic16", "Noto Sans JP", monospace !important;
+      text-shadow: none !important;
+      letter-spacing: 0.04em;
+      font-size: 16px !important;
+    }
+    #codelab-title h1::before, #app-bar .codelab-title::before {
+      content: "▸ ";
+      color: var(--neon-cyan);
+      text-shadow: 0 0 6px rgba(0,240,255,0.5);
+    }
+    #codelab-title [icon] svg, #codelab-title svg, #codelab-title paper-icon-button,
+    #app-bar [icon] svg, #app-bar svg, #app-bar paper-icon-button {
+      fill: var(--phosphor-dim) !important;
+      color: var(--phosphor-dim) !important;
+      transition: color 0.2s ease, fill 0.2s ease;
+    }
+    #codelab-title paper-icon-button:hover svg,
+    #app-bar paper-icon-button:hover svg { fill: var(--neon-cyan) !important; }
+    #countdown {
+      color: var(--crt-amber) !important;
+      text-shadow: none !important;
+      font-family: "IBM Plex Mono", monospace !important;
+      font-size: 13px !important;
+      /* leave toggle below intact */
+    }
+
+    /* Language toggle (injected by build pipeline) */
+    .lang-toggle {
+      position: fixed;
+      top: 14px;
+      right: 16px;
+      z-index: 10000;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: rgba(15, 22, 38, 0.85);
+      border: 1px solid var(--neon-cyan);
+      border-radius: 4px;
+      color: var(--neon-cyan);
+      font-family: "DotGothic16", "Noto Sans JP", monospace;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.15s, box-shadow 0.15s;
+      backdrop-filter: blur(4px);
+    }
+    .lang-toggle:hover {
+      background: rgba(0, 240, 255, 0.15);
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+      color: var(--neon-cyan) !important;
+    }
+
+    /* Drawer / TOC sidebar */
+    #drawer, google-codelab #drawer {
+      background: var(--bg-mid) !important;
+      border-right: 1px solid rgba(0,240,255,0.15) !important;
+      box-shadow: inset -1px 0 8px rgba(0,0,0,0.4) !important;
+    }
+    #drawer a {
+      background: transparent !important;
+      color: var(--phosphor-dim) !important;
+      border-left: 3px solid transparent !important;
+      font-family: "Noto Sans JP", system-ui, sans-serif !important;
+      letter-spacing: 0.01em;
+    }
+    #drawer a::before {
+      background: var(--bg-panel) !important;
+      color: var(--phosphor-dim) !important;
+      border: 1px solid rgba(122,138,168,0.4) !important;
+      border-radius: 4px !important;
+      box-shadow: none !important;
+    }
+    #drawer a.completed::before {
+      background: var(--gb-green) !important;
+      color: var(--bg-deep) !important;
+      border-color: var(--gb-green) !important;
+      box-shadow: 0 0 6px rgba(155,188,15,0.5);
+    }
+    #drawer a:hover {
+      color: var(--phosphor) !important;
+      background: rgba(0,240,255,0.05) !important;
+    }
+    #drawer a.current, #drawer a[selected] {
+      color: var(--phosphor) !important;
+      background: linear-gradient(90deg, rgba(0,240,255,0.10) 0%, rgba(0,240,255,0.02) 100%) !important;
+      border-left-color: var(--neon-cyan) !important;
+      text-shadow: none !important;
+      font-weight: 700 !important;
+    }
+    /* Kill the dark label backgrounds behind step text in drawer */
+    #drawer a span, #drawer a .label, #drawer ol li a span, #drawer ol li a .label,
+    #drawer a > *:not(.step), #drawer ol li a > *:not(.step) {
+      background: transparent !important;
+      background-color: transparent !important;
+    }
+
+    /* Step content */
+    google-codelab-step {
+      background: var(--bg-deep) !important;
+    }
+    .step-title, google-codelab-step h2.step-title, h1.step-title {
+      color: var(--neon-cyan) !important;
+      font-family: "DotGothic16","Noto Sans JP",monospace !important;
+      font-size: 28px !important;
+      text-shadow: 0 0 12px rgba(0,240,255,0.35);
+      border-bottom: 1px solid rgba(0,240,255,0.4) !important;
+      padding-bottom: 0.5em;
+      margin-bottom: 1.2em !important;
+      letter-spacing: 0.02em;
+    }
+    h1, h2, h3, h4, [is-upgraded] {
+      color: var(--neon-cyan) !important;
+      font-family: "DotGothic16","Noto Sans JP",monospace !important;
+      text-shadow: 0 0 6px rgba(0,240,255,0.3);
+      letter-spacing: 0.01em;
+    }
+    h3 { font-size: 20px !important; margin-top: 1.6em !important; }
+    p, li, td, th, span, label, dt, dd {
+      color: var(--phosphor) !important;
+      line-height: 1.7 !important;
+    }
+    strong, b {
+      color: #7dd3e0 !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.01em;
+    }
+    a, a:visited { color: var(--neon-cyan) !important; text-decoration: underline; text-decoration-color: rgba(0,240,255,0.4); }
+    a:hover { color: var(--neon-magenta) !important; text-shadow: 0 0 6px rgba(255,46,136,0.5); }
+
+    /* Code — sober dark mode */
+    pre, code, .gcb-codelab-code {
+      background: #0d1117 !important;
+      color: #e6edf3 !important;
+      border: none !important;
+      border-radius: 6px !important;
+      font-family: "IBM Plex Mono","JetBrains Mono","SFMono-Regular",Consolas,monospace !important;
+      box-shadow: none !important;
+    }
+    code { padding: 2px 6px; }
+    pre code { border: none !important; padding: 0 !important; box-shadow: none !important; background: transparent !important; }
+
+    /* Tables */
+    table {
+      background: var(--bg-panel) !important;
+      border: 1px solid rgba(0,240,255,0.3) !important;
+      border-collapse: collapse !important;
+      border-radius: 4px !important;
+      overflow: hidden;
+    }
+    table td, table th {
+      background: var(--bg-panel) !important;
+      border: 1px solid rgba(0,240,255,0.15) !important;
+      color: var(--phosphor) !important;
+      padding: 10px 14px !important;
+    }
+    table tr:nth-child(even) td { background: var(--bg-mid) !important; }
+    table th { color: var(--crt-amber) !important; font-family: "DotGothic16",monospace !important; text-transform: uppercase; letter-spacing: 0.05em; background: rgba(255,176,0,0.05) !important; }
+
+    /* Asides */
+    aside, aside.special, aside.warning, aside.positive, aside.negative {
+      background: var(--bg-panel) !important;
+      color: var(--phosphor) !important;
+      border-left: 4px solid var(--neon-cyan) !important;
+      border-radius: 0 !important;
+      box-shadow: 0 0 10px rgba(0,240,255,0.15);
+    }
+    aside.warning, aside.negative {
+      border-left-color: var(--crt-amber) !important;
+      box-shadow: 0 0 10px rgba(255,176,0,0.2);
+    }
+    aside.special, aside.positive {
+      border-left-color: var(--neon-cyan) !important;
+      box-shadow: 0 0 10px rgba(0,240,255,0.15);
+    }
+    aside p, aside li, aside strong { color: var(--phosphor) !important; }
+
+    /* Buttons / FAB / next-step — refined retro */
+    paper-fab, .fab-container paper-fab,
+    paper-button, button {
+      background: linear-gradient(180deg, #1a2050 0%, #0d1230 100%) !important;
+      color: var(--neon-cyan) !important;
+      border: 1px solid rgba(0,240,255,0.4) !important;
+      border-radius: 4px !important;
+      font-family: "DotGothic16", "Noto Sans JP", monospace !important;
+      font-size: 13px !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.08em !important;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.04) !important;
+      text-transform: uppercase;
+      padding: 8px 18px !important;
+      transition: all 0.2s ease;
+    }
+    paper-button:hover, button:hover, paper-fab:hover {
+      background: linear-gradient(180deg, #232b6a 0%, #131a44 100%) !important;
+      color: var(--neon-magenta) !important;
+      border-color: var(--neon-magenta) !important;
+      box-shadow: 0 0 10px rgba(255,46,136,0.4), 0 2px 8px rgba(0,0,0,0.4) !important;
+    }
+    /* Specifically style the floating FAB Next button — same family as other buttons */
+    .fab-container paper-fab, paper-fab,
+    #previous-step, #next-step, #done {
+      background: linear-gradient(180deg, #1a2050 0%, #0d1230 100%) !important;
+      color: var(--neon-cyan) !important;
+      border: 1px solid rgba(0,240,255,0.5) !important;
+      border-radius: 4px !important;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5), 0 0 10px rgba(0,240,255,0.2) !important;
+      font-family: "DotGothic16","Noto Sans JP",monospace !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.08em !important;
+      text-transform: uppercase !important;
+      padding: 8px 22px !important;
+      transition: all 0.2s ease;
+    }
+    .fab-container paper-fab:hover, paper-fab:hover,
+    #previous-step:hover, #next-step:hover, #done:hover {
+      background: linear-gradient(180deg, #232b6a 0%, #131a44 100%) !important;
+      color: var(--neon-magenta) !important;
+      border-color: var(--neon-magenta) !important;
+      box-shadow: 0 0 16px rgba(255,46,136,0.4), 0 2px 8px rgba(0,0,0,0.5) !important;
+    }
+    #next-step { background: linear-gradient(180deg, #1a2050 0%, #0d1230 100%) !important; color: var(--neon-cyan) !important; border-color: rgba(0,240,255,0.5) !important; }
+    #next-step:hover { background: linear-gradient(180deg, #232b6a 0%, #131a44 100%) !important; color: var(--neon-magenta) !important; border-color: var(--neon-magenta) !important; }
+    #done { background: linear-gradient(180deg, var(--gb-green) 0%, #6a8a0a 100%) !important; color: var(--bg-deep) !important; border-color: var(--gb-green) !important; }
+
+    /* Progress / done indicators */
+    google-codelab[hide-tabs] #app-bar .more, .arrow-back { color: var(--neon-cyan) !important; }
+
+    /* Scrollbars */
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: var(--bg-deep); }
+    ::-webkit-scrollbar-thumb { background: var(--neon-cyan); border-radius: 0; box-shadow: 0 0 6px rgba(0,240,255,0.5); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--neon-magenta); }
+
+    /* Selection */
+    ::selection { background: var(--neon-magenta); color: var(--bg-deep); }
+
+    /* ---- Override default light backgrounds ---- */
+    main, #steps, #steps > *, .codelab-step, .step, google-codelab main {
+      background: var(--bg-deep) !important;
+    }
+    google-codelab-step .instructions {
+      background: var(--bg-deep) !important;
+      box-shadow: none !important;
+      max-width: 900px !important;
+    }
+    google-codelab-step .instructions aside.note,
+    google-codelab-step .instructions aside.notice,
+    google-codelab-step .instructions aside.tip,
+    google-codelab-step .instructions aside.special,
+    google-codelab-step .instructions aside.warning,
+    google-codelab-step .instructions aside.callout,
+    google-codelab-step .instructions aside.positive,
+    google-codelab-step .instructions aside.negative {
+      background: var(--bg-panel) !important;
+      color: var(--phosphor) !important;
+    }
+    google-codelab-step .instructions aside.note,
+    google-codelab-step .instructions aside.warning {
+      border-color: var(--crt-amber) !important;
+    }
+    google-codelab-step .instructions aside.tip,
+    google-codelab-step .instructions aside.special,
+    google-codelab-step .instructions aside.positive {
+      border-color: var(--neon-cyan) !important;
+      border-left-color: var(--neon-cyan) !important;
+    }
+    google-codelab-step .instructions aside.callout {
+      border-left-color: var(--neon-cyan) !important;
+      background: var(--bg-panel) !important;
+    }
+    google-codelab-step .instructions code,
+    google-codelab-step code {
+      background: #0d1117 !important;
+      color: #e6edf3 !important;
+      border: none !important;
+      border-radius: 6px !important;
+    }
+    google-codelab-step pre,
+    google-codelab-step .instructions pre {
+      background: #0d1117 !important;
+      color: #e6edf3 !important;
+      border: none !important;
+      border-radius: 6px !important;
+      box-shadow: none !important;
+    }
+    google-codelab-step pre > code { background: transparent !important; border: none !important; color: #e6edf3 !important; }
+
+    /* ─── Prism syntax highlighting (one-dark inspired, calm) ─── */
+    pre[class*="language-"], code[class*="language-"] {
+      color: #e6edf3 !important;
+      background: #161b22 !important;
+      text-shadow: none !important;
+      font-family: "JetBrains Mono","SFMono-Regular","IBM Plex Mono",Consolas,monospace !important;
+      font-size: 0.9em !important;
+      line-height: 1.55 !important;
+      tab-size: 2 !important;
+    }
+    pre[class*="language-"] {
+      padding: 14px 16px !important;
+      border: none !important;
+      border-radius: 8px !important;
+      overflow: auto !important;
+    }
+    :not(pre) > code[class*="language-"] {
+      padding: 2px 6px !important;
+      border-radius: 4px !important;
+    }
+    .token.comment, .token.prolog, .token.doctype, .token.cdata { color: #7f848e !important; font-style: italic; }
+    .token.punctuation { color: #abb2bf !important; }
+    .token.property, .token.tag, .token.boolean, .token.number,
+    .token.constant, .token.symbol, .token.deleted { color: #d19a66 !important; }
+    .token.selector, .token.attr-name, .token.string, .token.char,
+    .token.builtin, .token.inserted { color: #98c379 !important; }
+    .token.operator, .token.entity, .token.url,
+    .language-css .token.string, .style .token.string { color: #56b6c2 !important; background: transparent !important; }
+    .token.atrule, .token.attr-value, .token.keyword { color: #c678dd !important; }
+    .token.function, .token.class-name { color: #61afef !important; }
+    .token.regex, .token.important, .token.variable { color: #e06c75 !important; }
+    .token.important, .token.bold { font-weight: bold; }
+    .token.italic { font-style: italic; }
+
+    /* Prism toolbar — Copy button */
+    div.code-toolbar { position: relative; }
+    div.code-toolbar > .toolbar {
+      position: absolute; top: 8px; right: 8px;
+      opacity: 0; transition: opacity 0.15s ease;
+      z-index: 10;
+    }
+    div.code-toolbar:hover > .toolbar { opacity: 1; }
+    div.code-toolbar > .toolbar .toolbar-item > button {
+      background: rgba(48, 54, 61, 0.85) !important;
+      color: #e6edf3 !important;
+      border: 1px solid #30363d !important;
+      border-radius: 4px !important;
+      padding: 4px 10px !important;
+      font-family: "JetBrains Mono","SFMono-Regular",monospace !important;
+      font-size: 0.75em !important;
+      cursor: pointer !important;
+      transition: background 0.15s, border-color 0.15s !important;
+      box-shadow: none !important;
+    }
+    div.code-toolbar > .toolbar .toolbar-item > button:hover,
+    div.code-toolbar > .toolbar .toolbar-item > button:focus {
+      background: rgba(0, 240, 255, 0.15) !important;
+      border-color: #00f0ff !important;
+      color: #00f0ff !important;
+    }
+
+    /* Brighten body text (was too dim) */
+    google-codelab-step p,
+    google-codelab-step li,
+    google-codelab-step td,
+    google-codelab-step th,
+    google-codelab-step span,
+    google-codelab-step label {
+      color: var(--phosphor) !important;
+      opacity: 1 !important;
+    }
+
+    /* Cap large hero/intro images (claat hashes filenames, so target by alt) */
+    google-codelab-step img[alt*="Copilot Logo"],
+    google-codelab-step img[alt*="GitHub Copilot Logo"] {
+      max-width: 100px !important;
+      width: 100px !important;
+      height: auto !important;
+      display: block;
+      margin: 1em auto !important;
+    }
+
+    /* Floating Octocat — sits at top-right of section, slightly above the first paragraph */
+    google-codelab-step .image-container:has(img[alt*="Octocat"]) {
+      float: right !important;
+      margin: -3.5em 0 0.5em 1.5em !important;
+      width: 120px !important;
+      text-align: right !important;
+      position: relative;
+      z-index: 1;
+    }
+    google-codelab-step img[alt*="Octocat"] {
+      width: 120px !important;
+      max-width: 120px !important;
+      height: auto;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+    }
+
+    /* ---- Drawer: no border around step tiles ---- */
+    #drawer { background: var(--bg-mid) !important; }
+    #drawer ol { background: var(--bg-mid) !important; padding: 8px 0 !important; }
+    #drawer ol li a {
+      background: transparent !important;
+      border: none !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      color: var(--phosphor-dim) !important;
+      border-left: 3px solid transparent !important;
+      margin: 1px 0 !important;
+      padding: 10px 14px !important;
+      transition: all 0.18s ease !important;
+      font-size: 13px !important;
+    }
+    #drawer ol li a:hover {
+      background: rgba(0,240,255,0.05) !important;
+      color: var(--phosphor) !important;
+      border-left-color: rgba(0,240,255,0.4) !important;
+    }
+    #drawer ol li[selected] a,
+    #drawer ol li a:focus {
+      background: linear-gradient(90deg, rgba(0,240,255,0.10) 0%, rgba(0,240,255,0.02) 100%) !important;
+      color: var(--phosphor) !important;
+      border: none !important;
+      border-left: 3px solid var(--neon-cyan) !important;
+      box-shadow: inset 0 0 0 1px rgba(0,240,255,0.12) !important;
+      text-shadow: none !important;
+      font-weight: 700 !important;
+    }
+    /* Step number bullet in drawer */
+    #drawer ol li .step:before,
+    #drawer ol li a .step::before {
+      background: var(--bg-panel) !important;
+      color: var(--phosphor-dim) !important;
+      border: 1px solid rgba(122,138,168,0.4) !important;
+      box-shadow: none !important;
+      border-radius: 4px !important;
+      font-family: "IBM Plex Mono", monospace !important;
+      font-weight: 700 !important;
+      transition: all 0.18s ease;
+    }
+    #drawer ol li a:hover .step::before {
+      color: var(--neon-cyan) !important;
+      border-color: rgba(0,240,255,0.5) !important;
+    }
+    #drawer ol li[selected] .step:before {
+      background: var(--neon-cyan) !important;
+      color: var(--bg-deep) !important;
+      border-color: var(--neon-cyan) !important;
+      box-shadow: 0 0 8px rgba(0,240,255,0.45) !important;
+    }
+    .step:before { background: var(--bg-panel) !important; color: var(--phosphor-dim) !important; border-radius: 4px !important; }
+
+    /* ---- Hide scrollbars (keep scroll functional) ---- */
+    * { scrollbar-width: none !important; -ms-overflow-style: none !important; }
+    *::-webkit-scrollbar { display: none !important; width: 0 !important; height: 0 !important; }
+
+    /* Drawer time-remaining + completion */
+    #drawer .codelab-time-container, #drawer .time-remaining {
+      color: var(--crt-amber) !important;
+      border-top: 1px solid rgba(255,176,0,0.3) !important;
+    }
+
+    /* ====================================================================
+       Per-phase "world" theming — each section gets its own color identity
+       Detection via the colored octocat present in the step:
+       - PLAN フェーズ    → green (PLAN sections 3,4,5)
+       - CODE フェーズ    → red   (CODE sections 6,11,12)
+       - REVIEW フェーズ  → yellow (REVIEW section 7)
+       - TEST & SECURE   → blue  (TEST & SECURE sections 8,9,10)
+       Other sections keep the default (cyan/magenta) palette.
+       ==================================================================== */
+
+    /* --- BLUE world: TEST & SECURE --- */
+    google-codelab-step:has(img[alt*="TEST"]) .step-title,
+    google-codelab-step:has(img[alt*="TEST"]) h1.step-title {
+      color: #4dd0ff !important;
+      text-shadow: 0 0 12px rgba(77,208,255,0.35) !important;
+      border-bottom-color: rgba(77,208,255,0.4) !important;
+    }
+    google-codelab-step:has(img[alt*="TEST"]) h2,
+    google-codelab-step:has(img[alt*="TEST"]) h3,
+    google-codelab-step:has(img[alt*="TEST"]) h4 {
+      color: #4dd0ff !important;
+      text-shadow: 0 0 6px rgba(77,208,255,0.3) !important;
+    }
+    google-codelab-step:has(img[alt*="TEST"]) strong,
+    google-codelab-step:has(img[alt*="TEST"]) b { color: #7dd3e0 !important; }
+    google-codelab-step:has(img[alt*="TEST"]) aside.special, google-codelab-step:has(img[alt*="TEST"]) .instructions aside.special,
+    google-codelab-step:has(img[alt*="TEST"]) aside.positive, google-codelab-step:has(img[alt*="TEST"]) .instructions aside.positive, google-codelab-step:has(img[alt*="TEST"]) .instructions aside.tip {
+      border-left-color: #4dd0ff !important;
+      box-shadow: 0 0 10px rgba(77,208,255,0.15) !important;
+    }
+    google-codelab-step:has(img[alt*="TEST"]) a,
+    google-codelab-step:has(img[alt*="TEST"]) a:visited { color: #7dd3e0 !important; }
+
+    /* --- GREEN world: PLAN --- */
+    google-codelab-step:has(img[alt*="PLAN"]) .step-title,
+    google-codelab-step:has(img[alt*="PLAN"]) h1.step-title {
+      color: #b8e054 !important;
+      text-shadow: 0 0 12px rgba(155,188,15,0.4) !important;
+      border-bottom-color: rgba(155,188,15,0.45) !important;
+    }
+    google-codelab-step:has(img[alt*="PLAN"]) h2,
+    google-codelab-step:has(img[alt*="PLAN"]) h3,
+    google-codelab-step:has(img[alt*="PLAN"]) h4 {
+      color: #b8e054 !important;
+      text-shadow: 0 0 6px rgba(155,188,15,0.3) !important;
+    }
+    google-codelab-step:has(img[alt*="PLAN"]) strong,
+    google-codelab-step:has(img[alt*="PLAN"]) b { color: #c5e895 !important; }
+    google-codelab-step:has(img[alt*="PLAN"]) aside.special, google-codelab-step:has(img[alt*="PLAN"]) .instructions aside.special,
+    google-codelab-step:has(img[alt*="PLAN"]) aside.positive, google-codelab-step:has(img[alt*="PLAN"]) .instructions aside.positive, google-codelab-step:has(img[alt*="PLAN"]) .instructions aside.tip {
+      border-left-color: #9bbc0f !important;
+      box-shadow: 0 0 10px rgba(155,188,15,0.18) !important;
+    }
+    google-codelab-step:has(img[alt*="PLAN"]) a,
+    google-codelab-step:has(img[alt*="PLAN"]) a:visited { color: #c5e895 !important; }
+
+    /* --- RED world: CODE --- */
+    google-codelab-step:has(img[alt*="CODE"]) .step-title,
+    google-codelab-step:has(img[alt*="CODE"]) h1.step-title {
+      color: #ff6b88 !important;
+      text-shadow: 0 0 12px rgba(255,107,136,0.4) !important;
+      border-bottom-color: rgba(255,107,136,0.45) !important;
+    }
+    google-codelab-step:has(img[alt*="CODE"]) h2,
+    google-codelab-step:has(img[alt*="CODE"]) h3,
+    google-codelab-step:has(img[alt*="CODE"]) h4 {
+      color: #ff6b88 !important;
+      text-shadow: 0 0 6px rgba(255,107,136,0.3) !important;
+    }
+    google-codelab-step:has(img[alt*="CODE"]) strong,
+    google-codelab-step:has(img[alt*="CODE"]) b { color: #ffb3c0 !important; }
+    google-codelab-step:has(img[alt*="CODE"]) aside.special, google-codelab-step:has(img[alt*="CODE"]) .instructions aside.special,
+    google-codelab-step:has(img[alt*="CODE"]) aside.positive, google-codelab-step:has(img[alt*="CODE"]) .instructions aside.positive, google-codelab-step:has(img[alt*="CODE"]) .instructions aside.tip {
+      border-left-color: #ff6b88 !important;
+      box-shadow: 0 0 10px rgba(255,107,136,0.18) !important;
+    }
+    google-codelab-step:has(img[alt*="CODE"]) a,
+    google-codelab-step:has(img[alt*="CODE"]) a:visited { color: #ffb3c0 !important; }
+
+    /* --- YELLOW world: REVIEW --- */
+    google-codelab-step:has(img[alt*="REVIEW"]) .step-title,
+    google-codelab-step:has(img[alt*="REVIEW"]) h1.step-title {
+      color: #ffc94d !important;
+      text-shadow: 0 0 12px rgba(255,201,77,0.4) !important;
+      border-bottom-color: rgba(255,201,77,0.45) !important;
+    }
+    google-codelab-step:has(img[alt*="REVIEW"]) h2,
+    google-codelab-step:has(img[alt*="REVIEW"]) h3,
+    google-codelab-step:has(img[alt*="REVIEW"]) h4 {
+      color: #ffc94d !important;
+      text-shadow: 0 0 6px rgba(255,201,77,0.3) !important;
+    }
+    google-codelab-step:has(img[alt*="REVIEW"]) strong,
+    google-codelab-step:has(img[alt*="REVIEW"]) b { color: #ffe199 !important; }
+    google-codelab-step:has(img[alt*="REVIEW"]) aside.special, google-codelab-step:has(img[alt*="REVIEW"]) .instructions aside.special,
+    google-codelab-step:has(img[alt*="REVIEW"]) aside.positive, google-codelab-step:has(img[alt*="REVIEW"]) .instructions aside.positive, google-codelab-step:has(img[alt*="REVIEW"]) .instructions aside.tip {
+      border-left-color: #ffc94d !important;
+      box-shadow: 0 0 10px rgba(255,201,77,0.2) !important;
+    }
+    google-codelab-step:has(img[alt*="REVIEW"]) a,
+    google-codelab-step:has(img[alt*="REVIEW"]) a:visited { color: #ffe199 !important; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</head>
+<body>
+  <a class="lang-toggle" href="../handson/index.html" title="日本語に切り替える">🌐 日本語</a>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="github-copilot-workshop"
+                  title="GitHub Copilot Hands-on Workshop"
+                  environment="web"
+                  feedback-link="https://example.com/feedback">
+    
+      <google-codelab-step label="INTRO: About This Workshop" duration="5">
+        <p>Welcome to the GitHub Copilot Workshop!</p>
+<p class="image-container"><img alt="GitHub Copilot Logo" src="../../img/6877afb1f5b2b914.png"></p>
+<p>In this workshop, you&#39;ll get hands-on experience with the simple concepts introduced in the <a href="https://theomonfort.github.io/theomonfort/playbook/github/?present=1&lang=en" target="_blank"><strong>Copilot Playbook</strong></a>.</p>
+<p>Working through the <strong>PLAN → CODE → REVIEW → TEST &amp; SECURE → OPERATE</strong> phases, you&#39;ll use GitHub Copilot to build a lightweight version of the Playbook — a site that renders Markdown beautifully — together with Copilot.</p>
+<h2 is-upgraded>Today&#39;s Goals</h2>
+<ul>
+<li><strong>PLAN</strong>: Wire up Copilot with &#34;context&#34;, &#34;rules&#34;, and &#34;templates&#34; using MCP, Instructions, and Skills</li>
+<li><strong>CODE</strong>: Design and implement the site using Copilot Chat (Plan / Agent mode)</li>
+<li><strong>REVIEW</strong>: Automate PR reviews with Copilot Code Review</li>
+<li><strong>TEST &amp; SECURE</strong>: Ensure quality and security with Dependabot, CodeQL (GHAS), and GitHub Actions (Playwright)</li>
+<li><strong>OPERATE</strong>: Embed AI into daily operations using Cloud Agent, Copilot CLI, and Agentic Workflow</li>
+</ul>
+<aside class="special"><p><strong>📖 Reference</strong>: Each step links to the corresponding <a href="https://theomonfort.github.io/theomonfort/playbook/?lang=en" target="_blank">Copilot Playbook</a> page. Use these as reference material when rolling this out internally.</p>
+</aside>
+<h2 is-upgraded>Prerequisites</h2>
+<p>Please have the following ready:</p>
+<ul>
+<li>A private Organization with the following features enabled: <ul>
+<li>GitHub Actions</li>
+<li>GitHub Copilot (Pro+ / Business / Enterprise)</li>
+<li>GitHub Advanced Security (GHAS)</li>
+</ul>
+</li>
+<li>Permission to create repositories within the Organization</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="INTRO: Setup" duration="15">
+        <p>This workshop uses the following GitHub repository:</p>
+<p><strong>Project URL</strong>: https://github.com/theomonfort/Github-copilot-workshop</p>
+<h2 is-upgraded>Step 1: Create a Repository from the Template</h2>
+<ol type="1">
+<li>Open the project URL in your browser</li>
+<li>Click <strong>Use this template</strong> in the top right, then select <strong>Create a new repository</strong></li>
+</ol>
+<p class="image-container"><img alt="Use this template → Create a new repository" src="../../img/a1c8f687ab2cac6b.png"></p>
+<ol type="1" start="3">
+<li>On the repository creation screen, configure the following:</li>
+</ol>
+<ul>
+<li>For Owner, select an <strong>Organization with Copilot / Actions / GHAS / Codespaces enabled</strong></li>
+<li>Set Visibility to <strong>Public</strong></li>
+</ul>
+<h3 is-upgraded>Repository name</h3>
+<ul>
+<li>Enter any name you like (e.g. <code>hands-on-yourname</code>)</li>
+</ul>
+<ol type="1" start="4">
+<li>Click <strong>Create repository</strong></li>
+</ol>
+<p class="image-container"><img alt="Click the Create repository button" src="../../img/218661522899103a.png"></p>
+<h2 is-upgraded>Step 2: Launch Your Dev Environment with Codespaces</h2>
+<ol type="1">
+<li>On your new repository page, click the green <strong>Code</strong> button</li>
+<li>Select the <strong>Codespaces</strong> tab</li>
+<li>Click <strong>Create codespace on main</strong></li>
+</ol>
+<aside class="special"><p><strong>⏳ Note</strong>: Codespace startup can take a few minutes. Please wait for the DevContainer build to finish.</p>
+</aside>
+<p>The DevContainer automatically sets up a Node.js 22 environment and pre-installs the following:</p>
+<ul>
+<li>GitHub Copilot &amp; Copilot Chat extension</li>
+<li>GitHub CLI (<code>gh</code>)</li>
+<li>GitHub MCP Server (<code>.vscode/mcp.json</code>, auto-detection enabled)</li>
+<li>Copilot CLI (<code>@github/copilot</code>)</li>
+<li>pnpm (package manager)</li>
+<li>gh-aw (Agentic Workflow CLI)</li>
+<li>Playwright (with Chromium browser)</li>
+</ul>
+<h2 is-upgraded>Step 3: Check the Source Content</h2>
+<p>Markdown files are located in <code>src/content/playbook/</code>. These are the raw materials for today&#39;s site.</p>
+<p>Open <code>src/content/playbook/</code> in the VS Code Explorer and browse through a few files. Later, you&#39;ll have Copilot turn these into a site with &#34;grid + detail + presentation mode&#34; viewing.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="PLAN: MCP Server" duration="10">
+        <p class="image-container"><img alt="PLAN phase Octocat" src="../../img/571b167bb39ee720.png"></p>
+<aside class="special"><p><strong>📖 Reference</strong>: <a href="https://theomonfort.github.io/theomonfort/playbook/mcp/?lang=en" target="_blank">Playbook / MCP Server</a> — check how MCP works, connection modes (stdio / HTTP), and how to configure it in VS Code.</p>
+</aside>
+<p>In this step, you&#39;ll verify and add <strong>MCP (Model Context Protocol) Servers</strong> that give Copilot access to external tools. With MCP in place, Copilot can directly create Issues, look up the latest docs, and more.</p>
+<h2 is-upgraded>3.1 — Verify the GitHub MCP Server</h2>
+<p>This repository already has the GitHub MCP Server configured in <code>.vscode/mcp.json</code>. VS Code automatically prompts to connect when the Codespace starts.</p>
+<p>Open <code>.vscode/mcp.json</code> and verify the following config is present:</p>
+<pre class="language-none"><code language="language-json" class="language-json">{
+  &#34;servers&#34;: {
+    &#34;github-mcp-server&#34;: {
+      &#34;type&#34;: &#34;http&#34;,
+      &#34;url&#34;: &#34;https://api.githubcopilot.com/mcp/&#34;
+    }
+  }
+}
+</code></pre>
+<p>Click the <strong>🔧 tools button</strong> in the Copilot Chat input area (to the right of the model selector) and confirm that the <code>github-mcp-server</code> tools (Issues / PRs / code search, etc.) appear in the list.</p>
+<p>⏱ ~1 min</p>
+<aside class="special"><p><strong>Key takeaway</strong>: The GitHub MCP Server is officially provided by GitHub. It lets Copilot operate Issues / PRs / Actions / Code search directly — just like running <code>gh</code> commands.</p>
+</aside>
+<h2 is-upgraded>3.2 — Add the Context7 MCP Server</h2>
+<p><strong>Context7</strong> is an MCP Server that feeds Copilot the <strong>latest official documentation</strong> for libraries and frameworks. It&#39;s essential for this workshop, which uses fast-moving frameworks like Astro, Tailwind, and TypeScript.</p>
+<ol type="1">
+<li>Open the command palette with <strong>Cmd+Shift+P</strong> (or <strong>Ctrl+Shift+P</strong> on Windows/Linux)</li>
+<li>Type and select <strong>&#34;MCP: Add Server...&#34;</strong></li>
+<li>Select <strong>&#34;HTTP&#34;</strong> as the transport</li>
+<li>Paste <code>https://mcp.context7.com/mcp</code> as the URL</li>
+<li>When asked for a <strong>Server ID</strong>, change the default <code>my-mcp-server-xxxxxxxx</code> to <strong><code>context7</code></strong> (important: makes it easy to identify in Copilot Chat&#39;s <code>#</code> autocomplete and tool list)</li>
+<li>Select <strong>&#34;Workspace&#34;</strong> as the save location</li>
+</ol>
+<p>After installing, verify that <code>context7</code> has been added to <code>.vscode/mcp.json</code>:</p>
+<pre class="language-none"><code language="language-json" class="language-json">{
+  &#34;servers&#34;: {
+    &#34;github-mcp-server&#34;: { &#34;type&#34;: &#34;http&#34;, &#34;url&#34;: &#34;https://api.githubcopilot.com/mcp/&#34; },
+    &#34;context7&#34;: {
+      &#34;type&#34;: &#34;http&#34;,
+      &#34;url&#34;: &#34;https://mcp.context7.com/mcp&#34;
+    }
+  }
+}
+</code></pre>
+<p>When you open <code>.vscode/mcp.json</code>, a small status indicator like <strong><code>Running | N tools</code></strong> appears above each server. If you see <strong><code>2 tools</code></strong> next to <code>context7</code> (<code>resolve-library-id</code> and <code>get-library-docs</code>), the connection is successful. If it doesn&#39;t appear, click <strong>Start</strong>.</p>
+<p>To verify it works, try the following in Copilot Chat:</p>
+<pre class="language-none"><code class="language-none">Use Context7 to summarize the latest documentation for Astro&#39;s content collections.
+</code></pre>
+<p>⏱ ~2 min</p>
+<aside class="special"><p><strong>Key takeaway</strong>: Using the HTTP version directly means no <code>npx</code> package download — startup is instant. If you go through <strong>&#34;Browse MCP Servers&#34;</strong> in the Marketplace, it selects the stdio (npx) version <code>io.github.upstash/context7</code>, which can be slow or stall on the first run due to package downloads. The HTTP version avoids this entirely. From now on, just ask &#34;What&#39;s the latest Astro API?&#34; or &#34;What&#39;s the new Tailwind v4 syntax?&#34; and Copilot will pull the official docs via Context7. No more worrying about training data cutoffs.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="PLAN: Instruction" duration="15">
+        <p class="image-container"><img alt="PLAN phase Octocat" src="../../img/571b167bb39ee720.png"></p>
+<aside class="special"><p><strong>📖 Reference</strong>: <a href="https://theomonfort.github.io/theomonfort/playbook/instructions?lang=en" target="_blank">Playbook / Instructions</a> — check the role, scope, and usage patterns of Instruction files.</p>
+</aside>
+<p>Instruction files are &#34;standing orders&#34; that give Copilot <strong>persistent rules</strong> at the repository or file level. Every team member&#39;s Copilot will follow the same conventions automatically.</p>
+<p>In this step, you&#39;ll create two types of Instruction files:</p>
+<ul>
+<li><strong><code>.github/copilot-instructions.md</code></strong> — always applied across the whole repository (language, stack, conventions)</li>
+<li><strong><code>.github/instructions/frontend.instructions.md</code></strong> — a <strong>Path Instruction</strong> applied only to frontend files (design tokens)</li>
+</ul>
+<h2 is-upgraded>4.1 — Create the Repository-wide Instruction</h2>
+<p>Paste the following prompt into Copilot Chat:</p>
+<pre class="language-none"><code class="language-none">Please create .github/copilot-instructions.md. Write everything in English.
+Use the following content:
+
+# Copilot Instructions
+
+## Language
+
+- Write all responses, comments, commit messages, and PR descriptions in **English**.
+
+## Stack
+
+- **Astro** only. Do not use Next.js, React Router, or SvelteKit.
+- Use Astro components (.astro) for pages and layouts.
+- Use Astro **content collections** (src/content/) for Markdown content.
+- Use Tailwind CSS for styling. Scoped &lt;style&gt; blocks where needed.
+- Use TypeScript everywhere (.ts, .astro frontmatter).
+
+## Conventions
+
+- Pages go in src/pages/.
+- Reusable UI goes in src/components/.
+- Markdown goes in src/content/&lt;collection&gt;/*.md. Schema in src/content.config.ts.
+- Package manager is **pnpm**.
+
+## Documentation Reference (always follow)
+
+Before writing code for any external library, framework, or language, **always call the following Context7 MCP tools first, then implement**:
+
+1. Use `resolve-library-id` to resolve the library ID.
+2. Use `get-library-docs` to fetch the latest documentation.
+3. Implement based on the retrieved documentation.
+
+Applies to: Astro (content collections, integrations, routing), Tailwind CSS, Mermaid, Playwright, pnpm, etc.
+
+**Prohibited**:
+- Do not write code from memory alone.
+- Do not skip Context7 by assuming you &#34;know&#34; it — check the docs every time, even for familiar tech.
+- Library APIs, config formats, and CLI flags may be outdated. Verify with Context7 rather than guessing.
+</code></pre>
+<p>⏱ ~2 min</p>
+<aside class="special"><p><strong>Key takeaway</strong>: From now on, Copilot&#39;s responses will be in English. Stack constraints will also be respected automatically.</p>
+</aside>
+<h2 is-upgraded>4.2 — Create the Frontend-specific Path Instruction</h2>
+<p>Create a <strong>Path Instruction</strong> that applies only to specific file patterns. VS Code will only pass this rule to Copilot when you&#39;re touching files that match the <code>applyTo</code> glob.</p>
+<p>Paste the following prompt into Copilot Chat:</p>
+<pre class="language-none"><code class="language-none">Please create .github/instructions/frontend.instructions.md.
+Write everything in English. Use the following YAML frontmatter at the top:
+
+---
+applyTo: &#34;**/*.{astro,css,tsx,jsx,ts,js,html}&#34;
+description: &#34;Frontend design tokens (retro JRPG theme)&#34;
+---
+
+Include the following content in English:
+
+# Frontend Design Rules
+
+When working on styles, components, or layouts, always apply the following tokens.
+
+## Theme
+
+Retro JRPG / cyberpunk arcade. Dark backgrounds with neon accents and pixel-style typography.
+
+## Colors
+
+| Role              | Hex        | Usage                             |
+| ----------------- | ---------- | --------------------------------- |
+| Background (base) | `#05060f`  | body / page                       |
+| Background (panel)| `#0a0e27`  | cards, sidebar                    |
+| Neon magenta      | `#ff2e88`  | primary accent, active            |
+| Neon cyan         | `#00f0ff`  | secondary, hover, links           |
+| Amber             | `#ffb000`  | warnings, highlights              |
+| Phosphor green    | `#9bbc0f`  | success, CRT-style text           |
+| Text (normal)     | `#e6f1ff`  | body text on dark backgrounds     |
+| Text (muted)      | `#7a8aa8`  | secondary text                    |
+
+## Fonts
+
+- Headings / UI: **`&#39;DotGothic16&#39;`** (pixel), fallback `monospace`.
+- Body: **`&#39;Noto Sans JP&#39;`**, fallback `system-ui, sans-serif`.
+- Code: `&#39;JetBrains Mono&#39;, &#39;Menlo&#39;, monospace`.
+
+Tailwind utilities: `font-pixel` (DotGothic16), `font-body` (Noto Sans JP).
+
+## Effects
+
+- Subtle CRT scanlines as a screen overlay.
+- Neon glow: `text-shadow: 0 0 8px &lt;color&gt;` / `box-shadow: 0 0 12px &lt;color&gt;`.
+- Borders: `1px dashed` or `2px solid` in neon colors.
+- Keep contrast high. Soft pastel gradients are not allowed.
+
+## Do Not
+
+- Use light / white backgrounds.
+- Use fully rounded (pill) shapes. Max border-radius is 4px.
+- Use soft gray drop shadows. Only use glow (neon glow).
+</code></pre>
+<p>⏱ ~2 min</p>
+<aside class="special"><p><strong>Key takeaway</strong>: This design token is automatically passed to Copilot only when editing <code>.astro</code> or <code>.css</code> files. It won&#39;t bleed into unrelated tasks like <code>/init</code> or docs editing, which reduces noise.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="PLAN: Skills" duration="10">
+        <p class="image-container"><img alt="PLAN phase Octocat" src="../../img/571b167bb39ee720.png"></p>
+<aside class="special"><p><strong>📖 Reference</strong>: <a href="https://theomonfort.github.io/theomonfort/playbook/agent-skills?lang=en" target="_blank">Playbook / Agent Skills</a> — check how Skills work and how they get summoned.</p>
+</aside>
+<p><strong>Agent Skills</strong> are reusable instruction sets that teach Copilot &#34;how to handle specific tasks.&#34; They&#39;re summoned automatically when a prompt matches, so you never have to re-explain templates from scratch.</p>
+<p>In this step, you&#39;ll install a Skill for writing well-structured Issues and use it to create one.</p>
+<h2 is-upgraded>5.1 — Install the github-issues Skill</h2>
+<p>Install the <strong><code>github-issues</code></strong> Skill from <a href="https://github.com/theomonfort/skills" target="_blank"><code>theomonfort/skills</code></a>. This skill includes multiple templates (bug report / feature request / task) and lets you write structured Issues complete with labels, priority, and dependencies.</p>
+<p>Run the following in the VS Code terminal:</p>
+<pre class="language-none"><code language="language-bash" class="language-bash">gh skill install theomonfort/skills github-issues
+</code></pre>
+<p>The CLI will ask you to choose a <strong>target agent</strong> and an <strong>installation scope</strong>:</p>
+<ul>
+<li><strong>Agent</strong>: select <code>copilot</code> (for GitHub Copilot Chat in VS Code)</li>
+<li><strong>Scope</strong>: <code>project</code> (installs to this repository only)</li>
+</ul>
+<aside class="special"><p><strong>💡 Tip</strong>: The Skill publishing format is standardized — just put a <strong>public repo + </strong><strong><code>skills/<skill-name>/SKILL.md</code></strong> structure and anyone can install it with <code>gh skill install <owner>/<repo> <skill-name></code> (spec: <a href="https://agentskills.io/specification" target="_blank">agentskills.io</a>). <code>github/awesome-copilot</code> is the community collection, but installing from it requires an authorization step for SAML SSO-protected orgs. This workshop uses the fork at <code>theomonfort/skills</code> to avoid that.</p>
+</aside>
+<p>After installation, <code>.agents/skills/github-issues/SKILL.md</code> will be added. Open it to see when Copilot will invoke this Skill and what templates it includes.</p>
+<aside class="warning"><p><strong>⚠️ Important</strong>: After installing a Skill, <strong>open a new Copilot Chat session</strong> (<code>+ New Chat</code>). Existing sessions won&#39;t load the Skill, so it won&#39;t be summoned in the next step.</p>
+</aside>
+<p>⏱ ~1 min</p>
+<h2 is-upgraded>5.2 — Create an Issue Using the Skill</h2>
+<p>Use the <code>github-issues</code> Skill to create one structured Issue. Enter the following prompt in Copilot Chat (GitHub MCP is already enabled from the previous step, so Copilot will naturally call the Issue creation tool):</p>
+<pre class="language-none"><code class="language-none">Use the github-issues skill to create the following Issue in this repository.
+Make it a structured feature request including user story, acceptance criteria, and implementation notes.
+
+Title: Add English support on the website
+
+Background:
+- The site is currently all in Japanese. We want to reach engineers globally.
+
+Requirements:
+- Add an English version using Astro&#39;s i18n routing (`/en/...`). Fall back to Japanese.
+- Extract UI strings like navigation and button labels into src/i18n/ja.ts / en.ts.
+- Structure src/content/ so both ja and en versions of Markdown can coexist.
+- Add a language toggle to the site header.
+
+Acceptance Criteria:
+- The full site is readable in English at the /en/ route.
+- Pages without a translation fall back to Japanese and show a warning banner at the top.
+- Existing SEO (sitemap, OG tags) outputs correctly for both languages.
+
+Labels: feature, i18n, frontend
+</code></pre>
+<p>⏱ ~2 min</p>
+<aside class="special"><p><strong>Key takeaway</strong>: Skills bring &#34;the right way to handle a specific task&#34; into Copilot. Normally Copilot auto-summons a Skill based on the SKILL.md description, but here we&#39;re calling it explicitly to make sure it fires. Verify that a structured Issue has been created directly on GitHub.</p>
+<p>The Issue you just created will be assigned to Cloud Agent or Agentic Workflow for implementation in a later chapter.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="CODE: Copilot Chat" duration="30">
+        <p class="image-container"><img alt="CODE phase Octocat" src="../../img/cbb3d36792343977.png"></p>
+<aside class="special"><p><strong>📖 Reference</strong>: <a href="https://theomonfort.github.io/theomonfort/playbook/copilot-chat/?lang=en" target="_blank">Playbook / Copilot Chat</a> — check the difference between Plan and Agent modes and when to use each.</p>
+</aside>
+<p>The PLAN harness (MCP, Instructions, Skills) is all set. Now it&#39;s time to use <strong>Copilot Chat&#39;s Plan mode</strong> to draft an implementation plan, then Agent mode to build it all at once.</p>
+<h2 is-upgraded>6.1 — Switch the Model to Claude Opus 4.6</h2>
+<p>Click the model selector at the bottom of the Copilot Chat panel and select <strong>Claude Opus 4.6</strong>.</p>
+<aside class="special"><p><strong>💡 Tip</strong>: Opus-series models excel at complex design tasks and long contexts. Other models are fine for everyday edits and completions, but for this section&#39;s &#34;build the whole site in one go&#34; work, Opus 4.6 gives you the most consistent quality.</p>
+</aside>
+<h2 is-upgraded>6.2 — Switch to Plan Mode</h2>
+<p>Select <strong>&#34;Plan&#34;</strong> from the mode switcher in Copilot Chat.</p>
+<aside class="special"><p><strong>💡 Tip</strong>: In Plan mode, Copilot focuses on <strong>design and questions</strong> — it won&#39;t immediately rewrite files. It will ask clarifying questions when requirements are unclear. Keep the conversation going until you&#39;re happy with the plan.</p>
+</aside>
+<h2 is-upgraded>6.3 — Request an Implementation Plan</h2>
+<p>Copy and paste the following prompt into Copilot Chat as-is:</p>
+<pre class="language-none"><code class="language-none">Please build a small Astro site (English only; no i18n or multi-language support needed). Work on a new branch (e.g. feature/playbook-site).
+
+The site is for viewing src/content/playbook/*.md in **Presentation mode (slideshow)**. Skip the index and detail pages — show the Presentation UI right from the start.
+
+- Treat each Markdown file as one &#34;section&#34;. Within a section, split on `##` headings so each heading becomes one slide.
+- Keyboard navigation:
+    * `←` `→` ... move between slides within the same section
+    * `↑` `↓` ... move to the previous / next section (md file)
+- Show a table of contents for all sections in a left sidebar, highlighting the current section.
+- Each section&#39;s theme color comes from the `color:` field in the md file&#39;s frontmatter and is applied to the slide background, title, and sidebar accent. Fall back to a default color if not present.
+- Render Mermaid diagrams (` ```mermaid `) inside Markdown.
+</code></pre>
+<p>Copilot may ask a few clarifying questions (e.g. package manager, UI framework, deploy target). Since it&#39;s read <code>copilot-instructions.md</code>, it should default to Astro / Tailwind / pnpm — just fill in anything it&#39;s missing.</p>
+<p>⏱ ~3 min</p>
+<aside class="special"><p><strong>Key takeaway</strong>: The Stack rules from 4.1 and the frontend design tokens from 4.2 kick in here. The plan should be proposed with Astro + Tailwind + the specified colors.</p>
+</aside>
+<h2 is-upgraded>6.4 — Implement with Autopilot</h2>
+<p>When you&#39;re happy with the plan, click <strong>&#34;Start with Autopilot&#34;</strong> to kick off implementation.</p>
+<p class="image-container"><img alt="Start with Autopilot" src="../../img/768c1c91ea2ffc00.png"></p>
+<p>⏱ ~15–20 min</p>
+<p>Copilot will automatically:</p>
+<ul>
+<li>Initialize the Astro project (pnpm)</li>
+<li>Define the playbook collection in <code>src/content.config.ts</code></li>
+<li>Build the Presentation UI (slideshow)</li>
+<li>Wire up keyboard navigation (← → ↑ ↓)</li>
+<li>Create the left sidebar (section TOC + current section highlight)</li>
+<li>Apply per-section theme colors based on frontmatter <code>color</code></li>
+<li>Render Mermaid diagrams</li>
+<li>Style everything with Tailwind using the design tokens</li>
+</ul>
+<p>Once implementation is done, start the dev server to check it out:</p>
+<pre class="language-none"><code language="language-bash" class="language-bash">pnpm dev
+</code></pre>
+<p>Click <strong>&#34;Open in Browser&#34;</strong> from the port forwarding notification to verify it works.</p>
+<aside class="special"><p><strong>Try it out</strong>: Navigate through the slides with ← → ↑ ↓. Note any broken behavior, UI improvements you&#39;d like, or features you want to add.</p>
+<p>Here&#39;s the key point — <strong>instead of asking Copilot Chat to fix things directly, log each one as a GitHub Issue</strong>. In Part 12 (CODE: CLI), you&#39;ll have the Copilot CLI implement all of them <strong>in parallel</strong>.</p>
+<p>Ask Copilot Chat to file your observations as <strong>3–5</strong> Issues (the <code>github-issues</code> skill will structure them automatically):</p>
+<pre class="language-none"><code class="language-none">Use the github-issues skill to create each of the following improvements as individual Issues in this repository.
+
+1. Title: Add fade animation between slide transitions
+   Details: There&#39;s currently no animation when switching slides. Add a 150ms fade when navigating with ← →.
+   Labels: enhancement, ui
+
+2. Title: Add English support (i18n)
+   Details: Currently Japanese only. Add a mechanism for English content alongside each md file using the frontmatter `titleEn` field, and add a language toggle in the top-right corner. Also support switching via `?lang=en` in the URL.
+   Labels: enhancement, i18n
+
+3. Title: Add progress bar and slide number indicator
+   Details: Show a thin progress bar at the top of the screen colored with the current section&#39;s theme color, and a small counter in the bottom-right like &#34;Section 3 / 18 · Slide 2 / 5&#34; so presenters can always see where they are.
+   Labels: enhancement, ui
+</code></pre>
+<p>You can see the created Issues in the <a href="#" target="_blank">repository&#39;s Issues tab</a>. In later chapters, you&#39;ll have Cloud Agent / Copilot CLI implement them.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="REVIEW: Copilot Code Review" duration="15">
+        <p class="image-container"><img alt="REVIEW phase Octocat" src="../../img/e9670caf5c5cc196.png"></p>
+<aside class="special"><p><strong>📖 Reference</strong>: <a href="https://theomonfort.github.io/theomonfort/playbook/copilot-code-review/?present=1&lang=en" target="_blank">Playbook / Copilot Code Review</a> — check how to automate code reviews and how Custom Instructions affect them.</p>
+</aside>
+<p>Once the implementation is working, before you open a PR, wire <strong>Copilot Code Review</strong> into your harness. The rules in <code>copilot-instructions.md</code> (language, stack, review criteria) will be automatically reflected in reviews.</p>
+<h2 is-upgraded>7.1 — Enable Copilot Code Review Settings</h2>
+<p>First, check the Copilot Code Review settings.</p>
+<ol type="1">
+<li>Repository <strong>Settings</strong> → <strong>Copilot</strong> → <strong>Code review</strong></li>
+<li>Enable the following: <ul>
+<li><strong>Use custom instructions when reviewing pull requests</strong> → On</li>
+</ul>
+</li>
+</ol>
+<aside class="special"><p><strong>Key takeaway</strong>: Enabling custom instructions makes the content of <code>copilot-instructions.md</code> apply to code reviews as well.</p>
+</aside>
+<h2 is-upgraded>7.2 — Create an Automatic Review Ruleset</h2>
+<p>Configure Copilot to automatically review code when a PR is opened. The fastest way is to create a Ruleset <strong>directly from the Code review settings page</strong>.</p>
+<ol type="1">
+<li>On the <strong>Settings</strong> → <strong>Copilot</strong> → <strong>Code review</strong> page, find the <strong>Automatic code review</strong> section</li>
+<li>Click <strong>Add a ruleset</strong> (or <strong>Create ruleset</strong>) → The Ruleset creation screen opens with <strong>Automatically request Copilot code review</strong> already enabled</li>
+</ol>
+<aside class="special"><p><strong>Key takeaway</strong>: On the Ruleset screen that opens, it&#39;s also recommended to enable:</p>
+<ul>
+<li><strong>Review new pushes</strong> — automatically re-review on every push</li>
+<li><strong>Require a pull request before merging</strong> — block direct pushes</li>
+<li>Add <strong>Repository admin</strong> to the <strong>Bypass list</strong> — so you don&#39;t get blocked waiting for reviews during the workshop</li>
+</ul>
+</aside>
+<h2 is-upgraded>7.3 — Open a PR and Check the Results</h2>
+<p>Push the site you built in section 6 to remote and open a PR. The Ruleset you set up in 7.2 will trigger Copilot Code Review automatically. Let Copilot Chat&#39;s Agent mode handle it:</p>
+<pre class="language-none"><code class="language-none">Commit and push the changes on the current branch, then open a PR against main. Write the title and body in English, summarizing the changes.
+</code></pre>
+<p>Once the PR is open, Copilot Code Review runs automatically (⏱ ~5 min):</p>
+<ul>
+<li>✅ <strong>Pull Request Overview</strong> — a summary comment on the whole PR</li>
+<li>✅ <strong>Code suggestions</strong> — specific improvement suggestions per file</li>
+</ul>
+<aside class="special"><p><strong>Key takeaway</strong>: You can follow the review in action via the <strong>&#34;View session&#34;</strong> link on the PR, or by opening the corresponding workflow run in the repository&#39;s <strong>Actions</strong> tab. You can trace exactly what files Copilot read and how it reasoned.</p>
+</aside>
+<h2 is-upgraded>7.4 — Apply the Review Suggestions</h2>
+<p>There are two ways to apply Copilot&#39;s review suggestions:</p>
+<ol type="1">
+<li><strong>Commit suggestion</strong> — commit individual suggestions one by one</li>
+<li><strong>Fix batch with Copilot</strong> — fix all suggestions at once (recommended)</li>
+</ol>
+<p>Clicking <strong>Fix batch with Copilot</strong> automatically creates a <strong>new PR</strong> with all the fixes applied (⏱ ~15 min).</p>
+<ol type="1">
+<li>First, merge the <strong>new fix PR</strong></li>
+<li>Then merge the <strong>original PR</strong></li>
+</ol>
+<aside class="warning"><p><strong>Note</strong>: In some cases, no new PR is created and fixes are committed directly to the original PR. If that happens, just merge the original PR as-is.</p>
+</aside>
+<aside class="special"><p><strong>Key takeaways</strong>:</p>
+<ul>
+<li>Copilot Code Review sessions are visible in the <strong>Actions</strong> tab — the review process is fully transparent.</li>
+<li>Review comments appear in English because the language setting in <code>copilot-instructions.md</code> is being applied!</li>
+<li>You can customize review behavior by adding review criteria to <code>copilot-instructions.md</code> (e.g. security-focused, performance-focused).</li>
+</ul>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="TEST &amp; SECURE: Dependabot" duration="3">
+        <p class="image-container"><img alt="TEST &amp; SECURE phase Octocat" src="../../img/560269265bf63bca.png"></p>
+<aside class="special"><p><strong>📖 Reference</strong>: <a href="http://127.0.0.1:4321/theomonfort/playbook/dependabot" target="_blank">Playbook / Dependabot</a> — check how Dependabot works and how to configure it.</p>
+</aside>
+<p>Enable Dependabot to continuously check for dependency vulnerabilities. Setup takes just a few clicks.</p>
+<h2 is-upgraded>8.1 — Enable Dependabot</h2>
+<ol type="1">
+<li>Repository <strong>Settings</strong> → <strong>Security and quality</strong> → <strong>Advanced Security</strong></li>
+<li>In the <strong>Dependabot</strong> section: <ul>
+<li>Enable <strong>Dependabot security updates</strong></li>
+<li>Enable <strong>Dependabot version updates</strong> → an editor opens showing the <code>.github/dependabot.yml</code> template</li>
+</ul>
+</li>
+<li>Change <code>package-ecosystem: ""</code> in the template to <strong><code>"npm"</code></strong> (this repo uses the pnpm / npm ecosystem): <pre class="language-none"><code language="language-yaml" class="language-yaml">version: 2
+updates:
+  - package-ecosystem: &#34;npm&#34;
+    directory: &#34;/&#34;
+    schedule:
+      interval: &#34;weekly&#34;
+</code></pre>
+</li>
+<li><strong>Commit changes...</strong> → Select <strong>&#34;Create a new branch and start a pull request&#34;</strong> → create and merge the PR</li>
+</ol>
+<aside class="warning"><p><strong>Note</strong>: If <code>package-ecosystem</code> is left empty, the <strong>Commit changes</strong> button will be greyed out. Enter a valid value like <code>"npm"</code> before committing. Also, the Ruleset configured in section 7.2 blocks direct commits to <code>main</code>, so merge via PR.</p>
+</aside>
+<aside class="special"><p><strong>Key takeaway</strong>: Dependabot checks dependencies weekly and automatically opens a PR if a vulnerability is found.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="TEST &amp; SECURE: CodeQL" duration="2">
+        <p class="image-container"><img alt="TEST &amp; SECURE phase Octocat" src="../../img/560269265bf63bca.png"></p>
+<p>Enable <strong>CodeQL</strong> to scan your code for security vulnerabilities using static analysis.</p>
+<h2 is-upgraded>9.1 — Enable CodeQL</h2>
+<ol type="1">
+<li>Repository <strong>Settings</strong> → <strong>Security and quality</strong> → <strong>Advanced Security</strong></li>
+<li><strong>Tools</strong> → <strong>CodeQL analysis</strong> → <strong>Set up</strong> → <strong>Default</strong> → <strong>Enable CodeQL</strong></li>
+</ol>
+<aside class="warning"><p><strong>Note</strong>: CodeQL only scans languages present in the default branch. Enable CodeQL after merging your first Astro PR, and TypeScript / JavaScript will be automatically scanned on subsequent pushes and PRs.</p>
+</aside>
+<aside class="special"><p><strong>Key takeaway</strong>: CodeQL detects security issues (XSS, SQL Injection, etc.) via static analysis.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="TEST &amp; SECURE: Actions" duration="15">
+        <p class="image-container"><img alt="TEST &amp; SECURE phase Octocat" src="../../img/560269265bf63bca.png"></p>
+<aside class="special"><p><strong>📖 Reference</strong>: <a href="https://theomonfort.github.io/theomonfort/playbook/github-actions/?present=1&lang=en" target="_blank">Playbook / GitHub Actions</a> — check the workflow structure and how triggers work in Actions.</p>
+</aside>
+<p>To make sure the <strong>keyboard navigation</strong> on the Presentation site never breaks, write Playwright E2E tests and create an Actions workflow that runs them automatically on every PR.</p>
+<h2 is-upgraded>10.1 — Write Tests for Presentation Mode</h2>
+<p>Enter the following in Copilot Chat (Agent mode):</p>
+<pre class="language-none"><code class="language-none">Create a new branch `test-creation` and work on that branch.
+
+Write Playwright E2E tests that verify the keyboard navigation of the Presentation site.
+
+Assumptions:
+- There are at least 2 entries in src/content/playbook/.
+- Opening the site shows Presentation mode immediately.
+
+Test cases:
+1. Pressing `←` / `→` moves between slides within the same section (one slide per ## heading).
+2. Pressing `↓` / `↑` moves to the next / previous section (md file).
+3. The left sidebar shows all sections as a table of contents, with the current section highlighted.
+4. When switching to a section with a different `color` in its frontmatter, the theme color (background, title, sidebar accent) changes.
+
+File layout:
+- Place tests in tests/e2e/presentation.spec.ts.
+- Update playwright.config.ts if needed (baseURL, webServer config to start pnpm dev).
+
+After writing the tests, run `pnpm exec playwright test` locally and confirm all tests pass.
+</code></pre>
+<p>⏱ ~5 min</p>
+<h2 is-upgraded>10.2 — Create an Actions Workflow to Run Tests on PRs</h2>
+<p>Continue in Copilot Chat with the following:</p>
+<pre class="language-none"><code class="language-none">Continue working on the same `test-creation` branch.
+
+Create .github/workflows/test.yml.
+Trigger it on PR creation and updates, and run the following steps:
+
+1. Set up Node.js 22
+2. Set up pnpm
+3. Install dependencies
+4. Install Playwright browsers (npx playwright install --with-deps chromium)
+5. Run `pnpm exec playwright test`
+6. On test failure, upload the Playwright report as an artifact
+</code></pre>
+<p>⏱ ~2 min</p>
+<p>Open a PR and you&#39;ll see <code>test.yml</code> running in the Actions tab. Whenever Presentation mode behavior changes, this workflow will catch regressions early.</p>
+<aside class="special"><p><strong>Key takeaway</strong>: With tests written and continuously run in Actions, you have a safety net that can detect regressions even when Cloud Agent or Agentic Workflow automatically creates PRs in later steps.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="CODE: Cloud Agent" duration="20">
+        <p class="image-container"><img alt="CODE phase Octocat" src="../../img/cbb3d36792343977.png"></p>
+<aside class="special"><p><strong>📖 Reference</strong>: <a href="https://theomonfort.github.io/theomonfort/playbook/cloud-agent/?present=1&lang=en" target="_blank">Playbook / Cloud Agent</a> — check how Cloud Agent operates, how Issue assignment works, and how it integrates with PRs.</p>
+</aside>
+<h2 is-upgraded>5.1 — Verify Copilot Settings</h2>
+<p>To use Cloud Agent, confirm the following settings:</p>
+<ol type="1">
+<li>Click your profile icon in the top right of GitHub → <strong>Copilot settings</strong></li>
+<li>Confirm that <strong>Copilot Cloud Agent</strong> is enabled</li>
+</ol>
+<h2 is-upgraded>5.2 — Assign Cloud Agent to an Existing Issue</h2>
+<p>Open one of the Issues you created in Step 1.4 that you&#39;d like Cloud Agent to implement.</p>
+<ol type="1">
+<li>Open the Issue</li>
+<li>Click <strong>Assignees</strong> in the right sidebar</li>
+<li>Select and assign from <strong>Copilot</strong> (GitHub), <strong>Claude</strong> (Anthropic), or <strong>Codex</strong> (OpenAI)</li>
+</ol>
+<p class="image-container"><img alt="Cloud Agent assignment screen" src="../../img/f36e70ae8a7a515c.png"></p>
+<p>At assignment time, you can customize:</p>
+<ul>
+<li><strong>Additional prompt</strong> — add supplementary instructions to the Issue description</li>
+<li><strong>Model selection</strong> — choose from Copilot / Claude / Codex</li>
+<li><strong>Base branch</strong> — specify the branch to work from</li>
+</ul>
+<aside class="special"><p><strong>Key takeaway</strong>: Cloud Agent autonomously implements the code and creates a PR (⏱ ~15 min per Issue). If Validation Tools (CodeQL, Code Review, Secret Scanning) set up in Step 4.1 are enabled, the Agent validates its own implementation before submitting the PR. Assign multiple Issues simultaneously and they&#39;ll be processed in parallel.</p>
+</aside>
+<h2 is-upgraded>5.3 — Review and Merge the PR</h2>
+<p>PRs created by Cloud Agent start in <strong>Draft</strong> state.</p>
+<ol type="1">
+<li>Open the PR and review the content</li>
+<li>Click <strong>Ready for review</strong> to take it out of Draft</li>
+<li>Copilot Code Review starts automatically</li>
+<li>Once review is complete, merge the PR</li>
+</ol>
+<aside class="warning"><p><strong>If you get a conflict</strong>: When multiple Cloud Agents work in parallel, they may change the same files and cause conflicts. Click <strong>Resolve conflicts</strong> → <strong>Fix with Copilot</strong> and Copilot will resolve the conflicts automatically.</p>
+</aside>
+<p class="image-container"><img alt="Resolving conflicts with Fix with Copilot" src="../../img/12a6ddcf1897bbd6.png"></p>
+<h2 is-upgraded>5.4 — Pull the Latest Code and Check the Site</h2>
+<p>Once Cloud Agent&#39;s PRs are merged, pull the latest code in Codespace and verify the site.</p>
+<pre class="language-none"><code language="language-bash" class="language-bash">git checkout main &amp;&amp; git pull &amp;&amp; pnpm install &amp;&amp; pnpm dev
+</code></pre>
+<p>When the port forwarding notification appears, click <strong>&#34;Open in Browser&#34;</strong> to see the new features Cloud Agent implemented.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="PLAN: Hooks" duration="10">
+        <p class="image-container"><img alt="PLAN phase Octocat" src="../../img/571b167bb39ee720.png"></p>
+<p>Let&#39;s put up guardrails with <strong>Hooks</strong> to prevent Copilot (Chat / CLI / Cloud Agent, etc.) from touching <strong>files you don&#39;t want modified</strong> — like <code>.github/</code> config files, <code>.env</code>, and <code>pnpm-lock.yaml</code>. This is especially important before the next chapter, where you&#39;ll run multiple agents in parallel from the CLI.</p>
+<p><strong>Hooks</strong> let you inject arbitrary scripts before and after an agent calls a tool (<code>PreToolUse</code> / <code>PostToolUse</code>). Returning <code>permissionDecision: deny</code> from a <code>PreToolUse</code> hook <strong>physically stops</strong> the agent.</p>
+<aside class="special"><p><strong>📖 Reference</strong>: <a href="https://theomonfort.github.io/theomonfort/playbook/hooks/?lang=en" target="_blank">Playbook / Hooks</a> — check how Hooks work and what event types are available.</p>
+</aside>
+<h2 is-upgraded>N.1 — Create <code>.github/hooks/hooks.json</code></h2>
+<p>Create a new file at <code>.github/hooks/hooks.json</code> in the root of your repository and paste in the following:</p>
+<pre class="language-none"><code language="language-json" class="language-json">{
+  &#34;version&#34;: 1,
+  &#34;hooks&#34;: {
+    &#34;PreToolUse&#34;: [
+      {
+        &#34;type&#34;: &#34;command&#34;,
+        &#34;matcher&#34;: &#34;.*(edit|create|write|delete|remove|rename|move|patch|replace|insert|update|bash|shell|terminal|command|run|execute|apply).*&#34;,
+        &#34;bash&#34;: &#34;node ./scripts/block-protected-paths.mjs&#34;,
+        &#34;cwd&#34;: &#34;.github/hooks&#34;,
+        &#34;timeoutSec&#34;: 5
+      }
+    ]
+  }
+}
+</code></pre>
+<p>Key points:</p>
+<ul>
+<li>The <code>matcher</code> restricts the hook to <strong>mutating tools</strong> only (file writes and shell execution) — reads and searches are not blocked.</li>
+<li><code>bash</code> is run relative to <code>cwd</code>. The script is created in the next step.</li>
+</ul>
+<h2 is-upgraded>N.2 — Create the Blocking Script</h2>
+<p>Create a new file at <code>.github/hooks/scripts/block-protected-paths.mjs</code> and paste in the following:</p>
+<pre class="language-none"><code language="language-javascript" class="language-javascript">import { stdin, stdout } from &#39;node:process&#39;;
+
+const rawPayload = await readStdin();
+const payload = parseJson(rawPayload);
+if (!payload) process.exit(0);
+
+const toolName = String(payload.tool_name ?? payload.toolName ?? &#39;requested&#39;);
+const toolInput = payload.tool_input ?? payload.toolArgs ?? {};
+
+const normalizedInput = JSON.stringify(toolInput).replaceAll(&#39;\\\\&#39;, &#39;/&#39;);
+const protectedPath = findProtectedPath(normalizedInput);
+if (!protectedPath) {
+  process.exit(0);
+}
+
+deny(`Repository policy: agents must not modify ${protectedPath}. The ${toolName} tool referenced ${protectedPath}.`);
+
+async function readStdin() {
+  const chunks = [];
+  for await (const chunk of stdin) chunks.push(chunk);
+  return Buffer.concat(chunks).toString(&#39;utf8&#39;).trim();
+}
+
+function parseJson(raw) {
+  if (!raw) return null;
+  try { return JSON.parse(raw); } catch { return null; }
+}
+
+function findProtectedPath(value) {
+  const protectedPaths = [
+    { label: &#39;.github/&#39;, pattern: /(^|[\/\s&#34;&#39;`=:([{])(?:\.\/)?\.github(?:\/|$)/i },
+    { label: &#39;.env&#39;, pattern: /(^|[\/\s&#34;&#39;`=:([{])(?:\.\/)?\.env(?:$|[\/\s&#34;&#39;`),}\]])/i },
+    { label: &#39;pnpm-lock.yaml&#39;, pattern: /(^|[\/\s&#34;&#39;`=:([{])pnpm-lock\.yaml(?:$|[\/\s&#34;&#39;`),}\]])/i },
+  ];
+  return protectedPaths.find(({ pattern }) =&gt; pattern.test(value))?.label;
+}
+
+function deny(reason) {
+  const additionalContext = &#39;This hook blocks agent writes to protected repository configuration, environment, and lock files. Choose a different path or ask the user to make the protected-file change manually.&#39;;
+  stdout.write(JSON.stringify({
+    permissionDecision: &#39;deny&#39;,
+    permissionDecisionReason: reason,
+    additionalContext,
+    hookSpecificOutput: {
+      hookEventName: &#39;PreToolUse&#39;,
+      permissionDecision: &#39;deny&#39;,
+      permissionDecisionReason: reason,
+      additionalContext,
+    },
+  }));
+}
+</code></pre>
+<p>Key points:</p>
+<ul>
+<li>Protected targets: <code>.github/</code>, <code>.env</code>, and <code>pnpm-lock.yaml</code>.</li>
+<li>The output returns both <strong>Copilot CLI format</strong> (<code>permissionDecision</code>) and <strong>VS Code format</strong> (<code>hookSpecificOutput</code>), so it works in either environment.</li>
+</ul>
+<h2 is-upgraded>N.3 — Restart Copilot Chat</h2>
+<p>To load the Hook configuration, <strong>close your current Copilot Chat session and open a new one</strong> (💬 icon → &#34;+&#34; for new chat).</p>
+<h2 is-upgraded>N.4 — Test the Agent (Intentionally Trigger a Block)</h2>
+<p>In the new chat, enter the following:</p>
+<pre class="language-none"><code class="language-none">Create a new file called .github/test.md with the content &#34;hello hooks&#34;.
+</code></pre>
+<p>Expected behavior:</p>
+<ul>
+<li>The agent tries to call the <code>create</code> / <code>write</code> tool.</li>
+<li>Hook fires → detects <code>.github/</code> path → returns <strong><code>permissionDecision: deny</code></strong>.</li>
+<li>A rejection message like &#34;Repository policy: agents must not modify <code>.github/</code>&#34; appears in the chat.</li>
+<li>The file is not created.</li>
+</ul>
+<aside class="warning"><p><strong>Was it blocked as expected?</strong> If not, check that <code>.github/hooks/hooks.json</code> is in the right path, that you opened Copilot Chat in a new session, and that <code>node</code> is available (<code>node --version</code>).</p>
+</aside>
+<p>⏱ ~10 min</p>
+<aside class="special"><p><strong>You&#39;re now safe to proceed to the CLI.</strong> In the next chapter you&#39;ll run multiple agents in parallel from Copilot CLI — and you no longer have to worry about them touching <code>.github/</code> on their own.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="CODE: CLI" duration="30">
+        <p class="image-container"><img alt="CODE phase Octocat" src="../../img/cbb3d36792343977.png"></p>
+<aside class="special"><p><strong>📖 Reference</strong>: <a href="https://theomonfort.github.io/theomonfort/playbook/cli/?lang=en" target="_blank">Playbook / Copilot CLI</a> — check Plan ↔ Agent switching and the terminal-centric workflow in Copilot CLI.</p>
+</aside>
+<p><strong>Copilot CLI</strong> is an interactive AI assistant that runs in the terminal. It can autonomously generate code, review it, refactor it, and more — all without opening VS Code.</p>
+<p>Here, you&#39;ll use <code>/fleet</code> from the CLI to implement the <strong>Issues you created at the end of Part 6</strong> in <strong>parallel</strong>.</p>
+<h2 is-upgraded>Key Commands</h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Command</p>
+</td><td colspan="1" rowspan="1"><p>Description</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/model</code></p>
+</td><td colspan="1" rowspan="1"><p>Select the AI model (Claude / GPT, etc.)</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/mode</code></p>
+</td><td colspan="1" rowspan="1"><p>Switch mode (plan / agent)</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/allow-all</code></p>
+</td><td colspan="1" rowspan="1"><p>Allow tool execution without confirmation (Autopilot)</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/fleet</code></p>
+</td><td colspan="1" rowspan="1"><p>Run multiple agents in parallel</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/tasks</code></p>
+</td><td colspan="1" rowspan="1"><p>Check the status of running fleet tasks</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/chronicle</code></p>
+</td><td colspan="1" rowspan="1"><p>Analyze session history and usage patterns</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/resume</code></p>
+</td><td colspan="1" rowspan="1"><p>Resume a previous session</p>
+</td></tr>
+</table>
+<h2 is-upgraded>12.1 — Start Copilot CLI</h2>
+<p>First, pull the latest code. Cloud Agent and Code Review PRs should have been merged by now, so update your local branch:</p>
+<pre class="language-none"><code language="language-bash" class="language-bash">git checkout main
+git pull
+</code></pre>
+<p>Then start Copilot CLI in the VS Code terminal:</p>
+<pre class="language-none"><code language="language-bash" class="language-bash">copilot
+</code></pre>
+<aside class="warning"><p><strong>First launch</strong>: If you see &#34;Install GitHub Copilot CLI?&#34;, enter <code>y</code> to install it. In Codespaces, it&#39;s already pre-installed via <code>postCreateCommand</code>.</p>
+</aside>
+<h2 is-upgraded>12.2 — Select a Model and Enable Autopilot</h2>
+<p>Inside the CLI, run:</p>
+<pre class="language-none"><code class="language-none">/allow-all
+</code></pre>
+<pre class="language-none"><code class="language-none">/model
+</code></pre>
+<p>Select the highest-performing model (e.g. Claude Opus 4.6).</p>
+<p>Then press <strong>Shift+Tab</strong> to switch to <strong>Agent (Autopilot) mode</strong>.</p>
+<h2 is-upgraded>12.3 — Implement Issues in Parallel with <code>/fleet</code></h2>
+<p>Use the CLI to implement the 3–5 Issues created in Part 6 in parallel. The prompt also includes an instruction to rubber-duck review with a different model (Codex).</p>
+<pre class="language-none"><code class="language-none">/fleet For all open Issues in this repository with a label of bug or enhancement,
+assign one fleet agent per Issue and implement them in parallel.
+
+Each agent should follow this flow:
+1. Create a branch matching the Issue number (fix/&lt;number&gt;-&lt;slug&gt;)
+2. Implement the fix
+3. Leave it in a state that can be verified with pnpm dev
+4. Commit and open a PR (include `Closes #&lt;number&gt;` in the body)
+
+Once all PRs are created, switch to the **GPT-5 Codex** model
+(using a different model from the Claude that implemented the code, to avoid blind spots)
+and do a rubber-duck review of all the created PRs.
+Focus on: design blind spots, logic bugs, missing Issue requirements, consistency with existing code,
+missing tests and error handling. Ignore style and minor nits —
+list only genuinely important issues, one concise note per PR.
+</code></pre>
+<p>⏱ ~10–15 min</p>
+<p>The CLI spawns multiple fleet agents, each autonomously implementing on its own branch and creating a PR. Progress streams to the terminal, and the rubber-duck review from the alternate model is printed at the end.</p>
+<p>To check progress during or after execution:</p>
+<pre class="language-none"><code class="language-none">/tasks
+</code></pre>
+<p>This shows the status (running / complete / failed) and current step for each fleet agent.</p>
+<aside class="special"><p><strong>Key takeaway</strong>: By having a different model (Codex) review what another model (Claude) implemented, you avoid same-model bias and surface blind spots.</p>
+</aside>
+<h2 is-upgraded>12.4 — Analyze Usage with Chronicle</h2>
+<p>Finally, review your Copilot CLI usage during the workshop with Chronicle:</p>
+<pre class="language-none"><code class="language-none">/experimental
+</code></pre>
+<pre class="language-none"><code class="language-none">chronicle
+</code></pre>
+<aside class="special"><p><strong>Chronicle key takeaway</strong>: Chronicle analyzes your Copilot usage patterns and provides advice on using it more effectively. You can also see trends from the parallel fleet executions here.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="OPERATE: Agentic Workflow" duration="15">
+        <aside class="special"><p><strong>📖 Reference</strong>: <a href="https://theomonfort.github.io/theomonfort/playbook/agentic-workflow?lang=en" target="_blank">Playbook / Agentic Workflow</a> — check the Agentic Workflow concept and GitHub Actions × Copilot integration patterns.</p>
+</aside>
+<p>Let&#39;s experience <strong>Agentic Workflow</strong> — combining GitHub Actions with Copilot (AI) to automatically run autonomous tasks in response to code changes.</p>
+<p><strong>What is Agentic Workflow?</strong>: A mechanism that uses Copilot inside GitHub Actions workflows to run autonomous tasks (report generation, documentation updates, code fixes, etc.) triggered by repository changes.</p>
+<h3 is-upgraded>Installing gh aw</h3>
+<p>First, install the CLI tool for Agentic Workflow.</p>
+<p>For local environments:</p>
+<pre class="language-none"><code language="language-bash" class="language-bash">gh extension install github/gh-aw
+</code></pre>
+<p>For Codespaces or environments with network restrictions (pre-GA):</p>
+<pre class="language-none"><code language="language-bash" class="language-bash">curl -sL https://raw.githubusercontent.com/github/gh-aw/main/install-gh-aw.sh | bash
+</code></pre>
+<h2 is-upgraded>6.1 — Create a Personal Access Token (PAT)</h2>
+<p>Create a PAT to use Copilot in Agentic Workflow.</p>
+<ol type="1">
+<li>Go to <a href="https://github.com/settings/personal-access-tokens/new" target="_blank">https://github.com/settings/personal-access-tokens/new</a></li>
+<li>Configure the following: <ul>
+<li><strong>Token name</strong>: <code>copilot-workshop-agent</code></li>
+<li><strong>Resource owner</strong>: The Organization (or personal account) where you created the repository</li>
+<li><strong>Repository access</strong>: Only select repositories → select your repository</li>
+<li><strong>Permissions</strong>: <ul>
+<li><strong>Actions</strong>: Read and write</li>
+<li><strong>Contents</strong>: Read-only</li>
+<li><strong>Issues</strong>: Read and write</li>
+<li><strong>Metadata</strong>: Read-only (auto-granted)</li>
+<li><strong>Pull requests</strong>: Read and write</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p><img alt="PAT Permissions" src="../../img/92804211fbb87c15.png"> 3. Copy the generated PAT</p>
+<aside class="warning"><p><strong>Note</strong>: The PAT is shown only once at creation time. Copy it and store it somewhere safe — you can&#39;t view it again.</p>
+</aside>
+<h3 is-upgraded>Set as a Repository Secret</h3>
+<ol type="1">
+<li>Repository <strong>Settings</strong> → <strong>Secrets and variables</strong> → <strong>Actions</strong></li>
+<li>Click <strong>New repository secret</strong></li>
+<li>Name: <code>COPILOT_GITHUB_TOKEN</code>, Value: the PAT you just created</li>
+</ol>
+<h3 is-upgraded>Verify Workflow Permissions</h3>
+<ol type="1">
+<li><strong>Settings</strong> → <strong>Actions</strong> → <strong>General</strong></li>
+<li>Check <strong>Allow GitHub Actions to create and approve pull requests</strong></li>
+</ol>
+<h2 is-upgraded>6.2 — Create the Daily Repo Status Workflow</h2>
+<p>Let&#39;s create an Agentic Workflow that automatically reports today&#39;s repository activity.</p>
+<p>Run the following in Agent mode:</p>
+<pre class="language-none"><code class="language-none">Please create the following Agentic Workflow.
+
+File: .github/workflows/daily-repo-status.md
+
+Purpose: Analyze repository activity (Issues, PRs, code changes) and
+automatically create a daily status report as an Issue.
+
+Format:
+- Define configuration in YAML front matter (on, permissions, tools, safe-outputs)
+- Write workflow instructions in the Markdown body
+
+Configuration:
+- Trigger: schedule: daily and workflow_dispatch
+- permissions: contents: read, issues: read, pull-requests: read
+- tools: github (lockdown: false, min-integrity: none)
+- safe-outputs: create-issue with title-prefix &#34;[repo-status] &#34;,
+  labels: [report, daily-status], close-older-issues: true
+
+Workflow instructions:
+1. Collect recent repository activity (Issues, PRs, code changes)
+2. Analyze progress and highlights
+3. Create a GitHub Issue with the results
+
+Reference: https://github.com/githubnext/agentics/blob/main/workflows/daily-repo-status.md
+
+When done, run `gh aw compile` to compile the workflow,
+then commit the changes and open a PR.
+</code></pre>
+<aside class="special"><p><strong>Key takeaway</strong>: <code>gh aw compile</code> generates a <code>.lock.yml</code> file that GitHub Actions can execute from the <code>.md</code> file. Without compiling, the workflow won&#39;t run.</p>
+</aside>
+<p>After merging the PR, manually trigger the workflow from the <strong>Actions</strong> tab:</p>
+<ol type="1">
+<li>Open the <strong>Actions</strong> tab in your repository</li>
+<li>Select <strong>Daily Repo Status</strong> from the left menu</li>
+<li>Click <strong>Run workflow</strong> → <strong>Run workflow</strong></li>
+</ol>
+<p class="image-container"><img alt="Manual run from Actions" src="../../img/d570d6f7f0957371.png"></p>
+<p>After execution completes (⏱ ~2 min), an Issue prefixed with <code>[repo-status]</code> will be automatically created in the repository&#39;s <strong>Issues</strong> tab, containing a summary of today&#39;s PRs, Issues, and code activity.</p>
+<aside class="special"><p><strong>Key takeaway</strong>: Unlike regular GitHub Actions, Agentic Workflow runs via the <code>gh aw run</code> command. Scheduled runs (automatic daily execution) can also be configured.</p>
+</aside>
+<h2 is-upgraded>6.3 — (Bonus) Create a Test Coverage Auto-Update Workflow</h2>
+<p>If you have extra time, try creating a workflow that automatically updates the test coverage report.</p>
+<p>Run the following in Agent mode:</p>
+<pre class="language-none"><code class="language-none">Please create the following Agentic Workflow.
+Reference: https://github.com/github/gh-aw/blob/main/create.md
+
+Workflow purpose:
+- Trigger on pushes to the main branch
+- Run tests and generate a coverage report
+- Auto-update coverage results as a badge in README.md
+- Automatically create a PR if there are changes
+
+Place the workflow file at .github/workflows/coverage-update.md.
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Congratulations 🎉" duration="5">
+        <h2 is-upgraded>What You Learned Today</h2>
+<p>In this workshop, you experienced GitHub Copilot end-to-end across the <strong>PLAN → CODE → REVIEW → TEST &amp; SECURE → OPERATE</strong> phases:</p>
+<ul>
+<li><strong>PLAN: MCP Server</strong> — Give Copilot fresh context via GitHub MCP and Context7</li>
+<li><strong>PLAN: Instruction</strong> — Lock in Copilot&#39;s assumptions, style, and language with <code>copilot-instructions.md</code> and Path Instructions</li>
+<li><strong>PLAN: Skills</strong> — Install a Skill from awesome-copilot to automate Issue creation</li>
+<li><strong>CODE: Copilot Chat</strong> — Design with Plan mode, implement the site with Agent mode</li>
+<li><strong>REVIEW: Copilot Code Review</strong> — Ensure quality with automated PR reviews</li>
+<li><strong>TEST &amp; SECURE: Dependabot &amp; CodeQL</strong> — Continuously detect dependency and code vulnerabilities</li>
+<li><strong>TEST &amp; SECURE: Actions</strong> — Automate Playwright tests with GitHub Actions</li>
+<li><strong>CODE: Cloud Agent</strong> — Assign Issues to Copilot and let it implement in the background</li>
+<li><strong>CODE: CLI</strong> — Move between Plan ↔ Agent from the terminal with Copilot CLI</li>
+<li><strong>OPERATE: Agentic Workflow</strong> — Build autonomous CI/CD with AI using <code>gh-aw</code></li>
+</ul>
+<h2 is-upgraded>Next Steps</h2>
+<ul>
+<li>Use the <a href="https://theomonfort.github.io/theomonfort/playbook/?lang=en" target="_blank">Playbook</a> as internal reference and share it with your team</li>
+<li>Try applying <code>/init</code> → Plan → Agent on real projects</li>
+<li>Automate daily tasks with Cloud Agent and Agentic Workflow</li>
+<li>Integrate Copilot CLI into your everyday terminal workflow</li>
+</ul>
+<h2 is-upgraded>Resources</h2>
+<ul>
+<li><a href="https://theomonfort.github.io/theomonfort/playbook/?lang=en" target="_blank">Theo&#39;s Copilot Playbook</a></li>
+<li><a href="https://docs.github.com/copilot" target="_blank">GitHub Copilot Documentation</a></li>
+<li><a href="https://docs.github.com/copilot/using-github-copilot/best-practices-for-using-github-copilot" target="_blank">GitHub Copilot Best Practices</a></li>
+<li><a href="https://github.com/github/awesome-copilot" target="_blank">awesome-copilot</a></li>
+<li><a href="https://github.com/githubnext/gh-aw" target="_blank">gh-aw (Agentic Workflows)</a></li>
+<li><a href="https://github.com/github/copilot-cli" target="_blank">Copilot CLI</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
