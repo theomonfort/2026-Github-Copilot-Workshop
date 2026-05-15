@@ -371,6 +371,33 @@
     .token.important, .token.bold { font-weight: bold; }
     .token.italic { font-style: italic; }
 
+    /* Prism toolbar — Copy button */
+    div.code-toolbar { position: relative; }
+    div.code-toolbar > .toolbar {
+      position: absolute; top: 8px; right: 8px;
+      opacity: 0; transition: opacity 0.15s ease;
+      z-index: 10;
+    }
+    div.code-toolbar:hover > .toolbar { opacity: 1; }
+    div.code-toolbar > .toolbar .toolbar-item > button {
+      background: rgba(48, 54, 61, 0.85) !important;
+      color: #e6edf3 !important;
+      border: 1px solid #30363d !important;
+      border-radius: 4px !important;
+      padding: 4px 10px !important;
+      font-family: "JetBrains Mono","SFMono-Regular",monospace !important;
+      font-size: 0.75em !important;
+      cursor: pointer !important;
+      transition: background 0.15s, border-color 0.15s !important;
+      box-shadow: none !important;
+    }
+    div.code-toolbar > .toolbar .toolbar-item > button:hover,
+    div.code-toolbar > .toolbar .toolbar-item > button:focus {
+      background: rgba(0, 240, 255, 0.15) !important;
+      border-color: #00f0ff !important;
+      color: #00f0ff !important;
+    }
+
     /* Brighten body text (was too dim) */
     google-codelab-step p,
     google-codelab-step li,
@@ -581,6 +608,8 @@
     details.prompt-collapse pre { margin: 0 !important; border: none !important; border-radius: 0 0 6px 6px !important; }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </head>
 <body>
