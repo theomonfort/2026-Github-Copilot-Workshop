@@ -83,11 +83,11 @@ The DevContainer automatically sets up a Node.js 22 environment and pre-installs
 - gh-aw (Agentic Workflow CLI)
 - Playwright (with Chromium browser)
 
-### Step 3: Check the Source Content
+### Step 3: Review the Source Material
 
 Markdown files are located in `src/content/playbook/`. These are the raw materials for today's site.
 
-Open `src/content/playbook/` in the VS Code Explorer and browse through a few files. Later, you'll have Copilot turn these into a site with "grid + detail + presentation mode" viewing.
+Open `src/content/playbook/` in the VS Code Explorer and browse through a few files. Later, you'll have Copilot turn these into a site where users can browse the content in grid, detail, and presentation views.
 
 ## PLAN: MCP Server
 Duration: 10
@@ -121,7 +121,7 @@ Click the **🔧 tools button** in the Copilot Chat input area (to the right of 
 ⏱ ~1 min
 
 > aside positive
-> **Key takeaway**: The GitHub MCP Server is officially provided by GitHub. It lets Copilot operate Issues / PRs / Actions / Code search directly — just like running `gh` commands.
+> **Key point**: The GitHub MCP Server is officially provided by GitHub. It lets Copilot operate Issues / PRs / Actions / Code search directly — just like running `gh` commands.
 
 ### 3.2 — Add the Context7 MCP Server
 
@@ -159,7 +159,7 @@ Use Context7 to summarize the latest documentation for Astro's content collectio
 ⏱ ~2 min
 
 > aside positive
-> **Key takeaway**: Using the HTTP version directly means no `npx` package download — startup is instant. If you go through **"Browse MCP Servers"** in the Marketplace, it selects the stdio (npx) version `io.github.upstash/context7`, which can be slow or stall on the first run due to package downloads. The HTTP version avoids this entirely.
+> **Key point**: Using the HTTP version directly means no `npx` package download — startup is instant. If you go through **"Browse MCP Servers"** in the Marketplace, it selects the stdio (npx) version `io.github.upstash/context7`, which can be slow or stall on the first run due to package downloads. The HTTP version avoids this entirely.
 > From now on, just ask "What's the latest Astro API?" or "What's the new Tailwind v4 syntax?" and Copilot will pull the official docs via Context7. No more worrying about training data cutoffs.
 
 ## PLAN: Instruction
@@ -170,7 +170,7 @@ Duration: 15
 > aside positive
 > **📖 Reference**: [Playbook / Instructions](https://theomonfort.github.io/theomonfort/playbook/instructions?lang=en) — check the role, scope, and usage patterns of Instruction files.
 
-Instruction files are "standing orders" that give Copilot **persistent rules** at the repository or file level. Every team member's Copilot will follow the same conventions automatically.
+Instruction files are documents that give Copilot **persistent rules** at the repository or file level. Every team member's Copilot will follow the same conventions automatically.
 
 In this step, you'll create two types of Instruction files:
 
@@ -225,7 +225,7 @@ Applies to: Astro (content collections, integrations, routing), Tailwind CSS, Me
 ⏱ ~2 min
 
 > aside positive
-> **Key takeaway**: From now on, Copilot's responses will be in English. Stack constraints will also be respected automatically.
+> **Key point**: From now on, Copilot's responses will be in English. Stack constraints will also be respected automatically.
 
 ### 4.2 — Create the Frontend-specific Path Instruction
 
@@ -290,7 +290,7 @@ Tailwind utilities: `font-pixel` (DotGothic16), `font-body` (Noto Sans JP).
 ⏱ ~2 min
 
 > aside positive
-> **Key takeaway**: This design token is automatically passed to Copilot only when editing `.astro` or `.css` files. It won't bleed into unrelated tasks like `/init` or docs editing, which reduces noise.
+> **Key point**: This design token is automatically passed to Copilot only when editing `.astro` or `.css` files. It won't bleed into unrelated tasks like `/init` or docs editing, which reduces noise.
 
 ## PLAN: Skills
 Duration: 10
@@ -359,7 +359,7 @@ Labels: feature, i18n, frontend
 ⏱ ~2 min
 
 > aside positive
-> **Key takeaway**: Skills bring "the right way to handle a specific task" into Copilot. Normally Copilot auto-summons a Skill based on the SKILL.md description, but here we're calling it explicitly to make sure it fires. Verify that a structured Issue has been created directly on GitHub.
+> **Key point**: Skills bring "the right way to handle a specific task" into Copilot. Normally Copilot auto-summons a Skill based on the SKILL.md description, but here we're calling it explicitly to make sure it fires. Verify that a structured Issue has been created directly on GitHub.
 >
 > The Issue you just created will be assigned to Cloud Agent or Agentic Workflow for implementation in a later chapter.
 
@@ -407,12 +407,12 @@ The site is for viewing src/content/playbook/*.md in **Presentation mode (slides
 - Render Mermaid diagrams (` ```mermaid `) inside Markdown.
 ```
 
-Copilot may ask a few clarifying questions (e.g. package manager, UI framework, deploy target). Since it's read `copilot-instructions.md`, it should default to Astro / Tailwind / pnpm — just fill in anything it's missing.
+Copilot may ask a few clarifying questions (e.g. package manager, UI framework, deploy target). Since it has read `copilot-instructions.md`, it should default to Astro / Tailwind / pnpm — just fill in anything it's missing.
 
 ⏱ ~3 min
 
 > aside positive
-> **Key takeaway**: The Stack rules from 4.1 and the frontend design tokens from 4.2 kick in here. The plan should be proposed with Astro + Tailwind + the specified colors.
+> **Key point**: The Stack rules from 4.1 and the frontend design tokens from 4.2 kick in here. The plan should be proposed with Astro + Tailwind + the specified colors.
 
 ### 6.4 — Implement with Autopilot
 
@@ -486,7 +486,7 @@ First, check the Copilot Code Review settings.
    - **Use custom instructions when reviewing pull requests** → On
 
 > aside positive
-> **Key takeaway**: Enabling custom instructions makes the content of `copilot-instructions.md` apply to code reviews as well.
+> **Key point**: Enabling custom instructions makes the content of `copilot-instructions.md` apply to code reviews as well.
 
 ### 7.2 — Create an Automatic Review Ruleset
 
@@ -496,7 +496,7 @@ Configure Copilot to automatically review code when a PR is opened. The fastest 
 2. Click **Add a ruleset** (or **Create ruleset**) → The Ruleset creation screen opens with **Automatically request Copilot code review** already enabled
 
 > aside positive
-> **Key takeaway**: On the Ruleset screen that opens, it's also recommended to enable:
+> **Key point**: On the Ruleset screen that opens, it's also recommended to enable:
 > - **Review new pushes** — automatically re-review on every push
 > - **Require a pull request before merging** — block direct pushes
 > - Add **Repository admin** to the **Bypass list** — so you don't get blocked waiting for reviews during the workshop
@@ -514,7 +514,7 @@ Once the PR is open, Copilot Code Review runs automatically (⏱ ~5 min):
 - ✅ **Code suggestions** — specific improvement suggestions per file
 
 > aside positive
-> **Key takeaway**: You can follow the review in action via the **"View session"** link on the PR, or by opening the corresponding workflow run in the repository's **Actions** tab. You can trace exactly what files Copilot read and how it reasoned.
+> **Key point**: You can follow the review in action via the **"View session"** link on the PR, or by opening the corresponding workflow run in the repository's **Actions** tab. You can trace exactly what files Copilot read and how it reasoned.
 
 ### 7.4 — Apply the Review Suggestions
 
@@ -532,7 +532,7 @@ Clicking **Fix batch with Copilot** automatically creates a **new PR** with all 
 > **Note**: In some cases, no new PR is created and fixes are committed directly to the original PR. If that happens, just merge the original PR as-is.
 
 > aside positive
-> **Key takeaways**:
+> **Key points**:
 > - Copilot Code Review sessions are visible in the **Actions** tab — the review process is fully transparent.
 > - Review comments appear in English because the language setting in `copilot-instructions.md` is being applied!
 > - You can customize review behavior by adding review criteria to `copilot-instructions.md` (e.g. security-focused, performance-focused).
@@ -569,7 +569,7 @@ Enable Dependabot to continuously check for dependency vulnerabilities. Setup ta
 > **Note**: If `package-ecosystem` is left empty, the **Commit changes** button will be greyed out. Enter a valid value like `"npm"` before committing. Also, the Ruleset configured in section 7.2 blocks direct commits to `main`, so merge via PR.
 
 > aside positive
-> **Key takeaway**: Dependabot checks dependencies weekly and automatically opens a PR if a vulnerability is found.
+> **Key point**: Dependabot checks dependencies weekly and automatically opens a PR if a vulnerability is found.
 
 ## TEST & SECURE: CodeQL
 Duration: 2
@@ -588,7 +588,7 @@ Enable **CodeQL** to scan your code for security vulnerabilities using static an
 > **Note**: CodeQL only scans languages present in the default branch. Enable CodeQL after merging your first Astro PR, and TypeScript / JavaScript will be automatically scanned on subsequent pushes and PRs.
 
 > aside positive
-> **Key takeaway**: CodeQL detects security issues (XSS, SQL Injection, etc.) via static analysis.
+> **Key point**: CodeQL detects security issues (XSS, SQL Injection, etc.) via static analysis.
 
 ## TEST & SECURE: Actions
 Duration: 15
@@ -652,7 +652,7 @@ Trigger it on PR creation and updates, and run the following steps:
 Open a PR and you'll see `test.yml` running in the Actions tab. Whenever Presentation mode behavior changes, this workflow will catch regressions early.
 
 > aside positive
-> **Key takeaway**: With tests written and continuously run in Actions, you have a safety net that can detect regressions even when Cloud Agent or Agentic Workflow automatically creates PRs in later steps.
+> **Key point**: With tests written and continuously run in Actions, you have a safety net that can detect regressions even when Cloud Agent or Agentic Workflow automatically creates PRs in later steps.
 
 
 ## CODE: Cloud Agent
@@ -688,7 +688,7 @@ At assignment time, you can customize:
 - **Base branch** — specify the branch to work from
 
 > aside positive
-> **Key takeaway**: Cloud Agent autonomously implements the code and creates a PR (⏱ ~15 min per Issue). If Validation Tools (CodeQL, Code Review, Secret Scanning) set up in Step 4.1 are enabled, the Agent validates its own implementation before submitting the PR. Assign multiple Issues simultaneously and they'll be processed in parallel.
+> **Key point**: Cloud Agent autonomously implements the code and creates a PR (⏱ ~15 min per Issue). If Validation Tools (CodeQL, Code Review, Secret Scanning) set up in Step 4.1 are enabled, the Agent validates its own implementation before submitting the PR. Assign multiple Issues simultaneously and they'll be processed in parallel.
 
 ### 5.3 — Review and Merge the PR
 
@@ -936,7 +936,7 @@ To check progress during or after execution:
 This shows the status (running / complete / failed) and current step for each fleet agent.
 
 > aside positive
-> **Key takeaway**: By having a different model (Codex) review what another model (Claude) implemented, you avoid same-model bias and surface blind spots.
+> **Key point**: By having a different model (Codex) review what another model (Claude) implemented, you avoid same-model bias and surface blind spots.
 
 ### 12.4 — Analyze Usage with Chronicle
 
@@ -1047,7 +1047,7 @@ then commit the changes and open a PR.
 ```
 
 > aside positive
-> **Key takeaway**: `gh aw compile` generates a `.lock.yml` file that GitHub Actions can execute from the `.md` file. Without compiling, the workflow won't run.
+> **Key point**: `gh aw compile` generates a `.lock.yml` file that GitHub Actions can execute from the `.md` file. Without compiling, the workflow won't run.
 
 After merging the PR, manually trigger the workflow from the **Actions** tab:
 
@@ -1060,7 +1060,7 @@ After merging the PR, manually trigger the workflow from the **Actions** tab:
 After execution completes (⏱ ~2 min), an Issue prefixed with `[repo-status]` will be automatically created in the repository's **Issues** tab, containing a summary of today's PRs, Issues, and code activity.
 
 > aside positive
-> **Key takeaway**: Unlike regular GitHub Actions, Agentic Workflow runs via the `gh aw run` command. Scheduled runs (automatic daily execution) can also be configured.
+> **Key point**: Unlike regular GitHub Actions, Agentic Workflow runs via the `gh aw run` command. Scheduled runs (automatic daily execution) can also be configured.
 
 ### 6.3 — (Bonus) Create a Test Coverage Auto-Update Workflow
 

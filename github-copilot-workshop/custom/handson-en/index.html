@@ -715,9 +715,9 @@
 <li>gh-aw (Agentic Workflow CLI)</li>
 <li>Playwright (with Chromium browser)</li>
 </ul>
-<h2 is-upgraded>Step 3: Check the Source Content</h2>
+<h2 is-upgraded>Step 3: Review the Source Material</h2>
 <p>Markdown files are located in <code>src/content/playbook/</code>. These are the raw materials for today&#39;s site.</p>
-<p>Open <code>src/content/playbook/</code> in the VS Code Explorer and browse through a few files. Later, you&#39;ll have Copilot turn these into a site with &#34;grid + detail + presentation mode&#34; viewing.</p>
+<p>Open <code>src/content/playbook/</code> in the VS Code Explorer and browse through a few files. Later, you&#39;ll have Copilot turn these into a site where users can browse the content in grid, detail, and presentation views.</p>
 
 
       </google-codelab-step>
@@ -741,7 +741,7 @@
 </code></pre>
 <p>Click the <strong>🔧 tools button</strong> in the Copilot Chat input area (to the right of the model selector) and confirm that the <code>github-mcp-server</code> tools (Issues / PRs / code search, etc.) appear in the list.</p>
 <p>⏱ ~1 min</p>
-<aside class="special"><p><strong>Key takeaway</strong>: The GitHub MCP Server is officially provided by GitHub. It lets Copilot operate Issues / PRs / Actions / Code search directly — just like running <code>gh</code> commands.</p>
+<aside class="special"><p><strong>Key point</strong>: The GitHub MCP Server is officially provided by GitHub. It lets Copilot operate Issues / PRs / Actions / Code search directly — just like running <code>gh</code> commands.</p>
 </aside>
 <h2 is-upgraded>3.2 — Add the Context7 MCP Server</h2>
 <p><strong>Context7</strong> is an MCP Server that feeds Copilot the <strong>latest official documentation</strong> for libraries and frameworks. It&#39;s essential for this workshop, which uses fast-moving frameworks like Astro, Tailwind, and TypeScript.</p>
@@ -769,7 +769,7 @@
 <pre class="language-none"><code class="language-none">Use Context7 to summarize the latest documentation for Astro&#39;s content collections.
 </code></pre>
 <p>⏱ ~2 min</p>
-<aside class="special"><p><strong>Key takeaway</strong>: Using the HTTP version directly means no <code>npx</code> package download — startup is instant. If you go through <strong>&#34;Browse MCP Servers&#34;</strong> in the Marketplace, it selects the stdio (npx) version <code>io.github.upstash/context7</code>, which can be slow or stall on the first run due to package downloads. The HTTP version avoids this entirely. From now on, just ask &#34;What&#39;s the latest Astro API?&#34; or &#34;What&#39;s the new Tailwind v4 syntax?&#34; and Copilot will pull the official docs via Context7. No more worrying about training data cutoffs.</p>
+<aside class="special"><p><strong>Key point</strong>: Using the HTTP version directly means no <code>npx</code> package download — startup is instant. If you go through <strong>&#34;Browse MCP Servers&#34;</strong> in the Marketplace, it selects the stdio (npx) version <code>io.github.upstash/context7</code>, which can be slow or stall on the first run due to package downloads. The HTTP version avoids this entirely. From now on, just ask &#34;What&#39;s the latest Astro API?&#34; or &#34;What&#39;s the new Tailwind v4 syntax?&#34; and Copilot will pull the official docs via Context7. No more worrying about training data cutoffs.</p>
 </aside>
 
 
@@ -779,7 +779,7 @@
         <p class="image-container"><img alt="PLAN phase Octocat" src="../../img/571b167bb39ee720.png"></p>
 <aside class="special"><p><strong>📖 Reference</strong>: <a href="https://theomonfort.github.io/theomonfort/playbook/instructions?lang=en" target="_blank">Playbook / Instructions</a> — check the role, scope, and usage patterns of Instruction files.</p>
 </aside>
-<p>Instruction files are &#34;standing orders&#34; that give Copilot <strong>persistent rules</strong> at the repository or file level. Every team member&#39;s Copilot will follow the same conventions automatically.</p>
+<p>Instruction files are documents that give Copilot <strong>persistent rules</strong> at the repository or file level. Every team member&#39;s Copilot will follow the same conventions automatically.</p>
 <p>In this step, you&#39;ll create two types of Instruction files:</p>
 <ul>
 <li><strong><code>.github/copilot-instructions.md</code></strong> — always applied across the whole repository (language, stack, conventions)</li>
@@ -827,7 +827,7 @@ Applies to: Astro (content collections, integrations, routing), Tailwind CSS, Me
 - Library APIs, config formats, and CLI flags may be outdated. Verify with Context7 rather than guessing.
 </code></pre>
 <p>⏱ ~2 min</p>
-<aside class="special"><p><strong>Key takeaway</strong>: From now on, Copilot&#39;s responses will be in English. Stack constraints will also be respected automatically.</p>
+<aside class="special"><p><strong>Key point</strong>: From now on, Copilot&#39;s responses will be in English. Stack constraints will also be respected automatically.</p>
 </aside>
 <h2 is-upgraded>4.2 — Create the Frontend-specific Path Instruction</h2>
 <p>Create a <strong>Path Instruction</strong> that applies only to specific file patterns. VS Code will only pass this rule to Copilot when you&#39;re touching files that match the <code>applyTo</code> glob.</p>
@@ -885,7 +885,7 @@ Tailwind utilities: `font-pixel` (DotGothic16), `font-body` (Noto Sans JP).
 - Use soft gray drop shadows. Only use glow (neon glow).
 </code></pre>
 <p>⏱ ~2 min</p>
-<aside class="special"><p><strong>Key takeaway</strong>: This design token is automatically passed to Copilot only when editing <code>.astro</code> or <code>.css</code> files. It won&#39;t bleed into unrelated tasks like <code>/init</code> or docs editing, which reduces noise.</p>
+<aside class="special"><p><strong>Key point</strong>: This design token is automatically passed to Copilot only when editing <code>.astro</code> or <code>.css</code> files. It won&#39;t bleed into unrelated tasks like <code>/init</code> or docs editing, which reduces noise.</p>
 </aside>
 
 
@@ -937,7 +937,7 @@ Acceptance Criteria:
 Labels: feature, i18n, frontend
 </code></pre>
 <p>⏱ ~2 min</p>
-<aside class="special"><p><strong>Key takeaway</strong>: Skills bring &#34;the right way to handle a specific task&#34; into Copilot. Normally Copilot auto-summons a Skill based on the SKILL.md description, but here we&#39;re calling it explicitly to make sure it fires. Verify that a structured Issue has been created directly on GitHub.</p>
+<aside class="special"><p><strong>Key point</strong>: Skills bring &#34;the right way to handle a specific task&#34; into Copilot. Normally Copilot auto-summons a Skill based on the SKILL.md description, but here we&#39;re calling it explicitly to make sure it fires. Verify that a structured Issue has been created directly on GitHub.</p>
 <p>The Issue you just created will be assigned to Cloud Agent or Agentic Workflow for implementation in a later chapter.</p>
 </aside>
 
@@ -971,9 +971,9 @@ The site is for viewing src/content/playbook/*.md in **Presentation mode (slides
 - Each section&#39;s theme color comes from the `color:` field in the md file&#39;s frontmatter and is applied to the slide background, title, and sidebar accent. Fall back to a default color if not present.
 - Render Mermaid diagrams (` ```mermaid `) inside Markdown.
 </code></pre>
-<p>Copilot may ask a few clarifying questions (e.g. package manager, UI framework, deploy target). Since it&#39;s read <code>copilot-instructions.md</code>, it should default to Astro / Tailwind / pnpm — just fill in anything it&#39;s missing.</p>
+<p>Copilot may ask a few clarifying questions (e.g. package manager, UI framework, deploy target). Since it has read <code>copilot-instructions.md</code>, it should default to Astro / Tailwind / pnpm — just fill in anything it&#39;s missing.</p>
 <p>⏱ ~3 min</p>
-<aside class="special"><p><strong>Key takeaway</strong>: The Stack rules from 4.1 and the frontend design tokens from 4.2 kick in here. The plan should be proposed with Astro + Tailwind + the specified colors.</p>
+<aside class="special"><p><strong>Key point</strong>: The Stack rules from 4.1 and the frontend design tokens from 4.2 kick in here. The plan should be proposed with Astro + Tailwind + the specified colors.</p>
 </aside>
 <h2 is-upgraded>6.4 — Implement with Autopilot</h2>
 <p>When you&#39;re happy with the plan, click <strong>&#34;Start with Autopilot&#34;</strong> to kick off implementation.</p>
@@ -1031,7 +1031,7 @@ The site is for viewing src/content/playbook/*.md in **Presentation mode (slides
 </ul>
 </li>
 </ol>
-<aside class="special"><p><strong>Key takeaway</strong>: Enabling custom instructions makes the content of <code>copilot-instructions.md</code> apply to code reviews as well.</p>
+<aside class="special"><p><strong>Key point</strong>: Enabling custom instructions makes the content of <code>copilot-instructions.md</code> apply to code reviews as well.</p>
 </aside>
 <h2 is-upgraded>7.2 — Create an Automatic Review Ruleset</h2>
 <p>Configure Copilot to automatically review code when a PR is opened. The fastest way is to create a Ruleset <strong>directly from the Code review settings page</strong>.</p>
@@ -1039,7 +1039,7 @@ The site is for viewing src/content/playbook/*.md in **Presentation mode (slides
 <li>On the <strong>Settings</strong> → <strong>Copilot</strong> → <strong>Code review</strong> page, find the <strong>Automatic code review</strong> section</li>
 <li>Click <strong>Add a ruleset</strong> (or <strong>Create ruleset</strong>) → The Ruleset creation screen opens with <strong>Automatically request Copilot code review</strong> already enabled</li>
 </ol>
-<aside class="special"><p><strong>Key takeaway</strong>: On the Ruleset screen that opens, it&#39;s also recommended to enable:</p>
+<aside class="special"><p><strong>Key point</strong>: On the Ruleset screen that opens, it&#39;s also recommended to enable:</p>
 <ul>
 <li><strong>Review new pushes</strong> — automatically re-review on every push</li>
 <li><strong>Require a pull request before merging</strong> — block direct pushes</li>
@@ -1055,7 +1055,7 @@ The site is for viewing src/content/playbook/*.md in **Presentation mode (slides
 <li>✅ <strong>Pull Request Overview</strong> — a summary comment on the whole PR</li>
 <li>✅ <strong>Code suggestions</strong> — specific improvement suggestions per file</li>
 </ul>
-<aside class="special"><p><strong>Key takeaway</strong>: You can follow the review in action via the <strong>&#34;View session&#34;</strong> link on the PR, or by opening the corresponding workflow run in the repository&#39;s <strong>Actions</strong> tab. You can trace exactly what files Copilot read and how it reasoned.</p>
+<aside class="special"><p><strong>Key point</strong>: You can follow the review in action via the <strong>&#34;View session&#34;</strong> link on the PR, or by opening the corresponding workflow run in the repository&#39;s <strong>Actions</strong> tab. You can trace exactly what files Copilot read and how it reasoned.</p>
 </aside>
 <h2 is-upgraded>7.4 — Apply the Review Suggestions</h2>
 <p>There are two ways to apply Copilot&#39;s review suggestions:</p>
@@ -1070,7 +1070,7 @@ The site is for viewing src/content/playbook/*.md in **Presentation mode (slides
 </ol>
 <aside class="warning"><p><strong>Note</strong>: In some cases, no new PR is created and fixes are committed directly to the original PR. If that happens, just merge the original PR as-is.</p>
 </aside>
-<aside class="special"><p><strong>Key takeaways</strong>:</p>
+<aside class="special"><p><strong>Key points</strong>:</p>
 <ul>
 <li>Copilot Code Review sessions are visible in the <strong>Actions</strong> tab — the review process is fully transparent.</li>
 <li>Review comments appear in English because the language setting in <code>copilot-instructions.md</code> is being applied!</li>
@@ -1106,7 +1106,7 @@ updates:
 </ol>
 <aside class="warning"><p><strong>Note</strong>: If <code>package-ecosystem</code> is left empty, the <strong>Commit changes</strong> button will be greyed out. Enter a valid value like <code>"npm"</code> before committing. Also, the Ruleset configured in section 7.2 blocks direct commits to <code>main</code>, so merge via PR.</p>
 </aside>
-<aside class="special"><p><strong>Key takeaway</strong>: Dependabot checks dependencies weekly and automatically opens a PR if a vulnerability is found.</p>
+<aside class="special"><p><strong>Key point</strong>: Dependabot checks dependencies weekly and automatically opens a PR if a vulnerability is found.</p>
 </aside>
 
 
@@ -1122,7 +1122,7 @@ updates:
 </ol>
 <aside class="warning"><p><strong>Note</strong>: CodeQL only scans languages present in the default branch. Enable CodeQL after merging your first Astro PR, and TypeScript / JavaScript will be automatically scanned on subsequent pushes and PRs.</p>
 </aside>
-<aside class="special"><p><strong>Key takeaway</strong>: CodeQL detects security issues (XSS, SQL Injection, etc.) via static analysis.</p>
+<aside class="special"><p><strong>Key point</strong>: CodeQL detects security issues (XSS, SQL Injection, etc.) via static analysis.</p>
 </aside>
 
 
@@ -1172,7 +1172,7 @@ Trigger it on PR creation and updates, and run the following steps:
 </code></pre>
 <p>⏱ ~2 min</p>
 <p>Open a PR and you&#39;ll see <code>test.yml</code> running in the Actions tab. Whenever Presentation mode behavior changes, this workflow will catch regressions early.</p>
-<aside class="special"><p><strong>Key takeaway</strong>: With tests written and continuously run in Actions, you have a safety net that can detect regressions even when Cloud Agent or Agentic Workflow automatically creates PRs in later steps.</p>
+<aside class="special"><p><strong>Key point</strong>: With tests written and continuously run in Actions, you have a safety net that can detect regressions even when Cloud Agent or Agentic Workflow automatically creates PRs in later steps.</p>
 </aside>
 
 
@@ -1202,7 +1202,7 @@ Trigger it on PR creation and updates, and run the following steps:
 <li><strong>Model selection</strong> — choose from Copilot / Claude / Codex</li>
 <li><strong>Base branch</strong> — specify the branch to work from</li>
 </ul>
-<aside class="special"><p><strong>Key takeaway</strong>: Cloud Agent autonomously implements the code and creates a PR (⏱ ~15 min per Issue). If Validation Tools (CodeQL, Code Review, Secret Scanning) set up in Step 4.1 are enabled, the Agent validates its own implementation before submitting the PR. Assign multiple Issues simultaneously and they&#39;ll be processed in parallel.</p>
+<aside class="special"><p><strong>Key point</strong>: Cloud Agent autonomously implements the code and creates a PR (⏱ ~15 min per Issue). If Validation Tools (CodeQL, Code Review, Secret Scanning) set up in Step 4.1 are enabled, the Agent validates its own implementation before submitting the PR. Assign multiple Issues simultaneously and they&#39;ll be processed in parallel.</p>
 </aside>
 <h2 is-upgraded>5.3 — Review and Merge the PR</h2>
 <p>PRs created by Cloud Agent start in <strong>Draft</strong> state.</p>
@@ -1408,7 +1408,7 @@ list only genuinely important issues, one concise note per PR.
 <pre class="language-none"><code class="language-none">/tasks
 </code></pre>
 <p>This shows the status (running / complete / failed) and current step for each fleet agent.</p>
-<aside class="special"><p><strong>Key takeaway</strong>: By having a different model (Codex) review what another model (Claude) implemented, you avoid same-model bias and surface blind spots.</p>
+<aside class="special"><p><strong>Key point</strong>: By having a different model (Codex) review what another model (Claude) implemented, you avoid same-model bias and surface blind spots.</p>
 </aside>
 <h2 is-upgraded>12.4 — Analyze Usage with Chronicle</h2>
 <p>Finally, review your Copilot CLI usage during the workshop with Chronicle:</p>
@@ -1499,7 +1499,7 @@ Reference: https://github.com/githubnext/agentics/blob/main/workflows/daily-repo
 When done, run `gh aw compile` to compile the workflow,
 then commit the changes and open a PR.
 </code></pre>
-<aside class="special"><p><strong>Key takeaway</strong>: <code>gh aw compile</code> generates a <code>.lock.yml</code> file that GitHub Actions can execute from the <code>.md</code> file. Without compiling, the workflow won&#39;t run.</p>
+<aside class="special"><p><strong>Key point</strong>: <code>gh aw compile</code> generates a <code>.lock.yml</code> file that GitHub Actions can execute from the <code>.md</code> file. Without compiling, the workflow won&#39;t run.</p>
 </aside>
 <p>After merging the PR, manually trigger the workflow from the <strong>Actions</strong> tab:</p>
 <ol type="1">
@@ -1509,7 +1509,7 @@ then commit the changes and open a PR.
 </ol>
 <p class="image-container"><img alt="Manual run from Actions" src="../../img/d570d6f7f0957371.png"></p>
 <p>After execution completes (⏱ ~2 min), an Issue prefixed with <code>[repo-status]</code> will be automatically created in the repository&#39;s <strong>Issues</strong> tab, containing a summary of today&#39;s PRs, Issues, and code activity.</p>
-<aside class="special"><p><strong>Key takeaway</strong>: Unlike regular GitHub Actions, Agentic Workflow runs via the <code>gh aw run</code> command. Scheduled runs (automatic daily execution) can also be configured.</p>
+<aside class="special"><p><strong>Key point</strong>: Unlike regular GitHub Actions, Agentic Workflow runs via the <code>gh aw run</code> command. Scheduled runs (automatic daily execution) can also be configured.</p>
 </aside>
 <h2 is-upgraded>6.3 — (Bonus) Create a Test Coverage Auto-Update Workflow</h2>
 <p>If you have extra time, try creating a workflow that automatically updates the test coverage report.</p>
