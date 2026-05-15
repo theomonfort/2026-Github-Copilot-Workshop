@@ -78,7 +78,35 @@
       text-shadow: none !important;
       font-family: "IBM Plex Mono", monospace !important;
       font-size: 13px !important;
-      letter-spacing: 0.05em;
+      /* leave toggle below intact */
+    }
+
+    /* Language toggle (injected by build pipeline) */
+    .lang-toggle {
+      position: fixed;
+      top: 14px;
+      right: 16px;
+      z-index: 10000;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: rgba(15, 22, 38, 0.85);
+      border: 1px solid var(--neon-cyan);
+      border-radius: 4px;
+      color: var(--neon-cyan);
+      font-family: "DotGothic16", "Noto Sans JP", monospace;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.15s, box-shadow 0.15s;
+      backdrop-filter: blur(4px);
+    }
+    .lang-toggle:hover {
+      background: rgba(0, 240, 255, 0.15);
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+      color: var(--neon-cyan) !important;
     }
 
     /* Drawer / TOC sidebar */
