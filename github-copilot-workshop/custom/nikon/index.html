@@ -884,8 +884,8 @@ Tailwind ユーティリティ: `font-pixel` (DotGothic16)、`font-body` (Noto S
 <aside class="warning"><p><strong>⚠️ 重要</strong>: Skill をインストールした後は <strong>Copilot Chat の新しいセッションを開いてください</strong>（<code>+ New Chat</code>）。既存セッションには Skill が読み込まれないため、次のステップでうまく召喚されません。</p>
 </aside>
 <p>⏱ 約1分</p>
-<h2 is-upgraded>5.2 — MCP + Skill で Issue を作成する</h2>
-<p>GitHub MCP Server + <code>github-issues</code> Skill を組み合わせて、構造化された Issue を 1 件作成します。Copilot Chat で以下のプロンプトを入力してください：</p>
+<h2 is-upgraded>5.2 — Skill で Issue を作成する</h2>
+<p><code>github-issues</code> Skill を使って、構造化された Issue を 1 件作成します。Copilot Chat で以下のプロンプトを入力してください（GitHub MCP は前のステップで既に有効になっているので、Copilot は自然と Issue 作成ツールを呼んでくれます）：</p>
 <pre class="language-none"><code class="language-none">github-issues skill を使って、このリポジトリに以下の Issue を作成してください。
 ユーザーストーリー・受け入れ基準・実装ノートを含む構造化された feature request にしてください。
 
@@ -908,7 +908,7 @@ Tailwind ユーティリティ: `font-pixel` (DotGothic16)、`font-body` (Noto S
 ラベル: feature, i18n, frontend
 </code></pre>
 <p>⏱ 約2分</p>
-<aside class="special"><p><strong>ポイント</strong>: <strong>MCP</strong> が「ツールへの接続」を、<strong>Skill</strong> が「そのツールでの作法」を持ち込みます。本来 Copilot は SKILL.md の説明から自動でスキルを召喚しますが、確実に発動させるために今回はプロンプトで明示的に指定しています。テンプレに沿った Issue が GitHub に直接立てられるのを確認してください。</p>
+<aside class="special"><p><strong>ポイント</strong>: Skill は「特定タスクの作法」を Copilot に持ち込みます。本来 Copilot は SKILL.md の説明から自動でスキルを召喚しますが、確実に発動させるために今回はプロンプトで明示的に指定しています。テンプレに沿った Issue が GitHub に直接立てられるのを確認してください。</p>
 <p>このあと作成された Issue は、Cloud Agent や Agentic Workflow のステップで実装担当として割り当てます（次の章で）。</p>
 </aside>
 
