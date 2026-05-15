@@ -553,7 +553,7 @@ Copilot のレビュー提案を修正する方法は2つあります：
 > - レビューコメントが日本語で表示されているのは、`copilot-instructions.md` で設定した言語指定が反映されているためです！
 > - `copilot-instructions.md` にレビュー観点（例: セキュリティ重視、パフォーマンス重視）を追記することで、レビュー内容をカスタマイズできます。
 
-## TEST & SECURE: Dependabot（任意）
+## TEST & SECURE: Dependabot
 Duration: 3
 
 <img src="github-copilot-workshop/img/Octocat-blue.png" alt="TEST & SECURE フェーズの Octocat" style="float: right; width: 100px; margin: 0 0 1em 1em;">
@@ -587,7 +587,7 @@ Duration: 3
 > aside positive
 > **ポイント**: Dependabot は週次で依存関係をチェックし、脆弱性が見つかれば自動的に PR を作成してくれます。
 
-## TEST & SECURE: CodeQL（任意）
+## TEST & SECURE: CodeQL
 Duration: 2
 
 <img src="github-copilot-workshop/img/Octocat-blue.png" alt="TEST & SECURE フェーズの Octocat" style="float: right; width: 100px; margin: 0 0 1em 1em;">
@@ -606,7 +606,7 @@ Duration: 2
 > aside positive
 > **ポイント**: CodeQL は静的解析でセキュリティ上の問題（XSS / SQL Injection 等）を検出します。
 
-## TEST & SECURE: Actions（任意）
+## TEST & SECURE: Actions
 Duration: 15
 
 <img src="github-copilot-workshop/img/Octocat-blue.png" alt="TEST & SECURE フェーズの Octocat" style="float: right; width: 100px; margin: 0 0 1em 1em;">
